@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#28b178">
+<title>BahasaBelajar · 印尼语单词</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- 首页 -->
+<main id="view-home" class="view">
+  <header class="home-header">
+    <div class="app-title">BahasaBelajar</div>
+    <div class="streak-badge">🔥 连续 <b id="home-streak">0</b> 天</div>
+  </header>
+
+  <section class="progress-card">
+    <div class="ring-wrap">
+      <svg viewBox="0 0 120 120" class="ring">
+        <circle class="ring-bg" cx="60" cy="60" r="52"/>
+        <circle class="ring-fg" id="ring-fg" cx="60" cy="60" r="52"/>
+      </svg>
+      <div class="ring-center">
+        <div class="ring-percent" id="ring-percent">0%</div>
+        <div class="ring-label">今日进度</div>
+      </div>
+    </div>
+    <div class="home-date" id="home-date"></div>
+    <div class="home-done-tip" id="home-done-tip" hidden>✅ 今日任务已完成</div>
+  </section>
+
+  <section class="entry-cards">
+    <button class="entry-card entry-learn" id="btn-learn">
+      <div class="entry-title">学习新词</div>
+      <div class="entry-sub">剩 <b id="home-new-remaining">0</b> 个</div>
+      <div class="entry-arrow">›</div>
+    </button>
+    <button class="entry-card entry-review" id="btn-review">
+      <div class="entry-title">复习</div>
+      <div class="entry-sub">剩 <b id="home-review-due">0</b> 个</div>
+      <div class="entry-arrow">›</div>
+    </button>
+  </section>
+
+  <section class="stats-row">
+    <div class="stat"><b id="stat-learned">0</b><span>已学习</span></div>
+    <div class="stat"><b id="stat-mastered">0</b><span>已掌握</span></div>
+    <div class="stat"><b id="stat-total">0</b><span>词库总数</span></div>
+  </section>
+</main>
+
+<!-- 学习/复习 卡片会话（共用） -->
+<main id="view-session" class="view" hidden>
+  <header class="session-header">
+    <button class="icon-btn" id="session-close">✕</button>
+    <div class="session-progress"><div class="session-progress-fg" id="session-progress-fg"></div></div>
+    <div class="session-count" id="session-count">0/0</div>
+  </header>
+
+  <section class="card" id="word-card">
+    <div class="card-level" id="card-level"></div>
+    <div class="card-word" id="card-word"></div>
+    <div class="card-pos" id="card-pos"></div>
+    <div class="card-answer" id="card-answer" hidden>
+      <div class="card-meaning" id="card-meaning"></div>
+      <div class="card-examples" id="card-examples"></div>
+    </div>
+  </section>
+
+  <footer class="session-actions">
+    <div id="actions-ask" class="btn-row">
+      <button class="big-btn btn-unknown" id="btn-unknown">不认识</button>
+      <button class="big-btn btn-known" id="btn-known">认识</button>
+    </div>
+    <div id="actions-learn-confirm" class="btn-row" hidden>
+      <button class="big-btn btn-secondary" id="btn-easy">太简单了</button>
+      <button class="big-btn btn-known" id="btn-got">记住了</button>
+    </div>
+    <div id="actions-next" class="btn-row" hidden>
+      <button class="big-btn btn-known" id="btn-next">下一个</button>
+    </div>
+  </footer>
+</main>
+
+<!-- 结算页 -->
+<main id="view-summary" class="view" hidden>
+  <section class="summary-card">
+    <div class="summary-emoji" id="summary-emoji">🎉</div>
+    <h2 id="summary-title">本轮完成</h2>
+    <div class="summary-stats">
+      <div class="stat"><b id="summary-count">0</b><span>单词</span></div>
+      <div class="stat"><b id="summary-wrong">0</b><span>答错次数</span></div>
+    </div>
+    <button class="big-btn btn-known" id="summary-back">返回首页</button>
+  </section>
+</main>
+
+<!-- 词库 -->
+<main id="view-words" class="view" hidden>
+  <header class="page-header"><h1>词库</h1></header>
+  <div class="words-toolbar">
+    <input type="search" id="words-search" placeholder="搜索单词或释义…">
+    <div class="chips" id="words-level-chips">
+      <button class="chip active" data-level="">全部</button>
+      <button class="chip" data-level="1">入门</button>
+      <button class="chip" data-level="2">初级</button>
+      <button class="chip" data-level="3">中级</button>
+    </div>
+    <div class="chips" id="words-status-chips">
+      <button class="chip active" data-status="">全部状态</button>
+      <button class="chip" data-status="new">未学</button>
+      <button class="chip" data-status="reviewing">复习中</button>
+      <button class="chip" data-status="mastered">已掌握</button>
+    </div>
+  </div>
+  <div class="words-total" id="words-total"></div>
+  <ul class="word-list" id="word-list"></ul>
+  <button class="load-more" id="words-more" hidden>加载更多</button>
+</main>
+
+<!-- 打卡日历 -->
+<main id="view-calendar" class="view" hidden>
+  <header class="page-header"><h1>打卡日历</h1></header>
+  <section class="stats-row">
+    <div class="stat"><b id="cal-streak">0</b><span>连续天数</span></div>
+    <div class="stat"><b id="cal-total">0</b><span>累计打卡</span></div>
+  </section>
+  <section class="calendar-card">
+    <div class="calendar-nav">
+      <button class="icon-btn" id="cal-prev">‹</button>
+      <div id="cal-month-label"></div>
+      <button class="icon-btn" id="cal-next">›</button>
+    </div>
+    <div class="calendar-weekdays">
+      <span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span>
+    </div>
+    <div class="calendar-grid" id="cal-grid"></div>
+  </section>
+</main>
+
+<!-- 设置 -->
+<main id="view-settings" class="view" hidden>
+  <header class="page-header"><h1>设置</h1></header>
+  <section class="settings-card">
+    <div class="setting-row">
+      <div>
+        <div class="setting-name">每日新词数</div>
+        <div class="setting-desc">每天学习的新单词数量</div>
+      </div>
+      <div class="stepper">
+        <button data-key="daily_new_words" data-delta="-5">−</button>
+        <b id="set-new">10</b>
+        <button data-key="daily_new_words" data-delta="5">＋</button>
+      </div>
+    </div>
+    <div class="setting-row">
+      <div>
+        <div class="setting-name">每日复习上限</div>
+        <div class="setting-desc">单次复习会话最多抽取的单词数</div>
+      </div>
+      <div class="stepper">
+        <button data-key="daily_review_limit" data-delta="-20">−</button>
+        <b id="set-review">100</b>
+        <button data-key="daily_review_limit" data-delta="20">＋</button>
+      </div>
+    </div>
+  </section>
+  <p class="settings-note">数据保存在本地 data.db（SQLite）。删除该文件即可重置全部进度。</p>
+</main>
+
+<!-- 底部 Tab -->
+<nav class="tabbar" id="tabbar">
+  <a href="#home" class="tab active" data-view="home"><span class="tab-icon">🏠</span>首页</a>
+  <a href="#words" class="tab" data-view="words"><span class="tab-icon">📚</span>词库</a>
+  <a href="#calendar" class="tab" data-view="calendar"><span class="tab-icon">📅</span>日历</a>
+  <a href="#settings" class="tab" data-view="settings"><span class="tab-icon">⚙️</span>设置</a>
+</nav>
+
+<!-- 打卡成功弹层 -->
+<div class="modal-mask" id="checkin-modal" hidden>
+  <div class="modal">
+    <div class="modal-emoji">🎊</div>
+    <h2>打卡成功！</h2>
+    <p>已连续打卡 <b id="modal-streak">1</b> 天</p>
+    <button class="big-btn btn-known" id="modal-close">太棒了</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="app.js"></script>
+</body>
+</html>
