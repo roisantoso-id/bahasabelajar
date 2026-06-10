@@ -1,0 +1,6894 @@
+[
+  {
+    "word": "saya",
+    "pos": "pron.",
+    "meaning": "我",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya tinggal di Jakarta.",
+        "zh": "我住在雅加达。"
+      },
+      {
+        "id": "Nama saya Budi.",
+        "zh": "我的名字是布迪。"
+      }
+    ]
+  },
+  {
+    "word": "kamu",
+    "pos": "pron.",
+    "meaning": "你",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Kamu mau makan apa?",
+        "zh": "你想吃什么？"
+      },
+      {
+        "id": "Apa kabar kamu?",
+        "zh": "你最近怎么样？"
+      }
+    ]
+  },
+  {
+    "word": "Anda",
+    "pos": "pron.",
+    "meaning": "您",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Apakah Anda sudah makan?",
+        "zh": "您吃过了吗？"
+      },
+      {
+        "id": "Siapa nama Anda?",
+        "zh": "您叫什么名字？"
+      }
+    ]
+  },
+  {
+    "word": "dia",
+    "pos": "pron.",
+    "meaning": "他；她",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Dia teman baik saya.",
+        "zh": "他是我的好朋友。"
+      },
+      {
+        "id": "Dia sedang bekerja di kantor.",
+        "zh": "他正在办公室工作。"
+      }
+    ]
+  },
+  {
+    "word": "kami",
+    "pos": "pron.",
+    "meaning": "我们（不包括听话人）",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Kami tinggal di Bandung.",
+        "zh": "我们住在万隆。"
+      },
+      {
+        "id": "Kami mau pergi ke pasar.",
+        "zh": "我们要去市场。"
+      }
+    ]
+  },
+  {
+    "word": "kita",
+    "pos": "pron.",
+    "meaning": "我们（包括听话人）；咱们",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Ayo kita makan siang bersama.",
+        "zh": "咱们一起去吃午饭吧。"
+      },
+      {
+        "id": "Kita bertemu di stasiun, ya.",
+        "zh": "咱们在车站见，好吗？"
+      }
+    ]
+  },
+  {
+    "word": "mereka",
+    "pos": "pron.",
+    "meaning": "他们；她们",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Mereka sedang belajar bahasa Indonesia.",
+        "zh": "他们正在学印尼语。"
+      },
+      {
+        "id": "Mereka datang dari Surabaya.",
+        "zh": "他们来自泗水。"
+      }
+    ]
+  },
+  {
+    "word": "orang",
+    "pos": "n.",
+    "meaning": "人",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Banyak orang menunggu bus di sana.",
+        "zh": "那里有很多人在等公交车。"
+      },
+      {
+        "id": "Dia orang Indonesia.",
+        "zh": "他是印尼人。"
+      }
+    ]
+  },
+  {
+    "word": "nama",
+    "pos": "n.",
+    "meaning": "名字",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Nama saya Sari.",
+        "zh": "我的名字是莎丽。"
+      },
+      {
+        "id": "Siapa nama kamu?",
+        "zh": "你叫什么名字？"
+      }
+    ]
+  },
+  {
+    "word": "teman",
+    "pos": "n.",
+    "meaning": "朋友",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Dia teman saya dari kantor.",
+        "zh": "他是我公司的朋友。"
+      },
+      {
+        "id": "Saya pergi ke toko dengan teman.",
+        "zh": "我和朋友一起去商店。"
+      }
+    ]
+  },
+  {
+    "word": "keluarga",
+    "pos": "n.",
+    "meaning": "家庭；家人",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Keluarga saya tinggal di desa.",
+        "zh": "我的家人住在乡下。"
+      },
+      {
+        "id": "Saya makan malam bersama keluarga.",
+        "zh": "我和家人一起吃晚饭。"
+      }
+    ]
+  },
+  {
+    "word": "ayah",
+    "pos": "n.",
+    "meaning": "父亲；爸爸",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Ayah saya bekerja di bank.",
+        "zh": "我爸爸在银行工作。"
+      }
+    ]
+  },
+  {
+    "word": "ibu",
+    "pos": "n.",
+    "meaning": "母亲；妈妈；女士",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Ibu sedang masak di dapur.",
+        "zh": "妈妈正在厨房做饭。"
+      },
+      {
+        "id": "Ibu saya suka minum teh.",
+        "zh": "我妈妈喜欢喝茶。"
+      }
+    ]
+  },
+  {
+    "word": "anak",
+    "pos": "n.",
+    "meaning": "孩子；儿女",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Anak itu sedang main di taman.",
+        "zh": "那个孩子正在公园里玩。"
+      },
+      {
+        "id": "Mereka punya dua anak.",
+        "zh": "他们有两个孩子。"
+      }
+    ]
+  },
+  {
+    "word": "kakak",
+    "pos": "n.",
+    "meaning": "哥哥；姐姐",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Kakak saya kuliah di Jakarta.",
+        "zh": "我哥哥在雅加达上大学。"
+      }
+    ]
+  },
+  {
+    "word": "adik",
+    "pos": "n.",
+    "meaning": "弟弟；妹妹",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Adik saya masih sekolah.",
+        "zh": "我妹妹还在上学。"
+      }
+    ]
+  },
+  {
+    "word": "suami",
+    "pos": "n.",
+    "meaning": "丈夫",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Suami saya bekerja di rumah sakit.",
+        "zh": "我丈夫在医院工作。"
+      }
+    ]
+  },
+  {
+    "word": "istri",
+    "pos": "n.",
+    "meaning": "妻子",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Istri saya pandai masak.",
+        "zh": "我妻子很会做饭。"
+      }
+    ]
+  },
+  {
+    "word": "laki-laki",
+    "pos": "n.",
+    "meaning": "男人；男性",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Anak laki-laki itu suka main bola.",
+        "zh": "那个男孩喜欢踢球。"
+      }
+    ]
+  },
+  {
+    "word": "perempuan",
+    "pos": "n.",
+    "meaning": "女人；女性",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Anak perempuan itu sedang baca buku.",
+        "zh": "那个女孩正在看书。"
+      }
+    ]
+  },
+  {
+    "word": "halo",
+    "pos": "interj.",
+    "meaning": "你好；喂（打招呼或接电话）",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Halo, apa kabar?",
+        "zh": "你好，最近怎么样？"
+      },
+      {
+        "id": "Halo, ini siapa?",
+        "zh": "喂，请问是哪位？"
+      }
+    ]
+  },
+  {
+    "word": "selamat",
+    "pos": "adj.",
+    "meaning": "平安的；（用于问候）祝……好；恭喜",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Selamat pagi, Bu!",
+        "zh": "早上好，女士！"
+      },
+      {
+        "id": "Selamat ulang tahun!",
+        "zh": "生日快乐！"
+      }
+    ]
+  },
+  {
+    "word": "pagi",
+    "pos": "n.",
+    "meaning": "早上；上午",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya bangun pagi setiap hari.",
+        "zh": "我每天早起。"
+      },
+      {
+        "id": "Selamat pagi!",
+        "zh": "早上好！"
+      }
+    ]
+  },
+  {
+    "word": "siang",
+    "pos": "n.",
+    "meaning": "中午；白天",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Kita makan siang di warung itu.",
+        "zh": "我们在那家小吃店吃午饭。"
+      }
+    ]
+  },
+  {
+    "word": "sore",
+    "pos": "n.",
+    "meaning": "下午；傍晚",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Sore ini saya mau jalan-jalan.",
+        "zh": "今天下午我想出去走走。"
+      }
+    ]
+  },
+  {
+    "word": "malam",
+    "pos": "n.",
+    "meaning": "晚上；夜",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Selamat malam!",
+        "zh": "晚上好！"
+      },
+      {
+        "id": "Malam ini kami makan di luar.",
+        "zh": "今晚我们在外面吃饭。"
+      }
+    ]
+  },
+  {
+    "word": "terima kasih",
+    "pos": "短语",
+    "meaning": "谢谢",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Terima kasih banyak atas bantuannya.",
+        "zh": "非常感谢你的帮助。"
+      },
+      {
+        "id": "Terima kasih, sampai jumpa!",
+        "zh": "谢谢，再见！"
+      }
+    ]
+  },
+  {
+    "word": "maaf",
+    "pos": "interj.",
+    "meaning": "对不起；抱歉；请问（客气引语）",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Maaf, saya datang terlambat.",
+        "zh": "对不起，我来晚了。"
+      },
+      {
+        "id": "Maaf, di mana toilet?",
+        "zh": "请问，洗手间在哪里？"
+      }
+    ]
+  },
+  {
+    "word": "permisi",
+    "pos": "interj.",
+    "meaning": "劳驾；借过；打扰一下",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Permisi, saya mau lewat.",
+        "zh": "劳驾，让我过一下。"
+      },
+      {
+        "id": "Permisi, di mana halte bus?",
+        "zh": "打扰一下，公交车站在哪里？"
+      }
+    ]
+  },
+  {
+    "word": "tolong",
+    "pos": "v.",
+    "meaning": "请（帮忙）；帮助",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Tolong buka pintu itu.",
+        "zh": "请把那扇门打开。"
+      },
+      {
+        "id": "Tolong bantu saya membawa tas ini.",
+        "zh": "请帮我拿这个包。"
+      }
+    ]
+  },
+  {
+    "word": "ya",
+    "pos": "interj.",
+    "meaning": "是；对；好的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Ya, saya mengerti.",
+        "zh": "是的，我明白。"
+      }
+    ]
+  },
+  {
+    "word": "tidak",
+    "pos": "adv.",
+    "meaning": "不；没有（否定动词或形容词）",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya tidak suka kopi.",
+        "zh": "我不喜欢咖啡。"
+      },
+      {
+        "id": "Dia tidak datang hari ini.",
+        "zh": "他今天没来。"
+      }
+    ]
+  },
+  {
+    "word": "bukan",
+    "pos": "adv.",
+    "meaning": "不是（否定名词）",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Ini bukan tas saya.",
+        "zh": "这不是我的包。"
+      },
+      {
+        "id": "Dia bukan orang Jakarta.",
+        "zh": "他不是雅加达人。"
+      }
+    ]
+  },
+  {
+    "word": "silakan",
+    "pos": "interj.",
+    "meaning": "请（表示邀请、允许）",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Silakan duduk.",
+        "zh": "请坐。"
+      },
+      {
+        "id": "Silakan masuk.",
+        "zh": "请进。"
+      }
+    ]
+  },
+  {
+    "word": "sampai jumpa",
+    "pos": "短语",
+    "meaning": "再见",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Sampai jumpa besok!",
+        "zh": "明天见！"
+      }
+    ]
+  },
+  {
+    "word": "kabar",
+    "pos": "n.",
+    "meaning": "消息；近况",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Apa kabar?",
+        "zh": "你好吗？"
+      },
+      {
+        "id": "Kabar baik, terima kasih.",
+        "zh": "我很好，谢谢。"
+      }
+    ]
+  },
+  {
+    "word": "baik",
+    "pos": "adj.",
+    "meaning": "好的；善良的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Hari ini cuaca sangat baik.",
+        "zh": "今天天气很好。"
+      },
+      {
+        "id": "Dia anak yang baik.",
+        "zh": "他是个好孩子。"
+      }
+    ]
+  },
+  {
+    "word": "apa",
+    "pos": "pron.",
+    "meaning": "什么",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Apa ini?",
+        "zh": "这是什么？"
+      },
+      {
+        "id": "Kamu mau minum apa?",
+        "zh": "你想喝什么？"
+      }
+    ]
+  },
+  {
+    "word": "siapa",
+    "pos": "pron.",
+    "meaning": "谁",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Siapa itu?",
+        "zh": "那是谁？"
+      },
+      {
+        "id": "Dengan siapa kamu pergi?",
+        "zh": "你和谁一起去？"
+      }
+    ]
+  },
+  {
+    "word": "mana",
+    "pos": "pron.",
+    "meaning": "哪里；哪个",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Toilet di mana?",
+        "zh": "洗手间在哪里？"
+      },
+      {
+        "id": "Kamu mau yang mana?",
+        "zh": "你想要哪一个？"
+      }
+    ]
+  },
+  {
+    "word": "kapan",
+    "pos": "adv.",
+    "meaning": "什么时候",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Kapan kamu pulang?",
+        "zh": "你什么时候回家？"
+      },
+      {
+        "id": "Kapan kita bertemu lagi?",
+        "zh": "我们什么时候再见面？"
+      }
+    ]
+  },
+  {
+    "word": "mengapa",
+    "pos": "adv.",
+    "meaning": "为什么",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Mengapa kamu tidak datang kemarin?",
+        "zh": "你昨天为什么没来？"
+      }
+    ]
+  },
+  {
+    "word": "bagaimana",
+    "pos": "adv.",
+    "meaning": "怎么；如何",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Bagaimana cara pergi ke stasiun?",
+        "zh": "去车站怎么走？"
+      },
+      {
+        "id": "Bagaimana rasanya?",
+        "zh": "味道怎么样？"
+      }
+    ]
+  },
+  {
+    "word": "berapa",
+    "pos": "pron.",
+    "meaning": "多少；几",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Harganya berapa?",
+        "zh": "这个多少钱？"
+      },
+      {
+        "id": "Berapa umur kamu?",
+        "zh": "你多大了？"
+      }
+    ]
+  },
+  {
+    "word": "satu",
+    "pos": "num.",
+    "meaning": "一",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya pesan satu nasi goreng.",
+        "zh": "我点一份炒饭。"
+      }
+    ]
+  },
+  {
+    "word": "dua",
+    "pos": "num.",
+    "meaning": "二；两",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya punya dua adik.",
+        "zh": "我有两个弟弟妹妹。"
+      }
+    ]
+  },
+  {
+    "word": "tiga",
+    "pos": "num.",
+    "meaning": "三",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Mereka punya tiga anak.",
+        "zh": "他们有三个孩子。"
+      }
+    ]
+  },
+  {
+    "word": "empat",
+    "pos": "num.",
+    "meaning": "四",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Ada empat kursi di ruang ini.",
+        "zh": "这个房间里有四把椅子。"
+      }
+    ]
+  },
+  {
+    "word": "lima",
+    "pos": "num.",
+    "meaning": "五",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Toko itu buka jam lima sore.",
+        "zh": "那家店下午五点开门。"
+      }
+    ]
+  },
+  {
+    "word": "enam",
+    "pos": "num.",
+    "meaning": "六",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya bangun jam enam pagi.",
+        "zh": "我早上六点起床。"
+      }
+    ]
+  },
+  {
+    "word": "tujuh",
+    "pos": "num.",
+    "meaning": "七",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Kereta berangkat jam tujuh.",
+        "zh": "火车七点出发。"
+      }
+    ]
+  },
+  {
+    "word": "delapan",
+    "pos": "num.",
+    "meaning": "八",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Kantor buka jam delapan pagi.",
+        "zh": "办公室早上八点上班。"
+      }
+    ]
+  },
+  {
+    "word": "sembilan",
+    "pos": "num.",
+    "meaning": "九",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Toko tutup jam sembilan malam.",
+        "zh": "商店晚上九点关门。"
+      }
+    ]
+  },
+  {
+    "word": "sepuluh",
+    "pos": "num.",
+    "meaning": "十",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Harganya sepuluh ribu rupiah.",
+        "zh": "价格是一万印尼盾。"
+      }
+    ]
+  },
+  {
+    "word": "seratus",
+    "pos": "num.",
+    "meaning": "一百",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Buku ini harganya seratus ribu rupiah.",
+        "zh": "这本书十万印尼盾。"
+      }
+    ]
+  },
+  {
+    "word": "seribu",
+    "pos": "num.",
+    "meaning": "一千",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Permen ini harganya seribu rupiah.",
+        "zh": "这颗糖一千印尼盾。"
+      }
+    ]
+  },
+  {
+    "word": "nol",
+    "pos": "num.",
+    "meaning": "零",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Nomor teleponnya mulai dengan nol delapan.",
+        "zh": "他的电话号码以零八开头。"
+      }
+    ]
+  },
+  {
+    "word": "puluh",
+    "pos": "num.",
+    "meaning": "十（数位，用于组合数词）",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Tiket ini lima puluh ribu rupiah.",
+        "zh": "这张票五万印尼盾。"
+      }
+    ]
+  },
+  {
+    "word": "makan",
+    "pos": "v.",
+    "meaning": "吃",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya makan nasi goreng setiap pagi.",
+        "zh": "我每天早上吃炒饭。"
+      },
+      {
+        "id": "Ayo kita makan bersama.",
+        "zh": "我们一起去吃饭吧。"
+      }
+    ]
+  },
+  {
+    "word": "minum",
+    "pos": "v.",
+    "meaning": "喝",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya minum kopi setiap pagi.",
+        "zh": "我每天早上喝咖啡。"
+      },
+      {
+        "id": "Dia suka minum teh manis.",
+        "zh": "他喜欢喝甜茶。"
+      }
+    ]
+  },
+  {
+    "word": "tidur",
+    "pos": "v.",
+    "meaning": "睡觉",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya tidur jam sepuluh malam.",
+        "zh": "我晚上十点睡觉。"
+      },
+      {
+        "id": "Anak itu sedang tidur.",
+        "zh": "那个孩子正在睡觉。"
+      }
+    ]
+  },
+  {
+    "word": "pergi",
+    "pos": "v.",
+    "meaning": "去；离开",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya pergi ke kantor naik bus.",
+        "zh": "我坐公交车去上班。"
+      },
+      {
+        "id": "Mereka pergi ke pasar pagi ini.",
+        "zh": "他们今天早上去了市场。"
+      }
+    ]
+  },
+  {
+    "word": "datang",
+    "pos": "v.",
+    "meaning": "来；到来",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Dia datang ke rumah saya kemarin.",
+        "zh": "他昨天来我家了。"
+      },
+      {
+        "id": "Silakan datang lagi besok.",
+        "zh": "欢迎明天再来。"
+      }
+    ]
+  },
+  {
+    "word": "pulang",
+    "pos": "v.",
+    "meaning": "回家；返回",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya pulang kerja jam lima sore.",
+        "zh": "我下午五点下班回家。"
+      },
+      {
+        "id": "Ayo kita pulang sekarang.",
+        "zh": "我们现在回家吧。"
+      }
+    ]
+  },
+  {
+    "word": "duduk",
+    "pos": "v.",
+    "meaning": "坐",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Silakan duduk di sini.",
+        "zh": "请坐这里。"
+      },
+      {
+        "id": "Dia duduk di samping saya.",
+        "zh": "他坐在我旁边。"
+      }
+    ]
+  },
+  {
+    "word": "berdiri",
+    "pos": "v.",
+    "meaning": "站立",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Banyak orang berdiri di dalam bus.",
+        "zh": "公交车里很多人站着。"
+      },
+      {
+        "id": "Jangan berdiri di depan pintu.",
+        "zh": "别站在门口。"
+      }
+    ]
+  },
+  {
+    "word": "bicara",
+    "pos": "v.",
+    "meaning": "说话；谈话",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Boleh saya bicara dengan Anda sebentar?",
+        "zh": "我可以和您谈一会儿吗？"
+      },
+      {
+        "id": "Dia berbicara bahasa Indonesia dengan baik.",
+        "zh": "他印尼语说得很好。"
+      }
+    ]
+  },
+  {
+    "word": "dengar",
+    "pos": "v.",
+    "meaning": "听；听见",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya dengar kabar baik dari teman.",
+        "zh": "我从朋友那里听到了好消息。"
+      },
+      {
+        "id": "Dia suka mendengarkan musik.",
+        "zh": "他喜欢听音乐。"
+      }
+    ]
+  },
+  {
+    "word": "lihat",
+    "pos": "v.",
+    "meaning": "看；看见",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Lihat, ada bus datang!",
+        "zh": "看，公交车来了！"
+      },
+      {
+        "id": "Saya melihat dia di pasar tadi pagi.",
+        "zh": "今天早上我在市场看见他了。"
+      }
+    ]
+  },
+  {
+    "word": "baca",
+    "pos": "v.",
+    "meaning": "读；阅读",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya suka baca buku sebelum tidur.",
+        "zh": "我喜欢睡前看书。"
+      },
+      {
+        "id": "Dia membaca koran setiap pagi.",
+        "zh": "他每天早上读报纸。"
+      }
+    ]
+  },
+  {
+    "word": "tulis",
+    "pos": "v.",
+    "meaning": "写",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Tolong tulis nama Anda di sini.",
+        "zh": "请把您的名字写在这里。"
+      },
+      {
+        "id": "Saya menulis surat untuk ibu.",
+        "zh": "我给妈妈写信。"
+      }
+    ]
+  },
+  {
+    "word": "beli",
+    "pos": "v.",
+    "meaning": "买",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya mau beli buah di pasar.",
+        "zh": "我想去市场买水果。"
+      },
+      {
+        "id": "Dia membeli baju baru kemarin.",
+        "zh": "他昨天买了新衣服。"
+      }
+    ]
+  },
+  {
+    "word": "jual",
+    "pos": "v.",
+    "meaning": "卖",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Ibu itu jual sayur di pasar.",
+        "zh": "那位大婶在市场卖蔬菜。"
+      },
+      {
+        "id": "Toko ini menjual buku murah.",
+        "zh": "这家店卖便宜的书。"
+      }
+    ]
+  },
+  {
+    "word": "suka",
+    "pos": "v.",
+    "meaning": "喜欢",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya suka makanan pedas.",
+        "zh": "我喜欢吃辣的。"
+      },
+      {
+        "id": "Dia suka main bola.",
+        "zh": "他喜欢踢球。"
+      }
+    ]
+  },
+  {
+    "word": "cinta",
+    "pos": "v.",
+    "meaning": "爱；爱情",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya cinta keluarga saya.",
+        "zh": "我爱我的家人。"
+      },
+      {
+        "id": "Dia sangat mencintai istrinya.",
+        "zh": "他非常爱他的妻子。"
+      }
+    ]
+  },
+  {
+    "word": "mau",
+    "pos": "v.",
+    "meaning": "要；想要；愿意",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya mau minum air.",
+        "zh": "我想喝水。"
+      },
+      {
+        "id": "Kamu mau pergi ke mana?",
+        "zh": "你要去哪里？"
+      }
+    ]
+  },
+  {
+    "word": "bisa",
+    "pos": "v.",
+    "meaning": "能；会；可以",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya bisa bicara bahasa Indonesia sedikit.",
+        "zh": "我会说一点印尼语。"
+      },
+      {
+        "id": "Bisa tolong bantu saya?",
+        "zh": "能请你帮我一下吗？"
+      }
+    ]
+  },
+  {
+    "word": "harus",
+    "pos": "adv.",
+    "meaning": "必须；得",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya harus kerja besok.",
+        "zh": "我明天得上班。"
+      },
+      {
+        "id": "Kamu harus banyak minum air.",
+        "zh": "你必须多喝水。"
+      }
+    ]
+  },
+  {
+    "word": "ada",
+    "pos": "v.",
+    "meaning": "有；在；存在",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Ada banyak orang di pasar.",
+        "zh": "市场里有很多人。"
+      },
+      {
+        "id": "Apakah ada kamar kosong?",
+        "zh": "有空房间吗？"
+      }
+    ]
+  },
+  {
+    "word": "punya",
+    "pos": "v.",
+    "meaning": "有；拥有",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya punya dua kakak.",
+        "zh": "我有两个哥哥姐姐。"
+      },
+      {
+        "id": "Apakah kamu punya uang kecil?",
+        "zh": "你有零钱吗？"
+      }
+    ]
+  },
+  {
+    "word": "tahu",
+    "pos": "v.",
+    "meaning": "知道",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya tidak tahu jalan ke sana.",
+        "zh": "我不知道去那里的路。"
+      },
+      {
+        "id": "Kamu tahu nomor teleponnya?",
+        "zh": "你知道他的电话号码吗？"
+      }
+    ]
+  },
+  {
+    "word": "kenal",
+    "pos": "v.",
+    "meaning": "认识",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya kenal dia dari kantor.",
+        "zh": "我是在公司认识他的。"
+      },
+      {
+        "id": "Senang berkenalan dengan Anda.",
+        "zh": "很高兴认识您。"
+      }
+    ]
+  },
+  {
+    "word": "kerja",
+    "pos": "v.",
+    "meaning": "工作；干活",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Ayah saya kerja di pabrik.",
+        "zh": "我爸爸在工厂工作。"
+      },
+      {
+        "id": "Saya bekerja dari pagi sampai sore.",
+        "zh": "我从早上工作到傍晚。"
+      }
+    ]
+  },
+  {
+    "word": "belajar",
+    "pos": "v.",
+    "meaning": "学习",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya belajar bahasa Indonesia setiap hari.",
+        "zh": "我每天学印尼语。"
+      },
+      {
+        "id": "Dia belajar masak dari ibunya.",
+        "zh": "她跟妈妈学做饭。"
+      }
+    ]
+  },
+  {
+    "word": "mengerti",
+    "pos": "v.",
+    "meaning": "明白；理解",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya mengerti maksud Anda.",
+        "zh": "我明白您的意思。"
+      },
+      {
+        "id": "Maaf, saya tidak mengerti.",
+        "zh": "对不起，我不明白。"
+      }
+    ]
+  },
+  {
+    "word": "bantu",
+    "pos": "v.",
+    "meaning": "帮助",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Tolong bantu saya angkat kotak ini.",
+        "zh": "请帮我抬这个箱子。"
+      },
+      {
+        "id": "Dia selalu membantu orang tuanya.",
+        "zh": "他总是帮助他的父母。"
+      }
+    ]
+  },
+  {
+    "word": "beri",
+    "pos": "v.",
+    "meaning": "给；给予",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Tolong beri saya waktu sebentar.",
+        "zh": "请给我一点时间。"
+      },
+      {
+        "id": "Dia memberi saya hadiah.",
+        "zh": "他送了我一份礼物。"
+      }
+    ]
+  },
+  {
+    "word": "ambil",
+    "pos": "v.",
+    "meaning": "拿；取",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Tolong ambil buku itu untuk saya.",
+        "zh": "请帮我拿那本书。"
+      },
+      {
+        "id": "Saya mengambil uang di bank.",
+        "zh": "我去银行取钱。"
+      }
+    ]
+  },
+  {
+    "word": "bawa",
+    "pos": "v.",
+    "meaning": "带；携带",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Jangan lupa bawa payung.",
+        "zh": "别忘了带伞。"
+      },
+      {
+        "id": "Dia membawa makanan untuk kami.",
+        "zh": "他给我们带了食物。"
+      }
+    ]
+  },
+  {
+    "word": "buka",
+    "pos": "v.",
+    "meaning": "打开；开（门、店）",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Tolong buka jendela itu.",
+        "zh": "请把那扇窗户打开。"
+      },
+      {
+        "id": "Toko ini buka jam sembilan pagi.",
+        "zh": "这家店早上九点开门。"
+      }
+    ]
+  },
+  {
+    "word": "tutup",
+    "pos": "v.",
+    "meaning": "关闭；关（门、店）",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Tolong tutup pintu itu.",
+        "zh": "请把那扇门关上。"
+      },
+      {
+        "id": "Warung itu tutup hari Minggu.",
+        "zh": "那家小吃店星期天不营业。"
+      }
+    ]
+  },
+  {
+    "word": "masuk",
+    "pos": "v.",
+    "meaning": "进入；进来",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Silakan masuk dan duduk.",
+        "zh": "请进来坐。"
+      },
+      {
+        "id": "Dia masuk kerja jam delapan.",
+        "zh": "他八点上班。"
+      }
+    ]
+  },
+  {
+    "word": "keluar",
+    "pos": "v.",
+    "meaning": "出去；出来",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya mau keluar sebentar.",
+        "zh": "我想出去一会儿。"
+      },
+      {
+        "id": "Dia keluar dari rumah pagi-pagi.",
+        "zh": "他一大早就出门了。"
+      }
+    ]
+  },
+  {
+    "word": "naik",
+    "pos": "v.",
+    "meaning": "上；乘坐；上涨",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya naik bus ke kantor.",
+        "zh": "我坐公交车去上班。"
+      },
+      {
+        "id": "Harga makanan naik bulan ini.",
+        "zh": "这个月食品价格上涨了。"
+      }
+    ]
+  },
+  {
+    "word": "turun",
+    "pos": "v.",
+    "meaning": "下；下降；下车",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya turun di halte berikutnya.",
+        "zh": "我在下一站下车。"
+      },
+      {
+        "id": "Hujan turun sejak pagi.",
+        "zh": "从早上开始就一直下雨。"
+      }
+    ]
+  },
+  {
+    "word": "jalan",
+    "pos": "v.",
+    "meaning": "走；行走；路",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Kami jalan kaki ke pasar.",
+        "zh": "我们步行去市场。"
+      },
+      {
+        "id": "Dia suka jalan-jalan di taman.",
+        "zh": "他喜欢在公园里散步。"
+      }
+    ]
+  },
+  {
+    "word": "lari",
+    "pos": "v.",
+    "meaning": "跑；跑步",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya lari pagi setiap hari Minggu.",
+        "zh": "我每个星期天晨跑。"
+      },
+      {
+        "id": "Anak itu lari ke sekolah.",
+        "zh": "那个孩子跑着去学校。"
+      }
+    ]
+  },
+  {
+    "word": "main",
+    "pos": "v.",
+    "meaning": "玩；玩耍",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Anak-anak main bola di lapangan.",
+        "zh": "孩子们在操场上踢球。"
+      },
+      {
+        "id": "Kami main kartu di rumah teman.",
+        "zh": "我们在朋友家玩牌。"
+      }
+    ]
+  },
+  {
+    "word": "tanya",
+    "pos": "v.",
+    "meaning": "问；询问",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Boleh saya tanya sesuatu?",
+        "zh": "我可以问个问题吗？"
+      },
+      {
+        "id": "Kalau tidak tahu, tanya saja.",
+        "zh": "不知道的话，问一下就好。"
+      }
+    ]
+  },
+  {
+    "word": "jawab",
+    "pos": "v.",
+    "meaning": "回答",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Tolong jawab pertanyaan saya.",
+        "zh": "请回答我的问题。"
+      },
+      {
+        "id": "Dia tidak menjawab telepon saya.",
+        "zh": "他没有接我的电话。"
+      }
+    ]
+  },
+  {
+    "word": "cari",
+    "pos": "v.",
+    "meaning": "找；寻找",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya sedang cari kunci saya.",
+        "zh": "我正在找我的钥匙。"
+      },
+      {
+        "id": "Dia mencari pekerjaan baru.",
+        "zh": "他在找新工作。"
+      }
+    ]
+  },
+  {
+    "word": "tunggu",
+    "pos": "v.",
+    "meaning": "等；等待",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Tunggu sebentar, ya.",
+        "zh": "请稍等一下。"
+      },
+      {
+        "id": "Saya menunggu bus di halte.",
+        "zh": "我在车站等公交车。"
+      }
+    ]
+  },
+  {
+    "word": "bayar",
+    "pos": "v.",
+    "meaning": "付钱；支付",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya mau bayar dengan uang tunai.",
+        "zh": "我想用现金付款。"
+      },
+      {
+        "id": "Dia sudah membayar tagihan listrik.",
+        "zh": "他已经付了电费。"
+      }
+    ]
+  },
+  {
+    "word": "pakai",
+    "pos": "v.",
+    "meaning": "用；穿；戴",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Dia pakai baju merah hari ini.",
+        "zh": "她今天穿红色的衣服。"
+      },
+      {
+        "id": "Boleh saya pakai telepon Anda?",
+        "zh": "我可以用一下您的电话吗？"
+      }
+    ]
+  },
+  {
+    "word": "rumah",
+    "pos": "n.",
+    "meaning": "房子；家",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Rumah saya dekat pasar.",
+        "zh": "我家离市场很近。"
+      },
+      {
+        "id": "Dia tinggal di rumah besar.",
+        "zh": "他住在一栋大房子里。"
+      }
+    ]
+  },
+  {
+    "word": "air",
+    "pos": "n.",
+    "meaning": "水",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya mau minum air putih.",
+        "zh": "我想喝白开水。"
+      },
+      {
+        "id": "Air di sungai itu sangat jernih.",
+        "zh": "那条河里的水很清澈。"
+      }
+    ]
+  },
+  {
+    "word": "nasi",
+    "pos": "n.",
+    "meaning": "米饭",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya makan nasi goreng setiap pagi.",
+        "zh": "我每天早上吃炒饭。"
+      },
+      {
+        "id": "Ibu sedang memasak nasi.",
+        "zh": "妈妈正在煮饭。"
+      }
+    ]
+  },
+  {
+    "word": "makanan",
+    "pos": "n.",
+    "meaning": "食物",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Makanan di warung ini enak sekali.",
+        "zh": "这家小吃店的食物非常好吃。"
+      }
+    ]
+  },
+  {
+    "word": "minuman",
+    "pos": "n.",
+    "meaning": "饮料",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Mau pesan minuman apa?",
+        "zh": "想点什么饮料？"
+      }
+    ]
+  },
+  {
+    "word": "uang",
+    "pos": "n.",
+    "meaning": "钱",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya tidak punya uang kecil.",
+        "zh": "我没有零钱。"
+      },
+      {
+        "id": "Dia menabung uang setiap bulan.",
+        "zh": "他每个月都存钱。"
+      }
+    ]
+  },
+  {
+    "word": "hari",
+    "pos": "n.",
+    "meaning": "天；日子",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Hari ini cuacanya bagus.",
+        "zh": "今天天气很好。"
+      },
+      {
+        "id": "Saya bekerja lima hari seminggu.",
+        "zh": "我一周工作五天。"
+      }
+    ]
+  },
+  {
+    "word": "waktu",
+    "pos": "n.",
+    "meaning": "时间",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya tidak punya waktu hari ini.",
+        "zh": "我今天没有时间。"
+      },
+      {
+        "id": "Waktu makan siang sudah tiba.",
+        "zh": "午饭时间到了。"
+      }
+    ]
+  },
+  {
+    "word": "jam",
+    "pos": "n.",
+    "meaning": "点钟；小时；钟表",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Sekarang jam berapa?",
+        "zh": "现在几点了？"
+      },
+      {
+        "id": "Saya tidur delapan jam setiap malam.",
+        "zh": "我每晚睡八个小时。"
+      }
+    ]
+  },
+  {
+    "word": "tahun",
+    "pos": "n.",
+    "meaning": "年",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Tahun ini saya berumur dua puluh tahun.",
+        "zh": "今年我二十岁。"
+      },
+      {
+        "id": "Dia tinggal di Jakarta selama tiga tahun.",
+        "zh": "他在雅加达住了三年。"
+      }
+    ]
+  },
+  {
+    "word": "bulan",
+    "pos": "n.",
+    "meaning": "月；月亮",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Bulan depan saya pergi ke Bali.",
+        "zh": "下个月我去巴厘岛。"
+      },
+      {
+        "id": "Bulan malam ini sangat terang.",
+        "zh": "今晚的月亮很亮。"
+      }
+    ]
+  },
+  {
+    "word": "minggu",
+    "pos": "n.",
+    "meaning": "星期；周",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Minggu depan ada ujian.",
+        "zh": "下周有考试。"
+      },
+      {
+        "id": "Saya berolahraga dua kali seminggu.",
+        "zh": "我一周锻炼两次。"
+      }
+    ]
+  },
+  {
+    "word": "pasar",
+    "pos": "n.",
+    "meaning": "市场",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Ibu pergi ke pasar setiap pagi.",
+        "zh": "妈妈每天早上去市场。"
+      }
+    ]
+  },
+  {
+    "word": "toko",
+    "pos": "n.",
+    "meaning": "商店",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Toko itu buka jam delapan pagi.",
+        "zh": "那家店早上八点开门。"
+      }
+    ]
+  },
+  {
+    "word": "mobil",
+    "pos": "n.",
+    "meaning": "汽车",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Ayah pergi ke kantor naik mobil.",
+        "zh": "爸爸开车去上班。"
+      }
+    ]
+  },
+  {
+    "word": "motor",
+    "pos": "n.",
+    "meaning": "摩托车",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Dia naik motor ke sekolah.",
+        "zh": "他骑摩托车去学校。"
+      }
+    ]
+  },
+  {
+    "word": "sepeda",
+    "pos": "n.",
+    "meaning": "自行车",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya suka naik sepeda di pagi hari.",
+        "zh": "我喜欢早上骑自行车。"
+      }
+    ]
+  },
+  {
+    "word": "buku",
+    "pos": "n.",
+    "meaning": "书",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya membaca buku sebelum tidur.",
+        "zh": "我睡前看书。"
+      },
+      {
+        "id": "Buku ini sangat menarik.",
+        "zh": "这本书很有意思。"
+      }
+    ]
+  },
+  {
+    "word": "meja",
+    "pos": "n.",
+    "meaning": "桌子",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Ada buku di atas meja.",
+        "zh": "桌子上有一本书。"
+      }
+    ]
+  },
+  {
+    "word": "kursi",
+    "pos": "n.",
+    "meaning": "椅子",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Silakan duduk di kursi ini.",
+        "zh": "请坐在这把椅子上。"
+      }
+    ]
+  },
+  {
+    "word": "pintu",
+    "pos": "n.",
+    "meaning": "门",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Tolong tutup pintu itu.",
+        "zh": "请把那扇门关上。"
+      }
+    ]
+  },
+  {
+    "word": "jendela",
+    "pos": "n.",
+    "meaning": "窗户",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Dia membuka jendela kamar.",
+        "zh": "他打开了房间的窗户。"
+      }
+    ]
+  },
+  {
+    "word": "kamar",
+    "pos": "n.",
+    "meaning": "房间",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Kamar saya ada di lantai dua.",
+        "zh": "我的房间在二楼。"
+      }
+    ]
+  },
+  {
+    "word": "sekolah",
+    "pos": "n.",
+    "meaning": "学校",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Anak-anak pergi ke sekolah setiap pagi.",
+        "zh": "孩子们每天早上去学校。"
+      },
+      {
+        "id": "Sekolah itu dekat rumah saya.",
+        "zh": "那所学校离我家很近。"
+      }
+    ]
+  },
+  {
+    "word": "kantor",
+    "pos": "n.",
+    "meaning": "办公室；办事处",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Ayah bekerja di kantor sampai sore.",
+        "zh": "爸爸在办公室工作到傍晚。"
+      }
+    ]
+  },
+  {
+    "word": "telepon",
+    "pos": "n.",
+    "meaning": "电话；打电话",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Boleh saya minta nomor telepon Anda?",
+        "zh": "可以给我您的电话号码吗？"
+      },
+      {
+        "id": "Dia menelepon ibunya setiap hari.",
+        "zh": "他每天给妈妈打电话。"
+      }
+    ]
+  },
+  {
+    "word": "baju",
+    "pos": "n.",
+    "meaning": "衣服",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Baju ini terlalu kecil untuk saya.",
+        "zh": "这件衣服对我来说太小了。"
+      }
+    ]
+  },
+  {
+    "word": "sepatu",
+    "pos": "n.",
+    "meaning": "鞋子",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya membeli sepatu baru kemarin.",
+        "zh": "我昨天买了一双新鞋。"
+      }
+    ]
+  },
+  {
+    "word": "tas",
+    "pos": "n.",
+    "meaning": "包；袋子",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Tas ini berat sekali.",
+        "zh": "这个包非常重。"
+      }
+    ]
+  },
+  {
+    "word": "kota",
+    "pos": "n.",
+    "meaning": "城市",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Jakarta adalah kota besar.",
+        "zh": "雅加达是一座大城市。"
+      }
+    ]
+  },
+  {
+    "word": "negara",
+    "pos": "n.",
+    "meaning": "国家",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Indonesia adalah negara yang indah.",
+        "zh": "印度尼西亚是一个美丽的国家。"
+      }
+    ]
+  },
+  {
+    "word": "bahasa",
+    "pos": "n.",
+    "meaning": "语言",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya sedang belajar bahasa Indonesia.",
+        "zh": "我正在学习印尼语。"
+      },
+      {
+        "id": "Dia bisa berbicara tiga bahasa.",
+        "zh": "他会说三种语言。"
+      }
+    ]
+  },
+  {
+    "word": "besar",
+    "pos": "adj.",
+    "meaning": "大的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Rumah itu sangat besar.",
+        "zh": "那栋房子非常大。"
+      },
+      {
+        "id": "Dia punya mimpi yang besar.",
+        "zh": "他有远大的梦想。"
+      }
+    ]
+  },
+  {
+    "word": "kecil",
+    "pos": "adj.",
+    "meaning": "小的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Kamar saya kecil tapi nyaman.",
+        "zh": "我的房间小但很舒适。"
+      },
+      {
+        "id": "Anak kecil itu lucu sekali.",
+        "zh": "那个小孩子非常可爱。"
+      }
+    ]
+  },
+  {
+    "word": "baru",
+    "pos": "adj.",
+    "meaning": "新的；刚刚",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya membeli sepatu baru.",
+        "zh": "我买了一双新鞋。"
+      },
+      {
+        "id": "Dia baru pulang dari kantor.",
+        "zh": "他刚从办公室回来。"
+      }
+    ]
+  },
+  {
+    "word": "lama",
+    "pos": "adj.",
+    "meaning": "旧的；久的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya sudah lama tinggal di sini.",
+        "zh": "我已经在这里住了很久。"
+      },
+      {
+        "id": "Itu teman lama saya.",
+        "zh": "那是我的老朋友。"
+      }
+    ]
+  },
+  {
+    "word": "buruk",
+    "pos": "adj.",
+    "meaning": "坏的；糟糕的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Cuaca hari ini sangat buruk.",
+        "zh": "今天天气很糟糕。"
+      }
+    ]
+  },
+  {
+    "word": "bagus",
+    "pos": "adj.",
+    "meaning": "好的；漂亮的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Film itu bagus sekali.",
+        "zh": "那部电影非常好看。"
+      },
+      {
+        "id": "Ide kamu sangat bagus.",
+        "zh": "你的主意非常好。"
+      }
+    ]
+  },
+  {
+    "word": "panas",
+    "pos": "adj.",
+    "meaning": "热的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Hari ini cuacanya panas sekali.",
+        "zh": "今天天气非常热。"
+      },
+      {
+        "id": "Hati-hati, kopinya masih panas.",
+        "zh": "小心，咖啡还很烫。"
+      }
+    ]
+  },
+  {
+    "word": "dingin",
+    "pos": "adj.",
+    "meaning": "冷的；凉的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya mau minum air dingin.",
+        "zh": "我想喝冰水。"
+      },
+      {
+        "id": "Malam ini udaranya dingin.",
+        "zh": "今晚天气很冷。"
+      }
+    ]
+  },
+  {
+    "word": "mahal",
+    "pos": "adj.",
+    "meaning": "贵的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Tas itu terlalu mahal untuk saya.",
+        "zh": "那个包对我来说太贵了。"
+      }
+    ]
+  },
+  {
+    "word": "murah",
+    "pos": "adj.",
+    "meaning": "便宜的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Makanan di pasar lebih murah.",
+        "zh": "市场里的食物更便宜。"
+      }
+    ]
+  },
+  {
+    "word": "banyak",
+    "pos": "adj.",
+    "meaning": "多的；许多",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Ada banyak orang di pasar.",
+        "zh": "市场里有很多人。"
+      },
+      {
+        "id": "Terima kasih banyak.",
+        "zh": "非常感谢。"
+      }
+    ]
+  },
+  {
+    "word": "sedikit",
+    "pos": "adj.",
+    "meaning": "少的；一点儿",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya hanya punya sedikit uang.",
+        "zh": "我只有一点儿钱。"
+      },
+      {
+        "id": "Dia bisa berbicara bahasa Inggris sedikit.",
+        "zh": "他会说一点儿英语。"
+      }
+    ]
+  },
+  {
+    "word": "cepat",
+    "pos": "adj.",
+    "meaning": "快的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Dia berjalan sangat cepat.",
+        "zh": "他走路很快。"
+      },
+      {
+        "id": "Cepat sembuh, ya!",
+        "zh": "祝你早日康复！"
+      }
+    ]
+  },
+  {
+    "word": "lambat",
+    "pos": "adj.",
+    "meaning": "慢的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Bus ini jalannya lambat sekali.",
+        "zh": "这辆公交车开得非常慢。"
+      }
+    ]
+  },
+  {
+    "word": "jauh",
+    "pos": "adj.",
+    "meaning": "远的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Rumah saya jauh dari kantor.",
+        "zh": "我家离办公室很远。"
+      }
+    ]
+  },
+  {
+    "word": "dekat",
+    "pos": "adj.",
+    "meaning": "近的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Sekolah itu dekat dari sini.",
+        "zh": "那所学校离这里很近。"
+      },
+      {
+        "id": "Mereka berdua teman dekat.",
+        "zh": "他们俩是好朋友。"
+      }
+    ]
+  },
+  {
+    "word": "tinggi",
+    "pos": "adj.",
+    "meaning": "高的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Gedung itu sangat tinggi.",
+        "zh": "那栋楼非常高。"
+      },
+      {
+        "id": "Kakak saya lebih tinggi dari saya.",
+        "zh": "我哥哥比我高。"
+      }
+    ]
+  },
+  {
+    "word": "rendah",
+    "pos": "adj.",
+    "meaning": "低的；矮的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Harga di toko itu lebih rendah.",
+        "zh": "那家店的价格更低。"
+      }
+    ]
+  },
+  {
+    "word": "mudah",
+    "pos": "adj.",
+    "meaning": "容易的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Soal ujian ini mudah sekali.",
+        "zh": "这次考试的题目非常容易。"
+      },
+      {
+        "id": "Bahasa Indonesia mudah dipelajari.",
+        "zh": "印尼语很容易学。"
+      }
+    ]
+  },
+  {
+    "word": "sulit",
+    "pos": "adj.",
+    "meaning": "难的；困难的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Pertanyaan ini sulit dijawab.",
+        "zh": "这个问题很难回答。"
+      }
+    ]
+  },
+  {
+    "word": "enak",
+    "pos": "adj.",
+    "meaning": "好吃的；舒服的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Masakan ibu sangat enak.",
+        "zh": "妈妈做的菜非常好吃。"
+      },
+      {
+        "id": "Badan saya tidak enak hari ini.",
+        "zh": "我今天身体不舒服。"
+      }
+    ]
+  },
+  {
+    "word": "cantik",
+    "pos": "adj.",
+    "meaning": "漂亮的；美丽的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Pemandangan di pantai itu cantik sekali.",
+        "zh": "那片海滩的风景非常美。"
+      }
+    ]
+  },
+  {
+    "word": "pintar",
+    "pos": "adj.",
+    "meaning": "聪明的；擅长的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Anak itu sangat pintar di sekolah.",
+        "zh": "那个孩子在学校很聪明。"
+      },
+      {
+        "id": "Dia pintar memasak.",
+        "zh": "她很会做饭。"
+      }
+    ]
+  },
+  {
+    "word": "kaya",
+    "pos": "adj.",
+    "meaning": "富有的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Orang itu kaya tapi rendah hati.",
+        "zh": "那个人很富有但很谦虚。"
+      }
+    ]
+  },
+  {
+    "word": "miskin",
+    "pos": "adj.",
+    "meaning": "贫穷的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Dulu keluarganya sangat miskin.",
+        "zh": "以前他家很穷。"
+      }
+    ]
+  },
+  {
+    "word": "sehat",
+    "pos": "adj.",
+    "meaning": "健康的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Olahraga membuat badan sehat.",
+        "zh": "运动使身体健康。"
+      },
+      {
+        "id": "Semoga kamu selalu sehat.",
+        "zh": "祝你身体一直健康。"
+      }
+    ]
+  },
+  {
+    "word": "sakit",
+    "pos": "adj.",
+    "meaning": "生病的；疼的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya tidak masuk kerja karena sakit.",
+        "zh": "我因为生病没去上班。"
+      },
+      {
+        "id": "Kepala saya sakit sejak pagi.",
+        "zh": "我的头从早上就一直疼。"
+      }
+    ]
+  },
+  {
+    "word": "lapar",
+    "pos": "adj.",
+    "meaning": "饿的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya lapar, ayo kita makan.",
+        "zh": "我饿了，我们去吃饭吧。"
+      }
+    ]
+  },
+  {
+    "word": "haus",
+    "pos": "adj.",
+    "meaning": "渴的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya haus, mau minum air.",
+        "zh": "我渴了，想喝水。"
+      }
+    ]
+  },
+  {
+    "word": "senang",
+    "pos": "adj.",
+    "meaning": "高兴的；喜欢",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya senang bertemu dengan kamu.",
+        "zh": "很高兴见到你。"
+      },
+      {
+        "id": "Dia senang membaca buku.",
+        "zh": "他喜欢看书。"
+      }
+    ]
+  },
+  {
+    "word": "sedih",
+    "pos": "adj.",
+    "meaning": "伤心的；难过的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Dia sedih karena gagal ujian.",
+        "zh": "他因为考试不及格而难过。"
+      }
+    ]
+  },
+  {
+    "word": "marah",
+    "pos": "adj.",
+    "meaning": "生气的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Ibu marah karena kamar saya kotor.",
+        "zh": "妈妈因为我的房间脏而生气。"
+      }
+    ]
+  },
+  {
+    "word": "takut",
+    "pos": "adj.",
+    "meaning": "害怕的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Adik saya takut anjing.",
+        "zh": "我弟弟怕狗。"
+      }
+    ]
+  },
+  {
+    "word": "dan",
+    "pos": "conj.",
+    "meaning": "和；以及",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya suka kopi dan teh.",
+        "zh": "我喜欢咖啡和茶。"
+      },
+      {
+        "id": "Ayah dan ibu sedang makan malam.",
+        "zh": "爸爸和妈妈正在吃晚饭。"
+      }
+    ]
+  },
+  {
+    "word": "atau",
+    "pos": "conj.",
+    "meaning": "或者；还是",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Kamu mau teh atau kopi?",
+        "zh": "你要茶还是咖啡？"
+      },
+      {
+        "id": "Kita bisa naik bus atau kereta.",
+        "zh": "我们可以坐公交车或者火车。"
+      }
+    ]
+  },
+  {
+    "word": "tetapi",
+    "pos": "conj.",
+    "meaning": "但是；可是",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Tas ini bagus, tetapi mahal.",
+        "zh": "这个包很好看，但是很贵。"
+      },
+      {
+        "id": "Dia lelah, tetapi tetap bekerja.",
+        "zh": "他很累，但还是继续工作。"
+      }
+    ]
+  },
+  {
+    "word": "karena",
+    "pos": "conj.",
+    "meaning": "因为",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya tidak datang karena hujan.",
+        "zh": "因为下雨，我没有来。"
+      },
+      {
+        "id": "Dia senang karena lulus ujian.",
+        "zh": "他因为通过了考试而高兴。"
+      }
+    ]
+  },
+  {
+    "word": "di",
+    "pos": "prep.",
+    "meaning": "在（地点）",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya tinggal di Jakarta.",
+        "zh": "我住在雅加达。"
+      },
+      {
+        "id": "Buku itu ada di atas meja.",
+        "zh": "那本书在桌子上。"
+      }
+    ]
+  },
+  {
+    "word": "ke",
+    "pos": "prep.",
+    "meaning": "到；往（方向）",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya pergi ke pasar setiap pagi.",
+        "zh": "我每天早上去市场。"
+      },
+      {
+        "id": "Besok kami akan pergi ke Bandung.",
+        "zh": "明天我们要去万隆。"
+      }
+    ]
+  },
+  {
+    "word": "dari",
+    "pos": "prep.",
+    "meaning": "从；来自",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Dia baru pulang dari sekolah.",
+        "zh": "他刚从学校回来。"
+      },
+      {
+        "id": "Saya berasal dari Tiongkok.",
+        "zh": "我来自中国。"
+      }
+    ]
+  },
+  {
+    "word": "dengan",
+    "pos": "prep.",
+    "meaning": "和；用；以",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya pergi ke pasar dengan ibu.",
+        "zh": "我和妈妈一起去市场。"
+      },
+      {
+        "id": "Dia menulis dengan pensil.",
+        "zh": "他用铅笔写字。"
+      }
+    ]
+  },
+  {
+    "word": "untuk",
+    "pos": "prep.",
+    "meaning": "为了；给",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Hadiah ini untuk kamu.",
+        "zh": "这个礼物是给你的。"
+      },
+      {
+        "id": "Saya belajar untuk ujian besok.",
+        "zh": "我为明天的考试而学习。"
+      }
+    ]
+  },
+  {
+    "word": "dalam",
+    "pos": "prep.",
+    "meaning": "在……里面；深的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Uang itu ada di dalam tas.",
+        "zh": "钱在包里。"
+      },
+      {
+        "id": "Dia berbicara dalam bahasa Indonesia.",
+        "zh": "他用印尼语讲话。"
+      }
+    ]
+  },
+  {
+    "word": "atas",
+    "pos": "n.",
+    "meaning": "上面；上方",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Kucing itu tidur di atas kursi.",
+        "zh": "那只猫在椅子上睡觉。"
+      },
+      {
+        "id": "Kamar saya ada di lantai atas.",
+        "zh": "我的房间在楼上。"
+      }
+    ]
+  },
+  {
+    "word": "bawah",
+    "pos": "n.",
+    "meaning": "下面；下方",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Sepatu saya ada di bawah meja.",
+        "zh": "我的鞋子在桌子下面。"
+      }
+    ]
+  },
+  {
+    "word": "depan",
+    "pos": "n.",
+    "meaning": "前面；下一个的",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Mobil itu parkir di depan rumah.",
+        "zh": "那辆车停在房子前面。"
+      },
+      {
+        "id": "Minggu depan saya pergi ke Bali.",
+        "zh": "下周我去巴厘岛。"
+      }
+    ]
+  },
+  {
+    "word": "belakang",
+    "pos": "n.",
+    "meaning": "后面；背后",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Ada taman kecil di belakang rumah.",
+        "zh": "房子后面有个小花园。"
+      }
+    ]
+  },
+  {
+    "word": "ini",
+    "pos": "pron.",
+    "meaning": "这；这个",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Ini buku saya.",
+        "zh": "这是我的书。"
+      },
+      {
+        "id": "Baju ini sangat bagus.",
+        "zh": "这件衣服非常好看。"
+      }
+    ]
+  },
+  {
+    "word": "itu",
+    "pos": "pron.",
+    "meaning": "那；那个",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Itu rumah teman saya.",
+        "zh": "那是我朋友的家。"
+      },
+      {
+        "id": "Mobil itu sangat mahal.",
+        "zh": "那辆车非常贵。"
+      }
+    ]
+  },
+  {
+    "word": "sekarang",
+    "pos": "adv.",
+    "meaning": "现在",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Sekarang saya tinggal di Jakarta.",
+        "zh": "我现在住在雅加达。"
+      },
+      {
+        "id": "Kita harus berangkat sekarang.",
+        "zh": "我们现在必须出发了。"
+      }
+    ]
+  },
+  {
+    "word": "kemarin",
+    "pos": "adv.",
+    "meaning": "昨天",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Kemarin saya pergi ke pasar.",
+        "zh": "昨天我去了市场。"
+      },
+      {
+        "id": "Dia sakit sejak kemarin.",
+        "zh": "他从昨天开始就生病了。"
+      }
+    ]
+  },
+  {
+    "word": "besok",
+    "pos": "adv.",
+    "meaning": "明天",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Besok saya ada ujian.",
+        "zh": "明天我有考试。"
+      },
+      {
+        "id": "Sampai jumpa besok!",
+        "zh": "明天见！"
+      }
+    ]
+  },
+  {
+    "word": "sudah",
+    "pos": "adv.",
+    "meaning": "已经",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya sudah makan siang.",
+        "zh": "我已经吃过午饭了。"
+      },
+      {
+        "id": "Dia sudah pulang ke rumah.",
+        "zh": "他已经回家了。"
+      }
+    ]
+  },
+  {
+    "word": "belum",
+    "pos": "adv.",
+    "meaning": "还没；尚未",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya belum makan pagi.",
+        "zh": "我还没吃早饭。"
+      },
+      {
+        "id": "Kamu sudah mandi? Belum.",
+        "zh": "你洗澡了吗？还没有。"
+      }
+    ]
+  },
+  {
+    "word": "sedang",
+    "pos": "adv.",
+    "meaning": "正在",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Ibu sedang memasak di dapur.",
+        "zh": "妈妈正在厨房做饭。"
+      },
+      {
+        "id": "Saya sedang belajar bahasa Indonesia.",
+        "zh": "我正在学印尼语。"
+      }
+    ]
+  },
+  {
+    "word": "akan",
+    "pos": "adv.",
+    "meaning": "将要；会",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Besok saya akan pergi ke Bandung.",
+        "zh": "明天我将去万隆。"
+      },
+      {
+        "id": "Dia akan datang jam tujuh malam.",
+        "zh": "他晚上七点会来。"
+      }
+    ]
+  },
+  {
+    "word": "masih",
+    "pos": "adv.",
+    "meaning": "还；仍然",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Dia masih tidur di kamar.",
+        "zh": "他还在房间里睡觉。"
+      },
+      {
+        "id": "Saya masih lapar.",
+        "zh": "我还是很饿。"
+      }
+    ]
+  },
+  {
+    "word": "lagi",
+    "pos": "adv.",
+    "meaning": "再；又；正在",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Tolong ulangi sekali lagi.",
+        "zh": "请再重复一遍。"
+      },
+      {
+        "id": "Saya mau makan lagi.",
+        "zh": "我想再吃一点。"
+      }
+    ]
+  },
+  {
+    "word": "juga",
+    "pos": "adv.",
+    "meaning": "也",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya juga suka kopi.",
+        "zh": "我也喜欢咖啡。"
+      },
+      {
+        "id": "Dia juga belajar bahasa Indonesia.",
+        "zh": "他也在学印尼语。"
+      }
+    ]
+  },
+  {
+    "word": "sangat",
+    "pos": "adv.",
+    "meaning": "非常；很",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Makanan ini sangat enak.",
+        "zh": "这食物非常好吃。"
+      },
+      {
+        "id": "Dia sangat senang hari ini.",
+        "zh": "他今天非常高兴。"
+      }
+    ]
+  },
+  {
+    "word": "sekali",
+    "pos": "adv.",
+    "meaning": "非常（放词后）；一次",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Pemandangan ini indah sekali.",
+        "zh": "这风景非常美。"
+      },
+      {
+        "id": "Saya pernah ke Bali sekali.",
+        "zh": "我去过一次巴厘岛。"
+      }
+    ]
+  },
+  {
+    "word": "hanya",
+    "pos": "adv.",
+    "meaning": "只；仅仅",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya hanya punya satu adik.",
+        "zh": "我只有一个弟弟。"
+      },
+      {
+        "id": "Dia hanya makan sedikit.",
+        "zh": "他只吃了一点。"
+      }
+    ]
+  },
+  {
+    "word": "semua",
+    "pos": "pron.",
+    "meaning": "所有；全部",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Semua orang sudah datang.",
+        "zh": "所有人都已经到了。"
+      },
+      {
+        "id": "Saya suka semua makanan Indonesia.",
+        "zh": "我喜欢所有的印尼菜。"
+      }
+    ]
+  },
+  {
+    "word": "setiap",
+    "pos": "adj.",
+    "meaning": "每；每个",
+    "level": 1,
+    "examples": [
+      {
+        "id": "Saya berolahraga setiap pagi.",
+        "zh": "我每天早上锻炼。"
+      },
+      {
+        "id": "Setiap orang punya mimpi.",
+        "zh": "每个人都有梦想。"
+      }
+    ]
+  },
+  {
+    "word": "buat",
+    "pos": "v.",
+    "meaning": "做；制作；造",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Ibu buat kue untuk ulang tahun adik.",
+        "zh": "妈妈为弟弟的生日做了蛋糕。"
+      },
+      {
+        "id": "Saya mau buat janji dengan dokter besok.",
+        "zh": "我想跟医生约明天的时间。"
+      }
+    ]
+  },
+  {
+    "word": "jadi",
+    "pos": "conj.",
+    "meaning": "所以；于是；成为",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Harganya mahal, jadi saya tidak beli.",
+        "zh": "价格太贵，所以我没买。"
+      }
+    ]
+  },
+  {
+    "word": "nanti",
+    "pos": "adv.",
+    "meaning": "等会儿；稍后",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Nanti sore saya mau belanja ke pasar.",
+        "zh": "今天下午我要去市场买东西。"
+      }
+    ]
+  },
+  {
+    "word": "sini",
+    "pos": "adv.",
+    "meaning": "这里",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Duduk di sini saja, dekat jendela.",
+        "zh": "就坐在这里吧，靠近窗户。"
+      }
+    ]
+  },
+  {
+    "word": "sana",
+    "pos": "adv.",
+    "meaning": "那里",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Toilet ada di sana, dekat kasir.",
+        "zh": "洗手间在那边，收银台旁边。"
+      }
+    ]
+  },
+  {
+    "word": "desa",
+    "pos": "n.",
+    "meaning": "村庄；乡村",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Nenek saya tinggal di desa.",
+        "zh": "我奶奶住在乡下。"
+      }
+    ]
+  },
+  {
+    "word": "kata",
+    "pos": "n.",
+    "meaning": "词；话语",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya belajar sepuluh kata baru setiap hari.",
+        "zh": "我每天学十个新单词。"
+      }
+    ]
+  },
+  {
+    "word": "jelek",
+    "pos": "adj.",
+    "meaning": "差；难看；不好",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Cuaca hari ini jelek sekali.",
+        "zh": "今天天气很糟糕。"
+      }
+    ]
+  },
+  {
+    "word": "capek",
+    "pos": "adj.",
+    "meaning": "累；疲倦",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya capek setelah bekerja seharian.",
+        "zh": "工作了一整天，我很累。"
+      }
+    ]
+  },
+  {
+    "word": "bodoh",
+    "pos": "adj.",
+    "meaning": "笨；愚蠢",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Dia merasa bodoh karena lupa membawa tiket.",
+        "zh": "他因为忘了带票而觉得自己很蠢。"
+      }
+    ]
+  },
+  {
+    "word": "ganteng",
+    "pos": "adj.",
+    "meaning": "帅；英俊",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Sopir taksi itu ganteng dan ramah.",
+        "zh": "那个出租车司机又帅又友善。"
+      }
+    ]
+  },
+  {
+    "word": "ayam",
+    "pos": "n.",
+    "meaning": "鸡；鸡肉",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya pesan ayam goreng dan es teh.",
+        "zh": "我点了炸鸡和冰茶。"
+      }
+    ]
+  },
+  {
+    "word": "ikan",
+    "pos": "n.",
+    "meaning": "鱼",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Ibu membeli ikan segar di pasar.",
+        "zh": "妈妈在市场买了新鲜的鱼。"
+      }
+    ]
+  },
+  {
+    "word": "daging",
+    "pos": "n.",
+    "meaning": "肉",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Harga daging sapi naik minggu ini.",
+        "zh": "这周牛肉价格涨了。"
+      }
+    ]
+  },
+  {
+    "word": "sayur",
+    "pos": "n.",
+    "meaning": "蔬菜",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya makan nasi dengan sayur dan tahu.",
+        "zh": "我吃米饭配蔬菜和豆腐。"
+      }
+    ]
+  },
+  {
+    "word": "buah",
+    "pos": "n.",
+    "meaning": "水果；果实",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Makan buah setiap hari itu sehat.",
+        "zh": "每天吃水果很健康。"
+      }
+    ]
+  },
+  {
+    "word": "telur",
+    "pos": "n.",
+    "meaning": "蛋；鸡蛋",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya sarapan roti dan telur rebus.",
+        "zh": "我早餐吃面包和水煮蛋。"
+      }
+    ]
+  },
+  {
+    "word": "roti",
+    "pos": "n.",
+    "meaning": "面包",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Dia membeli roti di toko dekat stasiun.",
+        "zh": "他在车站附近的店里买了面包。"
+      }
+    ]
+  },
+  {
+    "word": "mie",
+    "pos": "n.",
+    "meaning": "面条",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya pesan mie goreng tanpa cabai.",
+        "zh": "我点了不放辣椒的炒面。"
+      }
+    ]
+  },
+  {
+    "word": "kopi",
+    "pos": "n.",
+    "meaning": "咖啡",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Bapak minum kopi setiap pagi.",
+        "zh": "爸爸每天早上喝咖啡。"
+      }
+    ]
+  },
+  {
+    "word": "teh",
+    "pos": "n.",
+    "meaning": "茶",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya mau es teh manis, ya.",
+        "zh": "我要一杯甜冰茶。"
+      }
+    ]
+  },
+  {
+    "word": "susu",
+    "pos": "n.",
+    "meaning": "牛奶；奶",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Anak itu minum susu sebelum tidur.",
+        "zh": "那个孩子睡前喝牛奶。"
+      }
+    ]
+  },
+  {
+    "word": "gula",
+    "pos": "n.",
+    "meaning": "糖",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kopinya pakai gula sedikit saja.",
+        "zh": "咖啡里只放一点点糖。"
+      }
+    ]
+  },
+  {
+    "word": "garam",
+    "pos": "n.",
+    "meaning": "盐",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Tolong ambil garam di dapur.",
+        "zh": "请去厨房拿一下盐。"
+      }
+    ]
+  },
+  {
+    "word": "pedas",
+    "pos": "adj.",
+    "meaning": "辣",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Sambal ini pedas sekali.",
+        "zh": "这个辣椒酱太辣了。"
+      }
+    ]
+  },
+  {
+    "word": "manis",
+    "pos": "adj.",
+    "meaning": "甜；可爱",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Es tehnya terlalu manis untuk saya.",
+        "zh": "这杯冰茶对我来说太甜了。"
+      }
+    ]
+  },
+  {
+    "word": "asin",
+    "pos": "adj.",
+    "meaning": "咸",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Sup ini terlalu asin, tambah air sedikit.",
+        "zh": "这汤太咸了，加点水吧。"
+      }
+    ]
+  },
+  {
+    "word": "pahit",
+    "pos": "adj.",
+    "meaning": "苦",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Obat ini pahit, tapi harus diminum.",
+        "zh": "这药很苦，但必须喝。"
+      }
+    ]
+  },
+  {
+    "word": "goreng",
+    "pos": "v.",
+    "meaning": "炸；煎；炒",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Ibu sedang menggoreng ikan di dapur.",
+        "zh": "妈妈正在厨房煎鱼。"
+      },
+      {
+        "id": "Saya suka nasi goreng dengan telur.",
+        "zh": "我喜欢加蛋的炒饭。"
+      }
+    ]
+  },
+  {
+    "word": "rebus",
+    "pos": "v.",
+    "meaning": "煮；水煮",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Rebus telur ini selama sepuluh menit.",
+        "zh": "把这些蛋煮十分钟。"
+      },
+      {
+        "id": "Saya lebih suka jagung rebus daripada jagung goreng.",
+        "zh": "比起炸玉米，我更喜欢煮玉米。"
+      }
+    ]
+  },
+  {
+    "word": "pisang",
+    "pos": "n.",
+    "meaning": "香蕉",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Pisang goreng ini masih hangat.",
+        "zh": "这个炸香蕉还是热的。"
+      }
+    ]
+  },
+  {
+    "word": "apel",
+    "pos": "n.",
+    "meaning": "苹果",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Satu kilo apel berapa, Bu?",
+        "zh": "阿姨，苹果一公斤多少钱？"
+      }
+    ]
+  },
+  {
+    "word": "jeruk",
+    "pos": "n.",
+    "meaning": "橘子；柑橘",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya pesan jus jeruk dingin.",
+        "zh": "我点一杯冰橙汁。"
+      }
+    ]
+  },
+  {
+    "word": "mangga",
+    "pos": "n.",
+    "meaning": "芒果",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Mangga ini manis dan murah.",
+        "zh": "这芒果又甜又便宜。"
+      }
+    ]
+  },
+  {
+    "word": "semangka",
+    "pos": "n.",
+    "meaning": "西瓜",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kami makan semangka di pantai.",
+        "zh": "我们在海滩上吃西瓜。"
+      }
+    ]
+  },
+  {
+    "word": "kepala",
+    "pos": "n.",
+    "meaning": "头；头部；首领",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kepala saya sakit sejak pagi.",
+        "zh": "我的头从早上就开始疼。"
+      }
+    ]
+  },
+  {
+    "word": "mata",
+    "pos": "n.",
+    "meaning": "眼睛",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Mata saya merah karena kurang tidur.",
+        "zh": "我因为睡眠不足眼睛发红。"
+      }
+    ]
+  },
+  {
+    "word": "hidung",
+    "pos": "n.",
+    "meaning": "鼻子",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Hidung saya tersumbat karena flu.",
+        "zh": "我感冒了，鼻子不通气。"
+      }
+    ]
+  },
+  {
+    "word": "mulut",
+    "pos": "n.",
+    "meaning": "嘴；口",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Buka mulut, kata dokter gigi.",
+        "zh": "牙医说：张开嘴。"
+      }
+    ]
+  },
+  {
+    "word": "telinga",
+    "pos": "n.",
+    "meaning": "耳朵",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Telinga kiri saya sakit, Dok.",
+        "zh": "医生，我的左耳很疼。"
+      }
+    ]
+  },
+  {
+    "word": "tangan",
+    "pos": "n.",
+    "meaning": "手",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Cuci tangan sebelum makan.",
+        "zh": "吃饭前要洗手。"
+      }
+    ]
+  },
+  {
+    "word": "kaki",
+    "pos": "n.",
+    "meaning": "脚；腿",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kaki saya pegal setelah jalan jauh.",
+        "zh": "走了很远的路，我的腿很酸。"
+      }
+    ]
+  },
+  {
+    "word": "rambut",
+    "pos": "n.",
+    "meaning": "头发",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Rambut adik saya panjang dan hitam.",
+        "zh": "我妹妹的头发又长又黑。"
+      }
+    ]
+  },
+  {
+    "word": "gigi",
+    "pos": "n.",
+    "meaning": "牙齿",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya sikat gigi dua kali sehari.",
+        "zh": "我一天刷两次牙。"
+      }
+    ]
+  },
+  {
+    "word": "perut",
+    "pos": "n.",
+    "meaning": "肚子；腹部",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Perut saya sakit setelah makan pedas.",
+        "zh": "吃了辣的之后我肚子疼。"
+      }
+    ]
+  },
+  {
+    "word": "hujan",
+    "pos": "n.",
+    "meaning": "雨；下雨",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Hari ini hujan deras sejak pagi.",
+        "zh": "今天从早上起就下大雨。"
+      }
+    ]
+  },
+  {
+    "word": "matahari",
+    "pos": "n.",
+    "meaning": "太阳",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Matahari terbit pukul enam pagi.",
+        "zh": "太阳早上六点升起。"
+      }
+    ]
+  },
+  {
+    "word": "angin",
+    "pos": "n.",
+    "meaning": "风",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Angin di pantai sangat kencang.",
+        "zh": "海滩上的风很大。"
+      }
+    ]
+  },
+  {
+    "word": "awan",
+    "pos": "n.",
+    "meaning": "云",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Langit penuh awan hitam, mungkin akan hujan.",
+        "zh": "天上满是乌云，可能要下雨了。"
+      }
+    ]
+  },
+  {
+    "word": "langit",
+    "pos": "n.",
+    "meaning": "天空",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Langit sore ini berwarna oranye.",
+        "zh": "今天傍晚的天空是橙色的。"
+      }
+    ]
+  },
+  {
+    "word": "laut",
+    "pos": "n.",
+    "meaning": "海；海洋",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kami berenang di laut tadi pagi.",
+        "zh": "今天早上我们在海里游泳。"
+      }
+    ]
+  },
+  {
+    "word": "gunung",
+    "pos": "n.",
+    "meaning": "山",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Dari hotel, kami bisa melihat gunung.",
+        "zh": "从酒店我们能看到山。"
+      }
+    ]
+  },
+  {
+    "word": "sungai",
+    "pos": "n.",
+    "meaning": "河；河流",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Anak-anak bermain di tepi sungai.",
+        "zh": "孩子们在河边玩耍。"
+      }
+    ]
+  },
+  {
+    "word": "pantai",
+    "pos": "n.",
+    "meaning": "海滩；海边",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Besok kami mau piknik ke pantai.",
+        "zh": "明天我们要去海滩野餐。"
+      }
+    ]
+  },
+  {
+    "word": "pohon",
+    "pos": "n.",
+    "meaning": "树",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kami duduk di bawah pohon mangga.",
+        "zh": "我们坐在芒果树下。"
+      }
+    ]
+  },
+  {
+    "word": "bunga",
+    "pos": "n.",
+    "meaning": "花；利息",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Dia membeli bunga untuk ibunya.",
+        "zh": "他给妈妈买了花。"
+      }
+    ]
+  },
+  {
+    "word": "hewan",
+    "pos": "n.",
+    "meaning": "动物",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Di desa banyak hewan seperti ayam dan sapi.",
+        "zh": "村里有很多动物，比如鸡和牛。"
+      }
+    ]
+  },
+  {
+    "word": "kucing",
+    "pos": "n.",
+    "meaning": "猫",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kucing saya suka tidur di sofa.",
+        "zh": "我的猫喜欢在沙发上睡觉。"
+      }
+    ]
+  },
+  {
+    "word": "anjing",
+    "pos": "n.",
+    "meaning": "狗",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Anjing tetangga menggonggong setiap malam.",
+        "zh": "邻居的狗每天晚上都叫。"
+      }
+    ]
+  },
+  {
+    "word": "burung",
+    "pos": "n.",
+    "meaning": "鸟",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Burung itu bernyanyi di atas pohon.",
+        "zh": "那只鸟在树上唱歌。"
+      }
+    ]
+  },
+  {
+    "word": "pesawat",
+    "pos": "n.",
+    "meaning": "飞机",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Pesawat ke Bali berangkat pukul tujuh.",
+        "zh": "飞往巴厘岛的飞机七点起飞。"
+      }
+    ]
+  },
+  {
+    "word": "kereta",
+    "pos": "n.",
+    "meaning": "火车；列车",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kami naik kereta ke Yogyakarta.",
+        "zh": "我们坐火车去日惹。"
+      }
+    ]
+  },
+  {
+    "word": "bus",
+    "pos": "n.",
+    "meaning": "公共汽车；巴士",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Bus ke bandara lewat setiap tiga puluh menit.",
+        "zh": "去机场的巴士每三十分钟一班。"
+      }
+    ]
+  },
+  {
+    "word": "kapal",
+    "pos": "n.",
+    "meaning": "船",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kapal ke pulau itu berangkat dari pelabuhan pagi-pagi.",
+        "zh": "去那个岛的船一大早从港口出发。"
+      }
+    ]
+  },
+  {
+    "word": "bandara",
+    "pos": "n.",
+    "meaning": "机场",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kami sampai di bandara dua jam sebelum berangkat.",
+        "zh": "我们提前两小时到了机场。"
+      }
+    ]
+  },
+  {
+    "word": "stasiun",
+    "pos": "n.",
+    "meaning": "车站；火车站",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Stasiun kereta tidak jauh dari hotel.",
+        "zh": "火车站离酒店不远。"
+      }
+    ]
+  },
+  {
+    "word": "tiket",
+    "pos": "n.",
+    "meaning": "票；车票；门票",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya sudah beli tiket pesawat untuk besok.",
+        "zh": "我已经买好了明天的机票。"
+      }
+    ]
+  },
+  {
+    "word": "rumah sakit",
+    "pos": "n.",
+    "meaning": "医院",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Ayah dibawa ke rumah sakit tadi malam.",
+        "zh": "爸爸昨晚被送去了医院。"
+      }
+    ]
+  },
+  {
+    "word": "bank",
+    "pos": "n.",
+    "meaning": "银行",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya mau ambil uang di bank dulu.",
+        "zh": "我先去银行取钱。"
+      }
+    ]
+  },
+  {
+    "word": "hotel",
+    "pos": "n.",
+    "meaning": "酒店；旅馆",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kami menginap di hotel dekat pantai.",
+        "zh": "我们住在海边附近的酒店。"
+      }
+    ]
+  },
+  {
+    "word": "restoran",
+    "pos": "n.",
+    "meaning": "餐厅；饭店",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Restoran ini terkenal dengan ayam gorengnya.",
+        "zh": "这家餐厅以炸鸡出名。"
+      }
+    ]
+  },
+  {
+    "word": "masjid",
+    "pos": "n.",
+    "meaning": "清真寺",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Masjid itu ramai setiap hari Jumat.",
+        "zh": "那座清真寺每周五都很热闹。"
+      }
+    ]
+  },
+  {
+    "word": "gereja",
+    "pos": "n.",
+    "meaning": "教堂",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Mereka pergi ke gereja setiap hari Minggu.",
+        "zh": "他们每个星期天去教堂。"
+      }
+    ]
+  },
+  {
+    "word": "perpustakaan",
+    "pos": "n.",
+    "meaning": "图书馆",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya membaca buku di perpustakaan kampus.",
+        "zh": "我在学校图书馆看书。"
+      }
+    ]
+  },
+  {
+    "word": "apotek",
+    "pos": "n.",
+    "meaning": "药店",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya membeli obat batuk di apotek.",
+        "zh": "我在药店买了咳嗽药。"
+      }
+    ]
+  },
+  {
+    "word": "bioskop",
+    "pos": "n.",
+    "meaning": "电影院",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kami menonton film di bioskop malam ini.",
+        "zh": "今晚我们在电影院看电影。"
+      }
+    ]
+  },
+  {
+    "word": "harga",
+    "pos": "n.",
+    "meaning": "价格",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Berapa harga mangga ini, Pak?",
+        "zh": "大叔，这芒果多少钱？"
+      }
+    ]
+  },
+  {
+    "word": "diskon",
+    "pos": "n.",
+    "meaning": "折扣；打折",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Baju ini diskon lima puluh persen.",
+        "zh": "这件衣服打五折。"
+      }
+    ]
+  },
+  {
+    "word": "belanja",
+    "pos": "v.",
+    "meaning": "购物；买东西",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Ibu belanja sayur di pasar setiap pagi.",
+        "zh": "妈妈每天早上去市场买菜。"
+      },
+      {
+        "id": "Saya suka belanja online saat ada diskon.",
+        "zh": "有折扣的时候我喜欢网购。"
+      }
+    ]
+  },
+  {
+    "word": "menit",
+    "pos": "n.",
+    "meaning": "分钟",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Tunggu lima menit, ya, makanannya segera datang.",
+        "zh": "请等五分钟，菜马上就来。"
+      }
+    ]
+  },
+  {
+    "word": "detik",
+    "pos": "n.",
+    "meaning": "秒",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Satu menit ada enam puluh detik.",
+        "zh": "一分钟有六十秒。"
+      }
+    ]
+  },
+  {
+    "word": "tanggal",
+    "pos": "n.",
+    "meaning": "日期；日",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Hari ini tanggal berapa?",
+        "zh": "今天是几号？"
+      }
+    ]
+  },
+  {
+    "word": "guru",
+    "pos": "n.",
+    "meaning": "老师",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Guru bahasa Indonesia saya sangat sabar.",
+        "zh": "我的印尼语老师非常有耐心。"
+      }
+    ]
+  },
+  {
+    "word": "murid",
+    "pos": "n.",
+    "meaning": "学生",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Murid-murid sedang belajar di kelas.",
+        "zh": "学生们正在教室里学习。"
+      }
+    ]
+  },
+  {
+    "word": "dokter",
+    "pos": "n.",
+    "meaning": "医生",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya mau periksa ke dokter sore ini.",
+        "zh": "今天下午我要去看医生。"
+      }
+    ]
+  },
+  {
+    "word": "perawat",
+    "pos": "n.",
+    "meaning": "护士",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Perawat itu mengukur suhu badan saya.",
+        "zh": "那位护士给我量了体温。"
+      }
+    ]
+  },
+  {
+    "word": "polisi",
+    "pos": "n.",
+    "meaning": "警察",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Polisi mengatur lalu lintas di depan stasiun.",
+        "zh": "警察在车站前指挥交通。"
+      }
+    ]
+  },
+  {
+    "word": "sopir",
+    "pos": "n.",
+    "meaning": "司机",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Sopir bus itu mengemudi dengan hati-hati.",
+        "zh": "那个公交司机开车很小心。"
+      }
+    ]
+  },
+  {
+    "word": "petani",
+    "pos": "n.",
+    "meaning": "农民",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Petani di desa menanam padi.",
+        "zh": "村里的农民种水稻。"
+      }
+    ]
+  },
+  {
+    "word": "pedagang",
+    "pos": "n.",
+    "meaning": "商贩；商人",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Pedagang buah itu ramah sekali.",
+        "zh": "那个卖水果的小贩非常和气。"
+      }
+    ]
+  },
+  {
+    "word": "pegawai",
+    "pos": "n.",
+    "meaning": "职员；员工",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Dia bekerja sebagai pegawai bank.",
+        "zh": "他是一名银行职员。"
+      }
+    ]
+  },
+  {
+    "word": "gaji",
+    "pos": "n.",
+    "meaning": "工资；薪水",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Gaji saya dibayar setiap akhir bulan.",
+        "zh": "我的工资每个月底发。"
+      }
+    ]
+  },
+  {
+    "word": "mandi",
+    "pos": "v.",
+    "meaning": "洗澡",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya mandi dua kali sehari.",
+        "zh": "我一天洗两次澡。"
+      },
+      {
+        "id": "Setelah olahraga, dia langsung mandi.",
+        "zh": "运动之后他马上去洗澡。"
+      }
+    ]
+  },
+  {
+    "word": "masak",
+    "pos": "v.",
+    "meaning": "做饭；烹饪",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Ibu memasak sayur untuk makan malam.",
+        "zh": "妈妈做蔬菜当晚饭。"
+      },
+      {
+        "id": "Saya belum bisa masak nasi goreng.",
+        "zh": "我还不会做炒饭。"
+      }
+    ]
+  },
+  {
+    "word": "cuci",
+    "pos": "v.",
+    "meaning": "洗；洗涤",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya mencuci piring setelah makan.",
+        "zh": "吃完饭后我洗盘子。"
+      },
+      {
+        "id": "Tolong cuci baju ini, ya.",
+        "zh": "请帮忙洗一下这件衣服。"
+      }
+    ]
+  },
+  {
+    "word": "bersih",
+    "pos": "adj.",
+    "meaning": "干净",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kamar hotel ini bersih dan nyaman.",
+        "zh": "这间酒店房间又干净又舒适。"
+      }
+    ]
+  },
+  {
+    "word": "kotor",
+    "pos": "adj.",
+    "meaning": "脏",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Sepatu saya kotor karena hujan.",
+        "zh": "因为下雨，我的鞋子脏了。"
+      }
+    ]
+  },
+  {
+    "word": "berenang",
+    "pos": "v.",
+    "meaning": "游泳",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kami berenang di kolam hotel.",
+        "zh": "我们在酒店的泳池里游泳。"
+      },
+      {
+        "id": "Adik belajar berenang setiap hari Minggu.",
+        "zh": "弟弟每个星期天学游泳。"
+      }
+    ]
+  },
+  {
+    "word": "terbang",
+    "pos": "v.",
+    "meaning": "飞；飞行",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Burung itu terbang tinggi di langit.",
+        "zh": "那只鸟在天空中高高地飞。"
+      },
+      {
+        "id": "Pesawat kami terbang pukul sembilan pagi.",
+        "zh": "我们的飞机早上九点起飞。"
+      }
+    ]
+  },
+  {
+    "word": "menyanyi",
+    "pos": "v.",
+    "meaning": "唱歌",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Dia suka menyanyi di kamar mandi.",
+        "zh": "他喜欢在浴室里唱歌。"
+      },
+      {
+        "id": "Anak-anak menyanyi bersama di kelas.",
+        "zh": "孩子们在教室里一起唱歌。"
+      }
+    ]
+  },
+  {
+    "word": "menari",
+    "pos": "v.",
+    "meaning": "跳舞",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Adik saya suka menari di rumah.",
+        "zh": "我妹妹喜欢在家跳舞。"
+      },
+      {
+        "id": "Mereka menari bersama di pesta.",
+        "zh": "他们在派对上一起跳舞。"
+      }
+    ]
+  },
+  {
+    "word": "menggambar",
+    "pos": "v.",
+    "meaning": "画画；绘画",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Anak itu suka menggambar kucing.",
+        "zh": "那个孩子喜欢画猫。"
+      },
+      {
+        "id": "Saya menggambar rumah di buku.",
+        "zh": "我在本子上画了一座房子。"
+      }
+    ]
+  },
+  {
+    "word": "bertemu",
+    "pos": "v.",
+    "meaning": "见面；遇见",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya bertemu teman lama di pasar.",
+        "zh": "我在市场遇见了老朋友。"
+      },
+      {
+        "id": "Kita bertemu di sekolah besok, ya.",
+        "zh": "我们明天在学校见面吧。"
+      }
+    ]
+  },
+  {
+    "word": "kirim",
+    "pos": "v.",
+    "meaning": "寄；发送",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya mengirim surat untuk nenek.",
+        "zh": "我给奶奶寄了一封信。"
+      },
+      {
+        "id": "Tolong kirim foto itu ke saya.",
+        "zh": "请把那张照片发给我。"
+      }
+    ]
+  },
+  {
+    "word": "terima",
+    "pos": "v.",
+    "meaning": "收到；接受",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya menerima surat dari paman.",
+        "zh": "我收到了叔叔的来信。"
+      },
+      {
+        "id": "Dia menerima hadiah dari ibunya.",
+        "zh": "她收到了妈妈送的礼物。"
+      }
+    ]
+  },
+  {
+    "word": "pinjam",
+    "pos": "v.",
+    "meaning": "借；借用",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Boleh saya pinjam kamus kamu?",
+        "zh": "我可以借你的词典吗？"
+      },
+      {
+        "id": "Dia meminjam buku dari teman.",
+        "zh": "他向朋友借了一本书。"
+      }
+    ]
+  },
+  {
+    "word": "sewa",
+    "pos": "v.",
+    "meaning": "租；租用",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kami menyewa rumah kecil di kota.",
+        "zh": "我们在城里租了一间小房子。"
+      },
+      {
+        "id": "Dia sewa sepeda untuk satu hari.",
+        "zh": "他租了一辆自行车骑一天。"
+      }
+    ]
+  },
+  {
+    "word": "parkir",
+    "pos": "v.",
+    "meaning": "停车",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Ayah parkir mobil di depan rumah.",
+        "zh": "爸爸把车停在家门口。"
+      },
+      {
+        "id": "Jangan parkir di sini, ya.",
+        "zh": "别把车停在这里哦。"
+      }
+    ]
+  },
+  {
+    "word": "berhenti",
+    "pos": "v.",
+    "meaning": "停止；停下",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Bus itu berhenti di depan sekolah.",
+        "zh": "那辆公交车停在学校门口。"
+      },
+      {
+        "id": "Hujan sudah berhenti, ayo keluar.",
+        "zh": "雨已经停了，我们出去吧。"
+      }
+    ]
+  },
+  {
+    "word": "mulai",
+    "pos": "v.",
+    "meaning": "开始",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kelas mulai jam delapan pagi.",
+        "zh": "课程早上八点开始。"
+      },
+      {
+        "id": "Ayo kita mulai belajar sekarang.",
+        "zh": "我们现在开始学习吧。"
+      }
+    ]
+  },
+  {
+    "word": "selesai",
+    "pos": "v.",
+    "meaning": "结束；完成",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Tugas saya sudah selesai.",
+        "zh": "我的作业已经完成了。"
+      },
+      {
+        "id": "Film itu selesai jam sembilan malam.",
+        "zh": "那部电影晚上九点结束。"
+      }
+    ]
+  },
+  {
+    "word": "coba",
+    "pos": "v.",
+    "meaning": "尝试；试",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Coba pakai kemeja ini dulu.",
+        "zh": "先试穿一下这件衬衫吧。"
+      },
+      {
+        "id": "Saya mau mencoba makanan baru itu.",
+        "zh": "我想尝尝那种新食物。"
+      }
+    ]
+  },
+  {
+    "word": "lupa",
+    "pos": "v.",
+    "meaning": "忘记",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya lupa membawa kunci rumah.",
+        "zh": "我忘了带家里的钥匙。"
+      },
+      {
+        "id": "Jangan lupa makan siang, ya.",
+        "zh": "别忘了吃午饭哦。"
+      }
+    ]
+  },
+  {
+    "word": "ingat",
+    "pos": "v.",
+    "meaning": "记得；想起",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya masih ingat alamat rumahnya.",
+        "zh": "我还记得他家的地址。"
+      },
+      {
+        "id": "Apakah kamu ingat nama guru itu?",
+        "zh": "你记得那位老师的名字吗？"
+      }
+    ]
+  },
+  {
+    "word": "pilih",
+    "pos": "v.",
+    "meaning": "选择；挑选",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya memilih baju warna biru.",
+        "zh": "我选了蓝色的衣服。"
+      },
+      {
+        "id": "Pilih satu buku yang kamu suka.",
+        "zh": "挑一本你喜欢的书。"
+      }
+    ]
+  },
+  {
+    "word": "ganti",
+    "pos": "v.",
+    "meaning": "更换；换",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya mau ganti baju dulu.",
+        "zh": "我想先换件衣服。"
+      },
+      {
+        "id": "Dia mengganti sepatunya yang lama.",
+        "zh": "他换掉了那双旧鞋。"
+      }
+    ]
+  },
+  {
+    "word": "simpan",
+    "pos": "v.",
+    "meaning": "保存；存放",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Ibu menyimpan uang di lemari.",
+        "zh": "妈妈把钱存放在柜子里。"
+      },
+      {
+        "id": "Simpan handuk ini di kamar mandi.",
+        "zh": "把这条毛巾放在浴室里。"
+      }
+    ]
+  },
+  {
+    "word": "hilang",
+    "pos": "v.",
+    "meaning": "丢失；不见",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kunci saya hilang di sekolah.",
+        "zh": "我的钥匙在学校丢了。"
+      },
+      {
+        "id": "Kacamata kakek hilang lagi.",
+        "zh": "爷爷的眼镜又不见了。"
+      }
+    ]
+  },
+  {
+    "word": "dapur",
+    "pos": "n.",
+    "meaning": "厨房",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Ibu sedang memasak di dapur.",
+        "zh": "妈妈正在厨房做饭。"
+      }
+    ]
+  },
+  {
+    "word": "kamar mandi",
+    "pos": "n.",
+    "meaning": "浴室；卫生间",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kamar mandi ada di sebelah dapur.",
+        "zh": "浴室在厨房旁边。"
+      }
+    ]
+  },
+  {
+    "word": "tempat tidur",
+    "pos": "n.",
+    "meaning": "床",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Tempat tidur saya sangat nyaman.",
+        "zh": "我的床非常舒服。"
+      }
+    ]
+  },
+  {
+    "word": "lemari",
+    "pos": "n.",
+    "meaning": "柜子；衣柜",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Baju saya ada di dalam lemari.",
+        "zh": "我的衣服在衣柜里。"
+      }
+    ]
+  },
+  {
+    "word": "kulkas",
+    "pos": "n.",
+    "meaning": "冰箱",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Ada buah dan susu di dalam kulkas.",
+        "zh": "冰箱里有水果和牛奶。"
+      }
+    ]
+  },
+  {
+    "word": "kompor",
+    "pos": "n.",
+    "meaning": "炉子；灶",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Jangan lupa matikan kompor setelah masak.",
+        "zh": "做完饭别忘了关炉子。"
+      }
+    ]
+  },
+  {
+    "word": "piring",
+    "pos": "n.",
+    "meaning": "盘子",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Tolong cuci piring di dapur.",
+        "zh": "请把厨房里的盘子洗一下。"
+      }
+    ]
+  },
+  {
+    "word": "gelas",
+    "pos": "n.",
+    "meaning": "杯子；玻璃杯",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya minum air dari gelas itu.",
+        "zh": "我用那个杯子喝水。"
+      }
+    ]
+  },
+  {
+    "word": "sendok",
+    "pos": "n.",
+    "meaning": "勺子",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Dia makan bubur dengan sendok.",
+        "zh": "他用勺子吃粥。"
+      }
+    ]
+  },
+  {
+    "word": "garpu",
+    "pos": "n.",
+    "meaning": "叉子",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Sendok dan garpu ada di atas meja.",
+        "zh": "勺子和叉子在桌子上。"
+      }
+    ]
+  },
+  {
+    "word": "pisau",
+    "pos": "n.",
+    "meaning": "刀",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Ibu memotong buah dengan pisau.",
+        "zh": "妈妈用刀切水果。"
+      }
+    ]
+  },
+  {
+    "word": "handuk",
+    "pos": "n.",
+    "meaning": "毛巾",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Handuk biru itu masih basah.",
+        "zh": "那条蓝色的毛巾还是湿的。"
+      }
+    ]
+  },
+  {
+    "word": "sabun",
+    "pos": "n.",
+    "meaning": "肥皂",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Cuci tangan dengan sabun sebelum makan.",
+        "zh": "饭前用肥皂洗手。"
+      }
+    ]
+  },
+  {
+    "word": "celana",
+    "pos": "n.",
+    "meaning": "裤子",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Celana hitam ini terlalu panjang.",
+        "zh": "这条黑裤子太长了。"
+      }
+    ]
+  },
+  {
+    "word": "rok",
+    "pos": "n.",
+    "meaning": "裙子",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kakak memakai rok merah hari ini.",
+        "zh": "姐姐今天穿了一条红裙子。"
+      }
+    ]
+  },
+  {
+    "word": "kemeja",
+    "pos": "n.",
+    "meaning": "衬衫",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Ayah memakai kemeja putih ke kantor.",
+        "zh": "爸爸穿白衬衫去上班。"
+      }
+    ]
+  },
+  {
+    "word": "topi",
+    "pos": "n.",
+    "meaning": "帽子",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Dia memakai topi karena panas.",
+        "zh": "因为太阳大，他戴了帽子。"
+      }
+    ]
+  },
+  {
+    "word": "kacamata",
+    "pos": "n.",
+    "meaning": "眼镜",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kakek membaca koran dengan kacamata.",
+        "zh": "爷爷戴着眼镜看报纸。"
+      }
+    ]
+  },
+  {
+    "word": "jaket",
+    "pos": "n.",
+    "meaning": "夹克；外套",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Pakai jaket, di luar dingin.",
+        "zh": "穿上外套，外面很冷。"
+      }
+    ]
+  },
+  {
+    "word": "merah",
+    "pos": "adj.",
+    "meaning": "红色的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Tas merah itu milik adik saya.",
+        "zh": "那个红色的包是我妹妹的。"
+      }
+    ]
+  },
+  {
+    "word": "putih",
+    "pos": "adj.",
+    "meaning": "白色的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Dinding kamar saya berwarna putih.",
+        "zh": "我房间的墙是白色的。"
+      }
+    ]
+  },
+  {
+    "word": "hitam",
+    "pos": "adj.",
+    "meaning": "黑色的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kucing hitam itu tidur di sofa.",
+        "zh": "那只黑猫在沙发上睡觉。"
+      }
+    ]
+  },
+  {
+    "word": "biru",
+    "pos": "adj.",
+    "meaning": "蓝色的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Langit hari ini sangat biru.",
+        "zh": "今天的天空非常蓝。"
+      }
+    ]
+  },
+  {
+    "word": "hijau",
+    "pos": "adj.",
+    "meaning": "绿色的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Daun pohon itu hijau dan segar.",
+        "zh": "那棵树的叶子又绿又鲜嫩。"
+      }
+    ]
+  },
+  {
+    "word": "kuning",
+    "pos": "adj.",
+    "meaning": "黄色的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Pisang yang matang berwarna kuning.",
+        "zh": "熟了的香蕉是黄色的。"
+      }
+    ]
+  },
+  {
+    "word": "cokelat",
+    "pos": "adj.",
+    "meaning": "棕色的；巧克力色的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Sepatu cokelat itu sangat bagus.",
+        "zh": "那双棕色的鞋很好看。"
+      }
+    ]
+  },
+  {
+    "word": "abu-abu",
+    "pos": "adj.",
+    "meaning": "灰色的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Hari ini langit berwarna abu-abu.",
+        "zh": "今天的天空是灰色的。"
+      }
+    ]
+  },
+  {
+    "word": "ungu",
+    "pos": "adj.",
+    "meaning": "紫色的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Ibu suka bunga ungu di taman.",
+        "zh": "妈妈喜欢花园里的紫色花。"
+      }
+    ]
+  },
+  {
+    "word": "kakek",
+    "pos": "n.",
+    "meaning": "祖父；爷爷；外公",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kakek saya tinggal di desa.",
+        "zh": "我爷爷住在乡下。"
+      }
+    ]
+  },
+  {
+    "word": "nenek",
+    "pos": "n.",
+    "meaning": "祖母；奶奶；外婆",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Nenek sedang memasak di dapur.",
+        "zh": "奶奶正在厨房做饭。"
+      }
+    ]
+  },
+  {
+    "word": "paman",
+    "pos": "n.",
+    "meaning": "叔叔；舅舅",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Paman saya bekerja di Jakarta.",
+        "zh": "我叔叔在雅加达工作。"
+      }
+    ]
+  },
+  {
+    "word": "bibi",
+    "pos": "n.",
+    "meaning": "阿姨；姑姑",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Bibi datang ke rumah kami kemarin.",
+        "zh": "姑姑昨天来我们家了。"
+      }
+    ]
+  },
+  {
+    "word": "sepupu",
+    "pos": "n.",
+    "meaning": "堂兄弟姐妹；表兄弟姐妹",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Sepupu saya satu sekolah dengan saya.",
+        "zh": "我表弟和我在同一所学校。"
+      }
+    ]
+  },
+  {
+    "word": "ramah",
+    "pos": "adj.",
+    "meaning": "友好的；亲切的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Guru baru itu sangat ramah.",
+        "zh": "那位新老师非常亲切。"
+      }
+    ]
+  },
+  {
+    "word": "sopan",
+    "pos": "adj.",
+    "meaning": "有礼貌的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Anak itu sopan kepada orang tua.",
+        "zh": "那个孩子对长辈很有礼貌。"
+      }
+    ]
+  },
+  {
+    "word": "rajin",
+    "pos": "adj.",
+    "meaning": "勤奋的；勤劳的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Dia rajin belajar setiap malam.",
+        "zh": "他每天晚上都勤奋学习。"
+      }
+    ]
+  },
+  {
+    "word": "malas",
+    "pos": "adj.",
+    "meaning": "懒惰的；懒的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Hari ini saya malas keluar rumah.",
+        "zh": "今天我懒得出门。"
+      }
+    ]
+  },
+  {
+    "word": "lucu",
+    "pos": "adj.",
+    "meaning": "有趣的；可爱的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Cerita itu sangat lucu, saya tertawa.",
+        "zh": "那个故事很有趣，我笑了。"
+      }
+    ]
+  },
+  {
+    "word": "serius",
+    "pos": "adj.",
+    "meaning": "严肃的；认真的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Ayah selalu serius saat bekerja.",
+        "zh": "爸爸工作时总是很认真。"
+      }
+    ]
+  },
+  {
+    "word": "ramai",
+    "pos": "adj.",
+    "meaning": "热闹的；拥挤的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Pasar itu sangat ramai pada pagi hari.",
+        "zh": "那个市场早上非常热闹。"
+      }
+    ]
+  },
+  {
+    "word": "sepi",
+    "pos": "adj.",
+    "meaning": "安静的；冷清的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Jalan ini sepi pada malam hari.",
+        "zh": "这条路晚上很冷清。"
+      }
+    ]
+  },
+  {
+    "word": "terang",
+    "pos": "adj.",
+    "meaning": "明亮的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kamar saya terang karena ada jendela besar.",
+        "zh": "我的房间因为有大窗户所以很明亮。"
+      }
+    ]
+  },
+  {
+    "word": "gelap",
+    "pos": "adj.",
+    "meaning": "黑暗的；昏暗的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Di luar sudah gelap, ayo pulang.",
+        "zh": "外面已经天黑了，我们回家吧。"
+      }
+    ]
+  },
+  {
+    "word": "basah",
+    "pos": "adj.",
+    "meaning": "湿的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Baju saya basah karena hujan.",
+        "zh": "我的衣服被雨淋湿了。"
+      }
+    ]
+  },
+  {
+    "word": "kering",
+    "pos": "adj.",
+    "meaning": "干的；干燥的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Handuk itu sudah kering di luar.",
+        "zh": "那条毛巾在外面已经晾干了。"
+      }
+    ]
+  },
+  {
+    "word": "penuh",
+    "pos": "adj.",
+    "meaning": "满的；充满的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Gelas itu penuh dengan air.",
+        "zh": "那个杯子装满了水。"
+      }
+    ]
+  },
+  {
+    "word": "kosong",
+    "pos": "adj.",
+    "meaning": "空的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kulkas di rumah sudah kosong.",
+        "zh": "家里的冰箱已经空了。"
+      }
+    ]
+  },
+  {
+    "word": "berat",
+    "pos": "adj.",
+    "meaning": "重的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Tas sekolah adik sangat berat.",
+        "zh": "弟弟的书包非常重。"
+      }
+    ]
+  },
+  {
+    "word": "ringan",
+    "pos": "adj.",
+    "meaning": "轻的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kotak ini ringan, saya bisa membawanya.",
+        "zh": "这个箱子很轻，我拿得动。"
+      }
+    ]
+  },
+  {
+    "word": "tebal",
+    "pos": "adj.",
+    "meaning": "厚的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kamus itu sangat tebal.",
+        "zh": "那本词典非常厚。"
+      }
+    ]
+  },
+  {
+    "word": "tipis",
+    "pos": "adj.",
+    "meaning": "薄的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Buku ini tipis, cepat selesai dibaca.",
+        "zh": "这本书很薄，很快就能读完。"
+      }
+    ]
+  },
+  {
+    "word": "lebar",
+    "pos": "adj.",
+    "meaning": "宽的；宽阔的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Jalan di depan sekolah sangat lebar.",
+        "zh": "学校门前的路很宽。"
+      }
+    ]
+  },
+  {
+    "word": "sempit",
+    "pos": "adj.",
+    "meaning": "窄的；狭小的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kamar itu kecil dan sempit.",
+        "zh": "那个房间又小又窄。"
+      }
+    ]
+  },
+  {
+    "word": "keras",
+    "pos": "adj.",
+    "meaning": "硬的；大声的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Roti ini sudah keras, jangan dimakan.",
+        "zh": "这面包已经变硬了，别吃了。"
+      }
+    ]
+  },
+  {
+    "word": "lembut",
+    "pos": "adj.",
+    "meaning": "柔软的；温柔的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Suara ibu sangat lembut.",
+        "zh": "妈妈的声音非常温柔。"
+      }
+    ]
+  },
+  {
+    "word": "kuat",
+    "pos": "adj.",
+    "meaning": "强壮的；结实的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Ayah saya kuat, dia bisa mengangkat lemari.",
+        "zh": "我爸爸很强壮，他能搬动柜子。"
+      }
+    ]
+  },
+  {
+    "word": "lemah",
+    "pos": "adj.",
+    "meaning": "弱的；虚弱的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Badannya lemah karena sakit.",
+        "zh": "他因为生病身体很虚弱。"
+      }
+    ]
+  },
+  {
+    "word": "muda",
+    "pos": "adj.",
+    "meaning": "年轻的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Guru itu masih muda dan ramah.",
+        "zh": "那位老师还很年轻，也很亲切。"
+      }
+    ]
+  },
+  {
+    "word": "tua",
+    "pos": "adj.",
+    "meaning": "老的；年老的",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kakek saya sudah tua, tetapi masih sehat.",
+        "zh": "我爷爷已经年老了，但身体还很健康。"
+      }
+    ]
+  },
+  {
+    "word": "libur",
+    "pos": "n.",
+    "meaning": "假期；休假",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Besok hari libur, kita ke rumah nenek.",
+        "zh": "明天放假，我们去奶奶家。"
+      }
+    ]
+  },
+  {
+    "word": "kunci",
+    "pos": "n.",
+    "meaning": "钥匙；锁",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kunci rumah ada di tas saya.",
+        "zh": "家里的钥匙在我的包里。"
+      }
+    ]
+  },
+  {
+    "word": "surat",
+    "pos": "n.",
+    "meaning": "信；信件",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya menulis surat untuk kakek.",
+        "zh": "我给爷爷写了一封信。"
+      }
+    ]
+  },
+  {
+    "word": "koran",
+    "pos": "n.",
+    "meaning": "报纸",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Ayah membaca koran setiap pagi.",
+        "zh": "爸爸每天早上看报纸。"
+      }
+    ]
+  },
+  {
+    "word": "internet",
+    "pos": "n.",
+    "meaning": "互联网；网络",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya belajar bahasa Indonesia lewat internet.",
+        "zh": "我通过网络学习印尼语。"
+      }
+    ]
+  },
+  {
+    "word": "komputer",
+    "pos": "n.",
+    "meaning": "电脑；计算机",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kakak mengerjakan tugas dengan komputer.",
+        "zh": "哥哥用电脑做作业。"
+      }
+    ]
+  },
+  {
+    "word": "foto",
+    "pos": "n.",
+    "meaning": "照片",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Ini foto keluarga kami di rumah nenek.",
+        "zh": "这是我们一家在奶奶家拍的照片。"
+      }
+    ]
+  },
+  {
+    "word": "musik",
+    "pos": "n.",
+    "meaning": "音乐",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya suka mendengarkan musik di kamar.",
+        "zh": "我喜欢在房间里听音乐。"
+      }
+    ]
+  },
+  {
+    "word": "lagu",
+    "pos": "n.",
+    "meaning": "歌曲；歌",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Lagu ini sangat terkenal di Indonesia.",
+        "zh": "这首歌在印尼非常有名。"
+      }
+    ]
+  },
+  {
+    "word": "film",
+    "pos": "n.",
+    "meaning": "电影",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kami menonton film lucu tadi malam.",
+        "zh": "我们昨晚看了一部有趣的电影。"
+      }
+    ]
+  },
+  {
+    "word": "olahraga",
+    "pos": "n.",
+    "meaning": "运动；体育",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Olahraga setiap pagi baik untuk badan.",
+        "zh": "每天早上运动对身体好。"
+      }
+    ]
+  },
+  {
+    "word": "bola",
+    "pos": "n.",
+    "meaning": "球；足球",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Anak-anak bermain bola di lapangan.",
+        "zh": "孩子们在操场上踢球。"
+      }
+    ]
+  },
+  {
+    "word": "istirahat",
+    "pos": "v.",
+    "meaning": "休息",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Setelah belajar, saya istirahat sebentar.",
+        "zh": "学习之后，我休息了一会儿。"
+      },
+      {
+        "id": "Kamu kelihatan lelah, istirahat dulu, ya.",
+        "zh": "你看起来很累，先休息一下吧。"
+      }
+    ]
+  },
+  {
+    "word": "peta",
+    "pos": "n.",
+    "meaning": "地图",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Ada peta Indonesia di dinding kelas.",
+        "zh": "教室的墙上有一张印尼地图。"
+      }
+    ]
+  },
+  {
+    "word": "kamus",
+    "pos": "n.",
+    "meaning": "词典；字典",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya mencari kata baru di kamus.",
+        "zh": "我在词典里查新单词。"
+      }
+    ]
+  },
+  {
+    "word": "kelas",
+    "pos": "n.",
+    "meaning": "班级；教室",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Kelas kami ada dua puluh murid.",
+        "zh": "我们班有二十个学生。"
+      }
+    ]
+  },
+  {
+    "word": "ujian",
+    "pos": "n.",
+    "meaning": "考试",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Minggu depan ada ujian bahasa Indonesia.",
+        "zh": "下周有印尼语考试。"
+      }
+    ]
+  },
+  {
+    "word": "tugas",
+    "pos": "n.",
+    "meaning": "作业；任务",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Saya harus selesaikan tugas malam ini.",
+        "zh": "我今晚必须完成作业。"
+      }
+    ]
+  },
+  {
+    "word": "pertanyaan",
+    "pos": "n.",
+    "meaning": "问题",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Murid itu punya banyak pertanyaan.",
+        "zh": "那个学生有很多问题。"
+      }
+    ]
+  },
+  {
+    "word": "cerita",
+    "pos": "n.",
+    "meaning": "故事",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Nenek suka membaca cerita untuk saya.",
+        "zh": "奶奶喜欢给我读故事。"
+      }
+    ]
+  },
+  {
+    "word": "gambar",
+    "pos": "n.",
+    "meaning": "图画；图片",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Gambar di buku itu sangat bagus.",
+        "zh": "那本书里的图画非常漂亮。"
+      }
+    ]
+  },
+  {
+    "word": "umur",
+    "pos": "n.",
+    "meaning": "年龄；岁数",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Umur adik saya tujuh tahun.",
+        "zh": "我弟弟今年七岁。"
+      }
+    ]
+  },
+  {
+    "word": "alamat",
+    "pos": "n.",
+    "meaning": "地址",
+    "level": 2,
+    "examples": [
+      {
+        "id": "Tolong tulis alamat rumah kamu di sini.",
+        "zh": "请把你家的地址写在这里。"
+      }
+    ]
+  },
+  {
+    "word": "pekerjaan",
+    "pos": "n.",
+    "meaning": "工作；职业",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Dia sedang mencari pekerjaan baru di bidang teknologi.",
+        "zh": "他正在科技领域寻找新工作。"
+      },
+      {
+        "id": "Pekerjaan ini harus selesai sebelum hari Jumat.",
+        "zh": "这项工作必须在星期五之前完成。"
+      }
+    ]
+  },
+  {
+    "word": "perusahaan",
+    "pos": "n.",
+    "meaning": "公司；企业",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Perusahaan itu membuka cabang baru di Surabaya.",
+        "zh": "那家公司在泗水开了新分部。"
+      }
+    ]
+  },
+  {
+    "word": "rapat",
+    "pos": "n.",
+    "meaning": "会议",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Rapat akan dimulai pukul sembilan pagi besok.",
+        "zh": "会议将于明天早上九点开始。"
+      },
+      {
+        "id": "Kami membahas anggaran tahunan dalam rapat kemarin.",
+        "zh": "我们在昨天的会议上讨论了年度预算。"
+      }
+    ]
+  },
+  {
+    "word": "proyek",
+    "pos": "n.",
+    "meaning": "项目；工程",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Tim kami sedang mengerjakan proyek besar dari pemerintah.",
+        "zh": "我们团队正在做一个政府的大项目。"
+      }
+    ]
+  },
+  {
+    "word": "pengalaman",
+    "pos": "n.",
+    "meaning": "经验；经历",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Dia punya banyak pengalaman kerja di Jakarta.",
+        "zh": "他在雅加达有很多工作经验。"
+      },
+      {
+        "id": "Pengalaman itu mengubah cara saya melihat hidup.",
+        "zh": "那段经历改变了我看待生活的方式。"
+      }
+    ]
+  },
+  {
+    "word": "kesempatan",
+    "pos": "n.",
+    "meaning": "机会",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Ini kesempatan bagus untuk mengembangkan karier kamu.",
+        "zh": "这是发展你职业生涯的好机会。"
+      }
+    ]
+  },
+  {
+    "word": "keputusan",
+    "pos": "n.",
+    "meaning": "决定；决议",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Direktur akan mengumumkan keputusan penting minggu depan.",
+        "zh": "董事下周将宣布一项重要决定。"
+      },
+      {
+        "id": "Keputusan itu diambil setelah diskusi yang panjang.",
+        "zh": "那个决定是在长时间讨论之后做出的。"
+      }
+    ]
+  },
+  {
+    "word": "masalah",
+    "pos": "n.",
+    "meaning": "问题；麻烦",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Masalah lingkungan menjadi topik utama berita hari ini.",
+        "zh": "环境问题成为今天新闻的主要话题。"
+      }
+    ]
+  },
+  {
+    "word": "solusi",
+    "pos": "n.",
+    "meaning": "解决方案；办法",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Kita harus mencari solusi terbaik untuk masalah ini.",
+        "zh": "我们必须为这个问题找到最佳解决方案。"
+      }
+    ]
+  },
+  {
+    "word": "tujuan",
+    "pos": "n.",
+    "meaning": "目的；目标",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Tujuan utama program ini adalah membantu anak miskin.",
+        "zh": "这个项目的主要目的是帮助贫困儿童。"
+      }
+    ]
+  },
+  {
+    "word": "rencana",
+    "pos": "n.",
+    "meaning": "计划",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Apa rencana kamu setelah lulus kuliah nanti?",
+        "zh": "你大学毕业后有什么计划？"
+      },
+      {
+        "id": "Pemerintah mengumumkan rencana pembangunan jalan baru.",
+        "zh": "政府宣布了修建新道路的计划。"
+      }
+    ]
+  },
+  {
+    "word": "hasil",
+    "pos": "n.",
+    "meaning": "结果；成果",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Hasil ujian akan diumumkan minggu depan.",
+        "zh": "考试结果将于下周公布。"
+      },
+      {
+        "id": "Kerja keras kami akhirnya membawa hasil yang baik.",
+        "zh": "我们的努力终于带来了好结果。"
+      }
+    ]
+  },
+  {
+    "word": "usaha",
+    "pos": "n.",
+    "meaning": "努力；生意；事业",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Dia membuka usaha kecil di depan rumahnya.",
+        "zh": "他在自家门前开了个小生意。"
+      },
+      {
+        "id": "Tanpa usaha keras, kita tidak akan berhasil.",
+        "zh": "没有努力，我们不会成功。"
+      }
+    ]
+  },
+  {
+    "word": "bisnis",
+    "pos": "n.",
+    "meaning": "生意；商业",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Bisnis online berkembang sangat cepat di Indonesia.",
+        "zh": "网络生意在印尼发展得非常快。"
+      }
+    ]
+  },
+  {
+    "word": "pelanggan",
+    "pos": "n.",
+    "meaning": "顾客；客户",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Toko itu selalu ramah kepada setiap pelanggan.",
+        "zh": "那家店对每位顾客都很友好。"
+      }
+    ]
+  },
+  {
+    "word": "layanan",
+    "pos": "n.",
+    "meaning": "服务",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Layanan di hotel ini sangat memuaskan.",
+        "zh": "这家酒店的服务非常令人满意。"
+      }
+    ]
+  },
+  {
+    "word": "kualitas",
+    "pos": "n.",
+    "meaning": "质量；品质",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Kualitas produk lokal sekarang tidak kalah dari impor.",
+        "zh": "现在本地产品的质量不输进口货。"
+      }
+    ]
+  },
+  {
+    "word": "keuntungan",
+    "pos": "n.",
+    "meaning": "利润；好处",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Perusahaan itu mendapat keuntungan besar tahun ini.",
+        "zh": "那家公司今年获得了丰厚的利润。"
+      },
+      {
+        "id": "Apa keuntungan bekerja dari rumah menurut kamu?",
+        "zh": "你觉得在家工作有什么好处？"
+      }
+    ]
+  },
+  {
+    "word": "pemerintah",
+    "pos": "n.",
+    "meaning": "政府",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Pemerintah berjanji akan menurunkan harga bahan pokok.",
+        "zh": "政府承诺将降低基本物资的价格。"
+      }
+    ]
+  },
+  {
+    "word": "masyarakat",
+    "pos": "n.",
+    "meaning": "社会；民众",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Program ini mendapat dukungan penuh dari masyarakat.",
+        "zh": "这个项目得到了民众的全力支持。"
+      }
+    ]
+  },
+  {
+    "word": "budaya",
+    "pos": "n.",
+    "meaning": "文化",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Indonesia kaya akan budaya dan bahasa daerah.",
+        "zh": "印尼拥有丰富的地方文化和语言。"
+      }
+    ]
+  },
+  {
+    "word": "sejarah",
+    "pos": "n.",
+    "meaning": "历史",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Kota tua ini menyimpan banyak sejarah penting.",
+        "zh": "这座老城保存着许多重要的历史。"
+      }
+    ]
+  },
+  {
+    "word": "ekonomi",
+    "pos": "n.",
+    "meaning": "经济",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Ekonomi negara mulai membaik setelah krisis.",
+        "zh": "危机过后，国家经济开始好转。"
+      }
+    ]
+  },
+  {
+    "word": "politik",
+    "pos": "n.",
+    "meaning": "政治",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Dia tidak suka membicarakan politik di tempat kerja.",
+        "zh": "他不喜欢在工作场合谈论政治。"
+      }
+    ]
+  },
+  {
+    "word": "pendidikan",
+    "pos": "n.",
+    "meaning": "教育",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Pendidikan adalah kunci untuk masa depan yang lebih baik.",
+        "zh": "教育是通向更美好未来的关键。"
+      }
+    ]
+  },
+  {
+    "word": "kesehatan",
+    "pos": "n.",
+    "meaning": "健康；卫生",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Jangan lupa menjaga kesehatan saat musim hujan.",
+        "zh": "雨季时别忘了保重身体。"
+      }
+    ]
+  },
+  {
+    "word": "lingkungan",
+    "pos": "n.",
+    "meaning": "环境",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Kita semua bertanggung jawab menjaga lingkungan.",
+        "zh": "我们都有责任保护环境。"
+      }
+    ]
+  },
+  {
+    "word": "teknologi",
+    "pos": "n.",
+    "meaning": "技术；科技",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Teknologi baru ini memudahkan pekerjaan kami.",
+        "zh": "这项新技术让我们的工作更轻松。"
+      }
+    ]
+  },
+  {
+    "word": "informasi",
+    "pos": "n.",
+    "meaning": "信息；资讯",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Untuk informasi lebih lanjut, silakan hubungi kantor kami.",
+        "zh": "如需更多信息，请联系我们的办公室。"
+      }
+    ]
+  },
+  {
+    "word": "berita",
+    "pos": "n.",
+    "meaning": "新闻；消息",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Saya membaca berita itu di koran pagi ini.",
+        "zh": "我今天早上在报纸上读到了那条新闻。"
+      },
+      {
+        "id": "Ada berita baik tentang hasil wawancara kamu.",
+        "zh": "关于你的面试结果有好消息。"
+      }
+    ]
+  },
+  {
+    "word": "perkembangan",
+    "pos": "n.",
+    "meaning": "发展；进展",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Perkembangan teknologi mengubah cara kita bekerja.",
+        "zh": "科技的发展改变了我们的工作方式。"
+      }
+    ]
+  },
+  {
+    "word": "perubahan",
+    "pos": "n.",
+    "meaning": "变化；改变",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Perubahan iklim menjadi masalah serius di seluruh dunia.",
+        "zh": "气候变化成为全世界的严重问题。"
+      }
+    ]
+  },
+  {
+    "word": "perbedaan",
+    "pos": "n.",
+    "meaning": "差异；区别",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Kita harus menghormati perbedaan pendapat dalam diskusi.",
+        "zh": "在讨论中我们应该尊重意见的分歧。"
+      }
+    ]
+  },
+  {
+    "word": "hubungan",
+    "pos": "n.",
+    "meaning": "关系；联系",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Hubungan kedua negara semakin baik tahun ini.",
+        "zh": "两国关系今年越来越好。"
+      },
+      {
+        "id": "Dia menjaga hubungan baik dengan semua rekan kerja.",
+        "zh": "他和所有同事都保持良好的关系。"
+      }
+    ]
+  },
+  {
+    "word": "persahabatan",
+    "pos": "n.",
+    "meaning": "友谊",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Persahabatan kami sudah berjalan lebih dari sepuluh tahun.",
+        "zh": "我们的友谊已经持续了十多年。"
+      }
+    ]
+  },
+  {
+    "word": "kepercayaan",
+    "pos": "n.",
+    "meaning": "信任；信仰",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Kepercayaan pelanggan adalah hal paling penting bagi kami.",
+        "zh": "顾客的信任对我们来说最重要。"
+      }
+    ]
+  },
+  {
+    "word": "kejujuran",
+    "pos": "n.",
+    "meaning": "诚实",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Kejujuran adalah dasar dari setiap hubungan yang baik.",
+        "zh": "诚实是一切良好关系的基础。"
+      }
+    ]
+  },
+  {
+    "word": "kebahagiaan",
+    "pos": "n.",
+    "meaning": "幸福；快乐",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Bagi dia, kebahagiaan keluarga lebih penting daripada uang.",
+        "zh": "对他来说，家庭的幸福比金钱更重要。"
+      }
+    ]
+  },
+  {
+    "word": "harapan",
+    "pos": "n.",
+    "meaning": "希望；期望",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Jangan kehilangan harapan meskipun keadaan sulit.",
+        "zh": "即使处境艰难，也不要失去希望。"
+      }
+    ]
+  },
+  {
+    "word": "impian",
+    "pos": "n.",
+    "meaning": "梦想",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Impian saya adalah membuka restoran sendiri.",
+        "zh": "我的梦想是开一家自己的餐厅。"
+      }
+    ]
+  },
+  {
+    "word": "kenyataan",
+    "pos": "n.",
+    "meaning": "现实；事实",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Kenyataan kadang berbeda jauh dari harapan kita.",
+        "zh": "现实有时与我们的期望相差很远。"
+      }
+    ]
+  },
+  {
+    "word": "bangga",
+    "pos": "adj.",
+    "meaning": "自豪的；骄傲的",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Orang tuanya sangat bangga dengan prestasi anaknya.",
+        "zh": "他的父母为孩子的成就感到非常自豪。"
+      }
+    ]
+  },
+  {
+    "word": "kecewa",
+    "pos": "adj.",
+    "meaning": "失望的",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Dia kecewa karena tidak lulus ujian itu.",
+        "zh": "他因为没通过那场考试而感到失望。"
+      }
+    ]
+  },
+  {
+    "word": "khawatir",
+    "pos": "adj.",
+    "meaning": "担心的；忧虑的",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Ibu khawatir karena kamu belum pulang juga.",
+        "zh": "妈妈很担心，因为你还没回家。"
+      },
+      {
+        "id": "Jangan khawatir, semua akan baik-baik saja.",
+        "zh": "别担心，一切都会好的。"
+      }
+    ]
+  },
+  {
+    "word": "kaget",
+    "pos": "adj.",
+    "meaning": "吃惊的；吓一跳的",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Saya kaget mendengar berita pengunduran dirinya.",
+        "zh": "听到他辞职的消息我很吃惊。"
+      }
+    ]
+  },
+  {
+    "word": "malu",
+    "pos": "adj.",
+    "meaning": "害羞的；羞愧的",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Dia malu berbicara di depan banyak orang.",
+        "zh": "他不好意思在很多人面前讲话。"
+      }
+    ]
+  },
+  {
+    "word": "cemburu",
+    "pos": "adj.",
+    "meaning": "嫉妒的；吃醋的",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Dia cemburu melihat pacarnya mengobrol dengan orang lain.",
+        "zh": "看到恋人和别人聊天，他吃醋了。"
+      }
+    ]
+  },
+  {
+    "word": "bosan",
+    "pos": "adj.",
+    "meaning": "厌倦的；无聊的",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Saya mulai bosan dengan pekerjaan yang sama setiap hari.",
+        "zh": "我开始厌倦每天千篇一律的工作。"
+      }
+    ]
+  },
+  {
+    "word": "gugup",
+    "pos": "adj.",
+    "meaning": "紧张的",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Dia terlihat gugup sebelum wawancara kerja dimulai.",
+        "zh": "工作面试开始前，他看起来很紧张。"
+      }
+    ]
+  },
+  {
+    "word": "terharu",
+    "pos": "adj.",
+    "meaning": "感动的",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Saya terharu melihat dukungan teman-teman saya.",
+        "zh": "看到朋友们的支持，我很感动。"
+      }
+    ]
+  },
+  {
+    "word": "namun",
+    "pos": "conj.",
+    "meaning": "然而；但是",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Harga naik terus. Namun, gaji kami tetap sama.",
+        "zh": "物价不断上涨。然而，我们的工资还是老样子。"
+      },
+      {
+        "id": "Dia sudah berusaha keras, namun hasilnya belum memuaskan.",
+        "zh": "他已经很努力了，然而结果还不令人满意。"
+      }
+    ]
+  },
+  {
+    "word": "meskipun",
+    "pos": "conj.",
+    "meaning": "尽管；虽然",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Meskipun hujan deras, dia tetap berangkat ke kantor.",
+        "zh": "尽管下着大雨，他还是去了办公室。"
+      },
+      {
+        "id": "Dia tetap tenang meskipun situasinya sangat sulit.",
+        "zh": "尽管情况非常艰难，他依然保持冷静。"
+      }
+    ]
+  },
+  {
+    "word": "walaupun",
+    "pos": "conj.",
+    "meaning": "虽然；尽管",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Walaupun sibuk, dia selalu menyempatkan waktu untuk keluarga.",
+        "zh": "虽然很忙，他总会抽时间陪家人。"
+      },
+      {
+        "id": "Saya akan datang walaupun hanya sebentar.",
+        "zh": "哪怕只待一会儿，我也会来。"
+      }
+    ]
+  },
+  {
+    "word": "sehingga",
+    "pos": "conj.",
+    "meaning": "以致；因此",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Jalan macet parah sehingga kami terlambat ke rapat.",
+        "zh": "路上严重堵车，以致我们开会迟到了。"
+      },
+      {
+        "id": "Dia belajar keras sehingga lulus dengan nilai terbaik.",
+        "zh": "他刻苦学习，因此以最好的成绩毕业。"
+      }
+    ]
+  },
+  {
+    "word": "supaya",
+    "pos": "conj.",
+    "meaning": "以便；为了",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Berangkatlah lebih pagi supaya tidak terjebak macet.",
+        "zh": "早点出发，以免被堵在路上。"
+      },
+      {
+        "id": "Dia menabung supaya bisa membeli rumah sendiri.",
+        "zh": "他存钱是为了能买自己的房子。"
+      }
+    ]
+  },
+  {
+    "word": "agar",
+    "pos": "conj.",
+    "meaning": "为了；以便",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Tolong jelaskan pelan-pelan agar semua orang mengerti.",
+        "zh": "请慢慢解释，以便大家都能听懂。"
+      },
+      {
+        "id": "Pemerintah menurunkan pajak agar ekonomi cepat pulih.",
+        "zh": "政府降低税收，以便经济快速复苏。"
+      }
+    ]
+  },
+  {
+    "word": "ketika",
+    "pos": "conj.",
+    "meaning": "当……时",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Ketika saya tiba, rapat sudah dimulai.",
+        "zh": "我到的时候，会议已经开始了。"
+      },
+      {
+        "id": "Dia sangat senang ketika menerima kabar itu.",
+        "zh": "收到那个消息时，他非常高兴。"
+      }
+    ]
+  },
+  {
+    "word": "sementara",
+    "pos": "conj.",
+    "meaning": "与此同时；而；暂时",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Saya menyiapkan laporan, sementara dia menghubungi pelanggan.",
+        "zh": "我准备报告，与此同时他联系客户。"
+      },
+      {
+        "id": "Harga beras naik, sementara harga minyak justru turun.",
+        "zh": "米价上涨，而油价反而下跌。"
+      }
+    ]
+  },
+  {
+    "word": "misalnya",
+    "pos": "adv.",
+    "meaning": "例如；比如",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Banyak kota besar, misalnya Jakarta, menghadapi masalah macet.",
+        "zh": "许多大城市，例如雅加达，都面临堵车问题。"
+      },
+      {
+        "id": "Cobalah olahraga ringan, misalnya jalan kaki setiap pagi.",
+        "zh": "试试轻度运动，比如每天早上散步。"
+      }
+    ]
+  },
+  {
+    "word": "sebenarnya",
+    "pos": "adv.",
+    "meaning": "其实；实际上",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Sebenarnya saya kurang setuju dengan keputusan itu.",
+        "zh": "其实我不太同意那个决定。"
+      },
+      {
+        "id": "Masalahnya sebenarnya tidak sesulit yang kamu pikirkan.",
+        "zh": "问题其实没有你想的那么难。"
+      }
+    ]
+  },
+  {
+    "word": "mungkin",
+    "pos": "adv.",
+    "meaning": "可能；也许",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Mungkin dia lupa membalas pesan kamu.",
+        "zh": "也许他忘了回你的消息。"
+      },
+      {
+        "id": "Rapat besok mungkin akan diundur ke hari Kamis.",
+        "zh": "明天的会议可能会推迟到星期四。"
+      }
+    ]
+  },
+  {
+    "word": "pasti",
+    "pos": "adv.",
+    "meaning": "一定；肯定",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Kalau kamu berusaha, kamu pasti bisa.",
+        "zh": "只要你努力，你一定能行。"
+      },
+      {
+        "id": "Dia pasti datang ke acara malam ini.",
+        "zh": "他今晚肯定会来参加活动。"
+      }
+    ]
+  },
+  {
+    "word": "tentu",
+    "pos": "adv.",
+    "meaning": "当然；肯定",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Tentu saja saya mau membantu kamu.",
+        "zh": "我当然愿意帮你。"
+      },
+      {
+        "id": "Keputusan ini tentu akan mempengaruhi banyak orang.",
+        "zh": "这个决定当然会影响很多人。"
+      }
+    ]
+  },
+  {
+    "word": "hampir",
+    "pos": "adv.",
+    "meaning": "几乎；差点",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Proyek itu hampir selesai, tinggal tahap terakhir.",
+        "zh": "那个项目几乎完成了，只剩最后阶段。"
+      },
+      {
+        "id": "Saya hampir terlambat karena bangun kesiangan.",
+        "zh": "我因为睡过头差点迟到。"
+      }
+    ]
+  },
+  {
+    "word": "segera",
+    "pos": "adv.",
+    "meaning": "立即；马上",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Tolong kirim laporan itu segera setelah selesai.",
+        "zh": "报告一完成请立即发送。"
+      },
+      {
+        "id": "Pemerintah berjanji segera menangani masalah banjir ini.",
+        "zh": "政府承诺立即处理这次的洪水问题。"
+      }
+    ]
+  },
+  {
+    "word": "akhirnya",
+    "pos": "adv.",
+    "meaning": "最后；终于",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Setelah menunggu lama, akhirnya dia mendapat pekerjaan itu.",
+        "zh": "等了很久之后，他终于得到了那份工作。"
+      },
+      {
+        "id": "Akhirnya kedua pihak setuju untuk bekerja sama.",
+        "zh": "最后双方同意进行合作。"
+      }
+    ]
+  },
+  {
+    "word": "tiba-tiba",
+    "pos": "adv.",
+    "meaning": "突然",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Tiba-tiba hujan turun sangat deras sore itu.",
+        "zh": "那天下午突然下起了倾盆大雨。"
+      },
+      {
+        "id": "Dia tiba-tiba berubah pikiran dan menolak tawaran itu.",
+        "zh": "他突然改变主意，拒绝了那个提议。"
+      }
+    ]
+  },
+  {
+    "word": "biasanya",
+    "pos": "adv.",
+    "meaning": "通常；平常",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Biasanya saya tiba di kantor pukul delapan.",
+        "zh": "我通常八点到办公室。"
+      },
+      {
+        "id": "Dia biasanya minum kopi sebelum mulai bekerja.",
+        "zh": "他通常在开始工作前喝杯咖啡。"
+      }
+    ]
+  },
+  {
+    "word": "kadang-kadang",
+    "pos": "adv.",
+    "meaning": "有时；偶尔",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Kadang-kadang saya bekerja dari rumah pada hari Jumat.",
+        "zh": "有时我星期五在家办公。"
+      },
+      {
+        "id": "Dia kadang-kadang merasa kesepian di kota besar.",
+        "zh": "他有时在大城市里感到孤独。"
+      }
+    ]
+  },
+  {
+    "word": "selalu",
+    "pos": "adv.",
+    "meaning": "总是",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Dia selalu datang tepat waktu ke setiap rapat.",
+        "zh": "他每次开会总是准时到。"
+      },
+      {
+        "id": "Ibu selalu mengingatkan saya untuk makan teratur.",
+        "zh": "妈妈总是提醒我按时吃饭。"
+      }
+    ]
+  },
+  {
+    "word": "sering",
+    "pos": "adv.",
+    "meaning": "经常",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Kami sering berdiskusi tentang berita ekonomi terbaru.",
+        "zh": "我们经常讨论最新的经济新闻。"
+      },
+      {
+        "id": "Dia sering lembur sampai malam akhir-akhir ini.",
+        "zh": "他最近经常加班到深夜。"
+      }
+    ]
+  },
+  {
+    "word": "jarang",
+    "pos": "adv.",
+    "meaning": "很少；难得",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Sejak pindah kerja, dia jarang bertemu teman lamanya.",
+        "zh": "换工作以后，他很少见到老朋友。"
+      },
+      {
+        "id": "Saya jarang menonton televisi karena terlalu sibuk.",
+        "zh": "因为太忙，我很少看电视。"
+      }
+    ]
+  },
+  {
+    "word": "pernah",
+    "pos": "adv.",
+    "meaning": "曾经",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Apakah kamu pernah bekerja di perusahaan asing?",
+        "zh": "你曾在外国公司工作过吗？"
+      },
+      {
+        "id": "Saya pernah mengalami masalah yang sama dulu.",
+        "zh": "我以前也遇到过同样的问题。"
+      }
+    ]
+  },
+  {
+    "word": "memutuskan",
+    "pos": "v.",
+    "meaning": "决定；切断",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Setelah berpikir lama, dia memutuskan untuk pindah kerja.",
+        "zh": "经过长时间思考，他决定换工作。"
+      },
+      {
+        "id": "Perusahaan memutuskan menunda proyek itu sampai tahun depan.",
+        "zh": "公司决定把那个项目推迟到明年。"
+      }
+    ]
+  },
+  {
+    "word": "mengembangkan",
+    "pos": "v.",
+    "meaning": "发展；开发",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Perusahaan itu sedang mengembangkan aplikasi belajar bahasa.",
+        "zh": "那家公司正在开发一款语言学习应用。"
+      },
+      {
+        "id": "Pemerintah berusaha mengembangkan pariwisata di daerah timur.",
+        "zh": "政府正努力发展东部地区的旅游业。"
+      }
+    ]
+  },
+  {
+    "word": "meningkatkan",
+    "pos": "v.",
+    "meaning": "提高；增加",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Kami harus meningkatkan kualitas layanan kepada pelanggan.",
+        "zh": "我们必须提高对顾客的服务质量。"
+      },
+      {
+        "id": "Olahraga teratur dapat meningkatkan kesehatan tubuh.",
+        "zh": "规律运动可以增进身体健康。"
+      }
+    ]
+  },
+  {
+    "word": "menjelaskan",
+    "pos": "v.",
+    "meaning": "解释；说明",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Manajer menjelaskan rencana baru kepada seluruh tim.",
+        "zh": "经理向全体团队说明了新计划。"
+      },
+      {
+        "id": "Bisakah kamu menjelaskan maksud kalimat ini?",
+        "zh": "你能解释一下这句话的意思吗？"
+      }
+    ]
+  },
+  {
+    "word": "menyarankan",
+    "pos": "v.",
+    "meaning": "建议",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Dokter menyarankan dia untuk lebih banyak istirahat.",
+        "zh": "医生建议他多休息。"
+      },
+      {
+        "id": "Saya menyarankan kita menunda keputusan ini dulu.",
+        "zh": "我建议我们先推迟这个决定。"
+      }
+    ]
+  },
+  {
+    "word": "mempersiapkan",
+    "pos": "v.",
+    "meaning": "准备",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Dia sedang mempersiapkan presentasi untuk rapat besok.",
+        "zh": "他正在为明天的会议准备演示。"
+      },
+      {
+        "id": "Kami mempersiapkan segalanya jauh-jauh hari sebelum acara.",
+        "zh": "活动之前我们早早就准备好了一切。"
+      }
+    ]
+  },
+  {
+    "word": "menyelesaikan",
+    "pos": "v.",
+    "meaning": "完成；解决",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Saya harus menyelesaikan laporan ini sebelum jam lima.",
+        "zh": "我必须在五点前完成这份报告。"
+      },
+      {
+        "id": "Kedua pihak setuju menyelesaikan masalah ini secara damai.",
+        "zh": "双方同意以和平方式解决这个问题。"
+      }
+    ]
+  },
+  {
+    "word": "membandingkan",
+    "pos": "v.",
+    "meaning": "比较",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Sebelum membeli, dia selalu membandingkan harga di beberapa toko.",
+        "zh": "购买之前，他总是比较几家店的价格。"
+      },
+      {
+        "id": "Jangan suka membandingkan diri dengan orang lain.",
+        "zh": "不要总拿自己和别人比较。"
+      }
+    ]
+  },
+  {
+    "word": "mempengaruhi",
+    "pos": "v.",
+    "meaning": "影响",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Cuaca buruk mempengaruhi jadwal penerbangan hari ini.",
+        "zh": "恶劣天气影响了今天的航班时刻。"
+      },
+      {
+        "id": "Media sosial sangat mempengaruhi pendapat anak muda.",
+        "zh": "社交媒体极大地影响着年轻人的观点。"
+      }
+    ]
+  },
+  {
+    "word": "menghargai",
+    "pos": "v.",
+    "meaning": "尊重；珍惜；欣赏",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Kita harus menghargai pendapat orang lain.",
+        "zh": "我们应该尊重他人的意见。"
+      },
+      {
+        "id": "Saya sangat menghargai bantuan kamu selama ini.",
+        "zh": "我非常感激你一直以来的帮助。"
+      }
+    ]
+  },
+  {
+    "word": "berharap",
+    "pos": "v.",
+    "meaning": "希望；期望",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Saya berharap kamu cepat sembuh.",
+        "zh": "我希望你早日康复。"
+      },
+      {
+        "id": "Masyarakat berharap pemerintah segera menurunkan harga bahan pokok.",
+        "zh": "民众希望政府尽快降低基本物资的价格。"
+      }
+    ]
+  },
+  {
+    "word": "berusaha",
+    "pos": "v.",
+    "meaning": "努力；尝试",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Dia terus berusaha walaupun sudah gagal beberapa kali.",
+        "zh": "尽管失败了几次，他仍不断努力。"
+      },
+      {
+        "id": "Kami berusaha memberikan layanan terbaik untuk pelanggan.",
+        "zh": "我们努力为顾客提供最好的服务。"
+      }
+    ]
+  },
+  {
+    "word": "berhasil",
+    "pos": "v.",
+    "meaning": "成功",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Akhirnya tim kami berhasil menyelesaikan proyek itu.",
+        "zh": "我们团队终于成功完成了那个项目。"
+      },
+      {
+        "id": "Dia berhasil mendapatkan beasiswa ke luar negeri.",
+        "zh": "他成功获得了出国留学的奖学金。"
+      }
+    ]
+  },
+  {
+    "word": "gagal",
+    "pos": "v.",
+    "meaning": "失败",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Rencana itu gagal karena kurang persiapan.",
+        "zh": "那个计划因为准备不足而失败了。"
+      },
+      {
+        "id": "Jangan takut gagal, itu bagian dari proses belajar.",
+        "zh": "别怕失败，那是学习过程的一部分。"
+      }
+    ]
+  },
+  {
+    "word": "setuju",
+    "pos": "v.",
+    "meaning": "同意；赞成",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Saya setuju dengan usulan kamu tentang jadwal baru.",
+        "zh": "我同意你关于新日程的提议。"
+      },
+      {
+        "id": "Semua anggota rapat setuju untuk menunda proyek itu.",
+        "zh": "与会的所有成员都同意推迟那个项目。"
+      }
+    ]
+  },
+  {
+    "word": "menolak",
+    "pos": "v.",
+    "meaning": "拒绝；反对",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Dia menolak tawaran kerja itu karena gajinya kecil.",
+        "zh": "他因为工资低拒绝了那份工作邀请。"
+      },
+      {
+        "id": "Banyak warga menolak rencana pembangunan pabrik baru.",
+        "zh": "许多居民反对修建新工厂的计划。"
+      }
+    ]
+  },
+  {
+    "word": "berjanji",
+    "pos": "v.",
+    "meaning": "承诺；答应",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Dia berjanji akan datang tepat waktu besok.",
+        "zh": "他答应明天会准时到。"
+      },
+      {
+        "id": "Pemerintah berjanji memperbaiki jalan yang rusak itu.",
+        "zh": "政府承诺修复那条损坏的道路。"
+      }
+    ]
+  },
+  {
+    "word": "percaya",
+    "pos": "v.",
+    "meaning": "相信；信任",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Saya percaya kamu bisa menyelesaikan tugas ini.",
+        "zh": "我相信你能完成这个任务。"
+      },
+      {
+        "id": "Jangan mudah percaya pada berita di media sosial.",
+        "zh": "不要轻易相信社交媒体上的消息。"
+      }
+    ]
+  },
+  {
+    "word": "menyadari",
+    "pos": "v.",
+    "meaning": "意识到；察觉",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Dia baru menyadari kesalahannya setelah ditegur atasan.",
+        "zh": "被上司批评后，他才意识到自己的错误。"
+      },
+      {
+        "id": "Banyak orang belum menyadari pentingnya menjaga lingkungan.",
+        "zh": "很多人还没意识到保护环境的重要性。"
+      }
+    ]
+  },
+  {
+    "word": "terkenal",
+    "pos": "adj.",
+    "meaning": "著名的；有名的",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Bali terkenal dengan pantainya yang indah.",
+        "zh": "巴厘岛以美丽的海滩而闻名。"
+      }
+    ]
+  },
+  {
+    "word": "penting",
+    "pos": "adj.",
+    "meaning": "重要的",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Komunikasi yang baik sangat penting dalam tim.",
+        "zh": "良好的沟通在团队中非常重要。"
+      },
+      {
+        "id": "Ada hal penting yang ingin saya sampaikan hari ini.",
+        "zh": "今天我有一件重要的事想说。"
+      }
+    ]
+  },
+  {
+    "word": "berbahaya",
+    "pos": "adj.",
+    "meaning": "危险的",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Merokok sangat berbahaya bagi kesehatan kita.",
+        "zh": "吸烟对我们的健康非常有害。"
+      }
+    ]
+  },
+  {
+    "word": "aman",
+    "pos": "adj.",
+    "meaning": "安全的",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Daerah ini cukup aman, bahkan pada malam hari.",
+        "zh": "这个地区相当安全，即使在晚上也是。"
+      }
+    ]
+  },
+  {
+    "word": "nyaman",
+    "pos": "adj.",
+    "meaning": "舒适的；自在的",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Kantor baru kami lebih nyaman daripada yang lama.",
+        "zh": "我们的新办公室比旧的更舒适。"
+      }
+    ]
+  },
+  {
+    "word": "sibuk",
+    "pos": "adj.",
+    "meaning": "忙碌的",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Maaf, minggu ini saya sangat sibuk dengan proyek baru.",
+        "zh": "抱歉，这周我忙着新项目，非常忙。"
+      }
+    ]
+  },
+  {
+    "word": "gratis",
+    "pos": "adj.",
+    "meaning": "免费的",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Acara ini gratis dan terbuka untuk umum.",
+        "zh": "这个活动是免费的，对公众开放。"
+      }
+    ]
+  },
+  {
+    "word": "sederhana",
+    "pos": "adj.",
+    "meaning": "简单的；朴素的",
+    "level": 3,
+    "examples": [
+      {
+        "id": "Meskipun kaya, dia tetap hidup sederhana.",
+        "zh": "虽然很富有，他依然过着朴素的生活。"
+      },
+      {
+        "id": "Tolong jelaskan dengan cara yang lebih sederhana.",
+        "zh": "请用更简单的方式解释一下。"
+      }
+    ]
+  }
+]

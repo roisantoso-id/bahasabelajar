@@ -116,7 +116,7 @@ ul { list-style: none; }
   background: var(--primary-light); padding: 3px 10px; border-radius: 999px;
 }
 .card-word {
-  font-size: 44px; font-weight: 700; margin-top: 48px; text-align: center;
+  font-size: 44px; font-weight: 700; margin-top: 24px; text-align: center;
   word-break: break-word; letter-spacing: .5px;
 }
 .card-pos { color: var(--text-sub); font-style: italic; margin-top: 8px; font-size: 16px; }
