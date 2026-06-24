@@ -148,6 +148,19 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .cul-term{display:flex;gap:10px;align-items:baseline;font-size:13px}
 .cul-term-w{font-family:Georgia,serif;font-weight:800;color:var(--green);min-width:96px}
 .cul-term-m{color:#6a736c}
+/* 划词翻译 popup */
+#transPop{position:fixed;z-index:200;max-width:280px;background:#1f2d29;color:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 10px 36px rgba(0,0,0,.32);font-size:14px;line-height:1.5;opacity:0;transform:translateY(6px) scale(.96);pointer-events:none;transition:opacity .15s,transform .15s}
+#transPop.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+#transPop .tp-word{font-family:Georgia,serif;font-weight:800;font-size:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+#transPop .tp-pos{font-size:11px;font-style:italic;color:#9fc6b3;font-family:-apple-system,sans-serif;font-weight:600}
+#transPop .tp-src{margin-left:auto;font-size:10px;font-weight:700;padding:2px 7px;border-radius:99px;background:rgba(255,255,255,.14);color:#cfe3d8}
+#transPop .tp-mean{margin-top:7px;font-size:15px;font-weight:650}
+#transPop .tp-ex{margin-top:6px;font-size:12px;color:#b9c4bf;line-height:1.5}
+#transPop .tp-loading{color:#b9c4bf;font-size:13px}
+#transPop .tp-btn{margin-top:10px;width:100%;height:34px;border-radius:9px;background:#3a8f6f;color:#fff;font-size:12px;font-weight:800}
+#transPop .tp-btn:disabled{background:rgba(255,255,255,.16);color:#9aa8a2}
+#transPop .tp-arrow{position:absolute;bottom:-6px;left:var(--ax,24px);width:12px;height:12px;background:#1f2d29;transform:rotate(45deg)}
+#transPop.flip .tp-arrow{bottom:auto;top:-6px}
 .hidden{display:none!important}
 </style>
 </head>
@@ -275,6 +288,9 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
     <div id="cfgStatus" style="margin-top:12px;text-align:center;font-size:12px;color:var(--muted)"></div>
   </div>
 </div>
+
+<!-- ===== 划词翻译 POPUP ===== -->
+<div id="transPop"><div id="transPopBody"></div><div class="tp-arrow"></div></div>
 
 <script>
 // ===== CONFIG =====
@@ -646,6 +662,118 @@ function toggleCulture(i) {
   el.classList.remove('hidden')
   cultureExpanded = i
 }
+
+// ===== 划词翻译 =====
+const TRANS_SEL = '.sent-id, .ex-sentence, .rex-sentence'  // 仅在印尼语文本上启用
+let transCurrent = null
+
+function transContext(node) {
+  const el = node && (node.nodeType === 3 ? node.parentElement : node)
+  return el && el.closest(TRANS_SEL)
+}
+
+function hideTransPop() {
+  document.getElementById('transPop').classList.remove('show')
+  transCurrent = null
+}
+
+function onTextSelect() {
+  const sel = window.getSelection()
+  const text = (sel.toString() || '').trim()
+  if (!text || text.length > 60 || !sel.rangeCount) return
+  if (!transContext(sel.anchorNode)) return
+  const rect = sel.getRangeAt(0).getBoundingClientRect()
+  if (!rect.width && !rect.height) return
+  showTransPop(text, rect)
+}
+
+function showTransPop(text, rect) {
+  const pop = document.getElementById('transPop')
+  const clean = text.replace(/^[^\p{L}]+|[^\p{L}]+$/gu, '')
+  transCurrent = { text: clean }
+  document.getElementById('transPopBody').innerHTML = `<div class="tp-loading">查询「${clean}」…</div>`
+  pop.classList.add('show')
+  positionTransPop(rect)
+  lookupWord(clean, rect)
+}
+
+function positionTransPop(rect) {
+  const pop = document.getElementById('transPop')
+  const pw = Math.min(280, pop.offsetWidth || 280), ph = pop.offsetHeight || 80
+  let left = rect.left + rect.width / 2 - pw / 2
+  left = Math.max(8, Math.min(left, window.innerWidth - pw - 8))
+  let top = rect.top - ph - 12, flip = false
+  if (top < 8) { top = rect.bottom + 12; flip = true }
+  pop.style.left = left + 'px'
+  pop.style.top = top + 'px'
+  pop.style.setProperty('--ax', (rect.left + rect.width / 2 - left - 6) + 'px')
+  pop.classList.toggle('flip', flip)
+}
+
+async function lookupWord(clean, rect) {
+  if (!clean) return hideTransPop()
+  let hit = null
+  if (sb) {
+    const { data } = await sb.from('words').select('*').ilike('word', clean).limit(1)
+    if (data && data.length) hit = data[0]
+  }
+  if (transCurrent?.text !== clean) return  // 选区已变
+  if (hit) {
+    transCurrent.hit = hit
+    const ex = (hit.examples || [])[0]
+    renderTransBody(`
+      <div class="tp-word">${hit.word}<span class="tp-pos">${hit.pos}</span><span class="tp-src">词库</span></div>
+      <div class="tp-mean">${hit.meaning}</div>
+      ${ex ? `<div class="tp-ex">${ex.id}<br>${ex.zh}</div>` : ''}
+      <button class="tp-btn" id="tpAction" onclick="addSelToLearning()">＋ 加入背诵</button>`, rect)
+  } else {
+    let mt = '—'
+    try {
+      const r = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(clean)}&langpair=id|zh-CN`)
+      const j = await r.json()
+      mt = (j.responseData && j.responseData.translatedText) || '未找到翻译'
+    } catch (e) { mt = '翻译失败（网络）' }
+    if (transCurrent?.text !== clean) return
+    transCurrent.mt = mt
+    renderTransBody(`
+      <div class="tp-word">${clean}<span class="tp-src">机器翻译</span></div>
+      <div class="tp-mean">${mt}</div>
+      <button class="tp-btn" id="tpAction" onclick="collectSelWord()">＋ 收藏到词库</button>`, rect)
+  }
+}
+
+function renderTransBody(html, rect) {
+  document.getElementById('transPopBody').innerHTML = html
+  positionTransPop(rect || document.getElementById('transPop').getBoundingClientRect())
+}
+
+async function addSelToLearning() {
+  const hit = transCurrent?.hit
+  if (!hit || !sb) return
+  const btn = document.getElementById('tpAction')
+  btn.disabled = true; btn.textContent = '…'
+  const t = todayStr()
+  const { error } = await sb.from('learning').insert({
+    word_id: hit.id, stage: 1, status: 'reviewing',
+    next_review_at: addDays(t, INTERVALS[1]), learned_at: t, last_review_at: t,
+    correct_count: 0, wrong_count: 0
+  })
+  btn.textContent = error ? '已在学习列表 ✓' : '已加入背诵 ✓'
+}
+
+async function collectSelWord() {
+  const w = transCurrent?.text, mt = transCurrent?.mt
+  if (!w || !sb) return
+  const btn = document.getElementById('tpAction')
+  btn.disabled = true; btn.textContent = '…'
+  const { error } = await sb.from('words').insert({ word: w, pos: 'n.', meaning: mt, level: 3, examples: [] })
+  btn.textContent = error ? '词库已有此词 ✓' : '已收藏到词库 ✓'
+}
+
+document.addEventListener('mouseup', () => setTimeout(onTextSelect, 10))
+document.addEventListener('touchend', () => setTimeout(onTextSelect, 10))
+document.addEventListener('mousedown', (e) => { if (!e.target.closest('#transPop')) hideTransPop() })
+document.addEventListener('scroll', hideTransPop, true)
 
 // ===== INIT =====
 window.addEventListener('DOMContentLoaded', () => {
