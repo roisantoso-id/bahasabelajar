@@ -148,6 +148,13 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .cul-term{display:flex;gap:10px;align-items:baseline;font-size:13px}
 .cul-term-w{font-family:Georgia,serif;font-weight:800;color:var(--green);min-width:96px}
 .cul-term-m{color:#6a736c}
+/* 发音按钮 */
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:50%;background:var(--mint);color:var(--green);cursor:pointer;flex:none}
+.speak-btn:active{transform:scale(.9)}
+.word-speak{width:42px;height:42px;font-size:19px;margin:10px auto 0;display:flex}
+.sent-speak{width:24px;height:24px;font-size:12px;margin-right:7px;vertical-align:middle}
+.wl-speak{width:32px;height:32px;font-size:15px;margin-left:8px}
+#transPop .tp-speak{width:24px;height:24px;font-size:12px;background:rgba(255,255,255,.18);color:#fff}
 /* 划词翻译 popup */
 #transPop{position:fixed;z-index:200;max-width:280px;background:#1f2d29;color:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 10px 36px rgba(0,0,0,.32);font-size:14px;line-height:1.5;opacity:0;transform:translateY(6px) scale(.96);pointer-events:none;transition:opacity .15s,transform .15s}
 #transPop.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
@@ -433,6 +440,7 @@ function renderStudy() {
   document.getElementById('studyCard').innerHTML = `
     <span class="word-level">${levelName}</span>
     <div class="word-main">${w.word}</div>
+    <button class="speak-btn word-speak" onclick="speakStudyWord()">🔊</button>
     <div class="word-pos">${w.pos}</div>
     <div id="answerArea"><div class="think-hint">先在脑海里回想它的意思</div></div>`
   document.getElementById('studyActions').innerHTML = `
@@ -572,6 +580,7 @@ function renderWords() {
           <span class="wl-word">${w.word}</span><span class="wl-pos">${w.pos}</span>
           <div class="wl-meaning">${w.meaning}</div>
         </div>
+        <button class="speak-btn wl-speak" onclick="event.stopPropagation(); speakListWord(${i})">🔊</button>
       </div>
       <div class="wl-examples hidden">${exHtml}</div>
     </div>`
@@ -589,7 +598,7 @@ function filterLevel(el) {
 }
 
 // ===== ARTICLES =====
-let articleCache = []
+let articleCache = [], artCurrent = null
 
 async function loadArticles() {
   if (!sb) return
@@ -609,13 +618,14 @@ async function loadArticles() {
 function openArticle(id) {
   const a = articleCache.find(x => x.id === id)
   if (!a) return
+  artCurrent = a
   const lv = a.level===1?'入门':a.level===2?'初级':'中级'
   document.getElementById('artTitle').textContent = a.title_zh
   document.getElementById('artMeta').textContent = `${a.title} · ${a.category} · ${lv} · 共 ${a.sentences.length} 句`
   document.getElementById('artSummary').textContent = a.summary || ''
   document.getElementById('artBody').innerHTML = a.sentences.map((s, i) => `
     <div class="sent">
-      <div class="sent-id"><span class="sent-num">${i+1}.</span>${s.id}</div>
+      <div class="sent-id"><button class="speak-btn sent-speak" onclick="speakArticleSentence(${i})">🔊</button><span class="sent-num">${i+1}.</span>${s.id}</div>
       <div class="sent-zh">${s.zh}</div>
       ${s.note ? `<div class="sent-note">💡 ${s.note}</div>` : ''}
     </div>`).join('')
@@ -722,7 +732,7 @@ async function lookupWord(clean, rect) {
     transCurrent.hit = hit
     const ex = (hit.examples || [])[0]
     renderTransBody(`
-      <div class="tp-word">${hit.word}<span class="tp-pos">${hit.pos}</span><span class="tp-src">词库</span></div>
+      <div class="tp-word">${hit.word}<button class="speak-btn tp-speak" onclick="speakSel()">🔊</button><span class="tp-pos">${hit.pos}</span><span class="tp-src">词库</span></div>
       <div class="tp-mean">${hit.meaning}</div>
       ${ex ? `<div class="tp-ex">${ex.id}<br>${ex.zh}</div>` : ''}
       <button class="tp-btn" id="tpAction" onclick="addSelToLearning()">＋ 加入背诵</button>`, rect)
@@ -736,7 +746,7 @@ async function lookupWord(clean, rect) {
     if (transCurrent?.text !== clean) return
     transCurrent.mt = mt
     renderTransBody(`
-      <div class="tp-word">${clean}<span class="tp-src">机器翻译</span></div>
+      <div class="tp-word">${clean}<button class="speak-btn tp-speak" onclick="speakSel()">🔊</button><span class="tp-src">机器翻译</span></div>
       <div class="tp-mean">${mt}</div>
       <button class="tp-btn" id="tpAction" onclick="collectSelWord()">＋ 收藏到词库</button>`, rect)
   }
@@ -774,6 +784,34 @@ document.addEventListener('mouseup', () => setTimeout(onTextSelect, 10))
 document.addEventListener('touchend', () => setTimeout(onTextSelect, 10))
 document.addEventListener('mousedown', (e) => { if (!e.target.closest('#transPop')) hideTransPop() })
 document.addEventListener('scroll', hideTransPop, true)
+
+// ===== 发音（Web Speech API，印尼语 id-ID）=====
+let idVoice = null
+function loadVoices() {
+  try {
+    const vs = window.speechSynthesis.getVoices()
+    idVoice = vs.find(v => v.lang === 'id-ID') || vs.find(v => (v.lang || '').toLowerCase().startsWith('id')) || null
+  } catch (e) {}
+}
+function speak(text, rate) {
+  if (!text || !('speechSynthesis' in window)) return
+  try {
+    speechSynthesis.cancel()
+    const u = new SpeechSynthesisUtterance(text)
+    u.lang = 'id-ID'
+    if (idVoice) u.voice = idVoice
+    u.rate = rate || 0.95
+    speechSynthesis.speak(u)
+  } catch (e) {}
+}
+function speakStudyWord() { const w = studyQueue[studyIdx]; if (w) speak(w.word) }
+function speakArticleSentence(i) { if (artCurrent && artCurrent.sentences[i]) speak(artCurrent.sentences[i].id) }
+function speakListWord(i) { const w = wordItems[i]; if (w) speak(w.word) }
+function speakSel() { speak((transCurrent && (transCurrent.hit ? transCurrent.hit.word : transCurrent.text)) || '') }
+if ('speechSynthesis' in window) {
+  loadVoices()
+  if (speechSynthesis.onvoiceschanged !== undefined) speechSynthesis.onvoiceschanged = loadVoices
+}
 
 // ===== INIT =====
 window.addEventListener('DOMContentLoaded', () => {
