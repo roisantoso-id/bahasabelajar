@@ -118,6 +118,36 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .wl-examples{margin:10px 0 0 48px;padding-top:10px;border-top:1px dashed #ddd}
 .list-end{text-align:center;padding:20px;font-size:11px;color:var(--muted)}
 
+/* articles */
+.art-card{padding:18px;margin-bottom:12px;border-radius:var(--radius);background:var(--paper);box-shadow:0 4px 16px rgba(25,55,46,.05)}
+.art-card-top{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.art-cat{padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;background:var(--purplebg);color:var(--purple)}
+.art-level{padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;background:var(--mint);color:var(--green)}
+.art-title-id{font-size:17px;font-weight:800;font-family:Georgia,serif;color:var(--ink)}
+.art-title-zh{font-size:13px;color:var(--muted);margin-top:3px}
+.art-card-summary{font-size:12px;color:#888;margin-top:8px;line-height:1.5}
+.art-summary{background:#f1ede3;border-radius:12px;padding:12px 14px;font-size:13px;color:#5a5346;line-height:1.6;margin-bottom:18px}
+.sent{padding:14px 0;border-bottom:1px solid #eceae3}
+.sent:last-child{border-bottom:0}
+.sent-id{font-size:15px;font-weight:650;line-height:1.7;color:var(--ink)}
+.sent-num{display:inline-block;min-width:20px;color:var(--green2);font-weight:800;font-family:Georgia,serif}
+.sent-zh{font-size:13px;color:#6a736c;margin-top:6px;padding-left:20px;line-height:1.6}
+.sent-note{font-size:12px;color:#9a8f6a;background:#faf8f0;border-left:3px solid #e3d9b8;border-radius:0 8px 8px 0;padding:7px 10px;margin-top:8px;margin-left:20px;line-height:1.6}
+.trans-hidden .sent-zh,.trans-hidden .sent-note{display:none}
+/* culture */
+.cul-card{padding:16px;margin-bottom:12px;border-radius:var(--radius);background:var(--paper);box-shadow:0 4px 16px rgba(25,55,46,.05)}
+.cul-head{display:flex;align-items:center;gap:12px}
+.cul-emoji{font-size:28px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:var(--cream);flex-shrink:0}
+.cul-htext{flex:1;min-width:0}
+.cul-title{font-size:15px;font-weight:800}
+.cul-sub{font-size:12px;color:var(--muted);font-style:italic;margin-top:2px}
+.cul-cat{padding:3px 10px;border-radius:99px;font-size:10px;font-weight:700;background:var(--purplebg);color:var(--purple);flex-shrink:0}
+.cul-detail{margin-top:14px;padding-top:14px;border-top:1px dashed #ddd}
+.cul-body{font-size:13px;color:#444;line-height:1.85}
+.cul-terms{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+.cul-term{display:flex;gap:10px;align-items:baseline;font-size:13px}
+.cul-term-w{font-family:Georgia,serif;font-weight:800;color:var(--green);min-width:96px}
+.cul-term-m{color:#6a736c}
 .hidden{display:none!important}
 </style>
 </head>
@@ -194,9 +224,37 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
   <div class="list-end" id="listEnd"></div>
 </div>
 
+<!-- ===== ARTICLES ===== -->
+<div id="v-articles" class="view">
+  <div class="words-head"><h1>印尼文章</h1></div>
+  <div class="grammar-subtitle">逐句对照 · 时政 / 经济 / 科技</div>
+  <div id="articleList"></div>
+</div>
+
+<!-- ===== ARTICLE DETAIL ===== -->
+<div id="v-article" class="view">
+  <div class="grammar-head">
+    <button class="back" onclick="showView('articles', document.querySelectorAll('.tab')[1])">‹</button>
+    <h1 id="artTitle" style="font-size:18px"></h1>
+    <button id="transToggle" class="grammar-lesson-tag" onclick="toggleTrans()">隐藏中文</button>
+  </div>
+  <div id="artMeta" class="grammar-subtitle"></div>
+  <div id="artSummary" class="art-summary"></div>
+  <div id="artBody"></div>
+</div>
+
+<!-- ===== CULTURE ===== -->
+<div id="v-culture" class="view">
+  <div class="words-head"><h1>印尼文化</h1></div>
+  <div class="grammar-subtitle">Budaya Indonesia · 点开看详情</div>
+  <div id="cultureList"></div>
+</div>
+
 <!-- ===== TABS ===== -->
 <div class="tabs">
   <button class="tab active" onclick="showView('home',this)"><span class="tab-icon">🏠</span>今日</button>
+  <button class="tab" onclick="showView('articles',this)"><span class="tab-icon">📄</span>文章</button>
+  <button class="tab" onclick="showView('culture',this)"><span class="tab-icon">🎭</span>文化</button>
   <button class="tab" onclick="showView('words',this)"><span class="tab-icon">📖</span>词库</button>
   <button class="tab" onclick="showView('settings',this)"><span class="tab-icon">⚙️</span>设置</button>
 </div>
@@ -249,6 +307,8 @@ function showView(name, tabEl) {
   if (tabEl) tabEl.classList.add('active')
   if (name === 'home') loadHome()
   if (name === 'words') { wordsOffset = 0; loadWords() }
+  if (name === 'articles') loadArticles()
+  if (name === 'culture') loadCulture()
 }
 
 // ===== DATE HELPERS =====
@@ -512,6 +572,81 @@ function filterLevel(el) {
   loadWords()
 }
 
+// ===== ARTICLES =====
+let articleCache = []
+
+async function loadArticles() {
+  if (!sb) return
+  const {data} = await sb.from('articles').select('*').order('id')
+  articleCache = data || []
+  document.getElementById('articleList').innerHTML = articleCache.map(a => {
+    const lv = a.level===1?'入门':a.level===2?'初级':'中级'
+    return `<div class="art-card" onclick="openArticle(${a.id})">
+      <div class="art-card-top"><span class="art-cat">${a.category}</span><span class="art-level">${lv}</span></div>
+      <div class="art-title-id">${a.title}</div>
+      <div class="art-title-zh">${a.title_zh}</div>
+      ${a.summary ? `<div class="art-card-summary">${a.summary}</div>` : ''}
+    </div>`
+  }).join('') || '<div class="list-end">暂无文章</div>'
+}
+
+function openArticle(id) {
+  const a = articleCache.find(x => x.id === id)
+  if (!a) return
+  const lv = a.level===1?'入门':a.level===2?'初级':'中级'
+  document.getElementById('artTitle').textContent = a.title_zh
+  document.getElementById('artMeta').textContent = `${a.title} · ${a.category} · ${lv} · 共 ${a.sentences.length} 句`
+  document.getElementById('artSummary').textContent = a.summary || ''
+  document.getElementById('artBody').innerHTML = a.sentences.map((s, i) => `
+    <div class="sent">
+      <div class="sent-id"><span class="sent-num">${i+1}.</span>${s.id}</div>
+      <div class="sent-zh">${s.zh}</div>
+      ${s.note ? `<div class="sent-note">💡 ${s.note}</div>` : ''}
+    </div>`).join('')
+  const body = document.getElementById('artBody')
+  body.classList.remove('trans-hidden')
+  document.getElementById('transToggle').textContent = '隐藏中文'
+  showView('article')
+  window.scrollTo(0, 0)
+}
+
+function toggleTrans() {
+  const body = document.getElementById('artBody')
+  const hidden = body.classList.toggle('trans-hidden')
+  document.getElementById('transToggle').textContent = hidden ? '显示中文' : '隐藏中文'
+}
+
+// ===== CULTURE =====
+let cultureExpanded = -1
+
+async function loadCulture() {
+  if (!sb) return
+  const {data} = await sb.from('culture').select('*').order('id')
+  document.getElementById('cultureList').innerHTML = (data || []).map((c, i) => {
+    const terms = (c.terms||[]).map(t => `<div class="cul-term"><span class="cul-term-w">${t.word}</span><span class="cul-term-m">${t.meaning}</span></div>`).join('')
+    return `<div class="cul-card" onclick="toggleCulture(${i})">
+      <div class="cul-head">
+        <div class="cul-emoji">${c.emoji}</div>
+        <div class="cul-htext"><div class="cul-title">${c.title}</div><div class="cul-sub">${c.title_id||''}</div></div>
+        <span class="cul-cat">${c.category}</span>
+      </div>
+      <div class="cul-detail hidden" id="culd${i}">
+        <div class="cul-body">${c.body}</div>
+        ${terms ? `<div class="cul-terms">${terms}</div>` : ''}
+      </div>
+    </div>`
+  }).join('') || '<div class="list-end">暂无内容</div>'
+  cultureExpanded = -1
+}
+
+function toggleCulture(i) {
+  const el = document.getElementById('culd'+i)
+  if (cultureExpanded === i) { el.classList.add('hidden'); cultureExpanded = -1; return }
+  if (cultureExpanded >= 0) document.getElementById('culd'+cultureExpanded).classList.add('hidden')
+  el.classList.remove('hidden')
+  cultureExpanded = i
+}
+
 // ===== INIT =====
 window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('cfgUrl').value = SUPABASE_URL
@@ -519,7 +654,7 @@ window.addEventListener('DOMContentLoaded', () => {
   if (initSupabase()) {
     loadHome()
   } else {
-    showView('settings', document.querySelectorAll('.tab')[2])
+    showView('settings', document.querySelectorAll('.tab')[4])
   }
 })
 </script>
