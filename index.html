@@ -253,6 +253,28 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .note-sheet .ns-actions button{flex:1;height:48px;border-radius:12px;font-size:15px;font-weight:800}
 .ns-cancel{background:#eee;color:#555}.ns-save{background:var(--green);color:#fff}
 .tp-note-btn{background:var(--yellow,#f4c95d)!important;color:var(--green)!important}
+.task-icon.article{color:#2d745f;background:#dcebdc}
+.task-icon.extra{color:#8a6d3b;background:#f3ead2;font-size:22px}
+/* ===== 课程 LESSONS ===== */
+.lesson-card{padding:18px;margin-bottom:14px;border-radius:var(--radius);background:var(--paper);box-shadow:0 4px 16px rgba(25,55,46,.05)}
+.lesson-card.locked{opacity:.65}
+.lesson-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.lesson-no{width:44px;height:44px;flex:none;display:flex;align-items:center;justify-content:center;border-radius:14px;background:var(--green);color:#fff;font-family:Georgia,serif;font-size:18px;font-weight:800}
+.lesson-card.locked .lesson-no{background:#c4cbc6}
+.lesson-ht{flex:1;min-width:0}
+.lesson-title{font-size:16px;font-weight:800}
+.lesson-title-id{font-size:12px;color:var(--muted);font-style:italic;margin-top:2px}
+.lesson-summary{font-size:12px;color:#6a736c;line-height:1.6;margin-bottom:12px}
+.lesson-prog{height:6px;border-radius:99px;background:#eceae3;overflow:hidden;margin-bottom:6px}
+.lesson-prog-fill{height:100%;background:var(--green);border-radius:inherit}
+.lesson-meta{display:flex;gap:14px;font-size:11px;color:var(--muted);margin-bottom:12px}
+.lesson-meta b{color:var(--ink);font-weight:800}
+.lesson-btns{display:flex;gap:10px}
+.lesson-btns button{flex:1;height:42px;border-radius:12px;font-size:13px;font-weight:800}
+.lb-learn{background:var(--green);color:#fff}
+.lb-learn:disabled{background:#e8e6df;color:#9aa39d}
+.lb-grammar{background:var(--purplebg);color:var(--purple)}
+.lesson-empty{font-size:12px;color:var(--muted);text-align:center;padding:8px 0}
 .hidden{display:none!important}
 </style>
 </head>
@@ -290,7 +312,7 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
   <div class="section-title">今日训练</div>
   <div class="task" onclick="startLearn()">
     <div class="task-icon learn">Aa</div>
-    <div class="task-body"><div class="task-name">学习新词</div><div class="task-desc">认识它，再理解它</div></div>
+    <div class="task-body"><div class="task-name">学习新词</div><div class="task-desc" id="learnDesc">跟着课本学，按词频补</div></div>
     <span class="task-count" id="newCount">0</span><span class="task-arrow">›</span>
   </div>
   <div class="task" onclick="startGrammar()">
@@ -302,6 +324,18 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
     <div class="task-icon review">↻</div>
     <div class="task-body"><div class="task-name">巩固复习</div><div class="task-desc">在忘记之前再见一面</div></div>
     <span class="task-count" id="dueCount">0</span><span class="task-arrow">›</span>
+  </div>
+
+  <div class="section-title" style="margin-top:24px">拓展</div>
+  <div class="task" onclick="showView('articles')">
+    <div class="task-icon article">📄</div>
+    <div class="task-body"><div class="task-name">拓展阅读</div><div class="task-desc">时政/经济/科技长文 · 逐句对照</div></div>
+    <span class="task-arrow">›</span>
+  </div>
+  <div class="task" onclick="startExtra()">
+    <div class="task-icon extra">＋</div>
+    <div class="task-body"><div class="task-name">拓展词</div><div class="task-desc">课本之外的高阶词，想学再学</div></div>
+    <span class="task-arrow">›</span>
   </div>
   <div class="task" onclick="showView('culture')">
     <div class="task-icon culture">🎭</div>
@@ -413,10 +447,18 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
   </div>
 </div>
 
+<!-- ===== LESSONS（课程主线）===== -->
+<div id="v-lessons" class="view">
+  <div class="cal-eyebrow">KURIKULUM · 课本主线</div>
+  <h1 class="cal-title">课程</h1>
+  <div class="grammar-subtitle">跟着《新编基础印度尼西亚语》一课一课学</div>
+  <div id="lessonList"></div>
+</div>
+
 <!-- ===== TABS ===== -->
 <div class="tabs" id="tabBar">
   <button class="tab active" onclick="showView('home',this)"><span class="tab-icon">🏠</span>今日</button>
-  <button class="tab" onclick="showView('articles',this)"><span class="tab-icon">📄</span>文章</button>
+  <button class="tab" onclick="showView('lessons',this)"><span class="tab-icon">📚</span>课程</button>
   <button class="tab" onclick="showView('words',this)"><span class="tab-icon">📖</span>词库</button>
   <button class="tab" onclick="showView('calendar',this)"><span class="tab-icon">📅</span>日历</button>
   <button class="tab" onclick="showView('profile',this)"><span class="tab-icon">👤</span>我的</button>
@@ -637,6 +679,7 @@ function showView(name, tabEl) {
   if (name === 'culture') loadCulture()
   if (name === 'calendar') loadCalendar()
   if (name === 'profile') loadProfile()
+  if (name === 'lessons') loadLessons()
 }
 
 // ===== DATE HELPERS =====
@@ -697,6 +740,11 @@ async function getStreak(t) {
 // ===== STUDY =====
 let studyQueue = [], studyIdx = 0, studyCompleted = 0, studyMode = 'learn'
 
+async function learnedIdList() {
+  const {data} = await sb.from('learning').select('word_id')
+  return (data || []).map(r => r.word_id)
+}
+// 主线：课本词（按课、词频）优先，不够再用基础词库（按词频）补；routine 拓展词不进主线
 async function startLearn() {
   if (!sb) return alert('请先在设置中配置 Supabase')
   studyMode = 'learn'
@@ -705,14 +753,50 @@ async function startLearn() {
   const done = ci ? ci.new_learned : 0
   const limit = Math.max(0, (profile.daily_new_words || 10) - done)
   if (!limit) return alert('今日新词已学完！')
-  // PostgREST 不支持子查询，先取已学 id 列表再排除
-  const {data: learned} = await sb.from('learning').select('word_id')
-  const learnedIds = (learned || []).map(r => r.word_id)
-  let q = sb.from('words').select('*').order('level').order('id').limit(limit)
-  if (learnedIds.length) q = q.not('id', 'in', `(${learnedIds.join(',')})`)
-  const {data} = await q
-  if (!data || !data.length) return alert('词库已全部学完！')
-  studyQueue = data.map(w => ({...w, wrongTimes:0}))
+  const learnedIds = await learnedIdList()
+  const excl = learnedIds.length ? `(${learnedIds.join(',')})` : null
+  // 1) 课本词优先
+  let qt = sb.from('words').select('*').eq('source','textbook').order('lesson').order('freq').limit(limit)
+  if (excl) qt = qt.not('id','in',excl)
+  let pool = (await qt).data || []
+  // 2) 不够再用基础词库补
+  if (pool.length < limit) {
+    let qc = sb.from('words').select('*').eq('source','core').order('freq').limit(limit - pool.length)
+    if (excl) qc = qc.not('id','in',excl)
+    pool = pool.concat((await qc).data || [])
+  }
+  if (!pool.length) return alert('课本+基础词库已全部学完！去「拓展词」继续吧')
+  studyQueue = pool.map(w => ({...w, wrongTimes:0}))
+  studyIdx = 0; studyCompleted = 0
+  showView('study')
+  renderStudy()
+}
+// 学某一课的词（从「课程」页进入）
+async function startLessonWords(lessonNo) {
+  if (!sb) return
+  studyMode = 'learn'
+  const learnedIds = await learnedIdList()
+  const excl = learnedIds.length ? `(${learnedIds.join(',')})` : null
+  let q = sb.from('words').select('*').eq('lesson', lessonNo).order('freq').limit(50)
+  if (excl) q = q.not('id','in',excl)
+  const pool = (await q).data || []
+  if (!pool.length) return alert('这一课的词都学过啦，去「巩固复习」吧')
+  studyQueue = pool.map(w => ({...w, wrongTimes:0}))
+  studyIdx = 0; studyCompleted = 0
+  showView('study')
+  renderStudy()
+}
+// 拓展词（routine 生成的高阶词）
+async function startExtra() {
+  if (!sb) return alert('请先登录')
+  studyMode = 'learn'
+  const learnedIds = await learnedIdList()
+  const excl = learnedIds.length ? `(${learnedIds.join(',')})` : null
+  let q = sb.from('words').select('*').in('source',['routine','user']).order('freq').limit(profile.daily_new_words || 10)
+  if (excl) q = q.not('id','in',excl)
+  const pool = (await q).data || []
+  if (!pool.length) return alert('拓展词暂时学完了')
+  studyQueue = pool.map(w => ({...w, wrongTimes:0}))
   studyIdx = 0; studyCompleted = 0
   showView('study')
   renderStudy()
@@ -818,13 +902,53 @@ async function bumpCheckin(t, field) {
 
 function closeStudy() { showView('home', document.querySelector('.tab')) }
 
+// ===== LESSONS（课程主线）=====
+async function loadLessons() {
+  if (!sb) return
+  const [lessonsRes, wordsRes, grammarRes, learnedRes] = await Promise.all([
+    sb.from('lessons').select('*').order('no'),
+    sb.from('words').select('id,lesson').eq('source','textbook'),
+    sb.from('grammar').select('lesson'),
+    sb.from('learning').select('word_id')
+  ])
+  const lessons = lessonsRes.data || []
+  const tbWords = wordsRes.data || []
+  const grammar = grammarRes.data || []
+  const learnedSet = new Set((learnedRes.data || []).map(r => r.word_id))
+  const html = lessons.map(L => {
+    const lw = tbWords.filter(w => w.lesson === L.no)
+    const total = lw.length
+    const learned = lw.filter(w => learnedSet.has(w.id)).length
+    const gCount = grammar.filter(g => g.lesson === L.no).length
+    const pct = total ? Math.round(learned / total * 100) : 0
+    const locked = total === 0 && gCount === 0
+    return `<div class="lesson-card ${locked ? 'locked' : ''}">
+      <div class="lesson-top">
+        <div class="lesson-no">${L.no}</div>
+        <div class="lesson-ht"><div class="lesson-title">${esc(L.title)}</div><div class="lesson-title-id">${esc(L.title_id || '')}</div></div>
+      </div>
+      ${!locked && L.summary ? `<div class="lesson-summary">${esc(L.summary)}</div>` : ''}
+      ${locked ? `<div class="lesson-empty">📝 待录入 —— 把课本这一课的词 / 语法 / 对话补进来</div>` : `
+      <div class="lesson-prog"><div class="lesson-prog-fill" style="width:${pct}%"></div></div>
+      <div class="lesson-meta"><span>词 <b>${learned}/${total}</b></span><span>语法 <b>${gCount}</b> 条</span></div>
+      <div class="lesson-btns">
+        <button class="lb-learn" onclick="startLessonWords(${L.no})" ${total === 0 ? 'disabled' : ''}>学这课的词</button>
+        <button class="lb-grammar" onclick="startGrammar(${L.no})" ${gCount === 0 ? 'disabled' : ''}>看语法</button>
+      </div>`}
+    </div>`
+  }).join('')
+  document.getElementById('lessonList').innerHTML = html || '<div class="list-end">暂无课程</div>'
+}
+
 // ===== GRAMMAR =====
 let grammarExpanded = -1
 
-async function startGrammar() {
+async function startGrammar(lesson) {
+  lesson = lesson || 2
   if (!sb) return alert('请先在设置中配置 Supabase')
-  const {data} = await sb.from('grammar').select('*').eq('lesson',2).order('id')
-  if (!data || !data.length) return alert('暂无语法内容')
+  const {data} = await sb.from('grammar').select('*').eq('lesson',lesson).order('id')
+  if (!data || !data.length) return alert('这一课暂无语法内容')
+  document.getElementById('grammarTag').textContent = '第' + lesson + '课'
   showView('grammar')
   const html = data.map((r, i) => {
     const exHtml = r.examples.map(ex => `
@@ -1111,7 +1235,7 @@ async function collectSelWord() {
   if (!w || !sb) return
   const btn = document.getElementById('tpAction')
   btn.disabled = true; btn.textContent = '…'
-  const { error } = await sb.from('words').insert({ word: w, pos: 'n.', meaning: mt, level: 3, examples: [] })
+  const { error } = await sb.from('words').insert({ word: w, pos: 'n.', meaning: mt, level: 3, examples: [], source: 'user' })
   btn.textContent = error ? '词库已有此词 ✓' : '已收藏到词库 ✓'
 }
 
