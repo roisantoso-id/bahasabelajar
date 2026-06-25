@@ -502,6 +502,11 @@ let currentUser = null
 let authMode = 'login'  // 'login' | 'signup'
 let profile = { daily_new_words: 10, daily_review_limit: 100, display_name: null }
 
+// 转义 HTML，防止数据库/用户内容里的 <script> 等被当代码执行（存储型 XSS）
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]))
+}
+
 // ===== Qwen 代理（Supabase Edge Function）=====
 const QWEN_FN = SUPABASE_URL + '/functions/v1/qwen'
 let ttsEngine = localStorage.getItem('tts_engine') || 'qwen'   // 'qwen' | 'web'
@@ -740,9 +745,9 @@ function renderStudy() {
   const levelName = w.level===1?'入门':w.level===2?'初级':'中级'
   document.getElementById('studyCard').innerHTML = `
     <span class="word-level">${levelName}</span>
-    <div class="word-main">${w.word}</div>
+    <div class="word-main">${esc(w.word)}</div>
     <button class="speak-btn word-speak" onclick="speakStudyWord()">🔊</button>
-    <div class="word-pos">${w.pos}</div>
+    <div class="word-pos">${esc(w.pos)}</div>
     <div id="answerArea"><div class="think-hint">先在脑海里回想它的意思</div></div>`
   document.getElementById('studyActions').innerHTML = `
     <button class="btn-unknown" onclick="revealUnknown()">✕ 不认识</button>
@@ -767,8 +772,8 @@ function revealUnknown() {
 
 function showAnswer() {
   const w = studyQueue[studyIdx]
-  const exHtml = (w.examples||[]).map(e => `<div class="ex-item"><div class="ex-sentence">${e.id}</div><div class="ex-zh">${e.zh}</div></div>`).join('')
-  document.getElementById('answerArea').innerHTML = `<div class="word-meaning">${w.meaning}</div><div class="word-examples">${exHtml}</div>`
+  const exHtml = (w.examples||[]).map(e => `<div class="ex-item"><div class="ex-sentence">${esc(e.id)}</div><div class="ex-zh">${esc(e.zh)}</div></div>`).join('')
+  document.getElementById('answerArea').innerHTML = `<div class="word-meaning">${esc(w.meaning)}</div><div class="word-examples">${exHtml}</div>`
 }
 
 async function submitResult(result) {
@@ -824,15 +829,15 @@ async function startGrammar() {
   const html = data.map((r, i) => {
     const exHtml = r.examples.map(ex => `
       <div class="rule-example">
-        ${ex.root ? `<div class="rex-word"><span class="rex-id">${ex.id}</span><span class="rex-root">← ${ex.root}</span></div>` : ''}
-        <div class="rex-sentence">${ex.sentence}</div>
-        <div class="rex-zh">${ex.zh}</div>
+        ${ex.root ? `<div class="rex-word"><span class="rex-id">${esc(ex.id)}</span><span class="rex-root">← ${esc(ex.root)}</span></div>` : ''}
+        <div class="rex-sentence">${esc(ex.sentence)}</div>
+        <div class="rex-zh">${esc(ex.zh)}</div>
       </div>`).join('')
     return `<div class="rule-card" onclick="toggleRule(${i})">
-      <div class="rule-head"><span class="rule-pattern">${r.pattern}</span><span class="rule-arrow" id="rarr${i}">›</span></div>
-      <div class="rule-meaning">${r.meaning}</div>
+      <div class="rule-head"><span class="rule-pattern">${esc(r.pattern)}</span><span class="rule-arrow" id="rarr${i}">›</span></div>
+      <div class="rule-meaning">${esc(r.meaning)}</div>
       <div class="rule-detail hidden" id="rdetail${i}">
-        <div class="rule-explain">${r.explain}</div>
+        <div class="rule-explain">${esc(r.explain)}</div>
         ${exHtml}
       </div>
     </div>`
@@ -866,7 +871,7 @@ async function loadWords() {
   if (!sb) return
   let q = sb.from('words').select('*, learning(stage,status)').order('level').order('id')
   if (currentLevel) q = q.eq('level', Number(currentLevel))
-  const search = document.getElementById('searchInput').value.trim()
+  const search = document.getElementById('searchInput').value.trim().replace(/[,()%*:]/g, '')
   if (search) q = q.or(`word.ilike.%${search}%,meaning.ilike.%${search}%`)
   const {data, count} = await q.range(0, 99)
   wordItems = data || []
@@ -878,13 +883,13 @@ function renderWords() {
     const levelName = w.level===1?'入门':w.level===2?'初级':'中级'
     const st = w.learning && w.learning.length ? w.learning[0] : null
     const statusLabel = !st ? '未学' : st.status === 'mastered' ? '已掌握' : '学习中'
-    const exHtml = (w.examples||[]).map(e => `<div class="ex-item"><div class="ex-sentence">${e.id}</div><div class="ex-zh">${e.zh}</div></div>`).join('')
+    const exHtml = (w.examples||[]).map(e => `<div class="ex-item"><div class="ex-sentence">${esc(e.id)}</div><div class="ex-zh">${esc(e.zh)}</div></div>`).join('')
     return `<div class="wl-item" onclick="this.querySelector('.wl-examples').classList.toggle('hidden')">
       <div class="wl-line">
-        <div class="wl-letter">${w.word[0].toUpperCase()}</div>
+        <div class="wl-letter">${esc((w.word[0]||'').toUpperCase())}</div>
         <div class="wl-info">
-          <span class="wl-word">${w.word}</span><span class="wl-pos">${w.pos}</span>
-          <div class="wl-meaning">${w.meaning}</div>
+          <span class="wl-word">${esc(w.word)}</span><span class="wl-pos">${esc(w.pos)}</span>
+          <div class="wl-meaning">${esc(w.meaning)}</div>
         </div>
         <button class="speak-btn wl-speak" onclick="event.stopPropagation(); speakListWord(${i})">🔊</button>
       </div>
@@ -913,10 +918,10 @@ async function loadArticles() {
   document.getElementById('articleList').innerHTML = articleCache.map(a => {
     const lv = a.level===1?'入门':a.level===2?'初级':'中级'
     return `<div class="art-card" onclick="openArticle(${a.id})">
-      <div class="art-card-top"><span class="art-cat">${a.category}</span><span class="art-level">${lv}</span></div>
-      <div class="art-title-id">${a.title}</div>
-      <div class="art-title-zh">${a.title_zh}</div>
-      ${a.summary ? `<div class="art-card-summary">${a.summary}</div>` : ''}
+      <div class="art-card-top"><span class="art-cat">${esc(a.category)}</span><span class="art-level">${lv}</span></div>
+      <div class="art-title-id">${esc(a.title)}</div>
+      <div class="art-title-zh">${esc(a.title_zh)}</div>
+      ${a.summary ? `<div class="art-card-summary">${esc(a.summary)}</div>` : ''}
     </div>`
   }).join('') || '<div class="list-end">暂无文章</div>'
 }
@@ -931,9 +936,9 @@ function openArticle(id) {
   document.getElementById('artSummary').textContent = a.summary || ''
   document.getElementById('artBody').innerHTML = a.sentences.map((s, i) => `
     <div class="sent" data-si="${i}">
-      <div class="sent-id"><button class="speak-btn sent-speak" onclick="speakArticleSentence(${i})">🔊</button><span class="sent-num">${i+1}.</span>${s.id}</div>
-      <div class="sent-zh">${s.zh}</div>
-      ${s.note ? `<div class="sent-note">💡 ${s.note}</div>` : ''}
+      <div class="sent-id"><button class="speak-btn sent-speak" onclick="speakArticleSentence(${i})">🔊</button><span class="sent-num">${i+1}.</span>${esc(s.id)}</div>
+      <div class="sent-zh">${esc(s.zh)}</div>
+      ${s.note ? `<div class="sent-note">💡 ${esc(s.note)}</div>` : ''}
     </div>`).join('')
   const body = document.getElementById('artBody')
   body.classList.remove('trans-hidden')
@@ -956,15 +961,15 @@ async function loadCulture() {
   if (!sb) return
   const {data} = await sb.from('culture').select('*').order('id')
   document.getElementById('cultureList').innerHTML = (data || []).map((c, i) => {
-    const terms = (c.terms||[]).map(t => `<div class="cul-term"><span class="cul-term-w">${t.word}</span><span class="cul-term-m">${t.meaning}</span></div>`).join('')
+    const terms = (c.terms||[]).map(t => `<div class="cul-term"><span class="cul-term-w">${esc(t.word)}</span><span class="cul-term-m">${esc(t.meaning)}</span></div>`).join('')
     return `<div class="cul-card" onclick="toggleCulture(${i})">
       <div class="cul-head">
-        <div class="cul-emoji">${c.emoji}</div>
-        <div class="cul-htext"><div class="cul-title">${c.title}</div><div class="cul-sub">${c.title_id||''}</div></div>
-        <span class="cul-cat">${c.category}</span>
+        <div class="cul-emoji">${esc(c.emoji)}</div>
+        <div class="cul-htext"><div class="cul-title">${esc(c.title)}</div><div class="cul-sub">${esc(c.title_id||'')}</div></div>
+        <span class="cul-cat">${esc(c.category)}</span>
       </div>
       <div class="cul-detail hidden" id="culd${i}">
-        <div class="cul-body">${c.body}</div>
+        <div class="cul-body">${esc(c.body)}</div>
         ${terms ? `<div class="cul-terms">${terms}</div>` : ''}
       </div>
     </div>`
@@ -1012,7 +1017,7 @@ function showTransPop(text, rect) {
   const node = window.getSelection().anchorNode
   const sentEl = node && (node.nodeType === 3 ? node.parentElement : node).closest('#artBody .sent')
   if (sentEl) { transCurrent.inArticle = true; transCurrent.si = Number(sentEl.dataset.si) }
-  document.getElementById('transPopBody').innerHTML = `<div class="tp-loading">查询「${clean}」…</div>`
+  document.getElementById('transPopBody').innerHTML = `<div class="tp-loading">查询「${esc(clean)}」…</div>`
   pop.classList.add('show')
   positionTransPop(rect)
   lookupWord(clean, rect)
@@ -1044,9 +1049,9 @@ async function lookupWord(clean, rect) {
     transCurrent.hit = hit
     const ex = (hit.examples || [])[0]
     renderTransBody(`
-      <div class="tp-word">${hit.word}<button class="speak-btn tp-speak" onclick="speakSel()">🔊</button><span class="tp-pos">${hit.pos}</span><span class="tp-src">词库</span></div>
-      <div class="tp-mean">${hit.meaning}</div>
-      ${ex ? `<div class="tp-ex">${ex.id}<br>${ex.zh}</div>` : ''}
+      <div class="tp-word">${esc(hit.word)}<button class="speak-btn tp-speak" onclick="speakSel()">🔊</button><span class="tp-pos">${esc(hit.pos)}</span><span class="tp-src">词库</span></div>
+      <div class="tp-mean">${esc(hit.meaning)}</div>
+      ${ex ? `<div class="tp-ex">${esc(ex.id)}<br>${esc(ex.zh)}</div>` : ''}
       <button class="tp-btn" id="tpAction" onclick="addSelToLearning()">＋ 加入背诵</button>${noteBtn}`, rect)
   } else {
     let mt = '—', srcLabel = '机器翻译'
@@ -1076,8 +1081,8 @@ async function lookupWord(clean, rect) {
     if (transCurrent?.text !== clean) return
     transCurrent.mt = mt
     renderTransBody(`
-      <div class="tp-word">${clean}<button class="speak-btn tp-speak" onclick="speakSel()">🔊</button><span class="tp-src">${srcLabel}</span></div>
-      <div class="tp-mean">${mt}</div>
+      <div class="tp-word">${esc(clean)}<button class="speak-btn tp-speak" onclick="speakSel()">🔊</button><span class="tp-src">${srcLabel}</span></div>
+      <div class="tp-mean">${esc(mt)}</div>
       <button class="tp-btn" id="tpAction" onclick="collectSelWord()">＋ 收藏到词库</button>${noteBtn}`, rect)
   }
 }
@@ -1255,13 +1260,14 @@ function applyNotesToDOM() {
     const sent = document.querySelector(`#artBody .sent[data-si="${n.sentence_index}"]`)
     if (!sent) return
     const sentId = sent.querySelector('.sent-id')
-    if (n.quote && sentId.innerHTML.indexOf(n.quote) >= 0 && sentId.querySelector('mark') === null) {
-      sentId.innerHTML = sentId.innerHTML.replace(n.quote, `<mark>${n.quote}</mark>`)
+    const q = esc(n.quote || '')
+    if (q && sentId.innerHTML.indexOf(q) >= 0 && sentId.querySelector('mark') === null) {
+      sentId.innerHTML = sentId.innerHTML.replace(q, `<mark>${q}</mark>`)
     }
     if (n.note && n.note.trim()) {
       const box = document.createElement('div')
       box.className = 'note-box'
-      box.innerHTML = `<div class="note-quote">「${n.quote}」</div>${n.note}<span class="note-del" onclick="deleteNote(${n.id})">✕</span>`
+      box.innerHTML = `<div class="note-quote">「${q}」</div>${esc(n.note)}<span class="note-del" onclick="deleteNote(${Number(n.id)})">✕</span>`
       sent.appendChild(box)
     }
   })
