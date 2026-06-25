@@ -182,14 +182,22 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .art-title-zh{font-size:11px;color:var(--muted);margin-top:3px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
 .art-card-summary{display:none}
 .art-sent-count{font-size:10px;color:#b0b5b2;margin-top:6px}
-.art-summary{background:linear-gradient(180deg,#f5f1e7,#efeadc);border-radius:18px;padding:14px 16px;font-size:13px;color:#5a5346;line-height:1.65;margin-bottom:16px;border:1px solid rgba(20,41,37,.05)}
-.sent{padding:14px 0;border-bottom:1px solid #eceae3}
-.sent:last-child{border-bottom:0}
-.sent-id{font-size:15px;font-weight:700;line-height:1.7;color:var(--ink)}
-.sent-num{display:inline-block;min-width:20px;color:var(--green2);font-weight:800;font-family:Georgia,serif}
-.sent-zh{font-size:13px;color:#6a736c;margin-top:6px;padding-left:20px;line-height:1.65}
-.sent-note{font-size:12px;color:#9a8f6a;background:#faf8f0;border-left:3px solid #e3d9b8;border-radius:0 12px 12px 0;padding:8px 11px;margin-top:8px;margin-left:20px;line-height:1.6}
-.trans-hidden .sent-zh,.trans-hidden .sent-note{display:none}
+.art-summary{border-radius:16px;padding:12px 14px;font-size:12px;color:#5a5346;line-height:1.6;margin-bottom:12px;border:1px solid rgba(20,41,37,.06);background:rgba(245,241,231,.6);max-height:2.8em;overflow:hidden;position:relative;cursor:pointer;transition:max-height .3s ease}
+.art-summary.expanded{max-height:500px}
+.art-summary:not(.expanded)::after{content:'展开 ▾';position:absolute;bottom:0;right:0;padding:0 10px 2px 30px;font-size:10px;font-weight:800;color:var(--green);background:linear-gradient(90deg,transparent,#f5f1e7 30%)}
+.art-read-bar{height:3px;background:rgba(23,77,64,.1);border-radius:99px;margin:-4px 0 10px;overflow:hidden}
+.art-read-fill{height:100%;border-radius:inherit;background:linear-gradient(90deg,#1d5a4b,#2b7b62);transition:width .3s;width:0%}
+.sent{padding:10px 12px;margin-bottom:8px;border-radius:14px;background:rgba(255,253,248,.7);border:1px solid rgba(20,41,37,.04);box-shadow:0 4px 12px rgba(23,45,39,.04);cursor:pointer;transition:background .2s}
+.sent:active{background:rgba(240,245,238,.9)}
+.sent-id{font-size:14px;font-weight:700;line-height:1.6;color:var(--ink);display:flex;align-items:flex-start;gap:6px}
+.sent-id-text{flex:1}
+.sent-num{color:var(--green2);font-weight:800;font-family:Georgia,serif;font-size:12px;min-width:18px;flex-shrink:0;margin-top:2px}
+.sent-zh{font-size:12px;color:#6a736c;margin-top:4px;padding-left:24px;line-height:1.55}
+.sent-note{font-size:11px;color:#9a8f6a;background:#faf8f0;border-left:3px solid #e3d9b8;border-radius:0 10px 10px 0;padding:7px 10px;margin-top:6px;margin-left:24px;line-height:1.55;display:none}
+.sent.note-open .sent-note{display:block}
+.sent-note-hint{display:inline-block;margin-left:6px;font-size:10px;color:var(--green);opacity:.6}
+.sent.note-open .sent-note-hint{display:none}
+.trans-hidden .sent-zh,.trans-hidden .sent-note,.trans-hidden .sent-note-hint{display:none}
 /* culture */
 .cul-card{padding:16px;margin-bottom:12px;border-radius:24px;background:rgba(255,253,248,.92);border:1px solid rgba(20,41,37,.05);box-shadow:0 12px 28px rgba(23,45,39,.07)}
 .cul-head{display:flex;align-items:center;gap:12px}
@@ -449,7 +457,10 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 [data-theme="dark"] .search-box{background:rgba(26,32,29,.92);border-color:rgba(200,220,210,.08);box-shadow:0 12px 26px rgba(0,0,0,.15)}
 [data-theme="dark"] .filter-btn{border-color:rgba(200,220,210,.08);color:#7c857f;background:rgba(24,30,27,.7)}
 [data-theme="dark"] .filter-btn.active{border-color:transparent;background:linear-gradient(180deg,#28785a,#1a5840);color:#fff}
-[data-theme="dark"] .wl-item,[data-theme="dark"] .sent{border-bottom-color:#262d29}
+[data-theme="dark"] .wl-item{border-bottom-color:#262d29}
+[data-theme="dark"] .sent{background:rgba(26,32,29,.7);border-color:rgba(200,220,210,.06)}
+[data-theme="dark"] .art-summary{background:rgba(20,24,16,.6);border-color:rgba(200,220,210,.08);color:#8a8468}
+[data-theme="dark"] .art-summary:not(.expanded)::after{background:linear-gradient(90deg,transparent,#141810 30%);color:var(--green)}
 [data-theme="dark"] .wl-letter{background:linear-gradient(180deg,#162a22,#0d1f18);color:var(--green);box-shadow:0 10px 18px rgba(0,0,0,.15)}
 [data-theme="dark"] .wl-topic{background:linear-gradient(180deg,#162a22,#0d1f18);color:var(--green2)}
 [data-theme="dark"] .setting-line{background:#262d29}
@@ -464,7 +475,6 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 [data-theme="dark"] .cal-legend{border-top-color:#262d29}
 [data-theme="dark"] .note-box{background:#1a1810;border-left-color:#5a4a20}
 [data-theme="dark"] .sent-id mark{background:#4a3c14;color:var(--ink)}
-[data-theme="dark"] .art-summary{background:linear-gradient(180deg,#141810,#101210);border-color:rgba(200,220,210,.08);color:#8a8468}
 [data-theme="dark"] .sent-note{background:#1a1810;border-left-color:#4a3c14;color:#a89858}
 [data-theme="dark"] .auth-view{background:
   radial-gradient(circle at 16% 12%, rgba(22,42,34,.65), transparent 20%),
@@ -636,11 +646,12 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 <div id="v-article" class="view">
   <div class="grammar-head">
     <button class="back" onclick="showView('articles', document.querySelectorAll('.tab')[3])">‹</button>
-    <h1 id="artTitle" style="font-size:18px"></h1>
+    <h1 id="artTitle" style="font-size:16px"></h1>
     <button id="transToggle" class="grammar-lesson-tag" onclick="toggleTrans()">隐藏中文</button>
   </div>
-  <div id="artMeta" class="grammar-subtitle"></div>
-  <div id="artSummary" class="art-summary"></div>
+  <div class="art-read-bar"><div class="art-read-fill" id="artReadBar"></div></div>
+  <div id="artMeta" class="grammar-subtitle" style="font-size:11px"></div>
+  <div id="artSummary" class="art-summary" onclick="this.classList.toggle('expanded')"></div>
   <div id="artBody"></div>
 </div>
 
@@ -1508,13 +1519,16 @@ function openArticle(id) {
   artCurrent = a
   const lv = a.level===1?'入门':a.level===2?'初级':'中级'
   document.getElementById('artTitle').textContent = a.title_zh
-  document.getElementById('artMeta').textContent = `${a.title} · ${a.category} · ${lv} · 共 ${a.sentences.length} 句`
-  document.getElementById('artSummary').textContent = a.summary || ''
+  document.getElementById('artMeta').textContent = `${a.title} · ${a.category} · ${lv} · ${a.sentences.length} 句`
+  const sum = document.getElementById('artSummary')
+  sum.textContent = a.summary || ''
+  sum.classList.remove('expanded')
+  document.getElementById('artReadBar').style.width = '0%'
   document.getElementById('artBody').innerHTML = a.sentences.map((s, i) => `
-    <div class="sent" data-si="${i}">
-      <div class="sent-id"><button class="speak-btn sent-speak" onclick="speakArticleSentence(${i})">🔊</button><span class="sent-num">${i+1}.</span>${esc(s.id)}</div>
+    <div class="sent${s.note?' has-note':''}" data-si="${i}" onclick="toggleSentNote(this)">
+      <div class="sent-id"><button class="speak-btn sent-speak" onclick="event.stopPropagation();speakArticleSentence(${i})"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg></button><span class="sent-num">${i+1}</span><span class="sent-id-text">${esc(s.id)}</span>${s.note?'<span class="sent-note-hint">💡</span>':''}</div>
       <div class="sent-zh">${esc(s.zh)}</div>
-      ${s.note ? `<div class="sent-note">💡 ${esc(s.note)}</div>` : ''}
+      ${s.note ? `<div class="sent-note">${esc(s.note)}</div>` : ''}
     </div>`).join('')
   const body = document.getElementById('artBody')
   body.classList.remove('trans-hidden')
@@ -1522,6 +1536,22 @@ function openArticle(id) {
   showView('article')
   window.scrollTo(0, 0)
   loadArticleNotes(a.id)
+  initArticleScroll(a.sentences.length)
+}
+function toggleSentNote(el) { el.classList.toggle('note-open') }
+function initArticleScroll(total) {
+  const handler = () => {
+    const sents = document.querySelectorAll('#artBody .sent')
+    const vh = window.innerHeight
+    let visible = 0
+    sents.forEach(s => { if (s.getBoundingClientRect().top < vh * 0.8) visible++ })
+    const pct = Math.min(100, Math.round(visible / total * 100))
+    const bar = document.getElementById('artReadBar')
+    if (bar) bar.style.width = pct + '%'
+  }
+  window._artScrollHandler && window.removeEventListener('scroll', window._artScrollHandler)
+  window._artScrollHandler = handler
+  window.addEventListener('scroll', handler, {passive:true})
 }
 
 function toggleTrans() {
