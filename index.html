@@ -350,7 +350,52 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 .listen-play:active{transform:scale(.92)}
 .listen-hint{text-align:center;color:var(--muted);font-size:12px;margin-top:18px}
 .hidden{display:none!important}
+/* ===== 暗黑模式 ===== */
+[data-theme="dark"]{--ink:#dfe2e0;--muted:#6e7772;--green:#3a9b74;--green2:#52b78a;--mint:#162a22;--cream:#101412;--paper:#1a201d;--coral:#e8694e;--purple:#a082c9;--purplebg:#281f3d;--yellow:#c9a033}
+[data-theme="dark"] .tabs{border-top-color:#262d29}
+[data-theme="dark"] .auth-input{border-color:#2e3834}
+[data-theme="dark"] .produce-input{border-color:#2e3834;background:var(--paper)}
+[data-theme="dark"] .note-sheet textarea{border-color:#2e3834}
+[data-theme="dark"] .wl-item,[data-theme="dark"] .sent{border-bottom-color:#262d29}
+[data-theme="dark"] .setting-line{background:#262d29}
+[data-theme="dark"] .rule-example{background:#141a17}
+[data-theme="dark"] .cal-day.active{background:#1a2822}
+[data-theme="dark"] .stepper{border-color:#2e3834}
+[data-theme="dark"] .stepper button{background:#1a2822;color:var(--green2)}
+[data-theme="dark"] .btn-unknown{border-color:#3e3424;color:#c9a033;background:var(--paper)}
+[data-theme="dark"] .btn-easy{background:#262d29;color:var(--ink)}
+[data-theme="dark"] .filter-btn{border-color:#2e3834;color:#7c857f;background:rgba(24,30,27,.7)}
+[data-theme="dark"] .streak-badge{background:var(--paper)}
+[data-theme="dark"] .rule-detail,[data-theme="dark"] .cul-detail{border-top-color:#2e3834}
+[data-theme="dark"] .hero{background:linear-gradient(135deg,#0d1f18,#132a20,#172e22)}
+[data-theme="dark"] .hero::after{background:radial-gradient(circle,rgba(201,160,51,.12),transparent 68%)}
+[data-theme="dark"] .think-hint::before,[data-theme="dark"] .think-hint::after{background:#2e3834}
+[data-theme="dark"] .logout-btn{border-color:#4a2a2a;background:var(--paper)}
+[data-theme="dark"] .cal-legend{border-top-color:#262d29}
+[data-theme="dark"] .note-box{background:#1a1810;border-left-color:#5a4a20}
+[data-theme="dark"] .sent-id mark{background:#4a3c14;color:var(--ink)}
+[data-theme="dark"] .art-summary{background:#141810;color:#8a8468}
+[data-theme="dark"] .sent-note{background:#1a1810;border-left-color:#4a3c14;color:#a89858}
+[data-theme="dark"] .btn-know,[data-theme="dark"] .btn-next,[data-theme="dark"] .auth-btn,[data-theme="dark"] .lb-learn,[data-theme="dark"] .ns-save{background:linear-gradient(180deg,#28785a,#1a5840);box-shadow:0 8px 18px -6px rgba(20,63,53,.25)}
+[data-theme="dark"] .streak-card,[data-theme="dark"] .lesson-no{background:linear-gradient(140deg,#28785a,#1a5840)}
+[data-theme="dark"] .task,[data-theme="dark"] .stats-row,[data-theme="dark"] .lesson-card,[data-theme="dark"] .art-card,[data-theme="dark"] .cul-card,[data-theme="dark"] .word-card,[data-theme="dark"] .profile-card,[data-theme="dark"] .profile-stats,[data-theme="dark"] .setting-card,[data-theme="dark"] .cal-card,[data-theme="dark"] .week-chart{box-shadow:0 1px 2px rgba(0,0,0,.15),0 6px 18px -6px rgba(0,0,0,.25)}
+[data-theme="dark"] .note-sheet,[data-theme="dark"] .admin-sheet{background:var(--paper)}
+[data-theme="dark"] .admin-user{background:var(--cream)}
+[data-theme="dark"] .admin-badge.ban{background:#3d2020;color:#e8694e}
+[data-theme="dark"] .mode-switch{background:#1a201d}
+[data-theme="dark"] .mode-switch button.active{background:#262d29}
+[data-theme="dark"] .cal-quote{color:#4a544e}
+/* ===== 本周趋势 ===== */
+.week-chart{padding:16px 14px;border-radius:var(--radius);background:var(--paper);box-shadow:0 1px 2px rgba(25,55,46,.04),0 10px 26px -8px rgba(25,55,46,.10)}
+.wc-bars{display:flex;align-items:flex-end;gap:8px;height:72px;margin-bottom:8px}
+.wc-bar{flex:1;border-radius:6px 6px 0 0;background:var(--mint);min-height:4px;position:relative;transition:height .4s var(--ease)}
+.wc-bar.has{background:linear-gradient(180deg,var(--green2),var(--green))}
+.wc-val{position:absolute;top:-16px;left:0;right:0;text-align:center;font-size:10px;font-weight:700;color:var(--muted)}
+.wc-days{display:flex;gap:8px}
+.wc-day{flex:1;text-align:center;font-size:11px;color:var(--muted);font-weight:600}
+.wc-day.today{color:var(--green);font-weight:800}
 </style>
+<script>(function(){var p=localStorage.getItem('dark_mode')||'auto';if(p==='on'||(p==='auto'&&matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.setAttribute('data-theme','dark')})()</script>
 </head>
 <body>
 
@@ -428,6 +473,8 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
     <div class="stat"><div class="stat-val" id="totalStat">0</div><div class="stat-lbl">完整词库</div></div>
     <div class="stat"><div class="stat-val" id="todayDone">—</div><div class="stat-lbl">今日打卡</div></div>
   </div>
+  <div class="section-title" style="margin-top:24px">本周趋势</div>
+  <div class="week-chart" id="weekChart"></div>
 </div>
 
 <!-- ===== STUDY ===== -->
@@ -609,6 +656,15 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
         <div class="setting-copy"><div>用户管理</div><span>查看用户 · 停用 / 恢复登录</span></div>
         <span class="task-arrow" style="margin-left:auto;color:#ccc;font-size:22px">›</span>
       </div>
+    </div>
+  </div>
+
+  <div class="group-title">外观</div>
+  <div class="setting-card">
+    <div class="setting-row">
+      <div class="setting-icon green">◐</div>
+      <div class="setting-copy"><div>暗黑模式</div><span id="darkDesc">跟随系统</span></div>
+      <button class="tts-toggle" id="darkToggle" onclick="cycleDarkMode()">自动</button>
     </div>
   </div>
 
@@ -842,6 +898,7 @@ async function loadHome() {
   const total = goal + (dueCount||0) + checkin.reviewed
   const pct = checkin.completed ? 100 : Math.min(100, Math.round(done / Math.max(1,total)*100))
   document.getElementById('homeProgress').style.width = pct + '%'
+  loadWeekChart()
 }
 
 async function getStreak(t) {
@@ -1607,6 +1664,7 @@ function loadProfile() {
   document.getElementById('planReview').textContent = profile.daily_review_limit || 100
   document.getElementById('adminGroup').classList.toggle('hidden', !profile.is_admin)
   syncTTSToggle()
+  syncDarkToggle()
   loadProfileStats()
 }
 async function loadProfileStats() {
@@ -1750,6 +1808,51 @@ async function deleteNote(id) {
   if (!sb) return
   try { await sb.from('article_notes').delete().eq('id', id) } catch (e) {}
   loadArticleNotes(artCurrent.id)
+}
+
+// ===== 暗黑模式 =====
+let darkPref = localStorage.getItem('dark_mode') || 'auto'
+function applyDarkMode() {
+  const dark = darkPref === 'on' || (darkPref === 'auto' && matchMedia('(prefers-color-scheme:dark)').matches)
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light')
+}
+function cycleDarkMode() {
+  darkPref = { auto: 'on', on: 'off', off: 'auto' }[darkPref] || 'auto'
+  localStorage.setItem('dark_mode', darkPref)
+  applyDarkMode()
+  syncDarkToggle()
+}
+function syncDarkToggle() {
+  const btn = document.getElementById('darkToggle'), desc = document.getElementById('darkDesc')
+  if (!btn) return
+  btn.textContent = { auto: '自动', on: '开', off: '关' }[darkPref] || '自动'
+  desc.textContent = { auto: '跟随系统设置', on: '始终使用暗黑模式', off: '始终使用浅色模式' }[darkPref] || '跟随系统设置'
+}
+matchMedia('(prefers-color-scheme:dark)').addEventListener('change', () => { if (darkPref === 'auto') applyDarkMode() })
+
+// ===== 本周趋势 =====
+async function loadWeekChart() {
+  if (!sb) return
+  const t = todayStr()
+  const dates = []
+  for (let i = 6; i >= 0; i--) dates.push(addDays(t, -i))
+  try {
+    const { data } = await sb.from('checkins').select('date,new_learned,reviewed').gte('date', dates[0]).lte('date', dates[6])
+    const map = {}
+    ;(data || []).forEach(r => { map[r.date] = (r.new_learned || 0) + (r.reviewed || 0) })
+    const max = Math.max(1, ...dates.map(d => map[d] || 0))
+    const dayNames = ['日', '一', '二', '三', '四', '五', '六']
+    const bars = dates.map(d => {
+      const v = map[d] || 0
+      const pct = v ? Math.max(8, Math.round(v / max * 100)) : 5
+      return `<div class="wc-bar${v ? ' has' : ''}" style="height:${pct}%">${v ? `<div class="wc-val">${v}</div>` : ''}</div>`
+    }).join('')
+    const days = dates.map(d => {
+      const isToday = d === t
+      return `<div class="wc-day${isToday ? ' today' : ''}">${dayNames[new Date(d + 'T00:00').getDay()]}</div>`
+    }).join('')
+    document.getElementById('weekChart').innerHTML = `<div class="wc-bars">${bars}</div><div class="wc-days">${days}</div>`
+  } catch (e) {}
 }
 
 // ===== INIT =====
