@@ -143,6 +143,8 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 /* words list */
 .words-head{margin-bottom:14px}
 .words-head h1{font-size:22px;font-weight:900;letter-spacing:-.5px}
+.wb-sub{font-size:12px;color:var(--muted);font-weight:700;margin-top:4px}
+.wb-sub b{color:var(--green2);font-weight:900}
 .search-box{display:flex;align-items:center;padding:12px 14px;border-radius:18px;background:rgba(255,253,248,.92);border:1px solid rgba(20,41,37,.05);box-shadow:0 12px 26px rgba(23,45,39,.07);margin-bottom:12px}
 .search-box input{flex:1;border:0;outline:0;font-size:14px;background:transparent;font-weight:600}
 .filter-row{display:flex;gap:8px;margin-bottom:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px}
@@ -158,7 +160,15 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .wl-pos{margin-left:6px;color:#a0a59f;font-size:11px;font-style:italic}
 .wl-topic{margin-left:6px;font-size:9px;font-weight:700;padding:1px 7px;border-radius:99px;background:linear-gradient(180deg,#e8f2e8,#d7e7d7);color:var(--green2);vertical-align:middle}
 .wl-meaning{margin-top:3px;font-size:12px;color:#6d756f;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.wl-examples{margin:10px 0 0 48px;padding-top:10px;border-top:1px dashed #ddd}
+.wl-status{flex:none;margin:0 4px 0 6px;font-size:9px;font-weight:800;padding:3px 8px;border-radius:99px;white-space:nowrap}
+.wl-status.s-new{background:#edece6;color:#9aa39d}
+.wl-status.s-learning{background:linear-gradient(180deg,#fdebcb,#f9d99f);color:#a3701a}
+.wl-status.s-mastered{background:linear-gradient(180deg,#d9efd9,#c3e6c3);color:#2d7a4f}
+.wl-chevron{flex:none;margin-left:4px;color:#bcc2bc;transition:transform .22s var(--ease);display:flex}
+.wl-chevron svg{width:16px;height:16px}
+.wl-item.open .wl-chevron{transform:rotate(180deg)}
+.wl-examples{margin:10px 0 0 48px;padding-top:10px;border-top:1px dashed #ddd;display:none}
+.wl-item.open .wl-examples{display:block;animation:fadeUp .26s var(--ease)}
 .list-end{text-align:center;padding:20px;font-size:11px;color:var(--muted)}
 
 /* articles */
@@ -240,10 +250,11 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 /* 发音按钮 */
 .speak-btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:50%;background:linear-gradient(180deg,#e8f1e8,#d7e7d7);color:var(--green);cursor:pointer;flex:none;box-shadow:0 10px 18px rgba(23,45,39,.06)}
 .speak-btn:active{transform:scale(.9)}
-.word-speak{width:42px;height:42px;font-size:19px;margin:10px auto 0;display:flex}
-.sent-speak{width:24px;height:24px;font-size:12px;margin-right:7px;vertical-align:middle}
-.wl-speak{width:32px;height:32px;font-size:15px;margin-left:8px}
-#transPop .tp-speak{width:24px;height:24px;font-size:12px;background:rgba(255,255,255,.18);color:#fff}
+.speak-btn svg{width:54%;height:54%;display:block}
+.word-speak{width:44px;height:44px;margin:14px auto 0;display:flex}
+.sent-speak{width:24px;height:24px;margin-right:7px;vertical-align:middle}
+.wl-speak{width:32px;height:32px;margin-left:8px}
+#transPop .tp-speak{width:24px;height:24px;background:rgba(255,255,255,.18);color:#fff}
 /* 划词翻译 popup */
 #transPop{position:fixed;z-index:200;max-width:280px;background:linear-gradient(180deg,#1f2d29,#17221f);color:#fff;border-radius:18px;padding:12px 14px;box-shadow:0 18px 44px rgba(0,0,0,.28);font-size:14px;line-height:1.5;opacity:0;transform:translateY(6px) scale(.96);pointer-events:none;transition:opacity .15s,transform .15s;border:1px solid rgba(255,255,255,.08)}
 #transPop.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
@@ -306,6 +317,12 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .profile-avatar{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:18px;color:#fff;background:linear-gradient(180deg,#1f5d4d,#174d40);font-family:Georgia,serif;font-size:24px;font-weight:800;flex:none;text-transform:uppercase;box-shadow:0 12px 22px rgba(23,45,39,.15)}
 .profile-copy{flex:1;margin-left:14px;font-size:15px;font-weight:800;min-width:0}
 .profile-copy span{display:block;margin-top:4px;color:#8a918c;font-size:12px;font-weight:400;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.prof-name-line{display:flex;align-items:center;gap:6px;min-width:0}
+.prof-name-line>span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.name-edit{flex:none;width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:rgba(20,41,37,.06);color:var(--green)}
+.name-edit:active{transform:scale(.9)}
+.name-edit svg{width:14px;height:14px}
+.name-input{font:inherit;font-size:15px;font-weight:800;border:0;border-bottom:2px solid var(--green);background:transparent;color:inherit;outline:0;width:100%;max-width:170px;padding:2px 0}
 .profile-mark{padding:5px 10px;border-radius:999px;color:var(--green);background:linear-gradient(180deg,#f8db85,#f4c95d);font-size:10px;font-weight:900;flex:none;box-shadow:0 10px 18px rgba(244,201,93,.28)}
 .profile-stats{display:flex;justify-content:space-around;align-items:center;margin-top:14px;padding:16px;border-radius:28px;background:rgba(255,253,248,.92);border:1px solid rgba(20,41,37,.05);box-shadow:0 12px 28px rgba(23,45,39,.07)}
 .ps-val{font-size:20px;font-weight:900;text-align:center;letter-spacing:-.2px}
@@ -425,6 +442,7 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 .answer-word{text-align:center;font-family:Georgia,serif;font-size:30px;font-weight:900;margin:6px 0 2px;letter-spacing:-.6px}
 .answer-word.bad{color:#b8503a}.answer-word.ok{color:#1f7a55}
 .listen-play{display:flex;align-items:center;justify-content:center;width:92px;height:92px;margin:46px auto 0;border-radius:50%;background:linear-gradient(180deg,#e8f2e8,#d7e7d7);color:var(--green);font-size:38px;box-shadow:0 14px 28px rgba(23,45,39,.10)}
+.listen-play svg{width:40px;height:40px}
 .listen-play:active{transform:scale(.92)}
 .listen-hint{text-align:center;color:var(--muted);font-size:12px;margin-top:18px}
 .hidden{display:none!important}
@@ -488,6 +506,10 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 [data-theme="dark"] .art-summary:not(.expanded)::after{background:linear-gradient(90deg,transparent,#141810 30%);color:var(--green)}
 [data-theme="dark"] .wl-letter{background:linear-gradient(180deg,#162a22,#0d1f18);color:var(--green);box-shadow:0 10px 18px rgba(0,0,0,.15)}
 [data-theme="dark"] .wl-topic{background:linear-gradient(180deg,#162a22,#0d1f18);color:var(--green2)}
+[data-theme="dark"] .wl-status.s-new{background:#262d29;color:#7c857f}
+[data-theme="dark"] .wl-status.s-learning{background:linear-gradient(180deg,#3a2e16,#2a2010);color:#d0a23a}
+[data-theme="dark"] .wl-status.s-mastered{background:linear-gradient(180deg,#16301f,#0d2014);color:#5fae6f}
+[data-theme="dark"] .name-edit{background:rgba(200,220,210,.1)}
 [data-theme="dark"] .setting-line{background:#262d29}
 [data-theme="dark"] .rule-example{background:linear-gradient(180deg,#141a17,#101412)}
 [data-theme="dark"] .rule-detail,[data-theme="dark"] .cul-detail{border-top-color:#2e3834}
@@ -540,6 +562,45 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 [data-theme="dark"] .cul-cat{background:linear-gradient(180deg,#281f3d,#1e1630)}
 [data-theme="dark"] .wc-bar{background:linear-gradient(180deg,#162a22,#0d1f18)}
 [data-theme="dark"] .lesson-card.locked .lesson-no{background:linear-gradient(180deg,#2a2e2c,#222624)}
+
+/* ===== 学习小结（答错词）===== */
+.session-wrong{margin-top:18px;padding:14px 16px;border-radius:18px;background:rgba(241,116,85,.07);border:1px solid rgba(241,116,85,.18)}
+.session-wrong-title{font-size:10px;font-weight:900;color:var(--coral);letter-spacing:.6px;text-transform:uppercase;margin-bottom:10px}
+.session-wrong-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(241,116,85,.08)}
+.session-wrong-item:last-child{border-bottom:none}
+.swi-word{font-size:15px;font-weight:800;color:var(--ink)}
+.swi-meaning{font-size:12px;color:var(--muted);margin-top:1px}
+
+/* ===== 词库星标 ===== */
+.wl-star{width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:9px;color:#d5d0c5;font-size:17px;flex-shrink:0;transition:color .15s,transform .15s;background:none;border:none}
+.wl-star.starred{color:var(--yellow);transform:scale(1.15)}
+.filter-btn.starred-btn{display:flex;align-items:center;gap:4px}
+
+/* ===== 学习日记 ===== */
+.journal-input-wrap{padding:12px 14px 14px}
+.journal-textarea{width:100%;min-height:70px;border:1.5px solid rgba(20,41,37,.1);border-radius:14px;padding:10px 12px;font:inherit;font-size:14px;background:rgba(255,255,255,.8);resize:none;color:var(--ink);outline:none;transition:border-color .2s}
+.journal-textarea:focus{border-color:var(--green2)}
+.journal-footer{display:flex;justify-content:flex-end;margin-top:8px}
+.journal-save-btn{padding:9px 20px;border-radius:12px;background:linear-gradient(180deg,#2d745f,#1f5140);color:#fff;font-weight:800;font-size:13px;letter-spacing:.2px}
+.journal-list{margin-top:4px}
+.journal-entry{padding:11px 14px;border-radius:14px;background:rgba(255,253,248,.92);border:1px solid rgba(20,41,37,.06);box-shadow:0 3px 10px rgba(23,45,39,.04);margin-bottom:8px;position:relative}
+.journal-ts{font-size:10px;color:var(--muted);font-weight:700;margin-bottom:5px;letter-spacing:.3px}
+.journal-text{font-size:14px;line-height:1.6;white-space:pre-wrap;color:var(--ink);padding-right:24px}
+.journal-del{position:absolute;top:10px;right:10px;font-size:13px;color:#ccc;padding:2px 4px;border-radius:6px}
+.journal-empty{text-align:center;color:var(--muted);font-size:13px;padding:20px 0}
+
+/* ===== 笔记全览 ===== */
+.all-notes-item{padding:11px 14px;border-radius:14px;background:rgba(255,253,248,.9);border:1px solid rgba(20,41,37,.06);box-shadow:0 3px 10px rgba(23,45,39,.04);margin-bottom:8px;cursor:pointer;transition:opacity .15s}
+.all-notes-item:active{opacity:.7}
+.ani-art-title{font-size:10px;font-weight:900;color:var(--green2);letter-spacing:.3px;margin-bottom:4px}
+.ani-quote{font-size:12px;color:var(--muted);font-style:italic;margin-bottom:3px}
+.ani-note{font-size:14px;line-height:1.5;color:var(--ink)}
+.ani-empty{text-align:center;color:var(--muted);font-size:13px;padding:20px 0}
+
+/* dark */
+[data-theme="dark"] .journal-textarea{background:rgba(22,40,32,.8);border-color:rgba(200,220,210,.1);color:#d8e8e0}
+[data-theme="dark"] .journal-entry,[data-theme="dark"] .all-notes-item{background:rgba(18,28,23,.7);border-color:rgba(200,220,210,.07)}
+[data-theme="dark"] .session-wrong{background:rgba(241,116,85,.06);border-color:rgba(241,116,85,.14)}
 </style>
 <script>(function(){var p=localStorage.getItem('dark_mode')||'auto';if(p==='on'||(p==='auto'&&matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.setAttribute('data-theme','dark')})()</script>
 </head>
@@ -647,7 +708,7 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 
 <!-- ===== WORDS ===== -->
 <div id="v-words" class="view">
-  <div class="words-head"><h1>词库</h1></div>
+  <div class="words-head"><h1>词库</h1><div class="wb-sub" id="wbStat">加载中…</div></div>
   <div class="search-box">🔍 <input id="searchInput" placeholder="搜索单词或释义" oninput="searchWords()"></div>
   <div id="topicFilter" class="filter-row" style="margin-bottom:8px"></div>
   <div id="levelFilter" class="filter-row">
@@ -655,6 +716,7 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
     <button class="filter-btn" data-level="1" onclick="filterLevel(this)">入门</button>
     <button class="filter-btn" data-level="2" onclick="filterLevel(this)">初级</button>
     <button class="filter-btn" data-level="3" onclick="filterLevel(this)">中级</button>
+    <button class="filter-btn starred-btn" id="starredFilterBtn" onclick="filterStarred(this)">★ 收藏</button>
   </div>
   <div id="wordList" class="word-list"></div>
   <div class="list-end" id="listEnd"></div>
@@ -748,7 +810,7 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
   <div class="profile-card">
     <div class="profile-avatar" id="profAvatar">B</div>
     <div class="profile-copy">
-      <div id="profName">Bahasa Learner</div>
+      <div class="prof-name-line"><span id="profName">Bahasa Learner</span><button class="name-edit" onclick="editName()" aria-label="改名"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button></div>
       <span id="profEmail">正在建立印尼语思维</span>
     </div>
     <div class="profile-mark">PRO</div>
@@ -797,6 +859,22 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
     </div>
   </div>
 
+  <!-- 学习日记 -->
+  <div class="group-title">学习日记</div>
+  <div class="setting-card">
+    <div class="journal-input-wrap">
+      <textarea id="journalInput" class="journal-textarea" placeholder="记录今天的收获、疑惑、记忆点…&#10;Bahasa Indonesia 的感悟随时写在这里"></textarea>
+      <div class="journal-footer">
+        <button class="journal-save-btn" onclick="saveJournalEntry()">保存</button>
+      </div>
+    </div>
+    <div class="journal-list" id="journalList"></div>
+  </div>
+
+  <!-- 文章笔记全览 -->
+  <div class="group-title" id="allNotesTitle">文章笔记</div>
+  <div id="allNotesList"></div>
+
   <button class="logout-btn" onclick="doLogout()">退出登录</button>
   <div class="app-version">BahasaBelajar · H5 版</div>
 </div>
@@ -842,6 +920,8 @@ let profile = { daily_new_words: 10, daily_review_limit: 100, display_name: null
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]))
 }
+// 统一的发音 SVG 图标（替代 🔊 emoji）
+const SPEAK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>'
 
 // ===== Qwen 代理（Supabase Edge Function）=====
 const QWEN_FN = SUPABASE_URL + '/functions/v1/qwen'
@@ -1168,7 +1248,27 @@ function renderStudy() {
   syncModeSwitch()
 
   if (studyIdx >= studyQueue.length) {
-    document.getElementById('studyCard').innerHTML = `<div class="study-done"><div class="mark">◆</div><h2>做得漂亮</h2><p>完成 ${total} 个单词</p><button onclick="closeStudy()">完成训练</button></div>`
+    const wrongWords = studyQueue.filter(w => !w.retry && w.wrongTimes > 0)
+    const wrongHtml = wrongWords.length ? `
+      <div class="session-wrong">
+        <div class="session-wrong-title">需要加强 · ${wrongWords.length} 词</div>
+        ${wrongWords.map(w => `
+          <div class="session-wrong-item">
+            <div style="flex:1">
+              <div class="swi-word">${esc(w.word)}</div>
+              <div class="swi-meaning">${esc(w.meaning)}</div>
+            </div>
+            <button class="speak-btn" onclick="speak('${esc(w.word).replace(/'/g,'&#39;')}')" style="flex-shrink:0">${SPEAK_SVG}</button>
+          </div>`).join('')}
+      </div>` : ''
+    document.getElementById('studyCard').innerHTML = `
+      <div class="study-done">
+        <div class="mark">◆</div>
+        <h2>做得漂亮</h2>
+        <p>完成 ${total} 个${wrongWords.length ? ` · 错 ${wrongWords.length} 词` : ' · 全部答对！'}</p>
+        <button onclick="closeStudy()">完成训练</button>
+      </div>
+      ${wrongHtml}`
     document.getElementById('studyActions').innerHTML = ''
     return
   }
@@ -1178,9 +1278,9 @@ function renderStudy() {
   if (practiceMode === 'listen') return renderListen(w, levelName)
   // 认：看印尼语→回忆中文（默认）
   document.getElementById('studyCard').innerHTML = `
-    <span class="word-level">${levelName}</span>
+    <span class="word-level">${levelName}${w.topic ? ` · ${esc(w.topic)}` : ''}</span>
     <div class="word-main">${esc(w.word)}</div>
-    <button class="speak-btn word-speak" onclick="speakStudyWord()">🔊</button>
+    <button class="speak-btn word-speak" onclick="speakStudyWord()">${SPEAK_SVG}</button>
     <div class="word-pos">${esc(w.pos)}</div>
     <div id="answerArea"><div class="think-hint">先在脑海里回想它的意思</div></div>`
   document.getElementById('studyActions').innerHTML = `
@@ -1233,7 +1333,7 @@ function produceReveal() {
 function renderListen(w, levelName) {
   document.getElementById('studyCard').innerHTML = `
     <span class="word-level">${levelName}</span>
-    <button class="listen-play" onclick="speakStudyWord()">🔊</button>
+    <button class="listen-play" onclick="speakStudyWord()">${SPEAK_SVG}</button>
     <div class="listen-hint">点喇叭再听一次 · 回想它的意思和拼写</div>
     <div id="answerArea"></div>`
   document.getElementById('studyActions').innerHTML = `
@@ -1443,8 +1543,16 @@ function filterTopic(btn) {
   loadWords()
 }
 
+let showStarred = false
 async function loadWords() {
   if (!sb) return
+  if (showStarred) {
+    const ids = [...getStarred()]
+    if (!ids.length) { wordItems = []; renderWords(); wbStatLine(); return }
+    const {data} = await sb.from('words').select('*, learning(stage,status)').in('id', ids)
+    wordItems = data || []
+    renderWords(); wbStatLine(); return
+  }
   // 不在服务端 order by topic：库可能还没 topic 列，会让整个查询报错。改为客户端按领域分组排序。
   let q = sb.from('words').select('*, learning(stage,status)').order('level').order('id')
   if (currentLevel) q = q.eq('level', Number(currentLevel))
@@ -1461,24 +1569,47 @@ async function loadWords() {
     })
   }
   renderWords()
+  wbStatLine()
+}
+// 词库头部统计：库总量 + 已学（缓存，避免每次过滤都查）
+let wbTotals = null
+async function wbStatLine() {
+  const el = document.getElementById('wbStat')
+  if (!el) return
+  if (!wbTotals) {
+    try {
+      const { count: total } = await sb.from('words').select('*', { count: 'exact', head: true })
+      const { count: learned } = await sb.from('learning').select('*', { count: 'exact', head: true })
+      const { count: mastered } = await sb.from('learning').select('*', { count: 'exact', head: true }).eq('status', 'mastered')
+      wbTotals = { total: total || 0, learned: learned || 0, mastered: mastered || 0 }
+    } catch (e) { wbTotals = { total: 0, learned: 0, mastered: 0 } }
+  }
+  el.innerHTML = `共 <b>${wbTotals.total}</b> 词 · 已学 <b>${wbTotals.learned}</b> · 掌握 <b>${wbTotals.mastered}</b>`
 }
 
 function renderWords() {
+  const starred = getStarred()
   const html = wordItems.map((w,i) => {
-    const levelName = w.level===1?'入门':w.level===2?'初级':'中级'
     const st = w.learning && w.learning.length ? w.learning[0] : null
     const statusLabel = !st ? '未学' : st.status === 'mastered' ? '已掌握' : '学习中'
-    const exHtml = (w.examples||[]).map(e => `<div class="ex-item"><div class="ex-sentence">${esc(e.id)}</div><div class="ex-zh">${esc(e.zh)}</div></div>`).join('')
-    return `<div class="wl-item" onclick="this.querySelector('.wl-examples').classList.toggle('hidden')">
+    const stCls = !st ? 's-new' : st.status === 'mastered' ? 's-mastered' : 's-learning'
+    const exs = w.examples || []
+    const exHtml = exs.map(e => `<div class="ex-item"><div class="ex-sentence">${esc(e.id)}</div><div class="ex-zh">${esc(e.zh)}</div></div>`).join('')
+    const chevron = exs.length ? `<span class="wl-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>` : ''
+    const isStarred = starred.has(w.id)
+    return `<div class="wl-item" onclick="this.classList.toggle('open')">
       <div class="wl-line">
         <div class="wl-letter">${esc((w.word[0]||'').toUpperCase())}</div>
         <div class="wl-info">
           <span class="wl-word">${esc(w.word)}</span><span class="wl-pos">${esc(w.pos)}</span>${w.topic ? `<span class="wl-topic">${esc(w.topic)}</span>` : ''}
           <div class="wl-meaning">${esc(w.meaning)}</div>
         </div>
-        <button class="speak-btn wl-speak" onclick="event.stopPropagation(); speakListWord(${i})">🔊</button>
+        <span class="wl-status ${stCls}">${statusLabel}</span>
+        <button class="speak-btn wl-speak" onclick="event.stopPropagation(); speakListWord(${i})">${SPEAK_SVG}</button>
+        <button class="wl-star${isStarred?' starred':''}" onclick="event.stopPropagation();toggleStar(${w.id},this)" title="${isStarred?'取消收藏':'收藏'}">★</button>
+        ${chevron}
       </div>
-      <div class="wl-examples hidden">${exHtml}</div>
+      <div class="wl-examples">${exHtml}</div>
     </div>`
   }).join('')
   document.getElementById('wordList').innerHTML = html
@@ -1487,9 +1618,17 @@ function renderWords() {
 
 function searchWords() { loadWords() }
 function filterLevel(el) {
+  showStarred = false
   document.querySelectorAll('#levelFilter .filter-btn').forEach(b => b.classList.remove('active'))
   el.classList.add('active')
   currentLevel = el.dataset.level
+  loadWords()
+}
+function filterStarred(el) {
+  showStarred = !showStarred
+  document.querySelectorAll('#levelFilter .filter-btn').forEach(b => b.classList.remove('active'))
+  if (showStarred) { el.classList.add('active'); currentLevel = '' }
+  else { document.querySelector('#levelFilter .filter-btn[data-level=""]').classList.add('active') }
   loadWords()
 }
 
@@ -1734,7 +1873,7 @@ async function lookupWord(clean, rect) {
     transCurrent.hit = hit
     const ex = (hit.examples || [])[0]
     renderTransBody(`
-      <div class="tp-word">${esc(hit.word)}<button class="speak-btn tp-speak" onclick="speakSel()">🔊</button><span class="tp-pos">${esc(hit.pos)}</span><span class="tp-src">词库</span></div>
+      <div class="tp-word">${esc(hit.word)}<button class="speak-btn tp-speak" onclick="speakSel()">${SPEAK_SVG}</button><span class="tp-pos">${esc(hit.pos)}</span><span class="tp-src">词库</span></div>
       <div class="tp-mean">${esc(hit.meaning)}</div>
       ${ex ? `<div class="tp-ex">${esc(ex.id)}<br>${esc(ex.zh)}</div>` : ''}
       <button class="tp-btn" id="tpAction" onclick="addSelToLearning()">＋ 加入背诵</button>${noteBtn}`, rect)
@@ -1766,7 +1905,7 @@ async function lookupWord(clean, rect) {
     if (transCurrent?.text !== clean) return
     transCurrent.mt = mt
     renderTransBody(`
-      <div class="tp-word">${esc(clean)}<button class="speak-btn tp-speak" onclick="speakSel()">🔊</button><span class="tp-src">${srcLabel}</span></div>
+      <div class="tp-word">${esc(clean)}<button class="speak-btn tp-speak" onclick="speakSel()">${SPEAK_SVG}</button><span class="tp-src">${srcLabel}</span></div>
       <div class="tp-mean">${esc(mt)}</div>
       <button class="tp-btn" id="tpAction" onclick="collectSelWord()">＋ 收藏到词库</button>${noteBtn}`, rect)
   }
@@ -1910,6 +2049,29 @@ function loadProfile() {
   syncTTSToggle()
   syncDarkToggle()
   loadProfileStats()
+  renderJournal()
+  loadAllNotes()
+}
+// 自定义昵称：点笔→内联输入→回车/失焦保存
+function editName() {
+  const el = document.getElementById('profName')
+  if (el.querySelector('input')) return
+  const cur = profile.display_name || (currentUser && currentUser.email ? currentUser.email.split('@')[0] : '')
+  el.innerHTML = `<input id="nameInput" class="name-input" maxlength="20" value="${esc(cur)}">`
+  const inp = document.getElementById('nameInput')
+  inp.focus(); inp.select()
+  let saved = false
+  const save = async () => {
+    if (saved) return; saved = true
+    const v = (inp.value || '').trim().slice(0, 20)
+    if (v && v !== profile.display_name) {
+      profile.display_name = v
+      try { await sb.from('profiles').update({ display_name: v }).eq('user_id', currentUser.id) } catch (e) {}
+    }
+    loadProfile()
+  }
+  inp.onkeydown = e => { if (e.key === 'Enter') inp.blur(); if (e.key === 'Escape') { saved = true; loadProfile() } }
+  inp.onblur = save
 }
 async function loadProfileStats() {
   if (!sb) return
@@ -2052,6 +2214,75 @@ async function deleteNote(id) {
   if (!sb) return
   try { await sb.from('article_notes').delete().eq('id', id) } catch (e) {}
   loadArticleNotes(artCurrent.id)
+}
+
+// ===== 词库星标 =====
+function getStarred() {
+  try { return new Set(JSON.parse(localStorage.getItem('bb_starred') || '[]')) } catch(e) { return new Set() }
+}
+function toggleStar(wordId, el) {
+  const s = getStarred()
+  if (s.has(wordId)) { s.delete(wordId); el.classList.remove('starred'); el.title = '收藏' }
+  else { s.add(wordId); el.classList.add('starred'); el.title = '取消收藏' }
+  localStorage.setItem('bb_starred', JSON.stringify([...s]))
+  if (showStarred) loadWords()
+}
+
+// ===== 学习日记 =====
+function getJournal() {
+  try { return JSON.parse(localStorage.getItem('bb_journal') || '[]') } catch(e) { return [] }
+}
+function saveJournalEntry() {
+  const txt = (document.getElementById('journalInput').value || '').trim()
+  if (!txt) return
+  const entries = getJournal()
+  const now = new Date()
+  const ts = `${now.getMonth()+1}月${now.getDate()}日 ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`
+  entries.unshift({ id: now.getTime(), text: txt, ts })
+  localStorage.setItem('bb_journal', JSON.stringify(entries.slice(0, 200)))
+  document.getElementById('journalInput').value = ''
+  renderJournal()
+}
+function deleteJournalEntry(id) {
+  const entries = getJournal().filter(e => e.id !== id)
+  localStorage.setItem('bb_journal', JSON.stringify(entries))
+  renderJournal()
+}
+function renderJournal() {
+  const el = document.getElementById('journalList')
+  if (!el) return
+  const entries = getJournal()
+  if (!entries.length) { el.innerHTML = '<div class="journal-empty">还没有笔记，写点什么吧</div>'; return }
+  el.innerHTML = entries.map(e => `
+    <div class="journal-entry">
+      <div class="journal-ts">${esc(e.ts)}</div>
+      <div class="journal-text">${esc(e.text)}</div>
+      <button class="journal-del" onclick="deleteJournalEntry(${e.id})" title="删除">✕</button>
+    </div>`).join('')
+}
+
+// ===== 文章笔记全览 =====
+async function loadAllNotes() {
+  const el = document.getElementById('allNotesList')
+  const titleEl = document.getElementById('allNotesTitle')
+  if (!el || !sb) return
+  try {
+    const { data } = await sb.from('article_notes').select('*').order('id', { ascending: false }).limit(60)
+    const notes = data || []
+    if (titleEl) titleEl.textContent = `文章笔记${notes.length ? ' · ' + notes.length + ' 条' : ''}`
+    if (!notes.length) { el.innerHTML = '<div class="ani-empty">还没有文章笔记 · 阅读文章时划词可添加</div>'; return }
+    const artMap = {}
+    articleCache.forEach(a => { artMap[a.id] = a })
+    el.innerHTML = notes.map(n => {
+      const art = artMap[n.article_id]
+      const artTitle = art ? esc(art.title_zh) : `文章 #${n.article_id}`
+      return `<div class="all-notes-item" onclick="openArticle(${n.article_id})">
+        <div class="ani-art-title">${artTitle}</div>
+        ${n.quote ? `<div class="ani-quote">「${esc(n.quote)}」</div>` : ''}
+        ${n.note ? `<div class="ani-note">${esc(n.note)}</div>` : ''}
+      </div>`
+    }).join('')
+  } catch(e) { if (el) el.innerHTML = '' }
 }
 
 // ===== 暗黑模式 =====
