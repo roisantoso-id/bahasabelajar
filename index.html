@@ -232,6 +232,7 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .stepper{height:36px;display:flex;align-items:center;overflow:hidden;border:1px solid #dfe1db;border-radius:11px;flex:none}
 .stepper button{width:32px;height:100%;display:flex;align-items:center;justify-content:center;color:#2d6253;background:#f0f3ed;font-size:17px}
 .stepper span{min-width:34px;text-align:center;font-size:13px;font-weight:800}
+.tts-toggle{flex:none;min-width:58px;height:34px;padding:0 14px;border-radius:11px;background:var(--green);color:#fff;font-size:13px;font-weight:800}
 .logout-btn{width:100%;height:50px;margin-top:26px;border-radius:14px;border:1.5px solid #e6b0a4;color:#c0392b;background:var(--paper);font-size:15px;font-weight:800}
 .app-version{margin-top:18px;text-align:center;color:#adb1ad;font-size:11px}
 /* ===== 文章笔记 / 划线 ===== */
@@ -457,6 +458,15 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
     </div>
   </div>
 
+  <div class="group-title">发音引擎</div>
+  <div class="setting-card">
+    <div class="setting-row">
+      <div class="setting-icon green">🔊</div>
+      <div class="setting-copy"><div>朗读语音</div><span id="ttsDesc">Qwen 语音（在线，需边缘函数）</span></div>
+      <button class="tts-toggle" id="ttsToggle" onclick="toggleTTS()">Qwen</button>
+    </div>
+  </div>
+
   <div class="group-title">高级 · 数据连接</div>
   <div class="setting-card" style="padding:16px">
     <details>
@@ -500,6 +510,32 @@ let sb = null
 let currentUser = null
 let authMode = 'login'  // 'login' | 'signup'
 let profile = { daily_new_words: 10, daily_review_limit: 100, display_name: null }
+
+// ===== Qwen 代理（Supabase Edge Function）=====
+const QWEN_FN = SUPABASE_URL + '/functions/v1/qwen'
+let ttsEngine = localStorage.getItem('tts_engine') || 'qwen'   // 'qwen' | 'web'
+let qwenTransOK = true   // 翻译代理是否可用（失败则回退 MyMemory）
+
+async function qwenCall(action, text) {
+  const r = await fetch(QWEN_FN, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', apikey: SUPABASE_KEY },
+    body: JSON.stringify({ action, text })
+  })
+  if (!r.ok) throw new Error('qwen ' + action + ' ' + r.status)
+  return r
+}
+async function qwenTranslate(text) {
+  const r = await qwenCall('translate', text)
+  const d = await r.json()
+  if (!d.translation) throw new Error('empty')
+  return d.translation
+}
+async function qwenTTSUrl(text) {
+  const r = await qwenCall('tts', text)
+  const blob = await r.blob()
+  return URL.createObjectURL(blob)
+}
 
 function initSupabase() {
   if (!SUPABASE_URL || !SUPABASE_KEY) return false
@@ -1017,16 +1053,20 @@ async function lookupWord(clean, rect) {
       ${ex ? `<div class="tp-ex">${ex.id}<br>${ex.zh}</div>` : ''}
       <button class="tp-btn" id="tpAction" onclick="addSelToLearning()">＋ 加入背诵</button>${noteBtn}`, rect)
   } else {
-    let mt = '—'
+    let mt = '—', srcLabel = '机器翻译'
     try {
-      const r = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(clean)}&langpair=id|zh-CN`)
-      const j = await r.json()
-      mt = (j.responseData && j.responseData.translatedText) || '未找到翻译'
-    } catch (e) { mt = '翻译失败（网络）' }
+      mt = await qwenTranslate(clean); srcLabel = 'Qwen 翻译'
+    } catch (e) {
+      try {
+        const r = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(clean)}&langpair=id|zh-CN`)
+        const jj = await r.json()
+        mt = (jj.responseData && jj.responseData.translatedText) || '未找到翻译'
+      } catch (e2) { mt = '翻译失败（网络）' }
+    }
     if (transCurrent?.text !== clean) return
     transCurrent.mt = mt
     renderTransBody(`
-      <div class="tp-word">${clean}<button class="speak-btn tp-speak" onclick="speakSel()">🔊</button><span class="tp-src">机器翻译</span></div>
+      <div class="tp-word">${clean}<button class="speak-btn tp-speak" onclick="speakSel()">🔊</button><span class="tp-src">${srcLabel}</span></div>
       <div class="tp-mean">${mt}</div>
       <button class="tp-btn" id="tpAction" onclick="collectSelWord()">＋ 收藏到词库</button>${noteBtn}`, rect)
   }
@@ -1073,7 +1113,7 @@ function loadVoices() {
     idVoice = vs.find(v => v.lang === 'id-ID') || vs.find(v => (v.lang || '').toLowerCase().startsWith('id')) || null
   } catch (e) {}
 }
-function speak(text, rate) {
+function webSpeak(text, rate) {
   if (!text || !('speechSynthesis' in window)) return
   try {
     speechSynthesis.cancel()
@@ -1084,10 +1124,36 @@ function speak(text, rate) {
     speechSynthesis.speak(u)
   } catch (e) {}
 }
+let qwenAudio = null
+async function speak(text, rate) {
+  if (!text) return
+  if (ttsEngine !== 'qwen') return webSpeak(text, rate)
+  // Qwen TTS：取音频字节播放，失败回退 Web Speech
+  try {
+    if (qwenAudio) { qwenAudio.pause(); qwenAudio = null }
+    if ('speechSynthesis' in window) speechSynthesis.cancel()
+    const url = await qwenTTSUrl(text)
+    qwenAudio = new Audio(url)
+    await qwenAudio.play()
+  } catch (e) {
+    webSpeak(text, rate)
+  }
+}
 function speakStudyWord() { const w = studyQueue[studyIdx]; if (w) speak(w.word) }
 function speakArticleSentence(i) { if (artCurrent && artCurrent.sentences[i]) speak(artCurrent.sentences[i].id) }
 function speakListWord(i) { const w = wordItems[i]; if (w) speak(w.word) }
 function speakSel() { speak((transCurrent && (transCurrent.hit ? transCurrent.hit.word : transCurrent.text)) || '') }
+function toggleTTS() {
+  ttsEngine = ttsEngine === 'qwen' ? 'web' : 'qwen'
+  localStorage.setItem('tts_engine', ttsEngine)
+  syncTTSToggle()
+}
+function syncTTSToggle() {
+  const btn = document.getElementById('ttsToggle'), desc = document.getElementById('ttsDesc')
+  if (!btn) return
+  btn.textContent = ttsEngine === 'qwen' ? 'Qwen' : '系统'
+  desc.textContent = ttsEngine === 'qwen' ? 'Qwen 语音（在线，需边缘函数）' : '系统印尼语语音（免费·离线）'
+}
 if ('speechSynthesis' in window) {
   loadVoices()
   if (speechSynthesis.onvoiceschanged !== undefined) speechSynthesis.onvoiceschanged = loadVoices
@@ -1153,6 +1219,7 @@ function loadProfile() {
   document.getElementById('planReview').textContent = profile.daily_review_limit || 100
   document.getElementById('cfgUrl').value = SUPABASE_URL
   document.getElementById('cfgKey').value = SUPABASE_KEY
+  syncTTSToggle()
   loadProfileStats()
 }
 async function loadProfileStats() {
