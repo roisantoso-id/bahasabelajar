@@ -1050,14 +1050,28 @@ async function lookupWord(clean, rect) {
       <button class="tp-btn" id="tpAction" onclick="addSelToLearning()">＋ 加入背诵</button>${noteBtn}`, rect)
   } else {
     let mt = '—', srcLabel = '机器翻译'
+    const key = clean.toLowerCase()
+    // 1) 先查翻译缓存（已翻过的直接读，省钱+秒出）
+    let cached = null
     try {
-      mt = await qwenTranslate(clean); srcLabel = 'Qwen 翻译'
-    } catch (e) {
+      const { data } = await sb.from('translations').select('zh').eq('src', key).maybeSingle()
+      if (data && data.zh) cached = data.zh
+    } catch (e) {}
+    if (cached) {
+      mt = cached; srcLabel = '缓存'
+    } else {
+      // 2) 调 Qwen，成功则写入缓存
       try {
-        const r = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(clean)}&langpair=id|zh-CN`)
-        const jj = await r.json()
-        mt = (jj.responseData && jj.responseData.translatedText) || '未找到翻译'
-      } catch (e2) { mt = '翻译失败（网络）' }
+        mt = await qwenTranslate(clean); srcLabel = 'Qwen 翻译'
+        try { await sb.from('translations').upsert({ src: key, zh: mt, engine: 'qwen-mt' }, { onConflict: 'src', ignoreDuplicates: true }) } catch (e) {}
+      } catch (e) {
+        // 3) Qwen 不可用时用 MyMemory 兜底（不缓存，质量较低）
+        try {
+          const r = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(clean)}&langpair=id|zh-CN`)
+          const jj = await r.json()
+          mt = (jj.responseData && jj.responseData.translatedText) || '未找到翻译'
+        } catch (e2) { mt = '翻译失败（网络）' }
+      }
     }
     if (transCurrent?.text !== clean) return
     transCurrent.mt = mt
