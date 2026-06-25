@@ -278,6 +278,29 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .lb-learn:disabled{background:#e8e6df;color:#9aa39d}
 .lb-grammar{background:var(--purplebg);color:var(--purple)}
 .lesson-empty{font-size:12px;color:var(--muted);text-align:center;padding:8px 0}
+/* ===== 管理员 · 用户管理 ===== */
+.setting-icon.admin{color:#8a5a2b;background:#f3e6d2;font-size:17px}
+#adminPanel{position:fixed;inset:0;z-index:280;display:none;align-items:flex-end;background:rgba(0,0,0,.4)}
+#adminPanel.show{display:flex}
+.admin-sheet{width:100%;max-height:86vh;display:flex;flex-direction:column;background:var(--cream);border-radius:20px 20px 0 0;padding:18px 16px calc(16px + env(safe-area-inset-bottom));animation:sheetUp .3s var(--ease)}
+@keyframes sheetUp{from{transform:translateY(100%)}to{transform:none}}
+.admin-head{display:flex;align-items:center;justify-content:space-between}
+.admin-head h3{font-size:18px;font-weight:800}
+.admin-close{width:34px;height:34px;border-radius:50%;background:var(--paper);font-size:17px;display:flex;align-items:center;justify-content:center}
+.admin-sub{font-size:12px;color:var(--muted);margin:4px 0 14px}
+.admin-list{overflow-y:auto;-webkit-overflow-scrolling:touch;flex:1}
+.admin-user{display:flex;align-items:center;gap:12px;padding:12px;margin-bottom:8px;border-radius:14px;background:var(--paper);box-shadow:0 1px 2px rgba(25,55,46,.04),0 8px 20px -10px rgba(25,55,46,.1)}
+.admin-avatar{width:40px;height:40px;flex:none;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Lora',Georgia,serif;font-size:17px;font-weight:800;color:#fff;background:var(--green2);text-transform:uppercase}
+.admin-uinfo{flex:1;min-width:0}
+.admin-uname{font-size:14px;font-weight:750;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.admin-umeta{font-size:11px;color:var(--muted);margin-top:2px}
+.admin-badge{font-size:9px;font-weight:800;padding:2px 7px;border-radius:99px;background:var(--mint);color:var(--green);flex:none}
+.admin-badge.ban{background:#fbe1d8;color:#b8503a}
+.admin-ban-btn{flex:none;height:32px;padding:0 14px;border-radius:10px;font-size:12px;font-weight:800}
+.admin-ban-btn.ban{background:#fbe1d8;color:#b8503a}
+.admin-ban-btn.unban{background:var(--green);color:#fff}
+.admin-self{flex:none;font-size:11px;font-weight:700;color:var(--muted);padding:0 10px}
+.admin-loading{text-align:center;color:var(--muted);font-size:13px;padding:34px 0}
 /* ===== 动效 & 质感打磨 ===== */
 @media (prefers-reduced-motion:no-preference){
   @keyframes viewIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
@@ -575,6 +598,17 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
     </div>
   </div>
 
+  <div id="adminGroup" class="hidden">
+    <div class="group-title">管理员</div>
+    <div class="setting-card">
+      <div class="setting-row" onclick="openAdminPanel()" style="cursor:pointer">
+        <div class="setting-icon admin">⚙</div>
+        <div class="setting-copy"><div>用户管理</div><span>查看用户 · 停用 / 恢复登录</span></div>
+        <span class="task-arrow" style="margin-left:auto;color:#ccc;font-size:22px">›</span>
+      </div>
+    </div>
+  </div>
+
   <button class="logout-btn" onclick="doLogout()">退出登录</button>
   <div class="app-version">BahasaBelajar · H5 版</div>
 </div>
@@ -592,6 +626,18 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
       <button class="ns-cancel" onclick="closeNoteEditor()">取消</button>
       <button class="ns-save" onclick="saveNote()">保存</button>
     </div>
+  </div>
+</div>
+
+<!-- ===== 用户管理面板（仅管理员）===== -->
+<div id="adminPanel">
+  <div class="admin-sheet">
+    <div class="admin-head">
+      <h3>用户管理</h3>
+      <button class="admin-close" onclick="closeAdminPanel()">✕</button>
+    </div>
+    <div class="admin-sub" id="adminCount"></div>
+    <div class="admin-list" id="adminUserList"></div>
   </div>
 </div>
 
@@ -692,6 +738,7 @@ function translateAuthErr(m) {
 async function onLoggedIn(user) {
   currentUser = user
   await loadProfileData()
+  if (await enforceBan()) return
   showView('home', document.querySelector('.tab'))
 }
 async function doLogout() {
@@ -710,8 +757,24 @@ async function loadProfileData() {
     const { data, error } = await sb.from('profiles').select('*').maybeSingle()
     if (error) throw error
     if (data) { profile = data }
-    else { await sb.from('profiles').insert({}); }
+    else {
+      // 新用户：写入 email 方便管理员识别（email 列没建时静默回退）
+      const email = currentUser ? currentUser.email : null
+      try { await sb.from('profiles').insert({ email }) } catch (e2) { await sb.from('profiles').insert({}) }
+      profile = { daily_new_words: 10, daily_review_limit: 100, display_name: null, email, is_admin: false, banned: false }
+    }
   } catch (e) { /* profiles 表可能还没建，用默认值 */ }
+}
+// 被停用（banned）则强制登出 + 提示；返回 true 表示已拦截
+async function enforceBan() {
+  if (profile && profile.banned) {
+    if (sb) { try { await sb.auth.signOut() } catch (e) {} }
+    currentUser = null
+    enterAuth()
+    setAuthMsg('账号已被管理员停用，如有疑问请联系管理员')
+    return true
+  }
+  return false
 }
 
 // ===== NAV =====
@@ -1485,6 +1548,7 @@ function loadProfile() {
   document.getElementById('profAvatar').textContent = (name[0] || 'B').toUpperCase()
   document.getElementById('planNew').textContent = profile.daily_new_words || 10
   document.getElementById('planReview').textContent = profile.daily_review_limit || 100
+  document.getElementById('adminGroup').classList.toggle('hidden', !profile.is_admin)
   syncTTSToggle()
   loadProfileStats()
 }
@@ -1504,6 +1568,69 @@ async function stepPlan(key, delta) {
   profile[key] = Math.max(limits[0], Math.min(limits[1], cur + delta))
   document.getElementById(key === 'daily_new_words' ? 'planNew' : 'planReview').textContent = profile[key]
   try { await sb.from('profiles').update({ [key]: profile[key] }).eq('user_id', currentUser.id) } catch (e) {}
+}
+
+// ===== 管理员 · 用户管理 =====
+let adminUsers = []
+async function openAdminPanel() {
+  if (!profile.is_admin) return
+  document.getElementById('adminPanel').classList.add('show')
+  document.getElementById('adminCount').textContent = ''
+  document.getElementById('adminUserList').innerHTML = '<div class="admin-loading">加载中…</div>'
+  await loadUsers()
+}
+function closeAdminPanel() {
+  document.getElementById('adminPanel').classList.remove('show')
+}
+async function loadUsers() {
+  try {
+    const { data, error } = await sb.from('profiles')
+      .select('user_id,email,display_name,is_admin,banned,created_at')
+      .order('created_at', { ascending: true })
+    if (error) throw error
+    adminUsers = data || []
+    renderUsers()
+  } catch (e) {
+    document.getElementById('adminUserList').innerHTML =
+      '<div class="admin-loading">加载失败：' + esc(e.message || '请先运行 admin-migration.sql') + '</div>'
+  }
+}
+function renderUsers() {
+  document.getElementById('adminCount').textContent = `共 ${adminUsers.length} 位用户`
+  document.getElementById('adminUserList').innerHTML = adminUsers.map(u => {
+    const isMe = currentUser && u.user_id === currentUser.id
+    const name = u.email || u.display_name || (u.user_id || '').slice(0, 8)
+    const initial = (name[0] || '?').toUpperCase()
+    const joined = u.created_at ? new Date(u.created_at).toLocaleDateString('zh-CN') : '—'
+    const badges = (u.is_admin ? '<span class="admin-badge">ADMIN</span>' : '')
+      + (u.banned ? '<span class="admin-badge ban">已停用</span>' : '')
+    let right
+    if (isMe) right = '<span class="admin-self">你</span>'
+    else if (u.is_admin) right = '<span class="admin-self">管理员</span>'
+    else if (u.banned) right = `<button class="admin-ban-btn unban" onclick="toggleBan('${u.user_id}',false)">恢复</button>`
+    else right = `<button class="admin-ban-btn ban" onclick="toggleBan('${u.user_id}',true)">停用</button>`
+    return `<div class="admin-user">
+      <div class="admin-avatar"${u.banned ? ' style="background:#c2a59c"' : ''}>${esc(initial)}</div>
+      <div class="admin-uinfo">
+        <div class="admin-uname">${esc(name)}${badges}</div>
+        <div class="admin-umeta">加入于 ${esc(joined)}</div>
+      </div>
+      ${right}
+    </div>`
+  }).join('')
+}
+async function toggleBan(userId, ban) {
+  const u = adminUsers.find(x => x.user_id === userId)
+  const who = u ? (u.email || u.display_name || userId.slice(0, 8)) : userId.slice(0, 8)
+  if (!confirm(ban ? `停用「${who}」？\n停用后对方下次打开/登录将被强制登出。` : `恢复「${who}」的登录权限？`)) return
+  try {
+    const { error } = await sb.from('profiles').update({ banned: ban }).eq('user_id', userId)
+    if (error) throw error
+    if (u) u.banned = ban
+    renderUsers()
+  } catch (e) {
+    alert('操作失败：' + (e.message || '权限不足或表未迁移'))
+  }
 }
 
 // ===== 文章笔记 =====
@@ -1576,6 +1703,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     if (session && session.user) {
       currentUser = session.user
       await loadProfileData()
+      if (await enforceBan()) return
       showView('home', document.querySelector('.tab'))
     } else {
       enterAuth()
