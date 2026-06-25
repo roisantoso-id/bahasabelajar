@@ -3,6 +3,7 @@
 // JSON 格式：[{word, pos, meaning, level, examples:[{id, zh}]}, ...]
 const fs = require('fs')
 const path = require('path')
+const { classify } = require('./classify-topic.js')
 const URL = 'https://bzdelpmcewjdvmgyafux.supabase.co'
 // 优先用 service_role key（本地 env 或 supabase/service-key 文件，不入公开仓库），回退 anon
 const ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ6ZGVscG1jZXdqZHZtZ3lhZnV4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzMjY1MDksImV4cCI6MjA4ODkwMjUwOX0.x_D0VGGmXCY9rueAh0lV4f7r9wOJIGCHs19w5S2BNpg'
@@ -32,6 +33,19 @@ async function getJSON(url, headers) {
     if (!POS.includes(w.pos)) throw new Error(`非法 pos「${w.pos}」(${w.word})，合法值: ${POS.join(' ')}`)
     if (![1,2,3].includes(w.level)) w.level = 2
     if (!Array.isArray(w.examples)) w.examples = []
+  }
+
+  // 探测 topic 列是否存在（未跑 words-topic-schema.sql 的库就跳过，避免插入报错）
+  let hasTopic = false
+  try {
+    const probe = await fetch(`${URL}/rest/v1/words?select=topic&limit=1`, { headers: { apikey: KEY } })
+    hasTopic = probe.ok
+  } catch (e) {}
+  if (hasTopic) {
+    for (const w of incoming) if (!w.topic) w.topic = classify(w.word, w.meaning, w.pos)
+    console.log('已为新词自动归类领域(topic)')
+  } else {
+    console.log('⚠️ words 表无 topic 列，跳过领域归类（先跑 supabase/words-topic-schema.sql）')
   }
 
   // 拉现有词去重
