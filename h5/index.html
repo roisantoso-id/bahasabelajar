@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>BahasaBelajar</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#16352e;--muted:#7c857f;--green:#174d40;--green2:#2d745f;--mint:#dcebdc;--cream:#f4f1e9;--paper:#fffdf8;--coral:#f17455;--purple:#6b4c9a;--purplebg:#ebe0f5;--yellow:#f4c95d;--radius:18px;--ease:cubic-bezier(.22,.61,.36,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;background:var(--cream);color:var(--ink);min-height:100dvh;padding-bottom:calc(70px + env(safe-area-inset-bottom))}
+button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
+
+/* tabs */
+.tabs{position:fixed;bottom:0;left:0;right:0;display:flex;background:var(--paper);border-top:1px solid #e8e6df;padding-bottom:env(safe-area-inset-bottom);z-index:99}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 0 6px;font-size:11px;color:var(--muted);font-weight:600}
+.tab.active{color:var(--green)}
+.tab-icon{width:22px;height:22px;display:block;margin:0 auto}.tab-icon svg{width:100%;height:100%}
+
+/* pages */
+.view{display:none;padding:20px 16px}
+.view.active{display:block}
+
+/* home */
+.greeting{font-size:12px;font-weight:700;letter-spacing:2px;color:var(--green2)}
+.date-line{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.date-label{margin-top:6px;font-size:18px;font-weight:800}
+.streak-badge{display:flex;align-items:baseline;gap:3px;padding:8px 12px;border-radius:12px;background:#fff;font-size:11px;color:#68736d;box-shadow:0 4px 14px rgba(25,55,46,.07)}
+.streak-num{color:var(--ink);font-size:18px;font-weight:800}
+.hero{border-radius:var(--radius);background:var(--mint);padding:24px;margin-bottom:24px}
+.hero-kicker{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--green2)}
+.hero-title{margin-top:8px;font-size:24px;font-weight:900;line-height:1.3}
+.progress-bar{margin-top:16px;height:6px;border-radius:99px;background:rgba(23,77,64,.13);overflow:hidden}
+.progress-fill{height:100%;border-radius:inherit;background:var(--green);transition:width .3s}
+.section-title{font-size:15px;font-weight:800;margin-bottom:12px}
+.task{display:flex;align-items:center;padding:16px;margin-bottom:10px;border-radius:var(--radius);background:var(--paper);box-shadow:0 4px 16px rgba(25,55,46,.05)}
+.task-icon{width:46px;height:46px;display:flex;align-items:center;justify-content:center;border-radius:14px;font-size:16px;font-weight:900;flex-shrink:0}
+.task-icon.learn{color:var(--green);background:var(--mint)}
+.task-icon.review{color:#a44a34;background:#fbe1d8}
+.task-icon.grammar{color:var(--purple);background:var(--purplebg)}
+.task-body{flex:1;margin-left:14px}
+.task-name{font-size:15px;font-weight:800}
+.task-desc{font-size:11px;color:var(--muted);margin-top:4px}
+.task-count{font-size:20px;font-weight:900;margin-right:4px}
+.task-arrow{color:#ccc;font-size:22px}
+.stats-row{display:flex;justify-content:space-around;padding:16px;margin-top:16px;border-radius:var(--radius);background:var(--paper);box-shadow:0 4px 16px rgba(25,55,46,.05)}
+.stat{text-align:center}
+.stat-val{font-size:18px;font-weight:900}
+.stat-lbl{font-size:10px;color:var(--muted);margin-top:4px}
+
+/* study */
+.study-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.study-head .close{font-size:24px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--paper)}
+.study-progress{flex:1;height:5px;border-radius:99px;background:#e8e6df;overflow:hidden}
+.study-progress-fill{height:100%;border-radius:inherit;background:var(--green);transition:width .3s}
+.study-counter{font-size:12px;color:var(--muted);font-weight:700}
+.word-card{min-height:50vh;padding:24px;border-radius:var(--radius);background:var(--paper);box-shadow:0 6px 24px rgba(25,55,46,.06);display:flex;flex-direction:column;position:relative;overflow:hidden}.word-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green),var(--green2),var(--mint));border-radius:var(--radius) var(--radius) 0 0}
+.word-level{display:inline-block;padding:4px 10px;border-radius:99px;font-size:11px;font-weight:700;background:var(--mint);color:var(--green)}
+.word-main{text-align:center;font-size:32px;font-weight:900;font-family:'Lora',Georgia,serif;margin:32px 0 4px}
+.word-pos{text-align:center;font-size:13px;color:var(--muted);font-style:italic}
+.think-hint{text-align:center;color:var(--muted);font-size:12px;margin-top:40px;display:flex;align-items:center;gap:8px;justify-content:center}
+.think-hint::before,.think-hint::after{content:'';width:40px;height:1px;background:#ddd}
+.word-meaning{text-align:center;font-size:20px;font-weight:800;margin-top:24px}
+.word-examples{margin-top:20px}
+.ex-item{margin-bottom:14px}
+.ex-sentence{font-size:14px;font-weight:650;line-height:1.5}
+.ex-zh{font-size:12px;color:var(--muted);margin-top:2px}
+.study-actions{display:flex;gap:10px;margin-top:16px}
+.study-actions button{flex:1;height:52px;border-radius:14px;font-size:15px;font-weight:800}
+.btn-unknown{border:2px solid #e8c8a0;color:#b8860b;background:#fff}
+.btn-know{background:var(--green);color:#fff}
+.btn-easy{background:#e8e6df;color:var(--ink)}
+.btn-next{background:var(--green);color:#fff}
+.study-done{text-align:center;padding:60px 20px}
+.study-done .mark{font-size:48px;color:var(--coral)}
+.study-done h2{margin:16px 0 8px;font-size:22px}
+.study-done p{color:var(--muted);font-size:13px}
+.study-done button{margin-top:24px;width:100%;height:52px;border-radius:14px;background:var(--green);color:#fff;font-size:15px;font-weight:800}
+
+/* grammar */
+.grammar-head{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.grammar-head .back{font-size:24px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--paper);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.grammar-head h1{flex:1;font-size:22px;font-weight:800}
+.grammar-lesson-tag{padding:4px 12px;border-radius:99px;background:var(--mint);color:var(--green);font-size:11px;font-weight:700}
+.grammar-subtitle{color:var(--muted);font-size:12px;font-style:italic;margin-bottom:20px}
+.rule-card{margin-bottom:14px;padding:16px;border-radius:var(--radius);background:var(--paper);box-shadow:0 4px 16px rgba(25,55,46,.05)}
+.rule-head{display:flex;justify-content:space-between;align-items:center}
+.rule-pattern{font-size:16px;font-weight:800;color:var(--green);font-family:'Lora',Georgia,serif}
+.rule-arrow{color:var(--muted);font-size:14px}
+.rule-meaning{font-size:13px;color:#555;margin-top:6px;line-height:1.5}
+.rule-detail{margin-top:14px;padding-top:14px;border-top:1px dashed #ddd}
+.rule-explain{font-size:13px;color:#444;line-height:1.7;margin-bottom:14px}
+.rule-example{margin-bottom:14px;padding:12px;border-radius:10px;background:#f7f5ef}
+.rule-example:last-child{margin-bottom:0}
+.rex-word{display:flex;align-items:baseline;gap:6px;margin-bottom:6px}
+.rex-id{font-size:14px;font-weight:800;color:var(--green);font-family:'Lora',Georgia,serif}
+.rex-root{font-size:11px;color:var(--muted)}
+.rex-sentence{font-size:13px;font-weight:650;line-height:1.6}
+.rex-zh{margin-top:4px;font-size:11px;color:#888}
+
+/* words list */
+.words-head{margin-bottom:16px}
+.words-head h1{font-size:22px;font-weight:800}
+.search-box{display:flex;align-items:center;padding:10px 14px;border-radius:14px;background:var(--paper);box-shadow:0 4px 16px rgba(25,55,46,.05);margin-bottom:12px}
+.search-box input{flex:1;border:0;outline:0;font-size:14px;background:transparent}
+.filter-row{display:flex;gap:8px;margin-bottom:16px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.filter-btn{flex:none;padding:8px 14px;border:1px solid #dedfd9;border-radius:99px;font-size:11px;font-weight:650;color:#707a74;background:rgba(255,255,255,.45);white-space:nowrap}
+.filter-btn.active{border-color:var(--green);color:#fff;background:var(--green)}
+.word-list{border-radius:var(--radius);background:var(--paper);box-shadow:0 4px 16px rgba(25,55,46,.05);overflow:hidden}
+.wl-item{padding:14px;border-bottom:1px solid #eceae3}
+.wl-item:last-child{border-bottom:0}
+.wl-line{display:flex;align-items:center}
+.wl-letter{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:10px;color:var(--green);background:var(--mint);font-family:'Lora',Georgia,serif;font-size:15px;font-weight:800;flex-shrink:0}
+.wl-info{flex:1;margin-left:12px;min-width:0}
+.wl-word{font-family:'Lora',Georgia,serif;font-size:15px;font-weight:800}
+.wl-pos{margin-left:6px;color:#a0a59f;font-size:11px;font-style:italic}
+.wl-meaning{margin-top:3px;font-size:12px;color:#747e77;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wl-examples{margin:10px 0 0 48px;padding-top:10px;border-top:1px dashed #ddd}
+.list-end{text-align:center;padding:20px;font-size:11px;color:var(--muted)}
+
+/* articles */
+.art-card{padding:18px;margin-bottom:12px;border-radius:var(--radius);background:var(--paper);box-shadow:0 4px 16px rgba(25,55,46,.05)}
+.art-card-top{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.art-cat{padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;background:var(--purplebg);color:var(--purple)}
+.art-level{padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;background:var(--mint);color:var(--green)}
+.art-title-id{font-size:17px;font-weight:800;font-family:'Lora',Georgia,serif;color:var(--ink)}
+.art-title-zh{font-size:13px;color:var(--muted);margin-top:3px}
+.art-card-summary{font-size:12px;color:#888;margin-top:8px;line-height:1.5}
+.art-summary{background:#f1ede3;border-radius:12px;padding:12px 14px;font-size:13px;color:#5a5346;line-height:1.6;margin-bottom:18px}
+.sent{padding:14px 0;border-bottom:1px solid #eceae3}
+.sent:last-child{border-bottom:0}
+.sent-id{font-size:15px;font-weight:650;line-height:1.7;color:var(--ink)}
+.sent-num{display:inline-block;min-width:20px;color:var(--green2);font-weight:800;font-family:'Lora',Georgia,serif}
+.sent-zh{font-size:13px;color:#6a736c;margin-top:6px;padding-left:20px;line-height:1.6}
+.sent-note{font-size:12px;color:#9a8f6a;background:#faf8f0;border-left:3px solid #e3d9b8;border-radius:0 8px 8px 0;padding:7px 10px;margin-top:8px;margin-left:20px;line-height:1.6}
+.trans-hidden .sent-zh,.trans-hidden .sent-note{display:none}
+/* culture */
+.cul-card{padding:16px;margin-bottom:12px;border-radius:var(--radius);background:var(--paper);box-shadow:0 4px 16px rgba(25,55,46,.05)}
+.cul-head{display:flex;align-items:center;gap:12px}
+.cul-emoji{font-size:28px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:var(--cream);flex-shrink:0}
+.cul-htext{flex:1;min-width:0}
+.cul-title{font-size:15px;font-weight:800}
+.cul-sub{font-size:12px;color:var(--muted);font-style:italic;margin-top:2px}
+.cul-cat{padding:3px 10px;border-radius:99px;font-size:10px;font-weight:700;background:var(--purplebg);color:var(--purple);flex-shrink:0}
+.cul-detail{margin-top:14px;padding-top:14px;border-top:1px dashed #ddd}
+.cul-body{font-size:13px;color:#444;line-height:1.85}
+.cul-terms{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+.cul-term{display:flex;gap:10px;align-items:baseline;font-size:13px}
+.cul-term-w{font-family:'Lora',Georgia,serif;font-weight:800;color:var(--green);min-width:96px}
+.cul-term-m{color:#6a736c}
+/* 发音按钮 */
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:50%;background:var(--mint);color:var(--green);cursor:pointer;flex:none}
+.speak-btn:active{transform:scale(.9)}
+.word-speak{width:42px;height:42px;font-size:19px;margin:10px auto 0;display:flex}
+.sent-speak{width:24px;height:24px;font-size:12px;margin-right:7px;vertical-align:middle}
+.wl-speak{width:32px;height:32px;font-size:15px;margin-left:8px}
+#transPop .tp-speak{width:24px;height:24px;font-size:12px;background:rgba(255,255,255,.18);color:#fff}
+/* 划词翻译 popup */
+#transPop{position:fixed;z-index:200;max-width:280px;background:#1f2d29;color:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 10px 36px rgba(0,0,0,.32);font-size:14px;line-height:1.5;opacity:0;transform:translateY(6px) scale(.96);pointer-events:none;transition:opacity .15s,transform .15s}
+#transPop.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+#transPop .tp-word{font-family:'Lora',Georgia,serif;font-weight:800;font-size:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+#transPop .tp-pos{font-size:11px;font-style:italic;color:#9fc6b3;font-family:-apple-system,sans-serif;font-weight:600}
+#transPop .tp-src{margin-left:auto;font-size:10px;font-weight:700;padding:2px 7px;border-radius:99px;background:rgba(255,255,255,.14);color:#cfe3d8}
+#transPop .tp-mean{margin-top:7px;font-size:15px;font-weight:650}
+#transPop .tp-ex{margin-top:6px;font-size:12px;color:#b9c4bf;line-height:1.5}
+#transPop .tp-loading{color:#b9c4bf;font-size:13px}
+#transPop .tp-btn{margin-top:10px;width:100%;height:34px;border-radius:9px;background:#3a8f6f;color:#fff;font-size:12px;font-weight:800}
+#transPop .tp-btn:disabled{background:rgba(255,255,255,.16);color:#9aa8a2}
+#transPop .tp-arrow{position:absolute;bottom:-6px;left:var(--ax,24px);width:12px;height:12px;background:#1f2d29;transform:rotate(45deg)}
+#transPop.flip .tp-arrow{bottom:auto;top:-6px}
+.task-icon.culture{color:#a3622b;background:#f6e6d2}
+/* ===== AUTH ===== */
+.auth-view{display:none;position:fixed;inset:0;z-index:300;background:var(--cream);padding:0;align-items:center;justify-content:center}
+.auth-view.active{display:flex}
+.auth-box{width:100%;max-width:340px;padding:28px 24px;text-align:center}
+.auth-logo{line-height:1;display:flex;justify-content:center}
+.auth-title{font-size:26px;font-weight:900;margin-top:10px;letter-spacing:-.5px}
+.auth-sub{color:var(--muted);font-size:13px;margin-top:8px;margin-bottom:26px}
+.auth-input{width:100%;height:50px;padding:0 16px;margin-bottom:12px;border:1.5px solid #e3e1d8;border-radius:14px;font-size:15px;background:var(--paper)}
+.auth-input:focus{outline:none;border-color:var(--green)}
+.auth-btn{width:100%;height:52px;margin-top:6px;border-radius:14px;background:var(--green);color:#fff;font-size:16px;font-weight:800}
+.auth-btn:disabled{opacity:.6}
+.auth-msg{min-height:18px;margin-top:12px;font-size:13px;font-weight:600}
+.auth-msg.err{color:#c0392b}.auth-msg.ok{color:var(--green2)}
+.auth-toggle{margin-top:18px;font-size:13px;color:var(--muted)}
+.auth-toggle a{color:var(--green);font-weight:800;cursor:pointer}
+/* ===== CALENDAR ===== */
+.cal-eyebrow{color:var(--green2);font-size:11px;font-weight:800;letter-spacing:2px}
+.cal-title{font-size:22px;font-weight:900;margin:6px 0 18px}
+.streak-card{display:flex;align-items:center;justify-content:space-between;padding:20px;border-radius:20px;color:#fff;background:var(--green);box-shadow:0 12px 26px rgba(23,77,64,.18)}
+.streak-label{color:rgba(255,255,255,.62);font-size:11px;font-weight:700}
+.streak-number{font-size:42px;line-height:1.1;font-weight:900}
+.streak-unit{font-size:13px}
+.streak-copy{color:rgba(255,255,255,.58);font-size:11px;margin-top:4px}
+#v-calendar .streak-badge{width:84px;height:84px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:50%;color:var(--green);background:var(--yellow,#f4c95d);font-size:11px;font-weight:800;text-align:center;flex:none;padding:0;box-shadow:0 10px 22px -6px rgba(244,201,93,.55)}
+#v-calendar .streak-badge .diamond{margin-bottom:3px;color:var(--coral);font-size:22px;transform:rotate(45deg)}
+.cal-card{margin-top:16px;padding:18px 14px 14px;border-radius:var(--radius);background:var(--paper);box-shadow:0 4px 16px rgba(25,55,46,.05)}
+.month-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;font-size:15px;font-weight:900}
+.month-head button{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:#46655b;background:#edf3eb;font-size:20px}
+.cal-week,.cal-grid{display:grid;grid-template-columns:repeat(7,1fr)}
+.cal-week{margin-bottom:6px;color:#9ba19c;font-size:11px;text-align:center}
+.cal-day{position:relative;height:40px;display:flex;align-items:center;justify-content:center;margin:1px;border-radius:11px;font-size:13px;font-weight:650}
+.cal-day.active{background:#f0f3ed}
+.cal-day.done{color:#fff;background:var(--green2)}
+.cal-day.today{outline:2px solid var(--coral);outline-offset:-2px}
+.cal-day .check{position:absolute;right:3px;bottom:2px;font-size:8px}
+.cal-legend{display:flex;justify-content:center;gap:18px;margin-top:14px;padding-top:12px;border-top:1px solid #eceae3;color:#8a918c;font-size:10px}
+.cal-legend>div{display:flex;align-items:center;gap:5px}
+.cal-legend .dot{width:9px;height:9px;border-radius:50%}
+.done-dot{background:var(--green2)}.active-dot{background:#e3e9df}.today-dot{border:2px solid var(--coral)}
+.cal-quote{display:flex;flex-direction:column;gap:5px;margin:20px 8px 0;text-align:center;color:#738078;font-family:'Lora',Georgia,serif;font-size:12px;font-style:italic}
+.cal-quote div:last-child{color:#a1a59f;font-family:sans-serif;font-size:11px;font-style:normal}
+/* ===== PROFILE ===== */
+.profile-card{display:flex;align-items:center;padding:16px;border-radius:var(--radius);background:var(--paper);box-shadow:0 4px 16px rgba(25,55,46,.05)}
+.profile-avatar{width:50px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:16px;color:#fff;background:var(--green);font-family:'Lora',Georgia,serif;font-size:24px;font-weight:800;flex:none;text-transform:uppercase}
+.profile-copy{flex:1;margin-left:14px;font-size:15px;font-weight:800;min-width:0}
+.profile-copy span{display:block;margin-top:4px;color:#8a918c;font-size:12px;font-weight:400;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.profile-mark{padding:5px 10px;border-radius:99px;color:var(--green);background:var(--yellow,#f4c95d);font-size:10px;font-weight:900;flex:none}
+.profile-stats{display:flex;justify-content:space-around;align-items:center;margin-top:14px;padding:16px;border-radius:var(--radius);background:var(--paper);box-shadow:0 4px 16px rgba(25,55,46,.05)}
+.ps-val{font-size:20px;font-weight:900;text-align:center}
+.ps-lbl{font-size:10px;color:var(--muted);margin-top:4px;text-align:center}
+.ps-divider{width:1px;height:32px;background:#e7e5dd}
+.group-title{margin:26px 4px 12px;color:#69766f;font-size:12px;font-weight:800}
+.setting-card{border-radius:var(--radius);background:var(--paper);box-shadow:0 4px 16px rgba(25,55,46,.05);padding:0 16px}
+.setting-row{min-height:66px;display:flex;align-items:center}
+.setting-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;flex:none;border-radius:12px;font-size:14px;font-weight:900}
+.setting-icon.green{color:var(--green);background:var(--mint)}
+.setting-icon.coral{color:#a44a34;background:#fbe1d8;font-size:18px}
+.setting-copy{flex:1;margin-left:12px;font-size:14px;font-weight:750}
+.setting-copy span{display:block;margin-top:3px;color:#969c97;font-size:11px;font-weight:400}
+.setting-line{height:1px;margin-left:52px;background:#eceae3}
+.stepper{height:36px;display:flex;align-items:center;overflow:hidden;border:1px solid #dfe1db;border-radius:11px;flex:none}
+.stepper button{width:32px;height:100%;display:flex;align-items:center;justify-content:center;color:#2d6253;background:#f0f3ed;font-size:17px}
+.stepper span{min-width:34px;text-align:center;font-size:13px;font-weight:800}
+.tts-toggle{flex:none;min-width:58px;height:34px;padding:0 14px;border-radius:11px;background:var(--green);color:#fff;font-size:13px;font-weight:800}
+.logout-btn{width:100%;height:50px;margin-top:26px;border-radius:14px;border:1.5px solid #e6b0a4;color:#c0392b;background:var(--paper);font-size:15px;font-weight:800}
+.app-version{margin-top:18px;text-align:center;color:#adb1ad;font-size:11px}
+/* ===== 文章笔记 / 划线 ===== */
+.sent-id mark{background:#fde7a8;color:inherit;border-radius:3px;padding:0 1px;cursor:pointer}
+.sent.has-note{position:relative}
+.note-flag{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;margin-left:6px;border-radius:6px;background:#fde7a8;font-size:11px;vertical-align:middle;cursor:pointer}
+.note-box{margin:8px 0 0 20px;padding:10px 12px;border-radius:10px;background:#fffaf0;border-left:3px solid var(--yellow,#f4c95d);font-size:12px;color:#6a5d3a;line-height:1.6;position:relative}
+.note-box .note-quote{font-style:italic;color:#9a8a5a;font-size:11px;margin-bottom:3px}
+.note-box .note-del{position:absolute;top:8px;right:10px;color:#bbb;font-size:13px;cursor:pointer}
+#noteEditor{position:fixed;inset:0;z-index:260;display:none;align-items:flex-end;background:rgba(0,0,0,.32)}
+#noteEditor.show{display:flex}
+.note-sheet{width:100%;background:var(--paper);border-radius:20px 20px 0 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom))}
+.note-sheet h3{font-size:16px;font-weight:800;margin-bottom:4px}
+.note-sheet .ns-quote{font-size:13px;color:var(--green2);font-style:italic;margin-bottom:12px;line-height:1.5}
+.note-sheet textarea{width:100%;height:96px;padding:12px;border:1.5px solid #e3e1d8;border-radius:12px;font-size:14px;font-family:inherit;resize:none}
+.note-sheet textarea:focus{outline:none;border-color:var(--green)}
+.note-sheet .ns-actions{display:flex;gap:10px;margin-top:14px}
+.note-sheet .ns-actions button{flex:1;height:48px;border-radius:12px;font-size:15px;font-weight:800}
+.ns-cancel{background:#eee;color:#555}.ns-save{background:var(--green);color:#fff}
+.tp-note-btn{background:var(--yellow,#f4c95d)!important;color:var(--green)!important}
+.task-icon.article{color:#2d745f;background:#dcebdc}
+.task-icon.extra{color:#8a6d3b;background:#f3ead2;font-size:22px}
+/* ===== 课程 LESSONS ===== */
+.lesson-card{padding:18px;margin-bottom:14px;border-radius:var(--radius);background:var(--paper);box-shadow:0 4px 16px rgba(25,55,46,.05)}
+.lesson-card.locked{opacity:.65}
+.lesson-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.lesson-no{width:44px;height:44px;flex:none;display:flex;align-items:center;justify-content:center;border-radius:14px;background:var(--green);color:#fff;font-family:'Lora',Georgia,serif;font-size:18px;font-weight:800}
+.lesson-card.locked .lesson-no{background:#c4cbc6}
+.lesson-ht{flex:1;min-width:0}
+.lesson-title{font-size:16px;font-weight:800}
+.lesson-title-id{font-size:12px;color:var(--muted);font-style:italic;margin-top:2px}
+.lesson-summary{font-size:12px;color:#6a736c;line-height:1.6;margin-bottom:12px}
+.lesson-prog{height:6px;border-radius:99px;background:#eceae3;overflow:hidden;margin-bottom:6px}
+.lesson-prog-fill{height:100%;background:var(--green);border-radius:inherit}
+.lesson-meta{display:flex;gap:14px;font-size:11px;color:var(--muted);margin-bottom:12px}
+.lesson-meta b{color:var(--ink);font-weight:800}
+.lesson-btns{display:flex;gap:10px}
+.lesson-btns button{flex:1;height:42px;border-radius:12px;font-size:13px;font-weight:800}
+.lb-learn{background:var(--green);color:#fff}
+.lb-learn:disabled{background:#e8e6df;color:#9aa39d}
+.lb-grammar{background:var(--purplebg);color:var(--purple)}
+.lesson-empty{font-size:12px;color:var(--muted);text-align:center;padding:8px 0}
+/* ===== 动效 & 质感打磨 ===== */
+@media (prefers-reduced-motion:no-preference){
+  @keyframes viewIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+  @keyframes pop{0%{transform:scale(.82)}55%{transform:scale(1.12)}100%{transform:scale(1)}}
+  @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  .view.active{animation:viewIn .34s var(--ease)}
+  #v-home.active .task,#v-home.active .hero,#v-home.active .stats-row,#lessonList .lesson-card,#articleList .art-card,#cultureList .cul-card{animation:rise .42s var(--ease) both}
+  #v-home.active .task:nth-child(2){animation-delay:.03s}#v-home.active .task:nth-child(3){animation-delay:.06s}#v-home.active .task:nth-child(4){animation-delay:.09s}
+  #lessonList .lesson-card:nth-child(2){animation-delay:.05s}#lessonList .lesson-card:nth-child(3){animation-delay:.1s}
+  #answerArea>*{animation:fadeUp .34s var(--ease) both}
+  .tab.active .tab-icon{animation:pop .4s var(--ease)}
+  .word-main{animation:fadeUp .3s var(--ease)}
+}
+.task,.lesson-card,.art-card,.cul-card,.wl-item,.rule-card,.cul-card{transition:transform .14s var(--ease),box-shadow .24s ease}
+.task:active,.lesson-card:active,.art-card:active,.cul-card:active,.wl-item:active,.rule-card:active{transform:scale(.982)}
+button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
+.btn-know:active,.btn-easy:active,.btn-unknown:active,.btn-next:active,.auth-btn:active,.lb-learn:active,.lb-grammar:active,.logout-btn:active,.ns-save:active,.tp-btn:active,.listen-play:active,.task-arrow{transition:transform .1s var(--ease)}
+.btn-know:active,.btn-easy:active,.btn-unknown:active,.btn-next:active,.auth-btn:active,.lb-learn:active,.ns-save:active{transform:scale(.97)}
+/* 更柔和分层的阴影（去掉"AI 统一硬阴影"感）*/
+.task,.stats-row,.lesson-card,.art-card,.cul-card,.word-card,.profile-card,.profile-stats,.setting-card,.cal-card{box-shadow:0 1px 2px rgba(25,55,46,.04),0 10px 26px -8px rgba(25,55,46,.10)}
+/* hero 更有质感：渐变 + 暖光晕 */
+.hero{background:linear-gradient(135deg,#dcebdc 0%,#cfe6d3 52%,#e8f1de 100%);position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-26px;top:-30px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(244,201,93,.4),transparent 68%);pointer-events:none}
+.hero-copy,.hero-kicker,.hero-title,.progress-bar{position:relative;z-index:1}
+.hero-title{letter-spacing:-.6px}
+/* 主按钮：微渐变 + 投影更立体 */
+.btn-know,.btn-next,.auth-btn,.lb-learn,.ns-save{background:linear-gradient(180deg,#1e5a4b,#143d34);box-shadow:0 8px 18px -6px rgba(20,63,53,.45)}
+.streak-card,.lesson-no{background:linear-gradient(140deg,#1e5a4b,#143d34)}
+/* tab 选中加一条小指示 */
+.tabs .tab{position:relative}
+.tab.active::before{content:'';position:absolute;top:4px;left:50%;transform:translateX(-50%);width:18px;height:3px;border-radius:99px;background:var(--green)}
+/* ===== 练习模式 认/拼/听 ===== */
+.mode-switch{display:flex;gap:6px;background:#e9ede8;border-radius:12px;padding:4px;margin-bottom:14px}
+.mode-switch button{flex:1;height:34px;border-radius:9px;font-size:13px;font-weight:800;color:#6a736c;background:transparent}
+.mode-switch button.active{background:var(--paper);color:var(--green);box-shadow:0 2px 8px rgba(25,55,46,.08)}
+.produce-q{text-align:center;font-size:26px;font-weight:900;margin:30px 0 4px;color:var(--ink)}
+.produce-input{width:100%;height:52px;margin-top:28px;padding:0 16px;border:1.5px solid #d9ddd6;border-radius:14px;font-size:20px;font-family:'Lora',Georgia,serif;text-align:center;background:#fff}
+.produce-input:focus{outline:none;border-color:var(--green)}
+.produce-input.ok{border-color:#3a8f6f;color:#1f7a55}
+.produce-input.bad{border-color:#d98b7a;color:#b8503a}
+.produce-typed{text-align:center;font-size:13px;color:#b8503a;margin-top:10px}
+.answer-word{text-align:center;font-family:'Lora',Georgia,serif;font-size:30px;font-weight:800;margin:6px 0 2px}
+.answer-word.bad{color:#b8503a}.answer-word.ok{color:#1f7a55}
+.listen-play{display:flex;align-items:center;justify-content:center;width:88px;height:88px;margin:46px auto 0;border-radius:50%;background:var(--mint);color:var(--green);font-size:38px}
+.listen-play:active{transform:scale(.92)}
+.listen-hint{text-align:center;color:var(--muted);font-size:12px;margin-top:18px}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<!-- ===== AUTH (登录/注册) ===== -->
+<div id="v-auth" class="view auth-view">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+        <rect width="72" height="72" rx="20" fill="#174d40"/>
+        <path d="M18 26 Q27 15 36 26 Q45 37 54 26" stroke="#dcebdc" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+        <path d="M18 38 Q27 27 36 38 Q45 49 54 38" stroke="#dcebdc" stroke-width="3.2" stroke-linecap="round" fill="none" opacity="0.65"/>
+        <path d="M22 50 Q29 41 36 50 Q43 59 50 50" stroke="#dcebdc" stroke-width="2.4" stroke-linecap="round" fill="none" opacity="0.35"/>
+      </svg>
+    </div>
+    <h1 class="auth-title">BahasaBelajar</h1>
+    <p class="auth-sub" id="authSub">登录，开始你的印尼语之旅</p>
+    <input id="authEmail" class="auth-input" type="email" placeholder="邮箱" autocomplete="email">
+    <input id="authPass" class="auth-input" type="password" placeholder="密码（至少 6 位）" autocomplete="current-password">
+    <button class="auth-btn" id="authSubmit" onclick="doAuth()">登录</button>
+    <div class="auth-msg" id="authMsg"></div>
+    <div class="auth-toggle">
+      <span id="authToggleText">还没有账号？</span>
+      <a id="authToggleLink" onclick="toggleAuthMode()">注册一个</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HOME ===== -->
+<div id="v-home" class="view active">
+  <div class="greeting" id="greeting">Selamat pagi</div>
+  <div class="date-line">
+    <div class="date-label" id="dateLabel"></div>
+    <div class="streak-badge">◆ <span class="streak-num" id="streakNum">0</span> 天</div>
+  </div>
+  <div class="hero">
+    <div class="hero-kicker">BAHASA HARI INI</div>
+    <div class="hero-title">每天一点，<br>印尼语自然会。</div>
+    <div class="progress-bar"><div class="progress-fill" id="homeProgress" style="width:0%"></div></div>
+  </div>
+  <div class="section-title">今日训练</div>
+  <div class="task" onclick="startLearn()">
+    <div class="task-icon learn">Aa</div>
+    <div class="task-body"><div class="task-name">学习新词</div><div class="task-desc" id="learnDesc">跟着课本学，按词频补</div></div>
+    <span class="task-count" id="newCount">0</span><span class="task-arrow">›</span>
+  </div>
+  <div class="task" onclick="startGrammar()">
+    <div class="task-icon grammar">文</div>
+    <div class="task-body"><div class="task-name">语法笔记</div><div class="task-desc">词缀规则、句型拆解</div></div>
+    <span class="task-arrow">›</span>
+  </div>
+  <div class="task" onclick="startReview()">
+    <div class="task-icon review">↻</div>
+    <div class="task-body"><div class="task-name">巩固复习</div><div class="task-desc">在忘记之前再见一面</div></div>
+    <span class="task-count" id="dueCount">0</span><span class="task-arrow">›</span>
+  </div>
+
+  <div class="section-title" style="margin-top:24px">拓展</div>
+  <div class="task" onclick="showView('articles')">
+    <div class="task-icon article">📄</div>
+    <div class="task-body"><div class="task-name">拓展阅读</div><div class="task-desc">时政/经济/科技长文 · 逐句对照</div></div>
+    <span class="task-arrow">›</span>
+  </div>
+  <div class="task" onclick="startExtra()">
+    <div class="task-icon extra">＋</div>
+    <div class="task-body"><div class="task-name">拓展词</div><div class="task-desc">课本之外的高阶词，想学再学</div></div>
+    <span class="task-arrow">›</span>
+  </div>
+  <div class="task" onclick="showView('culture')">
+    <div class="task-icon culture">🎭</div>
+    <div class="task-body"><div class="task-name">印尼文化</div><div class="task-desc">皮影 / 蜡染 / 美食 / 节日</div></div>
+    <span class="task-arrow">›</span>
+  </div>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-val" id="learnedStat">0</div><div class="stat-lbl">已学单词</div></div>
+    <div class="stat"><div class="stat-val" id="totalStat">0</div><div class="stat-lbl">完整词库</div></div>
+    <div class="stat"><div class="stat-val" id="todayDone">—</div><div class="stat-lbl">今日打卡</div></div>
+  </div>
+</div>
+
+<!-- ===== STUDY ===== -->
+<div id="v-study" class="view">
+  <div class="study-head">
+    <button class="close" onclick="closeStudy()">✕</button>
+    <div class="study-progress"><div class="study-progress-fill" id="studyProgress"></div></div>
+    <span class="study-counter" id="studyCounter">0/0</span>
+  </div>
+  <div class="mode-switch" id="modeSwitch">
+    <button data-m="recognize" onclick="setPracticeMode('recognize')">认</button>
+    <button data-m="produce" onclick="setPracticeMode('produce')">拼</button>
+    <button data-m="listen" onclick="setPracticeMode('listen')">听</button>
+  </div>
+  <div id="studyCard" class="word-card"></div>
+  <div class="study-actions" id="studyActions"></div>
+</div>
+
+<!-- ===== GRAMMAR ===== -->
+<div id="v-grammar" class="view">
+  <div class="grammar-head">
+    <button class="back" onclick="closeGrammar()">‹</button>
+    <h1>语法笔记</h1>
+    <span class="grammar-lesson-tag" id="grammarTag">第2课</span>
+  </div>
+  <div class="grammar-subtitle">Tata Bahasa · Pelajaran ke-2</div>
+  <div id="grammarList"></div>
+</div>
+
+<!-- ===== WORDS ===== -->
+<div id="v-words" class="view">
+  <div class="words-head"><h1>词库</h1></div>
+  <div class="search-box">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ba19c" stroke-width="2.5" stroke-linecap="round" style="flex:none;margin-right:8px"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input id="searchInput" placeholder="搜索单词或释义" oninput="searchWords()">
+  </div>
+  <div class="filter-row">
+    <button class="filter-btn active" data-level="" onclick="filterLevel(this)">全部</button>
+    <button class="filter-btn" data-level="1" onclick="filterLevel(this)">入门</button>
+    <button class="filter-btn" data-level="2" onclick="filterLevel(this)">初级</button>
+    <button class="filter-btn" data-level="3" onclick="filterLevel(this)">中级</button>
+  </div>
+  <div id="wordList" class="word-list"></div>
+  <div class="list-end" id="listEnd"></div>
+</div>
+
+<!-- ===== ARTICLES ===== -->
+<div id="v-articles" class="view">
+  <div class="words-head"><h1>印尼文章</h1></div>
+  <div class="grammar-subtitle">逐句对照 · 时政 / 经济 / 科技</div>
+  <div id="articleList"></div>
+</div>
+
+<!-- ===== ARTICLE DETAIL ===== -->
+<div id="v-article" class="view">
+  <div class="grammar-head">
+    <button class="back" onclick="showView('articles', document.querySelectorAll('.tab')[1])">‹</button>
+    <h1 id="artTitle" style="font-size:18px"></h1>
+    <button id="transToggle" class="grammar-lesson-tag" onclick="toggleTrans()">隐藏中文</button>
+  </div>
+  <div id="artMeta" class="grammar-subtitle"></div>
+  <div id="artSummary" class="art-summary"></div>
+  <div id="artBody"></div>
+</div>
+
+<!-- ===== CULTURE ===== -->
+<div id="v-culture" class="view">
+  <div class="grammar-head">
+    <button class="back" onclick="showView('home', document.querySelector('.tab'))">‹</button>
+    <h1>印尼文化</h1>
+    <span class="grammar-lesson-tag">Budaya</span>
+  </div>
+  <div class="grammar-subtitle">Budaya Indonesia · 点开看详情</div>
+  <div id="cultureList"></div>
+</div>
+
+<!-- ===== CALENDAR ===== -->
+<div id="v-calendar" class="view">
+  <div class="cal-eyebrow">KEBIASAAN BAIK</div>
+  <h1 class="cal-title">学习日历</h1>
+  <div class="streak-card">
+    <div>
+      <div class="streak-label">连续学习</div>
+      <div><span class="streak-number" id="calStreak">0</span><span class="streak-unit"> 天</span></div>
+      <div class="streak-copy">让小小的坚持，变成语言直觉。</div>
+    </div>
+    <div class="streak-badge"><div class="diamond">◆</div><span id="calTotal">0</span> 次打卡</div>
+  </div>
+  <div class="cal-card">
+    <div class="month-head">
+      <button onclick="shiftMonth(-1)">‹</button>
+      <span id="monthLabel"></span>
+      <button onclick="shiftMonth(1)">›</button>
+    </div>
+    <div class="cal-week"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
+    <div class="cal-grid" id="calGrid"></div>
+    <div class="cal-legend">
+      <div><span class="dot done-dot"></span>完成打卡</div>
+      <div><span class="dot active-dot"></span>有学习</div>
+      <div><span class="dot today-dot"></span>今天</div>
+    </div>
+  </div>
+  <div class="cal-quote">
+    <div>" Sedikit demi sedikit, lama-lama menjadi bukit. "</div>
+    <div>积少成多，终成高山。</div>
+  </div>
+</div>
+
+<!-- ===== LESSONS（课程主线）===== -->
+<div id="v-lessons" class="view">
+  <div class="cal-eyebrow">KURIKULUM · 课本主线</div>
+  <h1 class="cal-title">课程</h1>
+  <div class="grammar-subtitle">跟着《新编基础印度尼西亚语》一课一课学</div>
+  <div id="lessonList"></div>
+</div>
+
+<!-- ===== TABS ===== -->
+<div class="tabs" id="tabBar">
+  <button class="tab active" onclick="showView('home',this)">
+    <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5L12 4l9 7.5V20a1 1 0 01-1 1h-5v-5H9v5H4a1 1 0 01-1-1z"/></svg></span>今日
+  </button>
+  <button class="tab" onclick="showView('lessons',this)">
+    <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></span>课程
+  </button>
+  <button class="tab" onclick="showView('words',this)">
+    <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="7" y1="16" x2="13" y2="16"/></svg></span>词库
+  </button>
+  <button class="tab" onclick="showView('calendar',this)">
+    <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>日历
+  </button>
+  <button class="tab" onclick="showView('profile',this)">
+    <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></span>我的
+  </button>
+</div>
+
+<!-- ===== PROFILE (我的) ===== -->
+<div id="v-profile" class="view">
+  <div class="cal-eyebrow">PREFERENSI</div>
+  <h1 class="cal-title">我的</h1>
+  <div class="profile-card">
+    <div class="profile-avatar" id="profAvatar">B</div>
+    <div class="profile-copy">
+      <div id="profName">Bahasa Learner</div>
+      <span id="profEmail">正在建立印尼语思维</span>
+    </div>
+    <div class="profile-mark">PRO</div>
+  </div>
+
+  <div class="profile-stats">
+    <div><div class="ps-val" id="profLearned">0</div><div class="ps-lbl">已学单词</div></div>
+    <div class="ps-divider"></div>
+    <div><div class="ps-val" id="profStreak">0</div><div class="ps-lbl">连续天数</div></div>
+    <div class="ps-divider"></div>
+    <div><div class="ps-val" id="profNotes">0</div><div class="ps-lbl">文章笔记</div></div>
+  </div>
+
+  <div class="group-title">每日计划</div>
+  <div class="setting-card">
+    <div class="setting-row">
+      <div class="setting-icon green">Aa</div>
+      <div class="setting-copy"><div>每日新词</div><span>建议 10–20 个，轻松坚持</span></div>
+      <div class="stepper"><button onclick="stepPlan('daily_new_words',-5)">−</button><span id="planNew">10</span><button onclick="stepPlan('daily_new_words',5)">＋</button></div>
+    </div>
+    <div class="setting-line"></div>
+    <div class="setting-row">
+      <div class="setting-icon coral">↻</div>
+      <div class="setting-copy"><div>复习上限</div><span>控制每天的复习量</span></div>
+      <div class="stepper"><button onclick="stepPlan('daily_review_limit',-10)">−</button><span id="planReview">100</span><button onclick="stepPlan('daily_review_limit',10)">＋</button></div>
+    </div>
+  </div>
+
+  <button class="logout-btn" onclick="doLogout()">退出登录</button>
+  <div class="app-version">BahasaBelajar · H5 版</div>
+</div>
+
+<!-- ===== 划词翻译 POPUP ===== -->
+<div id="transPop"><div id="transPopBody"></div><div class="tp-arrow"></div></div>
+
+<!-- ===== 笔记编辑器 ===== -->
+<div id="noteEditor">
+  <div class="note-sheet">
+    <h3>添加笔记</h3>
+    <div class="ns-quote" id="noteQuote"></div>
+    <textarea id="noteText" placeholder="写下你的理解、疑问或记忆点…（留空＝仅划线）"></textarea>
+    <div class="ns-actions">
+      <button class="ns-cancel" onclick="closeNoteEditor()">取消</button>
+      <button class="ns-save" onclick="saveNote()">保存</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== CONFIG =====
+let SUPABASE_URL = localStorage.getItem('sb_url') || 'https://bzdelpmcewjdvmgyafux.supabase.co'
+let SUPABASE_KEY = localStorage.getItem('sb_key') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ6ZGVscG1jZXdqZHZtZ3lhZnV4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzMjY1MDksImV4cCI6MjA4ODkwMjUwOX0.x_D0VGGmXCY9rueAh0lV4f7r9wOJIGCHs19w5S2BNpg'
+let sb = null
+let currentUser = null
+let authMode = 'login'  // 'login' | 'signup'
+let profile = { daily_new_words: 10, daily_review_limit: 100, display_name: null }
+
+// 转义 HTML，防止数据库/用户内容里的 <script> 等被当代码执行（存储型 XSS）
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]))
+}
+
+// ===== Qwen 代理（Supabase Edge Function）=====
+const QWEN_FN = SUPABASE_URL + '/functions/v1/qwen'
+let ttsEngine = localStorage.getItem('tts_engine') || 'qwen'   // 'qwen' | 'web'
+let qwenTransOK = true   // 翻译代理是否可用（失败则回退 MyMemory）
+
+async function qwenCall(action, text) {
+  // 带登录 token，函数会校验身份 + 每日上限（防盗刷）
+  const { data: { session } } = await sb.auth.getSession()
+  const token = session && session.access_token
+  if (!token) throw new Error('未登录')
+  const r = await fetch(QWEN_FN, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', apikey: SUPABASE_KEY, Authorization: 'Bearer ' + token },
+    body: JSON.stringify({ action, text })
+  })
+  if (r.status === 429) throw new Error('今日 Qwen 用量已达上限')
+  if (!r.ok) throw new Error('qwen ' + action + ' ' + r.status)
+  return r
+}
+async function qwenTranslate(text) {
+  const r = await qwenCall('translate', text)
+  const d = await r.json()
+  if (!d.translation) throw new Error('empty')
+  return d.translation
+}
+async function qwenTTSUrl(text) {
+  const r = await qwenCall('tts', text)
+  const blob = await r.blob()
+  return URL.createObjectURL(blob)
+}
+
+function initSupabase() {
+  if (!SUPABASE_URL || !SUPABASE_KEY) return false
+  sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+  return true
+}
+
+// ===== AUTH =====
+function toggleAuthMode() {
+  authMode = authMode === 'login' ? 'signup' : 'login'
+  document.getElementById('authSubmit').textContent = authMode === 'login' ? '登录' : '注册'
+  document.getElementById('authSub').textContent = authMode === 'login' ? '登录，开始你的印尼语之旅' : '注册一个新账号'
+  document.getElementById('authToggleText').textContent = authMode === 'login' ? '还没有账号？' : '已经有账号了？'
+  document.getElementById('authToggleLink').textContent = authMode === 'login' ? '注册一个' : '去登录'
+  setAuthMsg('')
+}
+function setAuthMsg(text, ok) {
+  const el = document.getElementById('authMsg')
+  el.textContent = text
+  el.className = 'auth-msg ' + (ok ? 'ok' : 'err')
+}
+async function doAuth() {
+  if (!sb) return setAuthMsg('Supabase 未初始化')
+  const email = document.getElementById('authEmail').value.trim()
+  const password = document.getElementById('authPass').value
+  if (!email || password.length < 6) return setAuthMsg('请输入邮箱和至少 6 位密码')
+  const btn = document.getElementById('authSubmit'); btn.disabled = true
+  setAuthMsg(authMode === 'login' ? '登录中…' : '注册中…', true)
+  try {
+    if (authMode === 'login') {
+      const { data, error } = await sb.auth.signInWithPassword({ email, password })
+      if (error) throw error
+      onLoggedIn(data.user)
+    } else {
+      const { data, error } = await sb.auth.signUp({ email, password })
+      if (error) throw error
+      if (data.session) { onLoggedIn(data.user) }
+      else { setAuthMsg('注册成功，请去邮箱确认后再登录（或在 Supabase 后台关闭邮箱确认）', true); authMode = 'login' }
+    }
+  } catch (e) {
+    setAuthMsg(translateAuthErr(e.message || '出错了'))
+  } finally { btn.disabled = false }
+}
+function translateAuthErr(m) {
+  if (/Invalid login/i.test(m)) return '邮箱或密码不正确'
+  if (/already registered|already exists/i.test(m)) return '该邮箱已注册，请直接登录'
+  if (/Email not confirmed/i.test(m)) return '邮箱未确认（请在 Supabase 后台关闭邮箱确认）'
+  if (/rate limit/i.test(m)) return '操作太频繁，请稍后再试'
+  return m
+}
+async function onLoggedIn(user) {
+  currentUser = user
+  await loadProfileData()
+  showView('home', document.querySelector('.tab'))
+}
+async function doLogout() {
+  if (sb) await sb.auth.signOut()
+  currentUser = null
+  enterAuth()
+}
+function enterAuth() {
+  authMode = 'login'
+  document.getElementById('authSubmit').textContent = '登录'
+  showView('auth')
+}
+async function loadProfileData() {
+  // 读取或创建本用户 profile（若表不存在则用默认值，不报错）
+  try {
+    const { data, error } = await sb.from('profiles').select('*').maybeSingle()
+    if (error) throw error
+    if (data) { profile = data }
+    else { await sb.from('profiles').insert({}); }
+  } catch (e) { /* profiles 表可能还没建，用默认值 */ }
+}
+
+// ===== NAV =====
+function showView(name, tabEl) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'))
+  document.getElementById('v-' + name).classList.add('active')
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'))
+  if (tabEl) tabEl.classList.add('active')
+  document.getElementById('tabBar').style.display = (name === 'auth') ? 'none' : ''
+  if (name !== 'auth') window.scrollTo(0, 0)
+  if (name === 'home') loadHome()
+  if (name === 'words') { wordsOffset = 0; loadWords() }
+  if (name === 'articles') loadArticles()
+  if (name === 'culture') loadCulture()
+  if (name === 'calendar') loadCalendar()
+  if (name === 'profile') loadProfile()
+  if (name === 'lessons') loadLessons()
+}
+
+// ===== DATE HELPERS =====
+function todayStr() {
+  const d = new Date()
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0')
+}
+function addDays(dateStr, n) {
+  const d = new Date(dateStr)
+  d.setDate(d.getDate() + n)
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0')
+}
+
+// SRS intervals
+const INTERVALS = {1:1, 2:2, 3:4, 4:7, 5:15, 6:30, 7:60}
+
+// ===== HOME =====
+async function loadHome() {
+  if (!sb) return
+  const t = todayStr()
+  const h = new Date().getHours()
+  document.getElementById('greeting').textContent = h < 12 ? 'Selamat pagi' : h < 18 ? 'Selamat siang' : 'Selamat malam'
+  document.getElementById('dateLabel').textContent = `${new Date().getMonth()+1}月${new Date().getDate()}日 · 今日计划`
+
+  const [{count: totalWords}, {count: learnedWords}] = await Promise.all([
+    sb.from('words').select('*', {count:'exact', head:true}),
+    sb.from('learning').select('*', {count:'exact', head:true})
+  ])
+  const {count: dueCount} = await sb.from('learning').select('*',{count:'exact',head:true}).eq('status','reviewing').lte('next_review_at', t)
+  const {data: ci} = await sb.from('checkins').select('*').eq('date', t).maybeSingle()
+  const checkin = ci || {new_learned:0, reviewed:0, completed:0}
+  const goal = profile.daily_new_words || 10
+  const newRemaining = Math.max(0, goal - checkin.new_learned)
+
+  document.getElementById('newCount').textContent = newRemaining
+  document.getElementById('dueCount').textContent = dueCount || 0
+  document.getElementById('learnedStat').textContent = learnedWords || 0
+  document.getElementById('totalStat').textContent = totalWords || 0
+  document.getElementById('todayDone').textContent = checkin.completed ? '✓' : '—'
+  document.getElementById('streakNum').textContent = await getStreak(t)
+
+  const done = checkin.new_learned + checkin.reviewed
+  const total = goal + (dueCount||0) + checkin.reviewed
+  const pct = checkin.completed ? 100 : Math.min(100, Math.round(done / Math.max(1,total)*100))
+  document.getElementById('homeProgress').style.width = pct + '%'
+}
+
+async function getStreak(t) {
+  const {data} = await sb.from('checkins').select('date').eq('completed',1).order('date',{ascending:false}).limit(60)
+  if (!data) return 0
+  const set = new Set(data.map(r=>r.date))
+  let d = set.has(t) ? t : addDays(t,-1)
+  let s = 0
+  while (set.has(d)) { s++; d = addDays(d,-1) }
+  return s
+}
+
+// ===== STUDY =====
+let studyQueue = [], studyIdx = 0, studyCompleted = 0, studyMode = 'learn'
+let practiceMode = localStorage.getItem('practice_mode') || 'recognize'  // recognize|produce|listen
+function setPracticeMode(m) {
+  practiceMode = m
+  localStorage.setItem('practice_mode', m)
+  syncModeSwitch()
+  renderStudy()
+}
+function syncModeSwitch() {
+  document.querySelectorAll('#modeSwitch button').forEach(b => b.classList.toggle('active', b.dataset.m === practiceMode))
+}
+
+async function learnedIdList() {
+  const {data} = await sb.from('learning').select('word_id')
+  return (data || []).map(r => r.word_id)
+}
+// 主线：课本词（按课、词频）优先，不够再用基础词库（按词频）补；routine 拓展词不进主线
+async function startLearn() {
+  if (!sb) return alert('请先在设置中配置 Supabase')
+  studyMode = 'learn'
+  const t = todayStr()
+  const {data: ci} = await sb.from('checkins').select('*').eq('date',t).maybeSingle()
+  const done = ci ? ci.new_learned : 0
+  const limit = Math.max(0, (profile.daily_new_words || 10) - done)
+  if (!limit) return alert('今日新词已学完！')
+  const learnedIds = await learnedIdList()
+  const excl = learnedIds.length ? `(${learnedIds.join(',')})` : null
+  // 1) 课本词优先
+  let qt = sb.from('words').select('*').eq('source','textbook').order('lesson').order('freq').limit(limit)
+  if (excl) qt = qt.not('id','in',excl)
+  let pool = (await qt).data || []
+  // 2) 不够再用基础词库补
+  if (pool.length < limit) {
+    let qc = sb.from('words').select('*').eq('source','core').order('freq').limit(limit - pool.length)
+    if (excl) qc = qc.not('id','in',excl)
+    pool = pool.concat((await qc).data || [])
+  }
+  if (!pool.length) return alert('课本+基础词库已全部学完！去「拓展词」继续吧')
+  studyQueue = pool.map(w => ({...w, wrongTimes:0}))
+  studyIdx = 0; studyCompleted = 0
+  showView('study')
+  renderStudy()
+}
+// 学某一课的词（从「课程」页进入）
+async function startLessonWords(lessonNo) {
+  if (!sb) return
+  studyMode = 'learn'
+  const learnedIds = await learnedIdList()
+  const excl = learnedIds.length ? `(${learnedIds.join(',')})` : null
+  let q = sb.from('words').select('*').eq('lesson', lessonNo).order('freq').limit(50)
+  if (excl) q = q.not('id','in',excl)
+  const pool = (await q).data || []
+  if (!pool.length) return alert('这一课的词都学过啦，去「巩固复习」吧')
+  studyQueue = pool.map(w => ({...w, wrongTimes:0}))
+  studyIdx = 0; studyCompleted = 0
+  showView('study')
+  renderStudy()
+}
+// 拓展词（routine 生成的高阶词）
+async function startExtra() {
+  if (!sb) return alert('请先登录')
+  studyMode = 'learn'
+  const learnedIds = await learnedIdList()
+  const excl = learnedIds.length ? `(${learnedIds.join(',')})` : null
+  let q = sb.from('words').select('*').in('source',['routine','user']).order('freq').limit(profile.daily_new_words || 10)
+  if (excl) q = q.not('id','in',excl)
+  const pool = (await q).data || []
+  if (!pool.length) return alert('拓展词暂时学完了')
+  studyQueue = pool.map(w => ({...w, wrongTimes:0}))
+  studyIdx = 0; studyCompleted = 0
+  showView('study')
+  renderStudy()
+}
+
+async function startReview() {
+  if (!sb) return alert('请先在设置中配置 Supabase')
+  studyMode = 'review'
+  const t = todayStr()
+  const {data} = await sb.from('learning').select('word_id, stage, words(*)').eq('status','reviewing').lte('next_review_at',t).order('next_review_at').limit(profile.daily_review_limit || 100)
+  if (!data || !data.length) return alert('暂无待复习单词！')
+  studyQueue = data.map(r => ({...r.words, stage: r.stage, wrongTimes:0}))
+  studyIdx = 0; studyCompleted = 0
+  showView('study')
+  renderStudy()
+}
+
+function renderStudy() {
+  const total = studyQueue.length
+  const pct = Math.round(studyCompleted / Math.max(1,total) * 100)
+  document.getElementById('studyProgress').style.width = pct + '%'
+  document.getElementById('studyCounter').textContent = `${studyCompleted}/${total}`
+  syncModeSwitch()
+
+  if (studyIdx >= studyQueue.length) {
+    document.getElementById('studyCard').innerHTML = `<div class="study-done"><div class="mark">◆</div><h2>做得漂亮</h2><p>完成 ${total} 个单词</p><button onclick="closeStudy()">完成训练</button></div>`
+    document.getElementById('studyActions').innerHTML = ''
+    return
+  }
+  const w = studyQueue[studyIdx]
+  const levelName = w.level===1?'入门':w.level===2?'初级':'中级'
+  if (practiceMode === 'produce') return renderProduce(w, levelName)
+  if (practiceMode === 'listen') return renderListen(w, levelName)
+  // 认：看印尼语→回忆中文（默认）
+  document.getElementById('studyCard').innerHTML = `
+    <span class="word-level">${levelName}</span>
+    <div class="word-main">${esc(w.word)}</div>
+    <button class="speak-btn word-speak" onclick="speakStudyWord()">🔊</button>
+    <div class="word-pos">${esc(w.pos)}</div>
+    <div id="answerArea"><div class="think-hint">先在脑海里回想它的意思</div></div>`
+  document.getElementById('studyActions').innerHTML = `
+    <button class="btn-unknown" onclick="revealUnknown()">✕ 不认识</button>
+    <button class="btn-know" onclick="revealKnown()">✓ 认识</button>`
+}
+
+// 拼：看中文→拼出印尼语
+function renderProduce(w, levelName) {
+  document.getElementById('studyCard').innerHTML = `
+    <span class="word-level">${levelName}</span>
+    <div class="produce-q">${esc(w.meaning)}</div>
+    <div class="word-pos">${esc(w.pos)}</div>
+    <input id="pInput" class="produce-input" placeholder="拼出印尼语" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false">
+    <div id="answerArea"></div>`
+  document.getElementById('studyActions').innerHTML = `
+    <button class="btn-unknown" onclick="produceReveal()">不会，看答案</button>
+    <button class="btn-know" onclick="produceCheck()">检查</button>`
+  const inp = document.getElementById('pInput')
+  inp.focus()
+  inp.onkeydown = e => { if (e.key === 'Enter') produceCheck() }
+}
+function produceCheck() {
+  const w = studyQueue[studyIdx]
+  const inp = document.getElementById('pInput')
+  const val = (inp.value || '').trim().toLowerCase()
+  if (!val) return
+  const ok = val === (w.word || '').trim().toLowerCase()
+  inp.classList.add(ok ? 'ok' : 'bad'); inp.disabled = true
+  if (ok) {
+    revealAnswerWord(w, true)
+    document.getElementById('studyActions').innerHTML = w.wrongTimes
+      ? `<button class="btn-next" onclick="nextWord(false)" style="width:100%">继续</button>`
+      : `<button class="btn-easy" onclick="submitResult('easy')">太简单了</button><button class="btn-know" onclick="submitResult('known')">记住了</button>`
+  } else {
+    requeueWrong(w)
+    revealAnswerWord(w, false, val)
+    document.getElementById('studyActions').innerHTML = `<button class="btn-next" onclick="nextWord(false)" style="width:100%">继续，下次拼对</button>`
+  }
+}
+function produceReveal() {
+  const w = studyQueue[studyIdx]
+  const inp = document.getElementById('pInput'); if (inp) inp.disabled = true
+  requeueWrong(w)
+  revealAnswerWord(w, false)
+  document.getElementById('studyActions').innerHTML = `<button class="btn-next" onclick="nextWord(false)" style="width:100%">继续，下次我会拼</button>`
+}
+
+// 听：听发音→回想意思和拼写
+function renderListen(w, levelName) {
+  document.getElementById('studyCard').innerHTML = `
+    <span class="word-level">${levelName}</span>
+    <button class="listen-play" onclick="speakStudyWord()">🔊</button>
+    <div class="listen-hint">点喇叭再听一次 · 回想它的意思和拼写</div>
+    <div id="answerArea"></div>`
+  document.getElementById('studyActions').innerHTML = `
+    <button class="btn-unknown" onclick="listenReveal(false)">✕ 没听出</button>
+    <button class="btn-know" onclick="listenReveal(true)">✓ 听出了</button>`
+  setTimeout(() => speakStudyWord(), 280)
+}
+function listenReveal(known) {
+  const w = studyQueue[studyIdx]
+  if (!known) requeueWrong(w)
+  revealAnswerWord(w, known)
+  document.getElementById('studyActions').innerHTML = (!known || w.wrongTimes)
+    ? `<button class="btn-next" onclick="nextWord(false)" style="width:100%">继续</button>`
+    : `<button class="btn-easy" onclick="submitResult('easy')">太简单了</button><button class="btn-know" onclick="submitResult('known')">记住了</button>`
+}
+
+function requeueWrong(w) {
+  w.wrongTimes++
+  studyQueue.splice(Math.min(studyIdx+4, studyQueue.length), 0, {...w, retry:true})
+}
+
+function revealKnown() {
+  showAnswer()
+  const w = studyQueue[studyIdx]
+  document.getElementById('studyActions').innerHTML = w.wrongTimes
+    ? `<button class="btn-next" onclick="nextWord(false)" style="width:100%">继续，下次我会记住</button>`
+    : `<button class="btn-easy" onclick="submitResult('easy')">太简单了</button><button class="btn-know" onclick="submitResult('known')">记住了</button>`
+}
+
+function revealUnknown() {
+  requeueWrong(studyQueue[studyIdx])
+  showAnswer()
+  document.getElementById('studyActions').innerHTML = `<button class="btn-next" onclick="nextWord(false)" style="width:100%">继续，下次我会记住</button>`
+}
+
+function exHtmlOf(w) {
+  return (w.examples||[]).map(e => `<div class="ex-item"><div class="ex-sentence">${esc(e.id)}</div><div class="ex-zh">${esc(e.zh)}</div></div>`).join('')
+}
+// 认模式：词已在卡顶，答案区只补释义+例句
+function showAnswer() {
+  const w = studyQueue[studyIdx]
+  document.getElementById('answerArea').innerHTML = `<div class="word-meaning">${esc(w.meaning)}</div><div class="word-examples">${exHtmlOf(w)}</div>`
+}
+// 拼/听模式：词没显示，答案区先亮出词，再给释义+例句
+function revealAnswerWord(w, ok, typed) {
+  document.getElementById('answerArea').innerHTML = `
+    <div class="answer-word ${ok ? 'ok' : 'bad'}">${esc(w.word)}</div>
+    <div class="word-pos" style="margin-bottom:6px">${esc(w.pos)}</div>
+    ${typed ? `<div class="produce-typed">你拼的：${esc(typed)}</div>` : ''}
+    <div class="word-meaning" style="margin-top:14px">${esc(w.meaning)}</div>
+    <div class="word-examples">${exHtmlOf(w)}</div>`
+}
+
+async function submitResult(result) {
+  const w = studyQueue[studyIdx]
+  const t = todayStr()
+  if (studyMode === 'learn') {
+    const stage = result === 'easy' ? 3 : 1
+    const next = addDays(t, INTERVALS[stage])
+    await sb.from('learning').insert({word_id:w.id, stage, status:'reviewing', next_review_at:next, learned_at:t, last_review_at:t, correct_count:1, wrong_count:w.wrongTimes})
+    await bumpCheckin(t, 'new_learned')
+  } else {
+    const correct = !w.wrongTimes
+    let stage = w.stage
+    if (correct) { stage = Math.min(7, stage+1) } else { stage = Math.max(1, stage-2) }
+    const status = stage > 7 ? 'mastered' : 'reviewing'
+    const next = addDays(t, INTERVALS[Math.min(stage,7)])
+    await sb.from('learning').update({stage, status, next_review_at:next, last_review_at:t, correct_count: w.correct_count+(correct?1:0), wrong_count: w.wrong_count+(correct?0:1)}).eq('word_id',w.id)
+    await bumpCheckin(t, 'reviewed')
+  }
+  nextWord(true)
+}
+
+function nextWord(countDone) {
+  if (countDone) studyCompleted++
+  studyIdx++
+  renderStudy()
+}
+
+async function bumpCheckin(t, field) {
+  const {data: existing} = await sb.from('checkins').select('*').eq('date',t).maybeSingle()
+  const goal = profile.daily_new_words || 10
+  if (existing) {
+    const nv = (existing[field] || 0) + 1
+    const newLearned = field === 'new_learned' ? nv : (existing.new_learned || 0)
+    const completed = newLearned >= goal ? 1 : (existing.completed || 0)
+    await sb.from('checkins').update({[field]: nv, completed}).eq('date',t)
+  } else {
+    const completed = (field === 'new_learned' && 1 >= goal) ? 1 : 0
+    await sb.from('checkins').insert({date:t, [field]:1, completed})
+  }
+}
+
+function closeStudy() { showView('home', document.querySelector('.tab')) }
+
+// ===== LESSONS（课程主线）=====
+async function loadLessons() {
+  if (!sb) return
+  const [lessonsRes, wordsRes, grammarRes, learnedRes] = await Promise.all([
+    sb.from('lessons').select('*').order('no'),
+    sb.from('words').select('id,lesson').eq('source','textbook'),
+    sb.from('grammar').select('lesson'),
+    sb.from('learning').select('word_id')
+  ])
+  const lessons = lessonsRes.data || []
+  const tbWords = wordsRes.data || []
+  const grammar = grammarRes.data || []
+  const learnedSet = new Set((learnedRes.data || []).map(r => r.word_id))
+  const html = lessons.map(L => {
+    const lw = tbWords.filter(w => w.lesson === L.no)
+    const total = lw.length
+    const learned = lw.filter(w => learnedSet.has(w.id)).length
+    const gCount = grammar.filter(g => g.lesson === L.no).length
+    const pct = total ? Math.round(learned / total * 100) : 0
+    const locked = total === 0 && gCount === 0
+    return `<div class="lesson-card ${locked ? 'locked' : ''}">
+      <div class="lesson-top">
+        <div class="lesson-no">${L.no}</div>
+        <div class="lesson-ht"><div class="lesson-title">${esc(L.title)}</div><div class="lesson-title-id">${esc(L.title_id || '')}</div></div>
+      </div>
+      ${!locked && L.summary ? `<div class="lesson-summary">${esc(L.summary)}</div>` : ''}
+      ${locked ? `<div class="lesson-empty">📝 待录入 —— 把课本这一课的词 / 语法 / 对话补进来</div>` : `
+      <div class="lesson-prog"><div class="lesson-prog-fill" style="width:${pct}%"></div></div>
+      <div class="lesson-meta"><span>词 <b>${learned}/${total}</b></span><span>语法 <b>${gCount}</b> 条</span></div>
+      <div class="lesson-btns">
+        <button class="lb-learn" onclick="startLessonWords(${L.no})" ${total === 0 ? 'disabled' : ''}>学这课的词</button>
+        <button class="lb-grammar" onclick="startGrammar(${L.no})" ${gCount === 0 ? 'disabled' : ''}>看语法</button>
+      </div>`}
+    </div>`
+  }).join('')
+  document.getElementById('lessonList').innerHTML = html || '<div class="list-end">暂无课程</div>'
+}
+
+// ===== GRAMMAR =====
+let grammarExpanded = -1
+
+async function startGrammar(lesson) {
+  lesson = lesson || 2
+  if (!sb) return alert('请先在设置中配置 Supabase')
+  const {data} = await sb.from('grammar').select('*').eq('lesson',lesson).order('id')
+  if (!data || !data.length) return alert('这一课暂无语法内容')
+  document.getElementById('grammarTag').textContent = '第' + lesson + '课'
+  showView('grammar')
+  const html = data.map((r, i) => {
+    const exHtml = r.examples.map(ex => `
+      <div class="rule-example">
+        ${ex.root ? `<div class="rex-word"><span class="rex-id">${esc(ex.id)}</span><span class="rex-root">← ${esc(ex.root)}</span></div>` : ''}
+        <div class="rex-sentence">${esc(ex.sentence)}</div>
+        <div class="rex-zh">${esc(ex.zh)}</div>
+      </div>`).join('')
+    return `<div class="rule-card" onclick="toggleRule(${i})">
+      <div class="rule-head"><span class="rule-pattern">${esc(r.pattern)}</span><span class="rule-arrow" id="rarr${i}">›</span></div>
+      <div class="rule-meaning">${esc(r.meaning)}</div>
+      <div class="rule-detail hidden" id="rdetail${i}">
+        <div class="rule-explain">${esc(r.explain)}</div>
+        ${exHtml}
+      </div>
+    </div>`
+  }).join('')
+  document.getElementById('grammarList').innerHTML = html
+  grammarExpanded = -1
+}
+
+function toggleRule(i) {
+  if (grammarExpanded === i) {
+    document.getElementById('rdetail'+i).classList.add('hidden')
+    document.getElementById('rarr'+i).textContent = '›'
+    grammarExpanded = -1
+  } else {
+    if (grammarExpanded >= 0) {
+      document.getElementById('rdetail'+grammarExpanded).classList.add('hidden')
+      document.getElementById('rarr'+grammarExpanded).textContent = '›'
+    }
+    document.getElementById('rdetail'+i).classList.remove('hidden')
+    document.getElementById('rarr'+i).textContent = '▾'
+    grammarExpanded = i
+  }
+}
+
+function closeGrammar() { showView('home', document.querySelector('.tab')) }
+
+// ===== WORDS =====
+let wordsOffset = 0, currentLevel = '', wordItems = []
+
+async function loadWords() {
+  if (!sb) return
+  let q = sb.from('words').select('*, learning(stage,status)').order('level').order('id')
+  if (currentLevel) q = q.eq('level', Number(currentLevel))
+  const search = document.getElementById('searchInput').value.trim().replace(/[,()%*:]/g, '')
+  if (search) q = q.or(`word.ilike.%${search}%,meaning.ilike.%${search}%`)
+  const {data, count} = await q.range(0, 99)
+  wordItems = data || []
+  renderWords()
+}
+
+function renderWords() {
+  const html = wordItems.map((w,i) => {
+    const levelName = w.level===1?'入门':w.level===2?'初级':'中级'
+    const st = w.learning && w.learning.length ? w.learning[0] : null
+    const statusLabel = !st ? '未学' : st.status === 'mastered' ? '已掌握' : '学习中'
+    const exHtml = (w.examples||[]).map(e => `<div class="ex-item"><div class="ex-sentence">${esc(e.id)}</div><div class="ex-zh">${esc(e.zh)}</div></div>`).join('')
+    return `<div class="wl-item" onclick="this.querySelector('.wl-examples').classList.toggle('hidden')">
+      <div class="wl-line">
+        <div class="wl-letter">${esc((w.word[0]||'').toUpperCase())}</div>
+        <div class="wl-info">
+          <span class="wl-word">${esc(w.word)}</span><span class="wl-pos">${esc(w.pos)}</span>
+          <div class="wl-meaning">${esc(w.meaning)}</div>
+        </div>
+        <button class="speak-btn wl-speak" onclick="event.stopPropagation(); speakListWord(${i})">🔊</button>
+      </div>
+      <div class="wl-examples hidden">${exHtml}</div>
+    </div>`
+  }).join('')
+  document.getElementById('wordList').innerHTML = html
+  document.getElementById('listEnd').textContent = `共 ${wordItems.length} 个单词`
+}
+
+function searchWords() { loadWords() }
+function filterLevel(el) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'))
+  el.classList.add('active')
+  currentLevel = el.dataset.level
+  loadWords()
+}
+
+// ===== ARTICLES =====
+let articleCache = [], artCurrent = null
+
+async function loadArticles() {
+  if (!sb) return
+  const {data} = await sb.from('articles').select('*').order('id')
+  articleCache = data || []
+  document.getElementById('articleList').innerHTML = articleCache.map(a => {
+    const lv = a.level===1?'入门':a.level===2?'初级':'中级'
+    return `<div class="art-card" onclick="openArticle(${a.id})">
+      <div class="art-card-top"><span class="art-cat">${esc(a.category)}</span><span class="art-level">${lv}</span></div>
+      <div class="art-title-id">${esc(a.title)}</div>
+      <div class="art-title-zh">${esc(a.title_zh)}</div>
+      ${a.summary ? `<div class="art-card-summary">${esc(a.summary)}</div>` : ''}
+    </div>`
+  }).join('') || '<div class="list-end">暂无文章</div>'
+}
+
+function openArticle(id) {
+  const a = articleCache.find(x => x.id === id)
+  if (!a) return
+  artCurrent = a
+  const lv = a.level===1?'入门':a.level===2?'初级':'中级'
+  document.getElementById('artTitle').textContent = a.title_zh
+  document.getElementById('artMeta').textContent = `${a.title} · ${a.category} · ${lv} · 共 ${a.sentences.length} 句`
+  document.getElementById('artSummary').textContent = a.summary || ''
+  document.getElementById('artBody').innerHTML = a.sentences.map((s, i) => `
+    <div class="sent" data-si="${i}">
+      <div class="sent-id"><button class="speak-btn sent-speak" onclick="speakArticleSentence(${i})">🔊</button><span class="sent-num">${i+1}.</span>${esc(s.id)}</div>
+      <div class="sent-zh">${esc(s.zh)}</div>
+      ${s.note ? `<div class="sent-note">💡 ${esc(s.note)}</div>` : ''}
+    </div>`).join('')
+  const body = document.getElementById('artBody')
+  body.classList.remove('trans-hidden')
+  document.getElementById('transToggle').textContent = '隐藏中文'
+  showView('article')
+  window.scrollTo(0, 0)
+  loadArticleNotes(a.id)
+}
+
+function toggleTrans() {
+  const body = document.getElementById('artBody')
+  const hidden = body.classList.toggle('trans-hidden')
+  document.getElementById('transToggle').textContent = hidden ? '显示中文' : '隐藏中文'
+}
+
+// ===== CULTURE =====
+let cultureExpanded = -1
+
+async function loadCulture() {
+  if (!sb) return
+  const {data} = await sb.from('culture').select('*').order('id')
+  document.getElementById('cultureList').innerHTML = (data || []).map((c, i) => {
+    const terms = (c.terms||[]).map(t => `<div class="cul-term"><span class="cul-term-w">${esc(t.word)}</span><span class="cul-term-m">${esc(t.meaning)}</span></div>`).join('')
+    return `<div class="cul-card" onclick="toggleCulture(${i})">
+      <div class="cul-head">
+        <div class="cul-emoji">${esc(c.emoji)}</div>
+        <div class="cul-htext"><div class="cul-title">${esc(c.title)}</div><div class="cul-sub">${esc(c.title_id||'')}</div></div>
+        <span class="cul-cat">${esc(c.category)}</span>
+      </div>
+      <div class="cul-detail hidden" id="culd${i}">
+        <div class="cul-body">${esc(c.body)}</div>
+        ${terms ? `<div class="cul-terms">${terms}</div>` : ''}
+      </div>
+    </div>`
+  }).join('') || '<div class="list-end">暂无内容</div>'
+  cultureExpanded = -1
+}
+
+function toggleCulture(i) {
+  const el = document.getElementById('culd'+i)
+  if (cultureExpanded === i) { el.classList.add('hidden'); cultureExpanded = -1; return }
+  if (cultureExpanded >= 0) document.getElementById('culd'+cultureExpanded).classList.add('hidden')
+  el.classList.remove('hidden')
+  cultureExpanded = i
+}
+
+// ===== 划词翻译 =====
+const TRANS_SEL = '.sent-id, .ex-sentence, .rex-sentence'  // 仅在印尼语文本上启用
+let transCurrent = null
+
+function transContext(node) {
+  const el = node && (node.nodeType === 3 ? node.parentElement : node)
+  return el && el.closest(TRANS_SEL)
+}
+
+function hideTransPop() {
+  document.getElementById('transPop').classList.remove('show')
+  transCurrent = null
+}
+
+function onTextSelect() {
+  const sel = window.getSelection()
+  const text = (sel.toString() || '').trim()
+  if (!text || text.length > 60 || !sel.rangeCount) return
+  if (!transContext(sel.anchorNode)) return
+  const rect = sel.getRangeAt(0).getBoundingClientRect()
+  if (!rect.width && !rect.height) return
+  showTransPop(text, rect)
+}
+
+function showTransPop(text, rect) {
+  const pop = document.getElementById('transPop')
+  const clean = text.replace(/^[^\p{L}]+|[^\p{L}]+$/gu, '')
+  transCurrent = { text: clean, raw: text }
+  // 若选区在文章句子内，记录句子下标（用于加笔记）
+  const node = window.getSelection().anchorNode
+  const sentEl = node && (node.nodeType === 3 ? node.parentElement : node).closest('#artBody .sent')
+  if (sentEl) { transCurrent.inArticle = true; transCurrent.si = Number(sentEl.dataset.si) }
+  document.getElementById('transPopBody').innerHTML = `<div class="tp-loading">查询「${esc(clean)}」…</div>`
+  pop.classList.add('show')
+  positionTransPop(rect)
+  lookupWord(clean, rect)
+}
+
+function positionTransPop(rect) {
+  const pop = document.getElementById('transPop')
+  const pw = Math.min(280, pop.offsetWidth || 280), ph = pop.offsetHeight || 80
+  let left = rect.left + rect.width / 2 - pw / 2
+  left = Math.max(8, Math.min(left, window.innerWidth - pw - 8))
+  let top = rect.top - ph - 12, flip = false
+  if (top < 8) { top = rect.bottom + 12; flip = true }
+  pop.style.left = left + 'px'
+  pop.style.top = top + 'px'
+  pop.style.setProperty('--ax', (rect.left + rect.width / 2 - left - 6) + 'px')
+  pop.classList.toggle('flip', flip)
+}
+
+async function lookupWord(clean, rect) {
+  if (!clean) return hideTransPop()
+  let hit = null
+  if (sb) {
+    const { data } = await sb.from('words').select('*').ilike('word', clean).limit(1)
+    if (data && data.length) hit = data[0]
+  }
+  if (transCurrent?.text !== clean) return  // 选区已变
+  const noteBtn = transCurrent.inArticle ? `<button class="tp-btn tp-note-btn" onclick="openNoteFromSel()">✎ 划线 / 笔记</button>` : ''
+  if (hit) {
+    transCurrent.hit = hit
+    const ex = (hit.examples || [])[0]
+    renderTransBody(`
+      <div class="tp-word">${esc(hit.word)}<button class="speak-btn tp-speak" onclick="speakSel()">🔊</button><span class="tp-pos">${esc(hit.pos)}</span><span class="tp-src">词库</span></div>
+      <div class="tp-mean">${esc(hit.meaning)}</div>
+      ${ex ? `<div class="tp-ex">${esc(ex.id)}<br>${esc(ex.zh)}</div>` : ''}
+      <button class="tp-btn" id="tpAction" onclick="addSelToLearning()">＋ 加入背诵</button>${noteBtn}`, rect)
+  } else {
+    let mt = '—', srcLabel = '机器翻译'
+    const key = clean.toLowerCase()
+    // 1) 先查翻译缓存（已翻过的直接读，省钱+秒出）
+    let cached = null
+    try {
+      const { data } = await sb.from('translations').select('zh').eq('src', key).maybeSingle()
+      if (data && data.zh) cached = data.zh
+    } catch (e) {}
+    if (cached) {
+      mt = cached; srcLabel = '缓存'
+    } else {
+      // 2) 调 Qwen，成功则写入缓存
+      try {
+        mt = await qwenTranslate(clean); srcLabel = 'Qwen 翻译'
+        try { await sb.from('translations').upsert({ src: key, zh: mt, engine: 'qwen-mt' }, { onConflict: 'src', ignoreDuplicates: true }) } catch (e) {}
+      } catch (e) {
+        // 3) Qwen 不可用时用 MyMemory 兜底（不缓存，质量较低）
+        try {
+          const r = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(clean)}&langpair=id|zh-CN`)
+          const jj = await r.json()
+          mt = (jj.responseData && jj.responseData.translatedText) || '未找到翻译'
+        } catch (e2) { mt = '翻译失败（网络）' }
+      }
+    }
+    if (transCurrent?.text !== clean) return
+    transCurrent.mt = mt
+    renderTransBody(`
+      <div class="tp-word">${esc(clean)}<button class="speak-btn tp-speak" onclick="speakSel()">🔊</button><span class="tp-src">${srcLabel}</span></div>
+      <div class="tp-mean">${esc(mt)}</div>
+      <button class="tp-btn" id="tpAction" onclick="collectSelWord()">＋ 收藏到词库</button>${noteBtn}`, rect)
+  }
+}
+
+function renderTransBody(html, rect) {
+  document.getElementById('transPopBody').innerHTML = html
+  positionTransPop(rect || document.getElementById('transPop').getBoundingClientRect())
+}
+
+async function addSelToLearning() {
+  const hit = transCurrent?.hit
+  if (!hit || !sb) return
+  const btn = document.getElementById('tpAction')
+  btn.disabled = true; btn.textContent = '…'
+  const t = todayStr()
+  const { error } = await sb.from('learning').insert({
+    word_id: hit.id, stage: 1, status: 'reviewing',
+    next_review_at: addDays(t, INTERVALS[1]), learned_at: t, last_review_at: t,
+    correct_count: 0, wrong_count: 0
+  })
+  btn.textContent = error ? '已在学习列表 ✓' : '已加入背诵 ✓'
+}
+
+async function collectSelWord() {
+  const w = transCurrent?.text, mt = transCurrent?.mt
+  if (!w || !sb) return
+  const btn = document.getElementById('tpAction')
+  btn.disabled = true; btn.textContent = '…'
+  const { error } = await sb.from('words').insert({ word: w, pos: 'n.', meaning: mt, level: 3, examples: [], source: 'user' })
+  btn.textContent = error ? '词库已有此词 ✓' : '已收藏到词库 ✓'
+}
+
+document.addEventListener('mouseup', () => setTimeout(onTextSelect, 10))
+document.addEventListener('touchend', () => setTimeout(onTextSelect, 10))
+document.addEventListener('mousedown', (e) => { if (!e.target.closest('#transPop')) hideTransPop() })
+document.addEventListener('scroll', hideTransPop, true)
+
+// ===== 发音（Web Speech API，印尼语 id-ID）=====
+let idVoice = null
+function loadVoices() {
+  try {
+    const vs = window.speechSynthesis.getVoices()
+    idVoice = vs.find(v => v.lang === 'id-ID') || vs.find(v => (v.lang || '').toLowerCase().startsWith('id')) || null
+  } catch (e) {}
+}
+function webSpeak(text, rate) {
+  if (!text || !('speechSynthesis' in window)) return
+  try {
+    speechSynthesis.cancel()
+    const u = new SpeechSynthesisUtterance(text)
+    u.lang = 'id-ID'
+    if (idVoice) u.voice = idVoice
+    u.rate = rate || 0.95
+    speechSynthesis.speak(u)
+  } catch (e) {}
+}
+// 发音用系统自带的真印尼语语音（id-ID）。Qwen TTS 不支持印尼语，已停用。
+function speak(text, rate) {
+  webSpeak(text, rate)
+}
+function speakStudyWord() { const w = studyQueue[studyIdx]; if (w) speak(w.word) }
+function speakArticleSentence(i) { if (artCurrent && artCurrent.sentences[i]) speak(artCurrent.sentences[i].id) }
+function speakListWord(i) { const w = wordItems[i]; if (w) speak(w.word) }
+function speakSel() { speak((transCurrent && (transCurrent.hit ? transCurrent.hit.word : transCurrent.text)) || '') }
+function toggleTTS() {
+  ttsEngine = ttsEngine === 'qwen' ? 'web' : 'qwen'
+  localStorage.setItem('tts_engine', ttsEngine)
+  syncTTSToggle()
+}
+function syncTTSToggle() {
+  const btn = document.getElementById('ttsToggle'), desc = document.getElementById('ttsDesc')
+  if (!btn) return
+  btn.textContent = ttsEngine === 'qwen' ? 'Qwen' : '系统'
+  desc.textContent = ttsEngine === 'qwen' ? 'Qwen 语音（在线，需边缘函数）' : '系统印尼语语音（免费·离线）'
+}
+if ('speechSynthesis' in window) {
+  loadVoices()
+  if (speechSynthesis.onvoiceschanged !== undefined) speechSynthesis.onvoiceschanged = loadVoices
+}
+
+// ===== CALENDAR =====
+let calMonth = null  // {y, m} 1-based month
+function loadCalendar() {
+  if (!calMonth) { const d = new Date(); calMonth = { y: d.getFullYear(), m: d.getMonth() + 1 } }
+  renderCalendar()
+}
+function shiftMonth(delta) {
+  let { y, m } = calMonth
+  m += delta
+  if (m < 1) { m = 12; y-- } else if (m > 12) { m = 1; y++ }
+  calMonth = { y, m }
+  renderCalendar()
+}
+async function renderCalendar() {
+  if (!sb) return
+  const { y, m } = calMonth
+  document.getElementById('monthLabel').textContent = `${y}年 ${m}月`
+  const mm = String(m).padStart(2, '0')
+  const first = `${y}-${mm}-01`
+  const lastDay = new Date(y, m, 0).getDate()
+  const last = `${y}-${mm}-${String(lastDay).padStart(2, '0')}`
+  let rows = []
+  try {
+    const { data } = await sb.from('checkins').select('*').gte('date', first).lte('date', last)
+    rows = data || []
+  } catch (e) {}
+  const map = {}
+  rows.forEach(r => { map[Number(r.date.slice(-2))] = r })
+  const firstDow = new Date(y, m - 1, 1).getDay()
+  const today = new Date()
+  const isThisMonth = today.getFullYear() === y && today.getMonth() + 1 === m
+  let html = ''
+  for (let i = 0; i < firstDow; i++) html += `<div class="cal-day"></div>`
+  for (let d = 1; d <= lastDay; d++) {
+    const info = map[d] || {}
+    const done = info.completed === 1
+    const active = (info.new_learned || 0) + (info.reviewed || 0) > 0
+    const today2 = isThisMonth && d === today.getDate()
+    html += `<div class="cal-day ${done ? 'done' : active ? 'active' : ''} ${today2 ? 'today' : ''}">${d}${done ? '<span class="check">✓</span>' : ''}</div>`
+  }
+  document.getElementById('calGrid').innerHTML = html
+  // streak + 总打卡
+  const t = todayStr()
+  document.getElementById('calStreak').textContent = await getStreak(t)
+  try {
+    const { count } = await sb.from('checkins').select('*', { count: 'exact', head: true }).eq('completed', 1)
+    document.getElementById('calTotal').textContent = count || 0
+  } catch (e) {}
+}
+
+// ===== PROFILE =====
+function loadProfile() {
+  const name = profile.display_name || (currentUser && currentUser.email ? currentUser.email.split('@')[0] : 'Bahasa Learner')
+  document.getElementById('profName').textContent = name
+  document.getElementById('profEmail').textContent = currentUser ? currentUser.email : '正在建立印尼语思维'
+  document.getElementById('profAvatar').textContent = (name[0] || 'B').toUpperCase()
+  document.getElementById('planNew').textContent = profile.daily_new_words || 10
+  document.getElementById('planReview').textContent = profile.daily_review_limit || 100
+  syncTTSToggle()
+  loadProfileStats()
+}
+async function loadProfileStats() {
+  if (!sb) return
+  try {
+    const { count: learned } = await sb.from('learning').select('*', { count: 'exact', head: true })
+    document.getElementById('profLearned').textContent = learned || 0
+    document.getElementById('profStreak').textContent = await getStreak(todayStr())
+    const { count: notes } = await sb.from('article_notes').select('*', { count: 'exact', head: true })
+    document.getElementById('profNotes').textContent = notes || 0
+  } catch (e) {}
+}
+async function stepPlan(key, delta) {
+  const limits = key === 'daily_new_words' ? [5, 100] : [10, 500]
+  const cur = profile[key] || (key === 'daily_new_words' ? 10 : 100)
+  profile[key] = Math.max(limits[0], Math.min(limits[1], cur + delta))
+  document.getElementById(key === 'daily_new_words' ? 'planNew' : 'planReview').textContent = profile[key]
+  try { await sb.from('profiles').update({ [key]: profile[key] }).eq('user_id', currentUser.id) } catch (e) {}
+}
+
+// ===== 文章笔记 =====
+let articleNotes = [], pendingNote = null
+async function loadArticleNotes(articleId) {
+  articleNotes = []
+  try {
+    const { data } = await sb.from('article_notes').select('*').eq('article_id', articleId).order('id')
+    articleNotes = data || []
+  } catch (e) { /* 表未建则跳过 */ }
+  applyNotesToDOM()
+}
+function applyNotesToDOM() {
+  document.querySelectorAll('#artBody .note-box').forEach(n => n.remove())
+  articleNotes.forEach(n => {
+    const sent = document.querySelector(`#artBody .sent[data-si="${n.sentence_index}"]`)
+    if (!sent) return
+    const sentId = sent.querySelector('.sent-id')
+    const q = esc(n.quote || '')
+    if (q && sentId.innerHTML.indexOf(q) >= 0 && sentId.querySelector('mark') === null) {
+      sentId.innerHTML = sentId.innerHTML.replace(q, `<mark>${q}</mark>`)
+    }
+    if (n.note && n.note.trim()) {
+      const box = document.createElement('div')
+      box.className = 'note-box'
+      box.innerHTML = `<div class="note-quote">「${q}」</div>${esc(n.note)}<span class="note-del" onclick="deleteNote(${Number(n.id)})">✕</span>`
+      sent.appendChild(box)
+    }
+  })
+}
+function openNoteFromSel() {
+  if (!transCurrent || !transCurrent.inArticle) return
+  const quote = transCurrent.raw, si = transCurrent.si, aid = artCurrent.id
+  hideTransPop()
+  pendingNote = { article_id: aid, sentence_index: si, quote }
+  document.getElementById('noteQuote').textContent = '「' + quote + '」'
+  document.getElementById('noteText').value = ''
+  document.getElementById('noteEditor').classList.add('show')
+  setTimeout(() => document.getElementById('noteText').focus(), 100)
+}
+function closeNoteEditor() {
+  document.getElementById('noteEditor').classList.remove('show')
+  pendingNote = null
+}
+async function saveNote() {
+  if (!pendingNote || !sb) return closeNoteEditor()
+  const note = document.getElementById('noteText').value.trim()
+  const articleId = pendingNote.article_id
+  try {
+    const { error } = await sb.from('article_notes').insert({ ...pendingNote, note })
+    if (error) throw error
+  } catch (e) {
+    alert('保存失败：可能还没在 Supabase 建好 article_notes 表（睡醒跑 SQL 后即可）')
+    return closeNoteEditor()
+  }
+  closeNoteEditor()
+  loadArticleNotes(articleId)
+}
+async function deleteNote(id) {
+  if (!sb) return
+  try { await sb.from('article_notes').delete().eq('id', id) } catch (e) {}
+  loadArticleNotes(artCurrent.id)
+}
+
+// ===== INIT =====
+window.addEventListener('DOMContentLoaded', async () => {
+  if (!initSupabase()) { enterAuth(); return }
+  try {
+    const { data: { session } } = await sb.auth.getSession()
+    if (session && session.user) {
+      currentUser = session.user
+      await loadProfileData()
+      showView('home', document.querySelector('.tab'))
+    } else {
+      enterAuth()
+    }
+  } catch (e) { enterAuth() }
+  sb.auth.onAuthStateChange((event, session) => {
+    if (event === 'SIGNED_OUT') enterAuth()
+  })
+})
+</script>
+</body>
+</html>
