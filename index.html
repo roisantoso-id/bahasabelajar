@@ -168,10 +168,111 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 #transPop .tp-btn:disabled{background:rgba(255,255,255,.16);color:#9aa8a2}
 #transPop .tp-arrow{position:absolute;bottom:-6px;left:var(--ax,24px);width:12px;height:12px;background:#1f2d29;transform:rotate(45deg)}
 #transPop.flip .tp-arrow{bottom:auto;top:-6px}
+.task-icon.culture{color:#a3622b;background:#f6e6d2}
+/* ===== AUTH ===== */
+.auth-view{display:none;position:fixed;inset:0;z-index:300;background:var(--cream);padding:0;align-items:center;justify-content:center}
+.auth-view.active{display:flex}
+.auth-box{width:100%;max-width:340px;padding:28px 24px;text-align:center}
+.auth-logo{font-size:54px;line-height:1}
+.auth-title{font-size:26px;font-weight:900;margin-top:10px;letter-spacing:-.5px}
+.auth-sub{color:var(--muted);font-size:13px;margin-top:8px;margin-bottom:26px}
+.auth-input{width:100%;height:50px;padding:0 16px;margin-bottom:12px;border:1.5px solid #e3e1d8;border-radius:14px;font-size:15px;background:var(--paper)}
+.auth-input:focus{outline:none;border-color:var(--green)}
+.auth-btn{width:100%;height:52px;margin-top:6px;border-radius:14px;background:var(--green);color:#fff;font-size:16px;font-weight:800}
+.auth-btn:disabled{opacity:.6}
+.auth-msg{min-height:18px;margin-top:12px;font-size:13px;font-weight:600}
+.auth-msg.err{color:#c0392b}.auth-msg.ok{color:var(--green2)}
+.auth-toggle{margin-top:18px;font-size:13px;color:var(--muted)}
+.auth-toggle a{color:var(--green);font-weight:800;cursor:pointer}
+/* ===== CALENDAR ===== */
+.cal-eyebrow{color:var(--green2);font-size:11px;font-weight:800;letter-spacing:2px}
+.cal-title{font-size:22px;font-weight:900;margin:6px 0 18px}
+.streak-card{display:flex;align-items:center;justify-content:space-between;padding:20px;border-radius:20px;color:#fff;background:var(--green);box-shadow:0 12px 26px rgba(23,77,64,.18)}
+.streak-label{color:rgba(255,255,255,.62);font-size:11px;font-weight:700}
+.streak-number{font-size:42px;line-height:1.1;font-weight:900}
+.streak-unit{font-size:13px}
+.streak-copy{color:rgba(255,255,255,.58);font-size:11px;margin-top:4px}
+.streak-badge{width:84px;height:84px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:50%;color:var(--green);background:var(--yellow,#f4c95d);font-size:11px;font-weight:800;text-align:center;flex:none}
+.streak-badge .diamond{margin-bottom:3px;color:var(--coral);font-size:22px;transform:rotate(45deg)}
+.cal-card{margin-top:16px;padding:18px 14px 14px;border-radius:var(--radius);background:var(--paper);box-shadow:0 4px 16px rgba(25,55,46,.05)}
+.month-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;font-size:15px;font-weight:900}
+.month-head button{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:#46655b;background:#edf3eb;font-size:20px}
+.cal-week,.cal-grid{display:grid;grid-template-columns:repeat(7,1fr)}
+.cal-week{margin-bottom:6px;color:#9ba19c;font-size:11px;text-align:center}
+.cal-day{position:relative;height:40px;display:flex;align-items:center;justify-content:center;margin:1px;border-radius:11px;font-size:13px;font-weight:650}
+.cal-day.active{background:#f0f3ed}
+.cal-day.done{color:#fff;background:var(--green2)}
+.cal-day.today{outline:2px solid var(--coral);outline-offset:-2px}
+.cal-day .check{position:absolute;right:3px;bottom:2px;font-size:8px}
+.cal-legend{display:flex;justify-content:center;gap:18px;margin-top:14px;padding-top:12px;border-top:1px solid #eceae3;color:#8a918c;font-size:10px}
+.cal-legend>div{display:flex;align-items:center;gap:5px}
+.cal-legend .dot{width:9px;height:9px;border-radius:50%}
+.done-dot{background:var(--green2)}.active-dot{background:#e3e9df}.today-dot{border:2px solid var(--coral)}
+.cal-quote{display:flex;flex-direction:column;gap:5px;margin:20px 8px 0;text-align:center;color:#738078;font-family:Georgia,serif;font-size:12px;font-style:italic}
+.cal-quote div:last-child{color:#a1a59f;font-family:sans-serif;font-size:11px;font-style:normal}
+/* ===== PROFILE ===== */
+.profile-card{display:flex;align-items:center;padding:16px;border-radius:var(--radius);background:var(--paper);box-shadow:0 4px 16px rgba(25,55,46,.05)}
+.profile-avatar{width:50px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:16px;color:#fff;background:var(--green);font-family:Georgia,serif;font-size:24px;font-weight:800;flex:none;text-transform:uppercase}
+.profile-copy{flex:1;margin-left:14px;font-size:15px;font-weight:800;min-width:0}
+.profile-copy span{display:block;margin-top:4px;color:#8a918c;font-size:12px;font-weight:400;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.profile-mark{padding:5px 10px;border-radius:99px;color:var(--green);background:var(--yellow,#f4c95d);font-size:10px;font-weight:900;flex:none}
+.profile-stats{display:flex;justify-content:space-around;align-items:center;margin-top:14px;padding:16px;border-radius:var(--radius);background:var(--paper);box-shadow:0 4px 16px rgba(25,55,46,.05)}
+.ps-val{font-size:20px;font-weight:900;text-align:center}
+.ps-lbl{font-size:10px;color:var(--muted);margin-top:4px;text-align:center}
+.ps-divider{width:1px;height:32px;background:#e7e5dd}
+.group-title{margin:26px 4px 12px;color:#69766f;font-size:12px;font-weight:800}
+.setting-card{border-radius:var(--radius);background:var(--paper);box-shadow:0 4px 16px rgba(25,55,46,.05);padding:0 16px}
+.setting-row{min-height:66px;display:flex;align-items:center}
+.setting-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;flex:none;border-radius:12px;font-size:14px;font-weight:900}
+.setting-icon.green{color:var(--green);background:var(--mint)}
+.setting-icon.coral{color:#a44a34;background:#fbe1d8;font-size:18px}
+.setting-copy{flex:1;margin-left:12px;font-size:14px;font-weight:750}
+.setting-copy span{display:block;margin-top:3px;color:#969c97;font-size:11px;font-weight:400}
+.setting-line{height:1px;margin-left:52px;background:#eceae3}
+.stepper{height:36px;display:flex;align-items:center;overflow:hidden;border:1px solid #dfe1db;border-radius:11px;flex:none}
+.stepper button{width:32px;height:100%;display:flex;align-items:center;justify-content:center;color:#2d6253;background:#f0f3ed;font-size:17px}
+.stepper span{min-width:34px;text-align:center;font-size:13px;font-weight:800}
+.logout-btn{width:100%;height:50px;margin-top:26px;border-radius:14px;border:1.5px solid #e6b0a4;color:#c0392b;background:var(--paper);font-size:15px;font-weight:800}
+.app-version{margin-top:18px;text-align:center;color:#adb1ad;font-size:11px}
+/* ===== 文章笔记 / 划线 ===== */
+.sent-id mark{background:#fde7a8;color:inherit;border-radius:3px;padding:0 1px;cursor:pointer}
+.sent.has-note{position:relative}
+.note-flag{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;margin-left:6px;border-radius:6px;background:#fde7a8;font-size:11px;vertical-align:middle;cursor:pointer}
+.note-box{margin:8px 0 0 20px;padding:10px 12px;border-radius:10px;background:#fffaf0;border-left:3px solid var(--yellow,#f4c95d);font-size:12px;color:#6a5d3a;line-height:1.6;position:relative}
+.note-box .note-quote{font-style:italic;color:#9a8a5a;font-size:11px;margin-bottom:3px}
+.note-box .note-del{position:absolute;top:8px;right:10px;color:#bbb;font-size:13px;cursor:pointer}
+#noteEditor{position:fixed;inset:0;z-index:260;display:none;align-items:flex-end;background:rgba(0,0,0,.32)}
+#noteEditor.show{display:flex}
+.note-sheet{width:100%;background:var(--paper);border-radius:20px 20px 0 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom))}
+.note-sheet h3{font-size:16px;font-weight:800;margin-bottom:4px}
+.note-sheet .ns-quote{font-size:13px;color:var(--green2);font-style:italic;margin-bottom:12px;line-height:1.5}
+.note-sheet textarea{width:100%;height:96px;padding:12px;border:1.5px solid #e3e1d8;border-radius:12px;font-size:14px;font-family:inherit;resize:none}
+.note-sheet textarea:focus{outline:none;border-color:var(--green)}
+.note-sheet .ns-actions{display:flex;gap:10px;margin-top:14px}
+.note-sheet .ns-actions button{flex:1;height:48px;border-radius:12px;font-size:15px;font-weight:800}
+.ns-cancel{background:#eee;color:#555}.ns-save{background:var(--green);color:#fff}
+.tp-note-btn{background:var(--yellow,#f4c95d)!important;color:var(--green)!important}
 .hidden{display:none!important}
 </style>
 </head>
 <body>
+
+<!-- ===== AUTH (登录/注册) ===== -->
+<div id="v-auth" class="view auth-view">
+  <div class="auth-box">
+    <div class="auth-logo">🇮🇩</div>
+    <h1 class="auth-title">BahasaBelajar</h1>
+    <p class="auth-sub" id="authSub">登录，开始你的印尼语之旅</p>
+    <input id="authEmail" class="auth-input" type="email" placeholder="邮箱" autocomplete="email">
+    <input id="authPass" class="auth-input" type="password" placeholder="密码（至少 6 位）" autocomplete="current-password">
+    <button class="auth-btn" id="authSubmit" onclick="doAuth()">登录</button>
+    <div class="auth-msg" id="authMsg"></div>
+    <div class="auth-toggle">
+      <span id="authToggleText">还没有账号？</span>
+      <a id="authToggleLink" onclick="toggleAuthMode()">注册一个</a>
+    </div>
+  </div>
+</div>
 
 <!-- ===== HOME ===== -->
 <div id="v-home" class="view active">
@@ -200,6 +301,11 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
     <div class="task-icon review">↻</div>
     <div class="task-body"><div class="task-name">巩固复习</div><div class="task-desc">在忘记之前再见一面</div></div>
     <span class="task-count" id="dueCount">0</span><span class="task-arrow">›</span>
+  </div>
+  <div class="task" onclick="showView('culture')">
+    <div class="task-icon culture">🎭</div>
+    <div class="task-body"><div class="task-name">印尼文化</div><div class="task-desc">皮影 / 蜡染 / 美食 / 节日</div></div>
+    <span class="task-arrow">›</span>
   </div>
   <div class="stats-row">
     <div class="stat"><div class="stat-val" id="learnedStat">0</div><div class="stat-lbl">已学单词</div></div>
@@ -265,50 +371,208 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 
 <!-- ===== CULTURE ===== -->
 <div id="v-culture" class="view">
-  <div class="words-head"><h1>印尼文化</h1></div>
+  <div class="grammar-head">
+    <button class="back" onclick="showView('home', document.querySelector('.tab'))">‹</button>
+    <h1>印尼文化</h1>
+    <span class="grammar-lesson-tag">Budaya</span>
+  </div>
   <div class="grammar-subtitle">Budaya Indonesia · 点开看详情</div>
   <div id="cultureList"></div>
 </div>
 
-<!-- ===== TABS ===== -->
-<div class="tabs">
-  <button class="tab active" onclick="showView('home',this)"><span class="tab-icon">🏠</span>今日</button>
-  <button class="tab" onclick="showView('articles',this)"><span class="tab-icon">📄</span>文章</button>
-  <button class="tab" onclick="showView('culture',this)"><span class="tab-icon">🎭</span>文化</button>
-  <button class="tab" onclick="showView('words',this)"><span class="tab-icon">📖</span>词库</button>
-  <button class="tab" onclick="showView('settings',this)"><span class="tab-icon">⚙️</span>设置</button>
+<!-- ===== CALENDAR ===== -->
+<div id="v-calendar" class="view">
+  <div class="cal-eyebrow">KEBIASAAN BAIK</div>
+  <h1 class="cal-title">学习日历</h1>
+  <div class="streak-card">
+    <div>
+      <div class="streak-label">连续学习</div>
+      <div><span class="streak-number" id="calStreak">0</span><span class="streak-unit"> 天</span></div>
+      <div class="streak-copy">让小小的坚持，变成语言直觉。</div>
+    </div>
+    <div class="streak-badge"><div class="diamond">◆</div><span id="calTotal">0</span> 次打卡</div>
+  </div>
+  <div class="cal-card">
+    <div class="month-head">
+      <button onclick="shiftMonth(-1)">‹</button>
+      <span id="monthLabel"></span>
+      <button onclick="shiftMonth(1)">›</button>
+    </div>
+    <div class="cal-week"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
+    <div class="cal-grid" id="calGrid"></div>
+    <div class="cal-legend">
+      <div><span class="dot done-dot"></span>完成打卡</div>
+      <div><span class="dot active-dot"></span>有学习</div>
+      <div><span class="dot today-dot"></span>今天</div>
+    </div>
+  </div>
+  <div class="cal-quote">
+    <div>" Sedikit demi sedikit, lama-lama menjadi bukit. "</div>
+    <div>积少成多，终成高山。</div>
+  </div>
 </div>
 
-<!-- ===== SETTINGS (inline) ===== -->
-<div id="v-settings" class="view">
-  <h1 style="font-size:22px;font-weight:800;margin-bottom:20px">设置</h1>
-  <div style="border-radius:var(--radius);background:var(--paper);padding:16px;box-shadow:0 4px 16px rgba(25,55,46,.05)">
-    <div style="margin-bottom:20px">
-      <div style="font-weight:700;margin-bottom:4px">Supabase URL</div>
-      <input id="cfgUrl" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:10px;font-size:13px" placeholder="https://xxx.supabase.co">
+<!-- ===== TABS ===== -->
+<div class="tabs" id="tabBar">
+  <button class="tab active" onclick="showView('home',this)"><span class="tab-icon">🏠</span>今日</button>
+  <button class="tab" onclick="showView('articles',this)"><span class="tab-icon">📄</span>文章</button>
+  <button class="tab" onclick="showView('words',this)"><span class="tab-icon">📖</span>词库</button>
+  <button class="tab" onclick="showView('calendar',this)"><span class="tab-icon">📅</span>日历</button>
+  <button class="tab" onclick="showView('profile',this)"><span class="tab-icon">👤</span>我的</button>
+</div>
+
+<!-- ===== PROFILE (我的) ===== -->
+<div id="v-profile" class="view">
+  <div class="cal-eyebrow">PREFERENSI</div>
+  <h1 class="cal-title">我的</h1>
+  <div class="profile-card">
+    <div class="profile-avatar" id="profAvatar">B</div>
+    <div class="profile-copy">
+      <div id="profName">Bahasa Learner</div>
+      <span id="profEmail">正在建立印尼语思维</span>
     </div>
-    <div style="margin-bottom:20px">
-      <div style="font-weight:700;margin-bottom:4px">Supabase Anon Key</div>
-      <input id="cfgKey" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:10px;font-size:13px" placeholder="eyJ...">
-    </div>
-    <button onclick="saveConfig()" style="width:100%;height:48px;border-radius:14px;background:var(--green);color:#fff;font-size:15px;font-weight:800">保存并连接</button>
-    <div id="cfgStatus" style="margin-top:12px;text-align:center;font-size:12px;color:var(--muted)"></div>
+    <div class="profile-mark">PRO</div>
   </div>
+
+  <div class="profile-stats">
+    <div><div class="ps-val" id="profLearned">0</div><div class="ps-lbl">已学单词</div></div>
+    <div class="ps-divider"></div>
+    <div><div class="ps-val" id="profStreak">0</div><div class="ps-lbl">连续天数</div></div>
+    <div class="ps-divider"></div>
+    <div><div class="ps-val" id="profNotes">0</div><div class="ps-lbl">文章笔记</div></div>
+  </div>
+
+  <div class="group-title">每日计划</div>
+  <div class="setting-card">
+    <div class="setting-row">
+      <div class="setting-icon green">Aa</div>
+      <div class="setting-copy"><div>每日新词</div><span>建议 10–20 个，轻松坚持</span></div>
+      <div class="stepper"><button onclick="stepPlan('daily_new_words',-5)">−</button><span id="planNew">10</span><button onclick="stepPlan('daily_new_words',5)">＋</button></div>
+    </div>
+    <div class="setting-line"></div>
+    <div class="setting-row">
+      <div class="setting-icon coral">↻</div>
+      <div class="setting-copy"><div>复习上限</div><span>控制每天的复习量</span></div>
+      <div class="stepper"><button onclick="stepPlan('daily_review_limit',-10)">−</button><span id="planReview">100</span><button onclick="stepPlan('daily_review_limit',10)">＋</button></div>
+    </div>
+  </div>
+
+  <div class="group-title">高级 · 数据连接</div>
+  <div class="setting-card" style="padding:16px">
+    <details>
+      <summary style="font-size:13px;font-weight:700;color:var(--muted);cursor:pointer">Supabase 配置（一般不用改）</summary>
+      <div style="margin-top:14px">
+        <div style="font-weight:700;margin-bottom:4px;font-size:13px">Supabase URL</div>
+        <input id="cfgUrl" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:10px;font-size:13px" placeholder="https://xxx.supabase.co">
+        <div style="font-weight:700;margin:14px 0 4px;font-size:13px">Supabase Anon Key</div>
+        <input id="cfgKey" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:10px;font-size:13px" placeholder="eyJ...">
+        <button onclick="saveConfig()" style="width:100%;height:44px;margin-top:12px;border-radius:12px;background:var(--green);color:#fff;font-size:14px;font-weight:800">保存并连接</button>
+        <div id="cfgStatus" style="margin-top:10px;text-align:center;font-size:12px;color:var(--muted)"></div>
+      </div>
+    </details>
+  </div>
+
+  <button class="logout-btn" onclick="doLogout()">退出登录</button>
+  <div class="app-version">BahasaBelajar · H5 版</div>
 </div>
 
 <!-- ===== 划词翻译 POPUP ===== -->
 <div id="transPop"><div id="transPopBody"></div><div class="tp-arrow"></div></div>
+
+<!-- ===== 笔记编辑器 ===== -->
+<div id="noteEditor">
+  <div class="note-sheet">
+    <h3>添加笔记</h3>
+    <div class="ns-quote" id="noteQuote"></div>
+    <textarea id="noteText" placeholder="写下你的理解、疑问或记忆点…（留空＝仅划线）"></textarea>
+    <div class="ns-actions">
+      <button class="ns-cancel" onclick="closeNoteEditor()">取消</button>
+      <button class="ns-save" onclick="saveNote()">保存</button>
+    </div>
+  </div>
+</div>
 
 <script>
 // ===== CONFIG =====
 let SUPABASE_URL = localStorage.getItem('sb_url') || 'https://bzdelpmcewjdvmgyafux.supabase.co'
 let SUPABASE_KEY = localStorage.getItem('sb_key') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ6ZGVscG1jZXdqZHZtZ3lhZnV4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzMjY1MDksImV4cCI6MjA4ODkwMjUwOX0.x_D0VGGmXCY9rueAh0lV4f7r9wOJIGCHs19w5S2BNpg'
 let sb = null
+let currentUser = null
+let authMode = 'login'  // 'login' | 'signup'
+let profile = { daily_new_words: 10, daily_review_limit: 100, display_name: null }
 
 function initSupabase() {
   if (!SUPABASE_URL || !SUPABASE_KEY) return false
   sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
   return true
+}
+
+// ===== AUTH =====
+function toggleAuthMode() {
+  authMode = authMode === 'login' ? 'signup' : 'login'
+  document.getElementById('authSubmit').textContent = authMode === 'login' ? '登录' : '注册'
+  document.getElementById('authSub').textContent = authMode === 'login' ? '登录，开始你的印尼语之旅' : '注册一个新账号'
+  document.getElementById('authToggleText').textContent = authMode === 'login' ? '还没有账号？' : '已经有账号了？'
+  document.getElementById('authToggleLink').textContent = authMode === 'login' ? '注册一个' : '去登录'
+  setAuthMsg('')
+}
+function setAuthMsg(text, ok) {
+  const el = document.getElementById('authMsg')
+  el.textContent = text
+  el.className = 'auth-msg ' + (ok ? 'ok' : 'err')
+}
+async function doAuth() {
+  if (!sb) return setAuthMsg('Supabase 未初始化')
+  const email = document.getElementById('authEmail').value.trim()
+  const password = document.getElementById('authPass').value
+  if (!email || password.length < 6) return setAuthMsg('请输入邮箱和至少 6 位密码')
+  const btn = document.getElementById('authSubmit'); btn.disabled = true
+  setAuthMsg(authMode === 'login' ? '登录中…' : '注册中…', true)
+  try {
+    if (authMode === 'login') {
+      const { data, error } = await sb.auth.signInWithPassword({ email, password })
+      if (error) throw error
+      onLoggedIn(data.user)
+    } else {
+      const { data, error } = await sb.auth.signUp({ email, password })
+      if (error) throw error
+      if (data.session) { onLoggedIn(data.user) }
+      else { setAuthMsg('注册成功，请去邮箱确认后再登录（或在 Supabase 后台关闭邮箱确认）', true); authMode = 'login' }
+    }
+  } catch (e) {
+    setAuthMsg(translateAuthErr(e.message || '出错了'))
+  } finally { btn.disabled = false }
+}
+function translateAuthErr(m) {
+  if (/Invalid login/i.test(m)) return '邮箱或密码不正确'
+  if (/already registered|already exists/i.test(m)) return '该邮箱已注册，请直接登录'
+  if (/Email not confirmed/i.test(m)) return '邮箱未确认（请在 Supabase 后台关闭邮箱确认）'
+  if (/rate limit/i.test(m)) return '操作太频繁，请稍后再试'
+  return m
+}
+async function onLoggedIn(user) {
+  currentUser = user
+  await loadProfileData()
+  showView('home', document.querySelector('.tab'))
+}
+async function doLogout() {
+  if (sb) await sb.auth.signOut()
+  currentUser = null
+  enterAuth()
+}
+function enterAuth() {
+  authMode = 'login'
+  document.getElementById('authSubmit').textContent = '登录'
+  showView('auth')
+}
+async function loadProfileData() {
+  // 读取或创建本用户 profile（若表不存在则用默认值，不报错）
+  try {
+    const { data, error } = await sb.from('profiles').select('*').maybeSingle()
+    if (error) throw error
+    if (data) { profile = data }
+    else { await sb.from('profiles').insert({}); }
+  } catch (e) { /* profiles 表可能还没建，用默认值 */ }
 }
 
 function saveConfig() {
@@ -328,10 +592,14 @@ function showView(name, tabEl) {
   document.getElementById('v-' + name).classList.add('active')
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'))
   if (tabEl) tabEl.classList.add('active')
+  document.getElementById('tabBar').style.display = (name === 'auth') ? 'none' : ''
+  if (name !== 'auth') window.scrollTo(0, 0)
   if (name === 'home') loadHome()
   if (name === 'words') { wordsOffset = 0; loadWords() }
   if (name === 'articles') loadArticles()
   if (name === 'culture') loadCulture()
+  if (name === 'calendar') loadCalendar()
+  if (name === 'profile') loadProfile()
 }
 
 // ===== DATE HELPERS =====
@@ -363,7 +631,8 @@ async function loadHome() {
   const {count: dueCount} = await sb.from('learning').select('*',{count:'exact',head:true}).eq('status','reviewing').lte('next_review_at', t)
   const {data: ci} = await sb.from('checkins').select('*').eq('date', t).maybeSingle()
   const checkin = ci || {new_learned:0, reviewed:0, completed:0}
-  const newRemaining = Math.max(0, 10 - checkin.new_learned)
+  const goal = profile.daily_new_words || 10
+  const newRemaining = Math.max(0, goal - checkin.new_learned)
 
   document.getElementById('newCount').textContent = newRemaining
   document.getElementById('dueCount').textContent = dueCount || 0
@@ -373,7 +642,7 @@ async function loadHome() {
   document.getElementById('streakNum').textContent = await getStreak(t)
 
   const done = checkin.new_learned + checkin.reviewed
-  const total = 10 + (dueCount||0) + checkin.reviewed
+  const total = goal + (dueCount||0) + checkin.reviewed
   const pct = checkin.completed ? 100 : Math.min(100, Math.round(done / Math.max(1,total)*100))
   document.getElementById('homeProgress').style.width = pct + '%'
 }
@@ -397,7 +666,7 @@ async function startLearn() {
   const t = todayStr()
   const {data: ci} = await sb.from('checkins').select('*').eq('date',t).maybeSingle()
   const done = ci ? ci.new_learned : 0
-  const limit = Math.max(0, 10 - done)
+  const limit = Math.max(0, (profile.daily_new_words || 10) - done)
   if (!limit) return alert('今日新词已学完！')
   // PostgREST 不支持子查询，先取已学 id 列表再排除
   const {data: learned} = await sb.from('learning').select('word_id')
@@ -416,7 +685,7 @@ async function startReview() {
   if (!sb) return alert('请先在设置中配置 Supabase')
   studyMode = 'review'
   const t = todayStr()
-  const {data} = await sb.from('learning').select('word_id, stage, words(*)').eq('status','reviewing').lte('next_review_at',t).order('next_review_at').limit(100)
+  const {data} = await sb.from('learning').select('word_id, stage, words(*)').eq('status','reviewing').lte('next_review_at',t).order('next_review_at').limit(profile.daily_review_limit || 100)
   if (!data || !data.length) return alert('暂无待复习单词！')
   studyQueue = data.map(r => ({...r.words, stage: r.stage, wrongTimes:0}))
   studyIdx = 0; studyCompleted = 0
@@ -498,10 +767,15 @@ function nextWord(countDone) {
 
 async function bumpCheckin(t, field) {
   const {data: existing} = await sb.from('checkins').select('*').eq('date',t).maybeSingle()
+  const goal = profile.daily_new_words || 10
   if (existing) {
-    await sb.from('checkins').update({[field]: existing[field]+1}).eq('date',t)
+    const nv = (existing[field] || 0) + 1
+    const newLearned = field === 'new_learned' ? nv : (existing.new_learned || 0)
+    const completed = newLearned >= goal ? 1 : (existing.completed || 0)
+    await sb.from('checkins').update({[field]: nv, completed}).eq('date',t)
   } else {
-    await sb.from('checkins').insert({date:t, [field]:1})
+    const completed = (field === 'new_learned' && 1 >= goal) ? 1 : 0
+    await sb.from('checkins').insert({date:t, [field]:1, completed})
   }
 }
 
@@ -624,7 +898,7 @@ function openArticle(id) {
   document.getElementById('artMeta').textContent = `${a.title} · ${a.category} · ${lv} · 共 ${a.sentences.length} 句`
   document.getElementById('artSummary').textContent = a.summary || ''
   document.getElementById('artBody').innerHTML = a.sentences.map((s, i) => `
-    <div class="sent">
+    <div class="sent" data-si="${i}">
       <div class="sent-id"><button class="speak-btn sent-speak" onclick="speakArticleSentence(${i})">🔊</button><span class="sent-num">${i+1}.</span>${s.id}</div>
       <div class="sent-zh">${s.zh}</div>
       ${s.note ? `<div class="sent-note">💡 ${s.note}</div>` : ''}
@@ -634,6 +908,7 @@ function openArticle(id) {
   document.getElementById('transToggle').textContent = '隐藏中文'
   showView('article')
   window.scrollTo(0, 0)
+  loadArticleNotes(a.id)
 }
 
 function toggleTrans() {
@@ -700,7 +975,11 @@ function onTextSelect() {
 function showTransPop(text, rect) {
   const pop = document.getElementById('transPop')
   const clean = text.replace(/^[^\p{L}]+|[^\p{L}]+$/gu, '')
-  transCurrent = { text: clean }
+  transCurrent = { text: clean, raw: text }
+  // 若选区在文章句子内，记录句子下标（用于加笔记）
+  const node = window.getSelection().anchorNode
+  const sentEl = node && (node.nodeType === 3 ? node.parentElement : node).closest('#artBody .sent')
+  if (sentEl) { transCurrent.inArticle = true; transCurrent.si = Number(sentEl.dataset.si) }
   document.getElementById('transPopBody').innerHTML = `<div class="tp-loading">查询「${clean}」…</div>`
   pop.classList.add('show')
   positionTransPop(rect)
@@ -728,6 +1007,7 @@ async function lookupWord(clean, rect) {
     if (data && data.length) hit = data[0]
   }
   if (transCurrent?.text !== clean) return  // 选区已变
+  const noteBtn = transCurrent.inArticle ? `<button class="tp-btn tp-note-btn" onclick="openNoteFromSel()">✎ 划线 / 笔记</button>` : ''
   if (hit) {
     transCurrent.hit = hit
     const ex = (hit.examples || [])[0]
@@ -735,7 +1015,7 @@ async function lookupWord(clean, rect) {
       <div class="tp-word">${hit.word}<button class="speak-btn tp-speak" onclick="speakSel()">🔊</button><span class="tp-pos">${hit.pos}</span><span class="tp-src">词库</span></div>
       <div class="tp-mean">${hit.meaning}</div>
       ${ex ? `<div class="tp-ex">${ex.id}<br>${ex.zh}</div>` : ''}
-      <button class="tp-btn" id="tpAction" onclick="addSelToLearning()">＋ 加入背诵</button>`, rect)
+      <button class="tp-btn" id="tpAction" onclick="addSelToLearning()">＋ 加入背诵</button>${noteBtn}`, rect)
   } else {
     let mt = '—'
     try {
@@ -748,7 +1028,7 @@ async function lookupWord(clean, rect) {
     renderTransBody(`
       <div class="tp-word">${clean}<button class="speak-btn tp-speak" onclick="speakSel()">🔊</button><span class="tp-src">机器翻译</span></div>
       <div class="tp-mean">${mt}</div>
-      <button class="tp-btn" id="tpAction" onclick="collectSelWord()">＋ 收藏到词库</button>`, rect)
+      <button class="tp-btn" id="tpAction" onclick="collectSelWord()">＋ 收藏到词库</button>${noteBtn}`, rect)
   }
 }
 
@@ -813,15 +1093,165 @@ if ('speechSynthesis' in window) {
   if (speechSynthesis.onvoiceschanged !== undefined) speechSynthesis.onvoiceschanged = loadVoices
 }
 
-// ===== INIT =====
-window.addEventListener('DOMContentLoaded', () => {
+// ===== CALENDAR =====
+let calMonth = null  // {y, m} 1-based month
+function loadCalendar() {
+  if (!calMonth) { const d = new Date(); calMonth = { y: d.getFullYear(), m: d.getMonth() + 1 } }
+  renderCalendar()
+}
+function shiftMonth(delta) {
+  let { y, m } = calMonth
+  m += delta
+  if (m < 1) { m = 12; y-- } else if (m > 12) { m = 1; y++ }
+  calMonth = { y, m }
+  renderCalendar()
+}
+async function renderCalendar() {
+  if (!sb) return
+  const { y, m } = calMonth
+  document.getElementById('monthLabel').textContent = `${y}年 ${m}月`
+  const mm = String(m).padStart(2, '0')
+  const first = `${y}-${mm}-01`
+  const lastDay = new Date(y, m, 0).getDate()
+  const last = `${y}-${mm}-${String(lastDay).padStart(2, '0')}`
+  let rows = []
+  try {
+    const { data } = await sb.from('checkins').select('*').gte('date', first).lte('date', last)
+    rows = data || []
+  } catch (e) {}
+  const map = {}
+  rows.forEach(r => { map[Number(r.date.slice(-2))] = r })
+  const firstDow = new Date(y, m - 1, 1).getDay()
+  const today = new Date()
+  const isThisMonth = today.getFullYear() === y && today.getMonth() + 1 === m
+  let html = ''
+  for (let i = 0; i < firstDow; i++) html += `<div class="cal-day"></div>`
+  for (let d = 1; d <= lastDay; d++) {
+    const info = map[d] || {}
+    const done = info.completed === 1
+    const active = (info.new_learned || 0) + (info.reviewed || 0) > 0
+    const today2 = isThisMonth && d === today.getDate()
+    html += `<div class="cal-day ${done ? 'done' : active ? 'active' : ''} ${today2 ? 'today' : ''}">${d}${done ? '<span class="check">✓</span>' : ''}</div>`
+  }
+  document.getElementById('calGrid').innerHTML = html
+  // streak + 总打卡
+  const t = todayStr()
+  document.getElementById('calStreak').textContent = await getStreak(t)
+  try {
+    const { count } = await sb.from('checkins').select('*', { count: 'exact', head: true }).eq('completed', 1)
+    document.getElementById('calTotal').textContent = count || 0
+  } catch (e) {}
+}
+
+// ===== PROFILE =====
+function loadProfile() {
+  const name = profile.display_name || (currentUser && currentUser.email ? currentUser.email.split('@')[0] : 'Bahasa Learner')
+  document.getElementById('profName').textContent = name
+  document.getElementById('profEmail').textContent = currentUser ? currentUser.email : '正在建立印尼语思维'
+  document.getElementById('profAvatar').textContent = (name[0] || 'B').toUpperCase()
+  document.getElementById('planNew').textContent = profile.daily_new_words || 10
+  document.getElementById('planReview').textContent = profile.daily_review_limit || 100
   document.getElementById('cfgUrl').value = SUPABASE_URL
   document.getElementById('cfgKey').value = SUPABASE_KEY
-  if (initSupabase()) {
-    loadHome()
-  } else {
-    showView('settings', document.querySelectorAll('.tab')[4])
+  loadProfileStats()
+}
+async function loadProfileStats() {
+  if (!sb) return
+  try {
+    const { count: learned } = await sb.from('learning').select('*', { count: 'exact', head: true })
+    document.getElementById('profLearned').textContent = learned || 0
+    document.getElementById('profStreak').textContent = await getStreak(todayStr())
+    const { count: notes } = await sb.from('article_notes').select('*', { count: 'exact', head: true })
+    document.getElementById('profNotes').textContent = notes || 0
+  } catch (e) {}
+}
+async function stepPlan(key, delta) {
+  const limits = key === 'daily_new_words' ? [5, 100] : [10, 500]
+  const cur = profile[key] || (key === 'daily_new_words' ? 10 : 100)
+  profile[key] = Math.max(limits[0], Math.min(limits[1], cur + delta))
+  document.getElementById(key === 'daily_new_words' ? 'planNew' : 'planReview').textContent = profile[key]
+  try { await sb.from('profiles').update({ [key]: profile[key] }).eq('user_id', currentUser.id) } catch (e) {}
+}
+
+// ===== 文章笔记 =====
+let articleNotes = [], pendingNote = null
+async function loadArticleNotes(articleId) {
+  articleNotes = []
+  try {
+    const { data } = await sb.from('article_notes').select('*').eq('article_id', articleId).order('id')
+    articleNotes = data || []
+  } catch (e) { /* 表未建则跳过 */ }
+  applyNotesToDOM()
+}
+function applyNotesToDOM() {
+  document.querySelectorAll('#artBody .note-box').forEach(n => n.remove())
+  articleNotes.forEach(n => {
+    const sent = document.querySelector(`#artBody .sent[data-si="${n.sentence_index}"]`)
+    if (!sent) return
+    const sentId = sent.querySelector('.sent-id')
+    if (n.quote && sentId.innerHTML.indexOf(n.quote) >= 0 && sentId.querySelector('mark') === null) {
+      sentId.innerHTML = sentId.innerHTML.replace(n.quote, `<mark>${n.quote}</mark>`)
+    }
+    if (n.note && n.note.trim()) {
+      const box = document.createElement('div')
+      box.className = 'note-box'
+      box.innerHTML = `<div class="note-quote">「${n.quote}」</div>${n.note}<span class="note-del" onclick="deleteNote(${n.id})">✕</span>`
+      sent.appendChild(box)
+    }
+  })
+}
+function openNoteFromSel() {
+  if (!transCurrent || !transCurrent.inArticle) return
+  const quote = transCurrent.raw, si = transCurrent.si, aid = artCurrent.id
+  hideTransPop()
+  pendingNote = { article_id: aid, sentence_index: si, quote }
+  document.getElementById('noteQuote').textContent = '「' + quote + '」'
+  document.getElementById('noteText').value = ''
+  document.getElementById('noteEditor').classList.add('show')
+  setTimeout(() => document.getElementById('noteText').focus(), 100)
+}
+function closeNoteEditor() {
+  document.getElementById('noteEditor').classList.remove('show')
+  pendingNote = null
+}
+async function saveNote() {
+  if (!pendingNote || !sb) return closeNoteEditor()
+  const note = document.getElementById('noteText').value.trim()
+  const articleId = pendingNote.article_id
+  try {
+    const { error } = await sb.from('article_notes').insert({ ...pendingNote, note })
+    if (error) throw error
+  } catch (e) {
+    alert('保存失败：可能还没在 Supabase 建好 article_notes 表（睡醒跑 SQL 后即可）')
+    return closeNoteEditor()
   }
+  closeNoteEditor()
+  loadArticleNotes(articleId)
+}
+async function deleteNote(id) {
+  if (!sb) return
+  try { await sb.from('article_notes').delete().eq('id', id) } catch (e) {}
+  loadArticleNotes(artCurrent.id)
+}
+
+// ===== INIT =====
+window.addEventListener('DOMContentLoaded', async () => {
+  document.getElementById('cfgUrl').value = SUPABASE_URL
+  document.getElementById('cfgKey').value = SUPABASE_KEY
+  if (!initSupabase()) { enterAuth(); return }
+  try {
+    const { data: { session } } = await sb.auth.getSession()
+    if (session && session.user) {
+      currentUser = session.user
+      await loadProfileData()
+      showView('home', document.querySelector('.tab'))
+    } else {
+      enterAuth()
+    }
+  } catch (e) { enterAuth() }
+  sb.auth.onAuthStateChange((event, session) => {
+    if (event === 'SIGNED_OUT') enterAuth()
+  })
 })
 </script>
 </body>
