@@ -3,3 +3,7 @@ data.db-shm
 data.db-wal
 .DS_Store
 node_modules/
+supabase/service-key
+.env
+.env.local
+/exports/
