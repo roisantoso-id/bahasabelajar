@@ -182,6 +182,22 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .art-title-zh{font-size:11px;color:var(--muted);margin-top:3px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
 .art-card-summary{display:none}
 .art-sent-count{font-size:10px;color:#b0b5b2;margin-top:6px}
+/* 猎奇 类目配色 */
+.art-featured.cat-猎奇 .art-featured-bg{background:linear-gradient(135deg,#3a1c4a,#5a2a6b,#7d3e8f)}
+.art-card .art-cat.cat-猎奇{background:linear-gradient(180deg,#efe0f5,#e0c8e8);color:#7d3e8f}
+[data-theme="dark"] .art-card .art-cat.cat-猎奇{background:linear-gradient(180deg,#241630,#190d28);color:#c08fd0}
+/* 封面图 */
+.art-featured.has-img{min-height:200px}
+.art-featured.has-img .art-featured-bg{background:none !important}
+.art-featured.has-img .art-featured-bg::after{background:linear-gradient(0deg,rgba(0,0,0,.72) 0%,rgba(0,0,0,.15) 55%,transparent 100%)}
+.art-featured-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.art-card-img{display:block;width:calc(100% + 28px);height:96px;object-fit:cover;margin:-14px -14px 10px;background:rgba(20,41,37,.04)}
+/* 未读红点 */
+.art-featured .art-dot{position:absolute;top:14px;right:14px;width:11px;height:11px;border-radius:50%;background:#ff3b30;box-shadow:0 0 0 3px rgba(255,59,48,.25);z-index:2}
+.art-card{position:relative}
+.art-card .art-dot{position:absolute;top:8px;right:8px;width:9px;height:9px;border-radius:50%;background:#ff3b30;box-shadow:0 0 0 3px rgba(255,59,48,.2);z-index:2}
+/* tab 红色角标 */
+.tab-badge{position:absolute;top:2px;left:50%;margin-left:4px;min-width:17px;height:17px;padding:0 4px;border-radius:99px;background:#ff3b30;color:#fff;font-size:10px;font-weight:800;line-height:17px;text-align:center;box-shadow:0 2px 6px rgba(255,59,48,.4);z-index:3}
 .art-summary{border-radius:16px;padding:12px 14px;font-size:12px;color:#5a5346;line-height:1.6;margin-bottom:12px;border:1px solid rgba(20,41,37,.06);background:rgba(245,241,231,.6);max-height:2.8em;overflow:hidden;position:relative;cursor:pointer;transition:max-height .3s ease}
 .art-summary.expanded{max-height:500px}
 .art-summary:not(.expanded)::after{content:'展开 ▾';position:absolute;bottom:0;right:0;padding:0 10px 2px 30px;font-size:10px;font-weight:800;color:var(--green);background:linear-gradient(90deg,transparent,#f5f1e7 30%)}
@@ -712,7 +728,7 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
   <button class="tab active" onclick="showView('home',this)"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span>今日</button>
   <button class="tab" onclick="showView('lessons',this)"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M2 4h7a2 2 0 0 1 2 2v14a1 1 0 0 0-1-1H2zM22 4h-7a2 2 0 0 0-2 2v14a1 1 0 0 1 1-1h8z"/></svg></span>课程</button>
   <button class="tab" onclick="showView('words',this)"><span class="tab-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>词库</button>
-  <button class="tab" onclick="showView('articles',this)"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" rx="2"/><path d="M8 8h8M8 12h5"/></svg></span>文章</button>
+  <button class="tab" onclick="showView('articles',this)"><span class="tab-badge" id="artTabBadge" style="display:none"></span><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" rx="2"/><path d="M8 8h8M8 12h5"/></svg></span>文章</button>
   <button class="tab" onclick="showView('profile',this)"><span class="tab-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 0 0-16 0"/></svg></span>我的</button>
 </div>
 
@@ -903,6 +919,7 @@ async function onLoggedIn(user) {
   await loadProfileData()
   if (await enforceBan()) return
   showView('home', document.querySelector('.tab'))
+  refreshArticleBadge()
 }
 async function doLogout() {
   if (sb) await sb.auth.signOut()
@@ -1480,19 +1497,50 @@ async function loadArticles() {
     `<button class="art-cat-btn${c===artFilter?' active':''}" onclick="filterArticles('${c}')">${c}</button>`
   ).join('')
   renderArticleList()
+  updateArticleBadge()
 }
 function filterArticles(cat) {
   artFilter = cat
   document.querySelectorAll('.art-cat-btn').forEach(b => b.classList.toggle('active', b.textContent === cat))
   renderArticleList()
 }
+// ===== 文章已读跟踪（localStorage）=====
+function getReadArticles() {
+  try { return new Set(JSON.parse(localStorage.getItem('bb_read_articles') || '[]')) } catch (e) { return new Set() }
+}
+function markArticleRead(id) {
+  const s = getReadArticles()
+  if (!s.has(id)) { s.add(id); try { localStorage.setItem('bb_read_articles', JSON.stringify([...s])) } catch (e) {} ; updateArticleBadge() }
+}
+function updateArticleBadge() {
+  const read = getReadArticles()
+  const unread = articleCache.filter(a => !read.has(a.id)).length
+  const badge = document.getElementById('artTabBadge')
+  if (!badge) return
+  if (unread > 0) { badge.textContent = '+' + (unread > 99 ? 99 : unread); badge.style.display = '' }
+  else badge.style.display = 'none'
+}
+// 进 app 时就拉文章 id，让角标提前显示（不渲染列表）
+async function refreshArticleBadge() {
+  if (!sb || articleCache.length) { updateArticleBadge(); return }
+  try {
+    const { data } = await sb.from('articles').select('id')
+    if (data) articleCache = data
+    updateArticleBadge()
+  } catch (e) {}
+}
 function renderArticleList() {
   const list = artFilter === '全部' ? articleCache : articleCache.filter(a => a.category === artFilter)
   if (!list.length) { document.getElementById('articleList').innerHTML = '<div class="list-end">暂无文章</div>'; return }
+  const read = getReadArticles()
   const featured = list[0]
   const rest = list.slice(1)
-  let html = `<div class="art-featured cat-${esc(featured.category)}" onclick="openArticle(${featured.id})">
+  const fImg = featured.image_url ? `<img class="art-featured-img" src="${esc(featured.image_url)}" alt="" loading="lazy" onerror="this.remove()">` : ''
+  const fDot = read.has(featured.id) ? '' : '<span class="art-dot"></span>'
+  let html = `<div class="art-featured cat-${esc(featured.category)}${featured.image_url?' has-img':''}" onclick="openArticle(${featured.id})">
+    ${fImg}
     <div class="art-featured-bg"></div>
+    ${fDot}
     <div class="art-featured-content">
       <span class="art-cat">${esc(featured.category)}</span>
       <div class="art-title-id">${esc(featured.title)}</div>
@@ -1501,14 +1549,17 @@ function renderArticleList() {
     </div>
   </div>`
   if (rest.length) {
-    html += '<div class="art-grid">' + rest.map(a =>
-      `<div class="art-card" onclick="openArticle(${a.id})">
+    html += '<div class="art-grid">' + rest.map(a => {
+      const img = a.image_url ? `<img class="art-card-img" src="${esc(a.image_url)}" alt="" loading="lazy" onerror="this.remove()">` : ''
+      const dot = read.has(a.id) ? '' : '<span class="art-dot"></span>'
+      return `<div class="art-card" onclick="openArticle(${a.id})">
+        ${dot}${img}
         <div class="art-card-top"><span class="art-cat cat-${esc(a.category)}">${esc(a.category)}</span></div>
         <div class="art-title-id">${esc(a.title)}</div>
         <div class="art-title-zh">${esc(a.title_zh)}</div>
         <div class="art-sent-count">${a.sentences?a.sentences.length:0} 句</div>
       </div>`
-    ).join('') + '</div>'
+    }).join('') + '</div>'
   }
   document.getElementById('articleList').innerHTML = html
 }
@@ -1517,6 +1568,7 @@ function openArticle(id) {
   const a = articleCache.find(x => x.id === id)
   if (!a) return
   artCurrent = a
+  markArticleRead(id)
   const lv = a.level===1?'入门':a.level===2?'初级':'中级'
   document.getElementById('artTitle').textContent = a.title_zh
   document.getElementById('artMeta').textContent = `${a.title} · ${a.category} · ${lv} · ${a.sentences.length} 句`
