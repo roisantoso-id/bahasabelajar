@@ -275,6 +275,21 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .lb-learn:disabled{background:#e8e6df;color:#9aa39d}
 .lb-grammar{background:var(--purplebg);color:var(--purple)}
 .lesson-empty{font-size:12px;color:var(--muted);text-align:center;padding:8px 0}
+/* ===== 练习模式 认/拼/听 ===== */
+.mode-switch{display:flex;gap:6px;background:#e9ede8;border-radius:12px;padding:4px;margin-bottom:14px}
+.mode-switch button{flex:1;height:34px;border-radius:9px;font-size:13px;font-weight:800;color:#6a736c;background:transparent}
+.mode-switch button.active{background:var(--paper);color:var(--green);box-shadow:0 2px 8px rgba(25,55,46,.08)}
+.produce-q{text-align:center;font-size:26px;font-weight:900;margin:30px 0 4px;color:var(--ink)}
+.produce-input{width:100%;height:52px;margin-top:28px;padding:0 16px;border:1.5px solid #d9ddd6;border-radius:14px;font-size:20px;font-family:Georgia,serif;text-align:center;background:#fff}
+.produce-input:focus{outline:none;border-color:var(--green)}
+.produce-input.ok{border-color:#3a8f6f;color:#1f7a55}
+.produce-input.bad{border-color:#d98b7a;color:#b8503a}
+.produce-typed{text-align:center;font-size:13px;color:#b8503a;margin-top:10px}
+.answer-word{text-align:center;font-family:Georgia,serif;font-size:30px;font-weight:800;margin:6px 0 2px}
+.answer-word.bad{color:#b8503a}.answer-word.ok{color:#1f7a55}
+.listen-play{display:flex;align-items:center;justify-content:center;width:88px;height:88px;margin:46px auto 0;border-radius:50%;background:var(--mint);color:var(--green);font-size:38px}
+.listen-play:active{transform:scale(.92)}
+.listen-hint{text-align:center;color:var(--muted);font-size:12px;margin-top:18px}
 .hidden{display:none!important}
 </style>
 </head>
@@ -355,6 +370,11 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
     <button class="close" onclick="closeStudy()">✕</button>
     <div class="study-progress"><div class="study-progress-fill" id="studyProgress"></div></div>
     <span class="study-counter" id="studyCounter">0/0</span>
+  </div>
+  <div class="mode-switch" id="modeSwitch">
+    <button data-m="recognize" onclick="setPracticeMode('recognize')">认</button>
+    <button data-m="produce" onclick="setPracticeMode('produce')">拼</button>
+    <button data-m="listen" onclick="setPracticeMode('listen')">听</button>
   </div>
   <div id="studyCard" class="word-card"></div>
   <div class="study-actions" id="studyActions"></div>
@@ -713,6 +733,16 @@ async function getStreak(t) {
 
 // ===== STUDY =====
 let studyQueue = [], studyIdx = 0, studyCompleted = 0, studyMode = 'learn'
+let practiceMode = localStorage.getItem('practice_mode') || 'recognize'  // recognize|produce|listen
+function setPracticeMode(m) {
+  practiceMode = m
+  localStorage.setItem('practice_mode', m)
+  syncModeSwitch()
+  renderStudy()
+}
+function syncModeSwitch() {
+  document.querySelectorAll('#modeSwitch button').forEach(b => b.classList.toggle('active', b.dataset.m === practiceMode))
+}
 
 async function learnedIdList() {
   const {data} = await sb.from('learning').select('word_id')
@@ -793,6 +823,7 @@ function renderStudy() {
   const pct = Math.round(studyCompleted / Math.max(1,total) * 100)
   document.getElementById('studyProgress').style.width = pct + '%'
   document.getElementById('studyCounter').textContent = `${studyCompleted}/${total}`
+  syncModeSwitch()
 
   if (studyIdx >= studyQueue.length) {
     document.getElementById('studyCard').innerHTML = `<div class="study-done"><div class="mark">◆</div><h2>做得漂亮</h2><p>完成 ${total} 个单词</p><button onclick="closeStudy()">完成训练</button></div>`
@@ -801,6 +832,9 @@ function renderStudy() {
   }
   const w = studyQueue[studyIdx]
   const levelName = w.level===1?'入门':w.level===2?'初级':'中级'
+  if (practiceMode === 'produce') return renderProduce(w, levelName)
+  if (practiceMode === 'listen') return renderListen(w, levelName)
+  // 认：看印尼语→回忆中文（默认）
   document.getElementById('studyCard').innerHTML = `
     <span class="word-level">${levelName}</span>
     <div class="word-main">${esc(w.word)}</div>
@@ -812,6 +846,73 @@ function renderStudy() {
     <button class="btn-know" onclick="revealKnown()">✓ 认识</button>`
 }
 
+// 拼：看中文→拼出印尼语
+function renderProduce(w, levelName) {
+  document.getElementById('studyCard').innerHTML = `
+    <span class="word-level">${levelName}</span>
+    <div class="produce-q">${esc(w.meaning)}</div>
+    <div class="word-pos">${esc(w.pos)}</div>
+    <input id="pInput" class="produce-input" placeholder="拼出印尼语" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false">
+    <div id="answerArea"></div>`
+  document.getElementById('studyActions').innerHTML = `
+    <button class="btn-unknown" onclick="produceReveal()">不会，看答案</button>
+    <button class="btn-know" onclick="produceCheck()">检查</button>`
+  const inp = document.getElementById('pInput')
+  inp.focus()
+  inp.onkeydown = e => { if (e.key === 'Enter') produceCheck() }
+}
+function produceCheck() {
+  const w = studyQueue[studyIdx]
+  const inp = document.getElementById('pInput')
+  const val = (inp.value || '').trim().toLowerCase()
+  if (!val) return
+  const ok = val === (w.word || '').trim().toLowerCase()
+  inp.classList.add(ok ? 'ok' : 'bad'); inp.disabled = true
+  if (ok) {
+    revealAnswerWord(w, true)
+    document.getElementById('studyActions').innerHTML = w.wrongTimes
+      ? `<button class="btn-next" onclick="nextWord(false)" style="width:100%">继续</button>`
+      : `<button class="btn-easy" onclick="submitResult('easy')">太简单了</button><button class="btn-know" onclick="submitResult('known')">记住了</button>`
+  } else {
+    requeueWrong(w)
+    revealAnswerWord(w, false, val)
+    document.getElementById('studyActions').innerHTML = `<button class="btn-next" onclick="nextWord(false)" style="width:100%">继续，下次拼对</button>`
+  }
+}
+function produceReveal() {
+  const w = studyQueue[studyIdx]
+  const inp = document.getElementById('pInput'); if (inp) inp.disabled = true
+  requeueWrong(w)
+  revealAnswerWord(w, false)
+  document.getElementById('studyActions').innerHTML = `<button class="btn-next" onclick="nextWord(false)" style="width:100%">继续，下次我会拼</button>`
+}
+
+// 听：听发音→回想意思和拼写
+function renderListen(w, levelName) {
+  document.getElementById('studyCard').innerHTML = `
+    <span class="word-level">${levelName}</span>
+    <button class="listen-play" onclick="speakStudyWord()">🔊</button>
+    <div class="listen-hint">点喇叭再听一次 · 回想它的意思和拼写</div>
+    <div id="answerArea"></div>`
+  document.getElementById('studyActions').innerHTML = `
+    <button class="btn-unknown" onclick="listenReveal(false)">✕ 没听出</button>
+    <button class="btn-know" onclick="listenReveal(true)">✓ 听出了</button>`
+  setTimeout(() => speakStudyWord(), 280)
+}
+function listenReveal(known) {
+  const w = studyQueue[studyIdx]
+  if (!known) requeueWrong(w)
+  revealAnswerWord(w, known)
+  document.getElementById('studyActions').innerHTML = (!known || w.wrongTimes)
+    ? `<button class="btn-next" onclick="nextWord(false)" style="width:100%">继续</button>`
+    : `<button class="btn-easy" onclick="submitResult('easy')">太简单了</button><button class="btn-know" onclick="submitResult('known')">记住了</button>`
+}
+
+function requeueWrong(w) {
+  w.wrongTimes++
+  studyQueue.splice(Math.min(studyIdx+4, studyQueue.length), 0, {...w, retry:true})
+}
+
 function revealKnown() {
   showAnswer()
   const w = studyQueue[studyIdx]
@@ -821,17 +922,27 @@ function revealKnown() {
 }
 
 function revealUnknown() {
-  const w = studyQueue[studyIdx]
-  w.wrongTimes++
-  studyQueue.splice(Math.min(studyIdx+4, studyQueue.length), 0, {...w, retry:true})
+  requeueWrong(studyQueue[studyIdx])
   showAnswer()
   document.getElementById('studyActions').innerHTML = `<button class="btn-next" onclick="nextWord(false)" style="width:100%">继续，下次我会记住</button>`
 }
 
+function exHtmlOf(w) {
+  return (w.examples||[]).map(e => `<div class="ex-item"><div class="ex-sentence">${esc(e.id)}</div><div class="ex-zh">${esc(e.zh)}</div></div>`).join('')
+}
+// 认模式：词已在卡顶，答案区只补释义+例句
 function showAnswer() {
   const w = studyQueue[studyIdx]
-  const exHtml = (w.examples||[]).map(e => `<div class="ex-item"><div class="ex-sentence">${esc(e.id)}</div><div class="ex-zh">${esc(e.zh)}</div></div>`).join('')
-  document.getElementById('answerArea').innerHTML = `<div class="word-meaning">${esc(w.meaning)}</div><div class="word-examples">${exHtml}</div>`
+  document.getElementById('answerArea').innerHTML = `<div class="word-meaning">${esc(w.meaning)}</div><div class="word-examples">${exHtmlOf(w)}</div>`
+}
+// 拼/听模式：词没显示，答案区先亮出词，再给释义+例句
+function revealAnswerWord(w, ok, typed) {
+  document.getElementById('answerArea').innerHTML = `
+    <div class="answer-word ${ok ? 'ok' : 'bad'}">${esc(w.word)}</div>
+    <div class="word-pos" style="margin-bottom:6px">${esc(w.pos)}</div>
+    ${typed ? `<div class="produce-typed">你拼的：${esc(typed)}</div>` : ''}
+    <div class="word-meaning" style="margin-top:14px">${esc(w.meaning)}</div>
+    <div class="word-examples">${exHtmlOf(w)}</div>`
 }
 
 async function submitResult(result) {
