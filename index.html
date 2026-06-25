@@ -517,11 +517,16 @@ let ttsEngine = localStorage.getItem('tts_engine') || 'qwen'   // 'qwen' | 'web'
 let qwenTransOK = true   // 翻译代理是否可用（失败则回退 MyMemory）
 
 async function qwenCall(action, text) {
+  // 带登录 token，函数会校验身份 + 每日上限（防盗刷）
+  const { data: { session } } = await sb.auth.getSession()
+  const token = session && session.access_token
+  if (!token) throw new Error('未登录')
   const r = await fetch(QWEN_FN, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', apikey: SUPABASE_KEY },
+    headers: { 'Content-Type': 'application/json', apikey: SUPABASE_KEY, Authorization: 'Bearer ' + token },
     body: JSON.stringify({ action, text })
   })
+  if (r.status === 429) throw new Error('今日 Qwen 用量已达上限')
   if (!r.ok) throw new Error('qwen ' + action + ' ' + r.status)
   return r
 }
