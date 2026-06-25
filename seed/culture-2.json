@@ -1,0 +1,268 @@
+[
+  {
+    "title": "甘美兰 Gamelan",
+    "title_id": "Gamelan",
+    "category": "艺术",
+    "emoji": "🎼",
+    "body": "甘美兰是印尼爪哇与巴厘岛的传统乐队，以青铜打击乐器为主——锣(gong)、排琴(saron)、釜锣(bonang)、鼓(kendang)等，常有几十件合奏。它讲究的不是个人炫技，而是所有乐手如水乳交融、彼此呼应，被视为互助精神的声音化身。甘美兰为皮影戏、舞蹈伴奏，也用于宫廷与宗教仪式。爪哇甘美兰沉静典雅，巴厘甘美兰则明快激越。每套乐器都被当作一个整体来调音，因此两套甘美兰的乐器往往无法互换。",
+    "terms": [
+      { "word": "gamelan", "meaning": "甘美兰乐队" },
+      { "word": "gong", "meaning": "锣" },
+      { "word": "kendang", "meaning": "鼓" },
+      { "word": "musik", "meaning": "音乐" },
+      { "word": "irama", "meaning": "节奏、旋律" }
+    ]
+  },
+  {
+    "title": "巴厘舞 Tari Bali",
+    "title_id": "Tari Bali",
+    "category": "艺术",
+    "emoji": "💃",
+    "body": "巴厘岛的舞蹈以瞪大的眼睛、翻飞的手指和颤动的体态著称，每个动作都有严格程式。最著名的 Kecak（凯查克火舞）没有乐器伴奏，由几十甚至上百名男子围坐成圈、齐声高呼「cak-cak-cak」充当节奏，演绎《罗摩衍那》中神猴助阵的段落，场面震撼。其他名舞如 Legong（少女宫廷舞）、Barong（善恶神兽对决）。舞蹈在巴厘不只是表演，更是献给神明的供奉。",
+    "terms": [
+      { "word": "tari", "meaning": "舞蹈" },
+      { "word": "menari", "meaning": "跳舞（me- 动词）" },
+      { "word": "penari", "meaning": "舞者" },
+      { "word": "gerak", "meaning": "动作、移动" },
+      { "word": "indah", "meaning": "美丽的" }
+    ]
+  },
+  {
+    "title": "安格隆 Angklung",
+    "title_id": "Angklung",
+    "category": "艺术",
+    "emoji": "🎵",
+    "body": "Angklung 是西爪哇巽他人的竹制乐器：几根长短不一的竹管装在框架上，摇晃时竹管撞击，发出一个固定音高。由于一架 angklung 通常只发一个音，要奏出旋律就必须许多人各持一两架、按指挥依次摇响——天然地把「合作」写进了乐器本身，因此常被用于学校的集体音乐教育。2010 年 angklung 被列入联合国教科文组织非遗名录。",
+    "terms": [
+      { "word": "angklung", "meaning": "安格隆（竹乐器）" },
+      { "word": "bambu", "meaning": "竹子" },
+      { "word": "bermain", "meaning": "玩、演奏（ber- 动词）" },
+      { "word": "bersama", "meaning": "一起、共同" },
+      { "word": "sekolah", "meaning": "学校" }
+    ]
+  },
+  {
+    "title": "克里斯短剑 Keris",
+    "title_id": "Keris",
+    "category": "手工艺",
+    "emoji": "🗡️",
+    "body": "Keris 是一种刃身常带波浪形弯曲的短剑，是爪哇、巴厘与马来世界的礼器和传家宝。它由铁与含镍的陨铁反复折叠锻打，表面浮现出名为 pamor 的花纹。印尼人相信每把 keris 都有灵性，能护佑或预示主人的命运，在某些地方的婚礼上还可作为新郎的象征替身出席。2005 年 keris 被列入教科文组织非遗名录。",
+    "terms": [
+      { "word": "keris", "meaning": "克里斯短剑" },
+      { "word": "besi", "meaning": "铁" },
+      { "word": "pusaka", "meaning": "传家宝、圣物" },
+      { "word": "tajam", "meaning": "锋利的" },
+      { "word": "senjata", "meaning": "武器" }
+    ]
+  },
+  {
+    "title": "宋吉锦 Songket",
+    "title_id": "Songket",
+    "category": "手工艺",
+    "emoji": "🧵",
+    "body": "Songket 是一种用金线或银线挑织出花纹的华丽织锦，盛产于苏门答腊的巨港(Palembang)和米南加保等地。织工在丝绸底布上手工一根根穿入金银线，织一匹常需数周乃至数月，因而过去是贵族与王室在婚礼、典礼上才穿的盛装。如今 songket 仍是隆重场合的礼服，也是地方身份的象征。",
+    "terms": [
+      { "word": "songket", "meaning": "宋吉锦（金银线织锦）" },
+      { "word": "tenun", "meaning": "织、织锦" },
+      { "word": "benang", "meaning": "线、纱" },
+      { "word": "emas", "meaning": "金、黄金" },
+      { "word": "kain", "meaning": "布、布料" }
+    ]
+  },
+  {
+    "title": "仁当牛肉 Rendang",
+    "title_id": "Rendang",
+    "category": "饮食",
+    "emoji": "🍛",
+    "body": "Rendang 源自苏门答腊西部的米南加保人，是一道把牛肉放进椰浆和姜黄、南姜、香茅、辣椒等大量香料里，小火慢熬数小时、直到汤汁收干、肉色乌亮的菜。它耐放、越煮越入味，原是为节庆和远行准备的食物，常出现在 nasi Padang（巴东饭）的餐桌上。它曾在 CNN 的全球美食网络评选中被选为「世界第一美味」。",
+    "terms": [
+      { "word": "rendang", "meaning": "仁当（慢炖牛肉）" },
+      { "word": "daging", "meaning": "肉" },
+      { "word": "sapi", "meaning": "牛" },
+      { "word": "santan", "meaning": "椰浆" },
+      { "word": "bumbu", "meaning": "香料、调料" }
+    ]
+  },
+  {
+    "title": "沙爹 Sate",
+    "title_id": "Sate",
+    "category": "饮食",
+    "emoji": "🍢",
+    "body": "Sate（沙爹）是把腌好的鸡、羊或牛肉切块串在竹签上炭火烤制，再淋上浓郁花生酱或甜酱油的小吃，街头巷尾都能闻到它的炭香。各地有各地的版本：马都拉沙爹配甜酱油，巴东沙爹则浇上金黄的咖喱状酱汁。它常配 lontong（粽状米糕）一起吃，是夜市与聚会的标配。",
+    "terms": [
+      { "word": "sate", "meaning": "沙爹（烤肉串）" },
+      { "word": "ayam", "meaning": "鸡" },
+      { "word": "bakar", "meaning": "烧、烤" },
+      { "word": "kacang", "meaning": "花生、豆" },
+      { "word": "manis", "meaning": "甜的" }
+    ]
+  },
+  {
+    "title": "印尼咖啡 Kopi",
+    "title_id": "Kopi",
+    "category": "饮食",
+    "emoji": "☕",
+    "body": "印尼是世界主要咖啡产地之一，苏门答腊的曼特宁、苏拉威西的托拉查、爪哇咖啡都享誉全球。最传统的喝法是 kopi tubruk——咖啡粉直接用热水冲泡、连渣带糖一起喝。臭名昭著又昂贵的「猫屎咖啡」(kopi luwak) 也产自这里。近年雅加达、万隆兴起的咖啡馆文化，让「nongkrong」（泡咖啡馆闲坐）成了年轻人的日常社交。",
+    "terms": [
+      { "word": "kopi", "meaning": "咖啡" },
+      { "word": "minum", "meaning": "喝" },
+      { "word": "panas", "meaning": "热的" },
+      { "word": "gula", "meaning": "糖" },
+      { "word": "pahit", "meaning": "苦的" }
+    ]
+  },
+  {
+    "title": "静居日 Nyepi",
+    "title_id": "Hari Raya Nyepi",
+    "category": "节日",
+    "emoji": "🤫",
+    "body": "Nyepi 是巴厘印度教的新年，又称「静居日」。这一天全岛进入绝对的安静：不生火、不工作、不出行、不娱乐，连机场都关闭、街上空无一人，目的是让恶灵以为岛上无人居住而离去。前一晚则截然相反——人们抬着巨大狰狞的 ogoh-ogoh 纸偶游行、喧天动地，象征驱赶邪祟。一动一静，是巴厘人独有的辞旧迎新。",
+    "terms": [
+      { "word": "hari raya", "meaning": "节日、大节" },
+      { "word": "sepi", "meaning": "安静的、冷清的" },
+      { "word": "tahun", "meaning": "年" },
+      { "word": "api", "meaning": "火" },
+      { "word": "diam", "meaning": "安静、不动" }
+    ]
+  },
+  {
+    "title": "加隆安节 Galungan",
+    "title_id": "Galungan",
+    "category": "节日",
+    "emoji": "🎍",
+    "body": "Galungan 是巴厘印度教纪念「善战胜恶」的节日，每 210 天循环一次。家家户户在门前竖起高高弯垂、用椰叶精心装饰的竹竿 penjor，街道顿时如绿色拱廊。巴厘人相信祖先的灵魂会在这期间返回人间，于是供上祭品、阖家祭拜，十天后的 Kuningan 节再送祖先离去。",
+    "terms": [
+      { "word": "penjor", "meaning": "加隆安装饰竹竿" },
+      { "word": "roh", "meaning": "灵魂" },
+      { "word": "nenek moyang", "meaning": "祖先" },
+      { "word": "sembahyang", "meaning": "祭拜、祈祷" },
+      { "word": "pulang", "meaning": "回来、回家" }
+    ]
+  },
+  {
+    "title": "协商一致 Musyawarah",
+    "title_id": "Musyawarah Mufakat",
+    "category": "社会",
+    "emoji": "🗣️",
+    "body": "Musyawarah 指通过反复商量、人人发言，最终达成大家都能接受的共识 mufakat，而不是简单地以少数服从多数来投票表决。它从村社决策一直延伸到国家政治，是建国五项原则 Pancasila 第四条的核心。背后的理念是：面子和团结比「赢」更重要，宁可多花时间，也要让每个人都不被落下。",
+    "terms": [
+      { "word": "musyawarah", "meaning": "协商、共同商议" },
+      { "word": "mufakat", "meaning": "一致同意" },
+      { "word": "setuju", "meaning": "同意" },
+      { "word": "keputusan", "meaning": "决定" },
+      { "word": "bersama", "meaning": "共同、一起" }
+    ]
+  },
+  {
+    "title": "橡皮时间 Jam Karet",
+    "title_id": "Jam Karet",
+    "category": "社会",
+    "emoji": "⏰",
+    "body": "「Jam karet」字面意思是「橡皮时间」——时间像橡皮一样能伸能缩。它戏谑地点出印尼人对时间相对宽松的态度：约好的时间到了人还没到，迟到半小时往往不算失礼。这背后是把人情、寒暄看得比分秒精确更重的文化。当然，正式商务和航班可不讲 jam karet；了解这个词，能帮你少一点文化误会、多一份从容。",
+    "terms": [
+      { "word": "jam", "meaning": "钟点、小时" },
+      { "word": "karet", "meaning": "橡胶、橡皮" },
+      { "word": "waktu", "meaning": "时间" },
+      { "word": "terlambat", "meaning": "迟到" },
+      { "word": "santai", "meaning": "轻松、悠闲" }
+    ]
+  },
+  {
+    "title": "科莫多龙 Komodo",
+    "title_id": "Komodo",
+    "category": "自然",
+    "emoji": "🦎",
+    "body": "科莫多巨蜥(komodo)是世界上现存最大的蜥蜴，体长可达三米，只生活在印尼东部的科莫多、林卡等几座小岛上。它行动看似迟缓，却是顶级掠食者，唾液中的毒液能让被咬的猎物逐渐衰竭。科莫多国家公园是世界自然遗产，也是热门的潜水与生态旅游地。当地人把这种巨蜥称作「ora」，视之为传说中的亲族。",
+    "terms": [
+      { "word": "komodo", "meaning": "科莫多巨蜥" },
+      { "word": "pulau", "meaning": "岛" },
+      { "word": "besar", "meaning": "大的" },
+      { "word": "hewan", "meaning": "动物" },
+      { "word": "liar", "meaning": "野生的" }
+    ]
+  },
+  {
+    "title": "多巴湖 Danau Toba",
+    "title_id": "Danau Toba",
+    "category": "自然",
+    "emoji": "🌋",
+    "body": "多巴湖是苏门答腊北部一座巨大的火山口湖，也是世界上最大的火山湖——它是约 7.4 万年前一次超级火山喷发留下的，湖中央的萨摩西岛(Pulau Samosir)几乎和新加坡一样大。这里是巴塔克人(Batak)的故乡，湖光山色之间散布着船形屋顶的传统民居。气候凉爽、风景壮阔，是苏门答腊最负盛名的去处之一。",
+    "terms": [
+      { "word": "danau", "meaning": "湖" },
+      { "word": "gunung", "meaning": "山、火山" },
+      { "word": "air", "meaning": "水" },
+      { "word": "pulau", "meaning": "岛" },
+      { "word": "pemandangan", "meaning": "风景、景色" }
+    ]
+  },
+  {
+    "title": "建国五原则 Pancasila",
+    "title_id": "Pancasila",
+    "category": "历史",
+    "emoji": "🦅",
+    "body": "Pancasila（源自梵语「五项原则」）是印尼的立国哲学，1945 年由苏加诺提出。五条依次是：信仰独一真神、公正而文明的人道、印尼的统一、在协商代议中受智慧引导的民主、为全体人民实现社会正义。它被设计成能容纳一个由上千座岛屿、数百个民族和多种宗教组成的国家；国徽上的神鹰 Garuda 胸前所挂的盾牌，描绘的正是这五项原则。",
+    "terms": [
+      { "word": "Pancasila", "meaning": "建国五项原则" },
+      { "word": "negara", "meaning": "国家" },
+      { "word": "satu", "meaning": "一、统一" },
+      { "word": "adil", "meaning": "公正的" },
+      { "word": "rakyat", "meaning": "人民" }
+    ]
+  },
+  {
+    "title": "独立日 Hari Kemerdekaan",
+    "title_id": "Hari Kemerdekaan",
+    "category": "历史",
+    "emoji": "🇮🇩",
+    "body": "1945 年 8 月 17 日，苏加诺宣读独立宣言，印尼脱离荷兰三百多年的殖民统治。每年这一天全国欢腾，除了庄严的升旗仪式，最热闹的是五花八门的社区游戏：爬上涂满润滑油的槟榔木杆抢顶端奖品(panjat pinang)、不用手啃挂着的脆饼(makan kerupuk)、套袋赛跑等，把民族的集体记忆过成了一场全民嘉年华。",
+    "terms": [
+      { "word": "merdeka", "meaning": "独立、自由" },
+      { "word": "kemerdekaan", "meaning": "独立（名词）" },
+      { "word": "bendera", "meaning": "旗帜" },
+      { "word": "pahlawan", "meaning": "英雄" },
+      { "word": "rakyat", "meaning": "人民" }
+    ]
+  },
+  {
+    "title": "婆罗浮屠 Borobudur",
+    "title_id": "Candi Borobudur",
+    "category": "历史",
+    "emoji": "🛕",
+    "body": "婆罗浮屠是位于中爪哇的世界最大佛教寺院，建于公元 9 世纪的夏连特拉王朝。它是一座没有内部空间的实心石构曼荼罗：信徒沿着九层回廊顺时针拾级而上，墙上两千多块浮雕讲述佛陀本生，顶层环绕着一座座钟形佛塔与端坐的佛像，象征从欲界到无形界的修行历程。它一度被火山灰与丛林湮没，19 世纪重见天日，如今是印尼最重要的古迹与卫塞节(Waisak)的朝圣地。",
+    "terms": [
+      { "word": "candi", "meaning": "古寺、塔庙" },
+      { "word": "batu", "meaning": "石头" },
+      { "word": "tinggi", "meaning": "高的" },
+      { "word": "sejarah", "meaning": "历史" },
+      { "word": "agama", "meaning": "宗教" }
+    ]
+  },
+  {
+    "title": "米南加保 Minangkabau",
+    "title_id": "Suku Minangkabau",
+    "category": "族群",
+    "emoji": "🏯",
+    "body": "米南加保人来自苏门答腊西部，是世界上最大的母系社会之一：家产、房屋和姓氏都由母亲传给女儿。男子成年后流行「merantau」——背井离乡到外地闯荡经商，巴东餐馆(rumah makan Padang)因此开遍印尼乃至全世界。他们的传统大屋 rumah gadang 有着层层翘起、形如水牛角的屋顶。Minangkabau 这名字据说就来自「水牛获胜」(menang kabau)的传说。",
+    "terms": [
+      { "word": "suku", "meaning": "民族、部族" },
+      { "word": "merantau", "meaning": "外出闯荡谋生" },
+      { "word": "rumah", "meaning": "房子、家" },
+      { "word": "adat", "meaning": "习俗、传统法" },
+      { "word": "ibu", "meaning": "母亲" }
+    ]
+  },
+  {
+    "title": "托拉查葬礼 Toraja",
+    "title_id": "Suku Toraja",
+    "category": "族群",
+    "emoji": "⚰️",
+    "body": "苏拉威西高地的托拉查人，以隆重得惊人的葬礼闻名。在他们的信仰里，人要经过盛大的 rambu solo' 葬仪才算真正抵达来世，因此家属常会把逝者遗体在家中安置数月甚至数年，攒够钱再举办，其间并不把人当作「已死」，而当作「生病」。葬礼上宰杀大量水牛与猪、宾客云集，逝者最后被安葬在悬崖石窟里，崖壁上立着名为 tau-tau 的木雕人像替他守望。",
+    "terms": [
+      { "word": "suku", "meaning": "民族、部族" },
+      { "word": "kematian", "meaning": "死亡" },
+      { "word": "kerbau", "meaning": "水牛" },
+      { "word": "upacara", "meaning": "仪式、典礼" },
+      { "word": "percaya", "meaning": "相信" }
+    ]
+  }
+]

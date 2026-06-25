@@ -500,6 +500,7 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
     <span class="grammar-lesson-tag">Budaya</span>
   </div>
   <div class="grammar-subtitle">Budaya Indonesia · 点开看详情</div>
+  <div id="cultureFilter" class="filter-row" style="margin-top:14px"></div>
   <div id="cultureList"></div>
 </div>
 
@@ -1286,10 +1287,28 @@ function toggleTrans() {
 // ===== CULTURE =====
 let cultureExpanded = -1
 
+let cultureData = [], cultureCat = ''
 async function loadCulture() {
   if (!sb) return
   const {data} = await sb.from('culture').select('*').order('id')
-  document.getElementById('cultureList').innerHTML = (data || []).map((c, i) => {
+  cultureData = data || []
+  // 分类 chips：按出现顺序去重 + 「全部」
+  const cats = []
+  cultureData.forEach(c => { if (c.category && !cats.includes(c.category)) cats.push(c.category) })
+  const chips = [`<button class="filter-btn${cultureCat ? '' : ' active'}" data-cat="" onclick="filterCulture(this)">全部</button>`]
+    .concat(cats.map(cat => `<button class="filter-btn${cultureCat === cat ? ' active' : ''}" data-cat="${esc(cat)}" onclick="filterCulture(this)">${esc(cat)}</button>`))
+  document.getElementById('cultureFilter').innerHTML = chips.join('')
+  renderCulture()
+}
+function filterCulture(btn) {
+  document.querySelectorAll('#cultureFilter .filter-btn').forEach(b => b.classList.remove('active'))
+  btn.classList.add('active')
+  cultureCat = btn.dataset.cat || ''
+  renderCulture()
+}
+function renderCulture() {
+  const list = cultureCat ? cultureData.filter(c => c.category === cultureCat) : cultureData
+  document.getElementById('cultureList').innerHTML = list.map((c, i) => {
     const terms = (c.terms||[]).map(t => `<div class="cul-term"><span class="cul-term-w">${esc(t.word)}</span><span class="cul-term-m">${esc(t.meaning)}</span></div>`).join('')
     return `<div class="cul-card" onclick="toggleCulture(${i})">
       <div class="cul-head">
@@ -1302,7 +1321,7 @@ async function loadCulture() {
         ${terms ? `<div class="cul-terms">${terms}</div>` : ''}
       </div>
     </div>`
-  }).join('') || '<div class="list-end">暂无内容</div>'
+  }).join('') || '<div class="list-end">这个分类暂无内容</div>'
   cultureExpanded = -1
 }
 
