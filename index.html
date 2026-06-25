@@ -24,7 +24,8 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .tabs{position:fixed;left:14px;right:14px;bottom:10px;display:flex;gap:6px;padding:9px;border:1px solid rgba(21,45,40,.06);background:rgba(255,253,248,.78);backdrop-filter:blur(20px) saturate(1.1);-webkit-backdrop-filter:blur(20px) saturate(1.1);border-radius:24px;box-shadow:0 18px 40px rgba(23,45,39,.12);z-index:99}
 .tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 4px 8px;font-size:11px;color:var(--muted);font-weight:700;border-radius:18px;transition:transform .2s var(--ease),background .2s var(--ease),color .2s var(--ease),box-shadow .2s var(--ease)}
 .tab.active{color:var(--green);background:linear-gradient(180deg,#ffffff,#f4f7ef);box-shadow:0 8px 18px rgba(23,45,39,.08);transform:translateY(-1px)}
-.tab-icon{font-size:18px;line-height:1}
+.tab-icon{width:22px;height:22px;display:block}
+.tab-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
 /* pages */
 .view{display:none;padding:18px 14px 0}
@@ -708,11 +709,11 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 
 <!-- ===== TABS ===== -->
 <div class="tabs" id="tabBar">
-  <button class="tab active" onclick="showView('home',this)"><span class="tab-icon">🏠</span>今日</button>
-  <button class="tab" onclick="showView('lessons',this)"><span class="tab-icon">📚</span>课程</button>
-  <button class="tab" onclick="showView('words',this)"><span class="tab-icon">📖</span>词库</button>
-  <button class="tab" onclick="showView('calendar',this)"><span class="tab-icon">📅</span>日历</button>
-  <button class="tab" onclick="showView('profile',this)"><span class="tab-icon">👤</span>我的</button>
+  <button class="tab active" onclick="showView('home',this)"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span>今日</button>
+  <button class="tab" onclick="showView('lessons',this)"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M2 4h7a2 2 0 0 1 2 2v14a1 1 0 0 0-1-1H2zM22 4h-7a2 2 0 0 0-2 2v14a1 1 0 0 1 1-1h8z"/></svg></span>课程</button>
+  <button class="tab" onclick="showView('words',this)"><span class="tab-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>词库</button>
+  <button class="tab" onclick="showView('calendar',this)"><span class="tab-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></span>日历</button>
+  <button class="tab" onclick="showView('profile',this)"><span class="tab-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 0 0-16 0"/></svg></span>我的</button>
 </div>
 
 <!-- ===== PROFILE (我的) ===== -->
