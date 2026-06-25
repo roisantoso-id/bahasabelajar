@@ -753,8 +753,10 @@ function enterAuth() {
 }
 async function loadProfileData() {
   // 读取或创建本用户 profile（若表不存在则用默认值，不报错）
+  // ⚠️ 必须按 user_id 过滤：管理员的 RLS 能读到所有人的 profile，
+  //    不加过滤 maybeSingle() 会因多行报错，导致自己的 profile 退回默认值。
   try {
-    const { data, error } = await sb.from('profiles').select('*').maybeSingle()
+    const { data, error } = await sb.from('profiles').select('*').eq('user_id', currentUser.id).maybeSingle()
     if (error) throw error
     if (data) { profile = data }
     else {
