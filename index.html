@@ -6,7 +6,7 @@
 <title>BahasaBelajar</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <style>
-:root{--ink:#16352e;--muted:#7c857f;--green:#174d40;--green2:#2d745f;--mint:#dcebdc;--cream:#f4f1e9;--paper:#fffdf8;--coral:#f17455;--purple:#6b4c9a;--purplebg:#ebe0f5;--radius:16px}
+:root{--ink:#16352e;--muted:#7c857f;--green:#174d40;--green2:#2d745f;--mint:#dcebdc;--cream:#f4f1e9;--paper:#fffdf8;--coral:#f17455;--purple:#6b4c9a;--purplebg:#ebe0f5;--yellow:#f4c95d;--radius:18px;--ease:cubic-bezier(.22,.61,.36,1)}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;background:var(--cream);color:var(--ink);min-height:100dvh;padding-bottom:calc(70px + env(safe-area-inset-bottom))}
 button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
@@ -192,8 +192,8 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .streak-number{font-size:42px;line-height:1.1;font-weight:900}
 .streak-unit{font-size:13px}
 .streak-copy{color:rgba(255,255,255,.58);font-size:11px;margin-top:4px}
-.streak-badge{width:84px;height:84px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:50%;color:var(--green);background:var(--yellow,#f4c95d);font-size:11px;font-weight:800;text-align:center;flex:none}
-.streak-badge .diamond{margin-bottom:3px;color:var(--coral);font-size:22px;transform:rotate(45deg)}
+#v-calendar .streak-badge{width:84px;height:84px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:50%;color:var(--green);background:var(--yellow,#f4c95d);font-size:11px;font-weight:800;text-align:center;flex:none;padding:0;box-shadow:0 10px 22px -6px rgba(244,201,93,.55)}
+#v-calendar .streak-badge .diamond{margin-bottom:3px;color:var(--coral);font-size:22px;transform:rotate(45deg)}
 .cal-card{margin-top:16px;padding:18px 14px 14px;border-radius:var(--radius);background:var(--paper);box-shadow:0 4px 16px rgba(25,55,46,.05)}
 .month-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;font-size:15px;font-weight:900}
 .month-head button{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:#46655b;background:#edf3eb;font-size:20px}
@@ -275,6 +275,38 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .lb-learn:disabled{background:#e8e6df;color:#9aa39d}
 .lb-grammar{background:var(--purplebg);color:var(--purple)}
 .lesson-empty{font-size:12px;color:var(--muted);text-align:center;padding:8px 0}
+/* ===== 动效 & 质感打磨 ===== */
+@media (prefers-reduced-motion:no-preference){
+  @keyframes viewIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+  @keyframes pop{0%{transform:scale(.82)}55%{transform:scale(1.12)}100%{transform:scale(1)}}
+  @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  .view.active{animation:viewIn .34s var(--ease)}
+  #v-home.active .task,#v-home.active .hero,#v-home.active .stats-row,#lessonList .lesson-card,#articleList .art-card,#cultureList .cul-card{animation:rise .42s var(--ease) both}
+  #v-home.active .task:nth-child(2){animation-delay:.03s}#v-home.active .task:nth-child(3){animation-delay:.06s}#v-home.active .task:nth-child(4){animation-delay:.09s}
+  #lessonList .lesson-card:nth-child(2){animation-delay:.05s}#lessonList .lesson-card:nth-child(3){animation-delay:.1s}
+  #answerArea>*{animation:fadeUp .34s var(--ease) both}
+  .tab.active .tab-icon{animation:pop .4s var(--ease)}
+  .word-main{animation:fadeUp .3s var(--ease)}
+}
+.task,.lesson-card,.art-card,.cul-card,.wl-item,.rule-card,.cul-card{transition:transform .14s var(--ease),box-shadow .24s ease}
+.task:active,.lesson-card:active,.art-card:active,.cul-card:active,.wl-item:active,.rule-card:active{transform:scale(.982)}
+button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
+.btn-know:active,.btn-easy:active,.btn-unknown:active,.btn-next:active,.auth-btn:active,.lb-learn:active,.lb-grammar:active,.logout-btn:active,.ns-save:active,.tp-btn:active,.listen-play:active,.task-arrow{transition:transform .1s var(--ease)}
+.btn-know:active,.btn-easy:active,.btn-unknown:active,.btn-next:active,.auth-btn:active,.lb-learn:active,.ns-save:active{transform:scale(.97)}
+/* 更柔和分层的阴影（去掉"AI 统一硬阴影"感）*/
+.task,.stats-row,.lesson-card,.art-card,.cul-card,.word-card,.profile-card,.profile-stats,.setting-card,.cal-card{box-shadow:0 1px 2px rgba(25,55,46,.04),0 10px 26px -8px rgba(25,55,46,.10)}
+/* hero 更有质感：渐变 + 暖光晕 */
+.hero{background:linear-gradient(135deg,#dcebdc 0%,#cfe6d3 52%,#e8f1de 100%);position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-26px;top:-30px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(244,201,93,.4),transparent 68%);pointer-events:none}
+.hero-copy,.hero-kicker,.hero-title,.progress-bar{position:relative;z-index:1}
+.hero-title{letter-spacing:-.6px}
+/* 主按钮：微渐变 + 投影更立体 */
+.btn-know,.btn-next,.auth-btn,.lb-learn,.ns-save{background:linear-gradient(180deg,#1e5a4b,#143d34);box-shadow:0 8px 18px -6px rgba(20,63,53,.45)}
+.streak-card,.lesson-no{background:linear-gradient(140deg,#1e5a4b,#143d34)}
+/* tab 选中加一条小指示 */
+.tabs .tab{position:relative}
+.tab.active::before{content:'';position:absolute;top:4px;left:50%;transform:translateX(-50%);width:18px;height:3px;border-radius:99px;background:var(--green)}
 /* ===== 练习模式 认/拼/听 ===== */
 .mode-switch{display:flex;gap:6px;background:#e9ede8;border-radius:12px;padding:4px;margin-bottom:14px}
 .mode-switch button{flex:1;height:34px;border-radius:9px;font-size:13px;font-weight:800;color:#6a736c;background:transparent}
