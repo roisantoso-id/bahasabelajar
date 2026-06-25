@@ -52,23 +52,15 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .hero-chip b{font-size:16px;color:var(--ink);font-weight:900}
 .progress-bar{margin-top:14px;height:8px;border-radius:99px;background:rgba(23,77,64,.12);overflow:hidden;max-width:280px}
 .progress-fill{height:100%;border-radius:inherit;background:linear-gradient(90deg,#1d5a4b,#2b7b62);transition:width .3s}
-.hero-visual{position:relative;min-height:214px;display:flex;align-items:center;justify-content:center;z-index:1}
-.hero-phone{position:relative;width:min(100%,184px);height:214px;border-radius:30px;background:linear-gradient(180deg,#111713,#202724 68%,#0f1412);box-shadow:0 24px 42px rgba(21,34,30,.24);padding:10px}
-.hero-phone::before{content:'';position:absolute;top:10px;left:50%;transform:translateX(-50%);width:72px;height:10px;border-radius:999px;background:#0b0d0c;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
-.hero-phone-screen{position:absolute;inset:26px 10px 12px;border-radius:20px;background:linear-gradient(180deg,#f8f5ed 0%,#e7f0e1 100%);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:16px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.5)}
-.hero-phone-screen::before{content:'';position:absolute;inset:0;background:
-  radial-gradient(circle at 18% 18%, rgba(255,255,255,.92), transparent 25%),
-  linear-gradient(180deg,rgba(21,37,33,.05),transparent 40%)}
-.hero-mini-badge,.hero-mini-word,.hero-mini-mean,.hero-mini-bar{position:relative;z-index:1}
-.hero-mini-badge{align-self:flex-start;padding:4px 8px;border-radius:999px;background:rgba(23,77,64,.12);color:var(--green);font-size:10px;font-weight:900;letter-spacing:1.6px}
-.hero-mini-word{margin-top:14px;font-size:24px;font-weight:900;font-family:Georgia,serif;color:var(--ink);letter-spacing:-.7px}
-.hero-mini-mean{margin-top:4px;font-size:12px;color:#5a6a63}
-.hero-mini-bar{margin-top:18px;height:8px;border-radius:999px;background:rgba(23,77,64,.10);overflow:hidden}
-.hero-mini-bar::after{content:'';display:block;width:62%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#d8b95e,#1d5a4b)}
-.hero-float{position:absolute;display:flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:18px;background:rgba(255,255,255,.76);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 14px 28px rgba(23,45,39,.12);font-size:18px;font-weight:900}
-.hero-float-a{left:-4px;top:16px;color:var(--green)}
-.hero-float-b{right:-2px;top:54px;color:#245c49}
-.hero-float-c{right:4px;bottom:14px;color:#d97c4f}
+.hero-visual{position:relative;z-index:1}
+.hero-cal{border-radius:20px;background:rgba(255,255,255,.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(27,60,50,.06);padding:10px 8px 8px;box-shadow:0 10px 24px rgba(23,45,39,.08);cursor:pointer;transition:transform .15s ease}
+.hero-cal-head{display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:var(--green);margin-bottom:6px;letter-spacing:.3px}
+.hero-cal-week{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;font-size:8px;color:#9ba19c;font-weight:700;margin-bottom:3px}
+.hero-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.hero-cal-day{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:10px;font-weight:700;color:var(--ink)}
+.hero-cal-day.hc-done{color:#fff;background:linear-gradient(180deg,#2b7b62,#1f5d4d);font-size:9px}
+.hero-cal-day.hc-active{background:rgba(23,77,64,.08)}
+.hero-cal-day.hc-today{outline:1.5px solid var(--coral);outline-offset:-1px;border-radius:8px}
 .section-title{font-size:13px;font-weight:900;margin:20px 2px 12px;letter-spacing:.3px;color:#53635d;text-transform:uppercase}
 .task{display:flex;align-items:center;padding:16px 15px;margin-bottom:10px;border-radius:24px;background:rgba(255,253,248,.86);border:1px solid rgba(20,41,37,.05);box-shadow:0 12px 28px rgba(23,45,39,.07)}
 .task-icon{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:18px;font-size:17px;font-weight:900;flex-shrink:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 10px 18px rgba(23,45,39,.07)}
@@ -411,7 +403,9 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 [data-theme="dark"] .hero::before{background:radial-gradient(circle,rgba(201,160,51,.12),transparent 72%)}
 [data-theme="dark"] .hero::after{background:radial-gradient(circle,rgba(23,77,64,.15),transparent 68%)}
 [data-theme="dark"] .hero-chip{background:rgba(26,32,29,.72);border-color:rgba(200,220,210,.08);color:#7a8c85}
-[data-theme="dark"] .hero-float{background:rgba(26,32,29,.76);box-shadow:0 14px 28px rgba(0,0,0,.25)}
+[data-theme="dark"] .hero-cal{background:rgba(26,32,29,.62);border-color:rgba(200,220,210,.08)}
+[data-theme="dark"] .hero-cal-day{color:#c0ccc6}
+[data-theme="dark"] .hero-cal-day.hc-active{background:rgba(43,123,98,.15)}
 [data-theme="dark"] .task,[data-theme="dark"] .stats-row{background:rgba(26,32,29,.92);border-color:rgba(200,220,210,.08);box-shadow:0 1px 2px rgba(0,0,0,.15),0 6px 18px -6px rgba(0,0,0,.25)}
 [data-theme="dark"] .task-icon.learn{background:linear-gradient(180deg,#162a22,#0d1f18);color:var(--green)}
 [data-theme="dark"] .task-icon.review{background:linear-gradient(180deg,#3d2020,#2a1414);color:#e8694e}
@@ -486,9 +480,6 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 [data-theme="dark"] .month-head button{background:linear-gradient(180deg,#1e2822,#1a201d);color:var(--green2);box-shadow:0 8px 18px rgba(0,0,0,.15)}
 [data-theme="dark"] .cul-cat{background:linear-gradient(180deg,#281f3d,#1e1630)}
 [data-theme="dark"] .wc-bar{background:linear-gradient(180deg,#162a22,#0d1f18)}
-[data-theme="dark"] .hero-phone-screen{background:linear-gradient(180deg,#1a201d,#162a22)}
-[data-theme="dark"] .hero-phone-screen::before{background:radial-gradient(circle at 18% 18%, rgba(40,50,44,.5), transparent 25%),linear-gradient(180deg,rgba(0,0,0,.1),transparent 40%)}
-[data-theme="dark"] .hero-mini-badge{background:rgba(58,155,116,.15)}
 [data-theme="dark"] .lesson-card.locked .lesson-no{background:linear-gradient(180deg,#2a2e2c,#222624)}
 </style>
 <script>(function(){var p=localStorage.getItem('dark_mode')||'auto';if(p==='on'||(p==='auto'&&matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.setAttribute('data-theme','dark')})()</script>
@@ -538,19 +529,7 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
       </div>
       <div class="progress-bar"><div class="progress-fill" id="homeProgress" style="width:0%"></div></div>
     </div>
-    <div class="hero-visual" aria-hidden="true">
-      <div class="hero-phone">
-        <div class="hero-phone-screen">
-          <div class="hero-mini-badge">ID</div>
-          <div class="hero-mini-word">belajar</div>
-          <div class="hero-mini-mean">学习 / to study</div>
-          <div class="hero-mini-bar"></div>
-        </div>
-      </div>
-      <div class="hero-float hero-float-a">Aa</div>
-      <div class="hero-float hero-float-b">🔊</div>
-      <div class="hero-float hero-float-c">✓</div>
-    </div>
+    <div class="hero-visual" id="heroCalWrap"></div>
   </div>
   <div class="section-title">今日训练</div>
   <div class="task" onclick="startLearn()">
@@ -646,7 +625,7 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 <!-- ===== ARTICLE DETAIL ===== -->
 <div id="v-article" class="view">
   <div class="grammar-head">
-    <button class="back" onclick="showView('articles', document.querySelectorAll('.tab')[1])">‹</button>
+    <button class="back" onclick="showView('articles', document.querySelectorAll('.tab')[3])">‹</button>
     <h1 id="artTitle" style="font-size:18px"></h1>
     <button id="transToggle" class="grammar-lesson-tag" onclick="toggleTrans()">隐藏中文</button>
   </div>
@@ -712,7 +691,7 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
   <button class="tab active" onclick="showView('home',this)"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span>今日</button>
   <button class="tab" onclick="showView('lessons',this)"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M2 4h7a2 2 0 0 1 2 2v14a1 1 0 0 0-1-1H2zM22 4h-7a2 2 0 0 0-2 2v14a1 1 0 0 1 1-1h8z"/></svg></span>课程</button>
   <button class="tab" onclick="showView('words',this)"><span class="tab-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>词库</button>
-  <button class="tab" onclick="showView('calendar',this)"><span class="tab-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></span>日历</button>
+  <button class="tab" onclick="showView('articles',this)"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" rx="2"/><path d="M8 8h8M8 12h5"/></svg></span>文章</button>
   <button class="tab" onclick="showView('profile',this)"><span class="tab-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 0 0-16 0"/></svg></span>我的</button>
 </div>
 
@@ -974,6 +953,33 @@ function addDays(dateStr, n) {
 const INTERVALS = {1:1, 2:2, 3:4, 4:7, 5:15, 6:30, 7:60}
 
 // ===== HOME =====
+async function renderHeroCal() {
+  if (!sb) return
+  const now = new Date()
+  const y = now.getFullYear(), m = now.getMonth() + 1
+  const mm = String(m).padStart(2, '0')
+  const lastDay = new Date(y, m, 0).getDate()
+  const firstDow = new Date(y, m - 1, 1).getDay()
+  const todayDate = now.getDate()
+  let rows = []
+  try {
+    const { data } = await sb.from('checkins').select('date,completed,new_learned,reviewed').gte('date', `${y}-${mm}-01`).lte('date', `${y}-${mm}-${String(lastDay).padStart(2,'0')}`)
+    rows = data || []
+  } catch (e) {}
+  const map = {}
+  rows.forEach(r => { map[Number(r.date.slice(-2))] = r })
+  let days = ''
+  for (let i = 0; i < firstDow; i++) days += '<div class="hero-cal-day"></div>'
+  for (let d = 1; d <= lastDay; d++) {
+    const info = map[d] || {}
+    const done = info.completed === 1
+    const active = (info.new_learned || 0) + (info.reviewed || 0) > 0
+    const cls = (done ? ' hc-done' : active ? ' hc-active' : '') + (d === todayDate ? ' hc-today' : '')
+    days += `<div class="hero-cal-day${cls}">${d}</div>`
+  }
+  document.getElementById('heroCalWrap').innerHTML =
+    `<div class="hero-cal" onclick="showView('calendar')"><div class="hero-cal-head">${y}年${m}月</div><div class="hero-cal-week"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div><div class="hero-cal-grid">${days}</div></div>`
+}
 async function loadHome() {
   if (!sb) return
   const t = todayStr()
@@ -1007,6 +1013,7 @@ async function loadHome() {
   const pct = checkin.completed ? 100 : Math.min(100, Math.round(done / Math.max(1,total)*100))
   document.getElementById('homeProgress').style.width = pct + '%'
   loadWeekChart()
+  renderHeroCal()
 }
 
 async function getStreak(t) {
