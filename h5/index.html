@@ -4,6 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>BahasaBelajar</title>
+<!-- PWA：添加到主屏幕后全屏运行（无浏览器地址栏/底栏） -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="印尼语">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4f1e9">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#16201d">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%3E%3Crect%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%22112%22%20fill%3D%22%23174d40%22%2F%3E%3Cg%20transform%3D%22translate(106%20118)%20scale(12.5)%22%20fill%3D%22none%22%20stroke%3D%22%23f4f1e9%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M2%204h7a2%202%200%200%201%202%202v14a1%201%200%200%200-1-1H2zM22%204h-7a2%202%200%200%200-2%202v14a1%201%200%200%201%201-1h8z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
+<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22BahasaBelajar%20%E5%8D%B0%E5%B0%BC%E8%AF%AD%22%2C%22short_name%22%3A%22%E5%8D%B0%E5%B0%BC%E8%AF%AD%22%2C%22start_url%22%3A%22.%2F%22%2C%22scope%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait%22%2C%22background_color%22%3A%22%23f4f1e9%22%2C%22theme_color%22%3A%22%23f4f1e9%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%253D%2522http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%2522%2520viewBox%253D%25220%25200%2520512%2520512%2522%253E%253Crect%2520width%253D%2522512%2522%2520height%253D%2522512%2522%2520rx%253D%2522112%2522%2520fill%253D%2522%2523174d40%2522%252F%253E%253Cg%2520transform%253D%2522translate(106%2520118)%2520scale(12.5)%2522%2520fill%253D%2522none%2522%2520stroke%253D%2522%2523f4f1e9%2522%2520stroke-width%253D%25222%2522%2520stroke-linecap%253D%2522round%2522%2520stroke-linejoin%253D%2522round%2522%253E%253Cpath%2520d%253D%2522M2%25204h7a2%25202%25200%25200%25201%25202%25202v14a1%25201%25200%25200%25200-1-1H2zM22%25204h-7a2%25202%25200%25200%25200-2%25202v14a1%25201%25200%25200%25201%25201-1h8z%2522%252F%253E%253C%252Fg%253E%253C%252Fsvg%253E%22%2C%22sizes%22%3A%22any%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%22%7D%5D%7D">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800;900&display=swap');
@@ -21,14 +30,14 @@ body{font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"PingFang 
 button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 
 /* tabs */
-.tabs{position:fixed;left:14px;right:14px;bottom:10px;display:flex;gap:6px;padding:9px;border:1px solid rgba(21,45,40,.06);background:rgba(255,253,248,.78);backdrop-filter:blur(20px) saturate(1.1);-webkit-backdrop-filter:blur(20px) saturate(1.1);border-radius:24px;box-shadow:0 18px 40px rgba(23,45,39,.12);z-index:99}
+.tabs{position:fixed;left:14px;right:14px;bottom:calc(10px + env(safe-area-inset-bottom));display:flex;gap:6px;padding:9px;border:1px solid rgba(21,45,40,.06);background:rgba(255,253,248,.78);backdrop-filter:blur(20px) saturate(1.1);-webkit-backdrop-filter:blur(20px) saturate(1.1);border-radius:24px;box-shadow:0 18px 40px rgba(23,45,39,.12);z-index:99}
 .tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 4px 8px;font-size:11px;color:var(--muted);font-weight:700;border-radius:18px;transition:transform .2s var(--ease),background .2s var(--ease),color .2s var(--ease),box-shadow .2s var(--ease)}
 .tab.active{color:var(--green);background:linear-gradient(180deg,#ffffff,#f4f7ef);box-shadow:0 8px 18px rgba(23,45,39,.08);transform:translateY(-1px)}
 .tab-icon{width:22px;height:22px;display:block}
 .tab-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
 /* pages */
-.view{display:none;padding:18px 14px 0}
+.view{display:none;padding:calc(18px + env(safe-area-inset-top)) 14px 0}
 .view.active{display:block}
 
 /* home */
