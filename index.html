@@ -33,24 +33,21 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 
 /* home */
 .greeting{font-size:11px;font-weight:800;letter-spacing:2.8px;color:var(--green2);text-transform:uppercase}
-.date-line{display:flex;justify-content:space-between;align-items:flex-end;margin:8px 0 16px}
-.date-label{margin-top:4px;font-size:22px;font-weight:900;letter-spacing:-.7px}
+.date-line{display:flex;justify-content:space-between;align-items:center;margin:4px 0 10px}
+.date-label{font-size:18px;font-weight:900;letter-spacing:-.5px}
 .streak-badge{display:flex;align-items:center;gap:6px;padding:10px 14px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(246,243,234,.96));font-size:11px;color:#68736d;box-shadow:0 10px 24px rgba(25,55,46,.08);border:1px solid rgba(26,58,49,.05)}
 .streak-num{color:var(--ink);font-size:18px;font-weight:900}
-.hero{border-radius:28px;padding:22px 18px 18px;margin-bottom:18px;background:
+.hero{border-radius:22px;padding:14px;margin-bottom:14px;background:
   radial-gradient(circle at 14% 18%, rgba(255,255,255,.48), transparent 22%),
   linear-gradient(145deg,#d7ead7 0%,#cbe2d0 46%,#edf3df 100%);
-  box-shadow:0 20px 40px rgba(23,45,39,.10);position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(140px,.85fr);gap:14px;align-items:center}
-.hero::before{content:'';position:absolute;inset:auto -32px -40px auto;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(244,201,93,.35),transparent 72%);filter:blur(2px)}
-.hero::after{content:'';position:absolute;left:-42px;bottom:-46px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(23,77,64,.10),transparent 68%)}
-.hero-copy,.hero-kicker,.hero-title,.progress-bar{position:relative;z-index:1}
-.hero-kicker{font-size:10px;font-weight:900;letter-spacing:2.4px;color:var(--green2)}
-.hero-title{margin-top:8px;font-size:28px;font-weight:900;line-height:1.16;letter-spacing:-.9px}
-.hero-sub{margin-top:10px;font-size:12px;color:#527163;line-height:1.55;max-width:22ch}
-.hero-metrics{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.hero-chip{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.72);border:1px solid rgba(27,60,50,.05);box-shadow:0 10px 20px rgba(23,45,39,.06);font-size:11px;font-weight:700;color:#5a6c66}
-.hero-chip b{font-size:16px;color:var(--ink);font-weight:900}
-.progress-bar{margin-top:14px;height:8px;border-radius:99px;background:rgba(23,77,64,.12);overflow:hidden;max-width:280px}
+  box-shadow:0 16px 32px rgba(23,45,39,.08);position:relative;overflow:hidden;display:grid;grid-template-columns:1fr minmax(130px,.8fr);gap:10px;align-items:center}
+.hero::before{content:'';position:absolute;inset:auto -32px -40px auto;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(244,201,93,.3),transparent 72%);filter:blur(2px)}
+.hero::after{content:'';position:absolute;left:-42px;bottom:-46px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(23,77,64,.10),transparent 68%)}
+.hero-copy{position:relative;z-index:1}
+.hero-metrics{display:flex;flex-wrap:wrap;gap:6px}
+.hero-chip{display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:12px;background:rgba(255,255,255,.72);border:1px solid rgba(27,60,50,.05);box-shadow:0 6px 14px rgba(23,45,39,.05);font-size:10px;font-weight:700;color:#5a6c66}
+.hero-chip b{font-size:15px;color:var(--ink);font-weight:900}
+.progress-bar{margin-top:8px;height:6px;border-radius:99px;background:rgba(23,77,64,.12);overflow:hidden}
 .progress-fill{height:100%;border-radius:inherit;background:linear-gradient(90deg,#1d5a4b,#2b7b62);transition:width .3s}
 .hero-visual{position:relative;z-index:1}
 .hero-cal{border-radius:20px;background:rgba(255,255,255,.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(27,60,50,.06);padding:10px 8px 8px;box-shadow:0 10px 24px rgba(23,45,39,.08);cursor:pointer;transition:transform .15s ease}
@@ -61,21 +58,23 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .hero-cal-day.hc-done{color:#fff;background:linear-gradient(180deg,#2b7b62,#1f5d4d);font-size:9px}
 .hero-cal-day.hc-active{background:rgba(23,77,64,.08)}
 .hero-cal-day.hc-today{outline:1.5px solid var(--coral);outline-offset:-1px;border-radius:8px}
-.section-title{font-size:13px;font-weight:900;margin:20px 2px 12px;letter-spacing:.3px;color:#53635d;text-transform:uppercase}
-.task{display:flex;align-items:center;padding:16px 15px;margin-bottom:10px;border-radius:24px;background:rgba(255,253,248,.86);border:1px solid rgba(20,41,37,.05);box-shadow:0 12px 28px rgba(23,45,39,.07)}
-.task-icon{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:18px;font-size:17px;font-weight:900;flex-shrink:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 10px 18px rgba(23,45,39,.07)}
+.section-title{font-size:12px;font-weight:900;margin:14px 2px 8px;letter-spacing:.3px;color:#53635d;text-transform:uppercase}
+.task-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.task{display:flex;flex-direction:column;padding:12px;border-radius:18px;background:rgba(255,253,248,.86);border:1px solid rgba(20,41,37,.05);box-shadow:0 8px 20px rgba(23,45,39,.06)}
+.task-icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:12px;font-size:14px;font-weight:900;flex-shrink:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 6px 12px rgba(23,45,39,.06);margin-bottom:8px}
 .task-icon.learn{color:#1d5a4b;background:linear-gradient(180deg,#e8f2e8,#cfe4cf)}
 .task-icon.review{color:#9f4a34;background:linear-gradient(180deg,#fde8de,#f4cfbe)}
 .task-icon.grammar{color:#644693;background:linear-gradient(180deg,#f1e9fb,#ddcef1)}
 .task-icon.article{color:#2d745f;background:linear-gradient(180deg,#edf6ef,#d5ead8)}
 .task-icon.extra{color:#8a6d3b;background:linear-gradient(180deg,#fbf1dd,#f2e0b4);font-size:20px}
 .task-icon.culture{color:#9a602b;background:linear-gradient(180deg,#fbefe2,#f6dcc1)}
-.task-body{flex:1;margin-left:14px}
-.task-name{font-size:15px;font-weight:900;letter-spacing:-.2px}
-.task-desc{font-size:11px;color:#71807a;margin-top:4px;line-height:1.45}
-.task-count{font-size:20px;font-weight:900;margin-right:4px;color:var(--ink)}
-.task-arrow{color:#bcc3bd;font-size:24px}
-.stats-row{display:flex;justify-content:space-around;padding:14px 10px;margin-top:16px;border-radius:24px;background:rgba(255,253,248,.8);border:1px solid rgba(20,41,37,.05);box-shadow:0 12px 28px rgba(23,45,39,.07)}
+.task-body{flex:1}
+.task-name{font-size:13px;font-weight:800;letter-spacing:-.2px}
+.task-desc{display:none}
+.task-count{font-size:18px;font-weight:900;color:var(--green);margin-top:2px}
+.task-arrow{display:none}
+.task-row{display:flex;align-items:center;justify-content:space-between}
+.stats-row{display:none}
 .stat{text-align:center}
 .stat-val{font-size:20px;font-weight:900;letter-spacing:-.3px}
 .stat-lbl{font-size:10px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
@@ -340,15 +339,15 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
   @keyframes pop{0%{transform:scale(.82)}55%{transform:scale(1.12)}100%{transform:scale(1)}}
   @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
   .view.active{animation:viewIn .34s var(--ease)}
-  #v-home.active .task,#v-home.active .hero,#v-home.active .stats-row,#lessonList .lesson-card,#articleList .art-card,#cultureList .cul-card{animation:rise .42s var(--ease) both}
+  #v-home.active .task-grid .task,#v-home.active .hero,#v-home.active .week-chart,#lessonList .lesson-card,#articleList .art-card,#cultureList .cul-card{animation:rise .42s var(--ease) both}
   #v-home.active .task:nth-child(2){animation-delay:.03s}#v-home.active .task:nth-child(3){animation-delay:.06s}#v-home.active .task:nth-child(4){animation-delay:.09s}
   #lessonList .lesson-card:nth-child(2){animation-delay:.05s}#lessonList .lesson-card:nth-child(3){animation-delay:.1s}
   #answerArea>*{animation:fadeUp .34s var(--ease) both}
   .tab.active .tab-icon{animation:pop .4s var(--ease)}
   .word-main{animation:fadeUp .3s var(--ease)}
 }
-.task,.lesson-card,.art-card,.cul-card,.wl-item,.rule-card,.cul-card{transition:transform .14s var(--ease),box-shadow .24s ease}
-.task:active,.lesson-card:active,.art-card:active,.cul-card:active,.wl-item:active,.rule-card:active{transform:scale(.982)}
+.task,.lesson-card,.art-card,.cul-card,.wl-item,.rule-card{transition:transform .14s var(--ease),box-shadow .24s ease}
+.task:active,.lesson-card:active,.art-card:active,.cul-card:active,.wl-item:active,.rule-card:active{transform:scale(.96)}
 button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 .btn-know:active,.btn-easy:active,.btn-unknown:active,.btn-next:active,.auth-btn:active,.lb-learn:active,.lb-grammar:active,.logout-btn:active,.ns-save:active,.tp-btn:active,.listen-play:active,.task-arrow{transition:transform .1s var(--ease)}
 .btn-know:active,.btn-easy:active,.btn-unknown:active,.btn-next:active,.auth-btn:active,.lb-learn:active,.ns-save:active{transform:scale(.97)}
@@ -375,8 +374,8 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 .listen-hint{text-align:center;color:var(--muted);font-size:12px;margin-top:18px}
 .hidden{display:none!important}
 /* ===== 本周趋势 ===== */
-.week-chart{padding:16px 14px;border-radius:24px;background:rgba(255,253,248,.92);border:1px solid rgba(20,41,37,.05);box-shadow:0 12px 28px rgba(23,45,39,.07)}
-.wc-bars{display:flex;align-items:flex-end;gap:8px;height:72px;margin-bottom:8px}
+.week-chart{padding:12px;border-radius:18px;background:rgba(255,253,248,.92);border:1px solid rgba(20,41,37,.05);box-shadow:0 8px 20px rgba(23,45,39,.06)}
+.wc-bars{display:flex;align-items:flex-end;gap:8px;height:52px;margin-bottom:6px}
 .wc-bar{flex:1;border-radius:6px 6px 0 0;background:linear-gradient(180deg,#e8f2e8,#d7e7d7);min-height:4px;position:relative;transition:height .4s var(--ease)}
 .wc-bar.has{background:linear-gradient(180deg,var(--green2),var(--green))}
 .wc-val{position:absolute;top:-16px;left:0;right:0;text-align:center;font-size:10px;font-weight:700;color:var(--muted)}
@@ -406,7 +405,7 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 [data-theme="dark"] .hero-cal{background:rgba(26,32,29,.62);border-color:rgba(200,220,210,.08)}
 [data-theme="dark"] .hero-cal-day{color:#c0ccc6}
 [data-theme="dark"] .hero-cal-day.hc-active{background:rgba(43,123,98,.15)}
-[data-theme="dark"] .task,[data-theme="dark"] .stats-row{background:rgba(26,32,29,.92);border-color:rgba(200,220,210,.08);box-shadow:0 1px 2px rgba(0,0,0,.15),0 6px 18px -6px rgba(0,0,0,.25)}
+[data-theme="dark"] .task{background:rgba(26,32,29,.92);border-color:rgba(200,220,210,.08);box-shadow:0 1px 2px rgba(0,0,0,.15),0 6px 18px -6px rgba(0,0,0,.25)}
 [data-theme="dark"] .task-icon.learn{background:linear-gradient(180deg,#162a22,#0d1f18);color:var(--green)}
 [data-theme="dark"] .task-icon.review{background:linear-gradient(180deg,#3d2020,#2a1414);color:#e8694e}
 [data-theme="dark"] .task-icon.grammar{background:linear-gradient(180deg,#281f3d,#1e1630);color:var(--purple)}
@@ -515,62 +514,48 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
   <div class="greeting" id="greeting">Selamat pagi</div>
   <div class="date-line">
     <div class="date-label" id="dateLabel"></div>
-    <div class="streak-badge">◆ <span class="streak-num" id="streakNum">0</span> 天</div>
   </div>
+  <span id="streakNum" style="display:none">0</span>
   <div class="hero">
     <div class="hero-copy">
-      <div class="hero-kicker">BAHASA HARI INI</div>
-      <div class="hero-title">每天一点，<br>印尼语自然会。</div>
-      <div class="hero-sub">扇贝式节奏 · 词汇 / 例句 / 语音 / 复习一体化</div>
       <div class="hero-metrics">
-        <div class="hero-chip"><span>学习</span><b id="learnedStatMini">0</b></div>
+        <div class="hero-chip"><span>已学</span><b id="learnedStatMini">0</b></div>
         <div class="hero-chip"><span>词库</span><b id="totalStatMini">0</b></div>
-        <div class="hero-chip"><span>打卡</span><b id="streakMini">0</b></div>
+        <div class="hero-chip"><span>连续</span><b id="streakMini">0</b><span>天</span></div>
       </div>
       <div class="progress-bar"><div class="progress-fill" id="homeProgress" style="width:0%"></div></div>
     </div>
     <div class="hero-visual" id="heroCalWrap"></div>
   </div>
-  <div class="section-title">今日训练</div>
-  <div class="task" onclick="startLearn()">
-    <div class="task-icon learn">Aa</div>
-    <div class="task-body"><div class="task-name">学习新词</div><div class="task-desc" id="learnDesc">跟着课本学，按词频补</div></div>
-    <span class="task-count" id="newCount">0</span><span class="task-arrow">›</span>
+  <div class="task-grid">
+    <div class="task" onclick="startLearn()">
+      <div class="task-icon learn">Aa</div>
+      <div class="task-row"><div class="task-body"><div class="task-name">学习新词</div></div><span class="task-count" id="newCount">0</span></div>
+    </div>
+    <div class="task" onclick="startReview()">
+      <div class="task-icon review">↻</div>
+      <div class="task-row"><div class="task-body"><div class="task-name">巩固复习</div></div><span class="task-count" id="dueCount">0</span></div>
+    </div>
+    <div class="task" onclick="startGrammar()">
+      <div class="task-icon grammar">文</div>
+      <div class="task-body"><div class="task-name">语法笔记</div></div>
+    </div>
+    <div class="task" onclick="startExtra()">
+      <div class="task-icon extra">＋</div>
+      <div class="task-body"><div class="task-name">拓展词</div></div>
+    </div>
+    <div class="task" onclick="showView('articles', document.querySelectorAll('.tab')[3])">
+      <div class="task-icon article">📄</div>
+      <div class="task-body"><div class="task-name">印尼文章</div></div>
+    </div>
+    <div class="task" onclick="showView('culture')">
+      <div class="task-icon culture">🎭</div>
+      <div class="task-body"><div class="task-name">印尼文化</div></div>
+    </div>
   </div>
-  <div class="task" onclick="startGrammar()">
-    <div class="task-icon grammar">文</div>
-    <div class="task-body"><div class="task-name">语法笔记</div><div class="task-desc">词缀规则、句型拆解</div></div>
-    <span class="task-arrow">›</span>
-  </div>
-  <div class="task" onclick="startReview()">
-    <div class="task-icon review">↻</div>
-    <div class="task-body"><div class="task-name">巩固复习</div><div class="task-desc">在忘记之前再见一面</div></div>
-    <span class="task-count" id="dueCount">0</span><span class="task-arrow">›</span>
-  </div>
-
-  <div class="section-title" style="margin-top:24px">拓展</div>
-  <div class="task" onclick="showView('articles')">
-    <div class="task-icon article">📄</div>
-    <div class="task-body"><div class="task-name">拓展阅读</div><div class="task-desc">时政/经济/科技长文 · 逐句对照</div></div>
-    <span class="task-arrow">›</span>
-  </div>
-  <div class="task" onclick="startExtra()">
-    <div class="task-icon extra">＋</div>
-    <div class="task-body"><div class="task-name">拓展词</div><div class="task-desc">课本之外的高阶词，想学再学</div></div>
-    <span class="task-arrow">›</span>
-  </div>
-  <div class="task" onclick="showView('culture')">
-    <div class="task-icon culture">🎭</div>
-    <div class="task-body"><div class="task-name">印尼文化</div><div class="task-desc">皮影 / 蜡染 / 美食 / 节日</div></div>
-    <span class="task-arrow">›</span>
-  </div>
-  <div class="stats-row">
-    <div class="stat"><div class="stat-val" id="learnedStat">0</div><div class="stat-lbl">已学单词</div></div>
-    <div class="stat"><div class="stat-val" id="totalStat">0</div><div class="stat-lbl">完整词库</div></div>
-    <div class="stat"><div class="stat-val" id="todayDone">—</div><div class="stat-lbl">今日打卡</div></div>
-  </div>
-  <div class="section-title" style="margin-top:24px">本周趋势</div>
+  <div class="section-title">本周趋势</div>
   <div class="week-chart" id="weekChart"></div>
+  <div id="learnedStat" style="display:none">0</div><div id="totalStat" style="display:none">0</div><div id="todayDone" style="display:none">—</div>
 </div>
 
 <!-- ===== STUDY ===== -->
