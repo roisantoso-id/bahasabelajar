@@ -21,6 +21,7 @@
 - `lessons` 表 = 课本课程（第1课、2课…）。
 - `words`/`articles` 加了 `lesson`(第几课)、`source`、`freq`(词频排名)；`grammar` 加了 `source`。`words.source` 默认 `routine`。
 - **source 四类**：`core`(基础词库 id1-500) / `textbook`(课本课程词，带 lesson) / `routine`(routine 自动生成的拓展) / `user`(划词收藏)。
+- **单词本 · 领域(topic)分类**（`supabase/words-topic-schema.sql` + `words-topics.sql`）：`words` 加 `topic` 列，把词按 17 个领域归类（人称指代/数字时间/家庭人物/身体健康/饮食/居家物品/交通出行/自然地理/教育语言/工作商务/社会时政/文娱科技/问候寒暄/动作行为/性质状态/虚词语法/其他）。词库页 = **领域 × 难度** 双轴筛选（chips 按库里实际有的 topic 自动生成）。分类逻辑在 `scripts/classify-topic.js`（按词性+中文释义关键词），`add-words.js` 入库时自动调它给新词归类（探测到 topic 列才注入）。前端对「无 topic 列」优雅降级：领域行隐藏、词库照常。
 - **学习主线顺序**：startLearn 先 `textbook`(按 lesson、freq) → 不够再 `core`(按 freq)，**不含 routine**。`startExtra()` 学 routine+user 拓展词；`startLessonWords(no)` 学某课的词。
 - 底部 tab：今日 · **课程** · 词库 · 日历 · 我的（文章/文化/拓展词 挪到「今日」页的「拓展」组）。
 - 建表/权限 SQL 都在 `supabase/`：`schema.sql`（核心表）、`grants.sql`、`modules.sql`（文章+文化）、`routine-grants.sql`、`auth-notes-migration.sql`（登录+笔记）
@@ -32,6 +33,14 @@
 - 关键：需在 Supabase Dashboard 关闭 "Confirm email"，注册才能即时登录。
 - ⚠️ 这套登录是 `auth-notes-migration.sql` 跑完才生效。前端对缺表/未登录做了**优雅降级**（try/catch，缺表用默认值，不崩）。
 
+### 管理员 / 用户停用（`supabase/admin-migration.sql`）
+- `profiles` 加 `is_admin` / `banned` / `email` 三列。管理员在「我的」页底部多出「用户管理」入口（`#adminGroup`，仅 `profile.is_admin` 时显示），点开 `#adminPanel` 底部弹层列出所有用户，可一键**停用 / 恢复**。
+- **停用 = soft-ban**：`banned=true` 时，前端在 `onLoggedIn` 和启动会话里调 `enforceBan()` → 强制 `signOut` + 登录页提示「账号已被管理员停用」。纯静态站拿不到 service_role，无法真正禁用 auth 账号（key 不能进前端），对朋友自用足够。
+- **安全靠 RLS + 触发器**，不是靠前端：
+  - `is_admin()`（SECURITY DEFINER）避免「策略查 profiles 自身」递归；策略 `admin read/update profiles` 让管理员能读/改所有人。
+  - `trg_protect_admin_cols` 触发器：普通登录用户即便能改自己 profile，也**改不动 `is_admin`/`banned`**（防自我提权/解禁）；`auth.uid() is null`（SQL Editor 等后台）放行，方便以后用 SQL 再发管理员。
+- 发管理员：改 `admin-migration.sql` 第 4 步的邮箱为你的「app 登录邮箱」，在 SQL Editor 跑一次。
+
 ## 模块
 
 | 模块 | 表 | 内容 | H5 视图 |
@@ -39,11 +48,12 @@
 | 登录 | auth.users, profiles | 邮箱+密码，多用户隔离 | v-auth |
 | 今日/学习 | words, learning, checkins | SRS 间隔重复背词；每日目标取自 profiles | v-home, v-study |
 | 语法笔记 | grammar | 词缀规则、句型 | v-grammar |
-| 词库 | words | 搜索/分级浏览 | v-words |
+| 词库/单词本 | words | 搜索 + 领域(topic)×难度(level) 双轴筛选 | v-words |
 | 印尼文章 | articles | 长文逐句对照（时政/经济/科技） | v-articles, v-article |
 | 印尼文化 | culture | 文化卡片 + 相关词（入口在「今日」页） | v-culture |
 | 日历 | checkins | 月历 + 连续天数 + 打卡标记（仿小程序） | v-calendar |
-| 我的 | profiles | 头像/邮箱、统计、每日计划、退出登录、Supabase 配置 | v-profile |
+| 我的 | profiles | 头像/邮箱、统计、每日计划、退出登录 | v-profile |
+| 用户管理 | profiles | 管理员看所有用户，停用/恢复登录（soft-ban） | #adminPanel |
 | 划词翻译 | words + Qwen/MyMemory | 选中印尼语弹出释义；词库优先→Qwen(qwen-mt-turbo)，失败回退 MyMemory | #transPop |
 | 文章笔记 | article_notes | 文章里划线+写笔记，高亮渲染，可删（按用户） | #noteEditor |
 | 发音 | Qwen TTS / Web Speech | 🔊 默认 Qwen(qwen3-tts-flash)，失败/切换回退系统 id-ID；「我的」页可切引擎 | speak() / ttsEngine |
@@ -79,8 +89,11 @@ SRS 间隔（天）：`{1:1, 2:2, 3:4, 4:7, 5:15, 6:30, 7:60}`，逻辑在 `h5/i
 ### 加文章 / 文化卡
 - 文章（带去重，按 title）：写 JSON → `node scripts/add-articles.js <文件路径>`
    - 格式：`{title, title_zh, level, category, summary, sentences:[{id(印尼语句), zh(翻译), note(词缀/语法注释)}]}`
-- 文化卡：`seed/culture.json` → `node scripts/upload-modules.js`（仅在表为空时插入）
+- 文化卡（带去重，按 title）：写 JSON → `node scripts/add-culture.js <文件路径>`
    - 格式：`{title, title_id, category, emoji, body, terms:[{word, meaning}]}`
+   - `category` 现有：艺术 / 手工艺 / 饮食 / 语言 / 节日 / 社会 / 自然 / 历史 / 族群（前端「印尼文化」页按 category 自动生成筛选 chips，新分类加内容即自动出现）
+   - 首批用 `seed/culture.json`，扩充批在 `seed/culture-2.json`
+- 旧脚本 `upload-modules.js` 只在表**为空**时整体插入（首次用），日常增量请用 `add-culture.js`
 - 旧的全量导入脚本 `upload-modules.js` 只在表为空时插入。**要重新全量导入需先清空表**：
    ```sql
    truncate articles restart identity;   -- 或 culture

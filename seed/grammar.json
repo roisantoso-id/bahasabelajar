@@ -1,0 +1,150 @@
+[
+  {
+    "lesson": 2,
+    "pattern": "ber- + 名词",
+    "meaning": "做与词根含义相关的动作或行为（不及物动词）",
+    "explain": "ber- 加在名词前面，表示「做该名词相关的事」。生成的动词是不及物动词，后面不能直接跟宾语。",
+    "examples": [
+      {"id": "bercerita", "root": "cerita (故事)", "sentence": "Pemimpin itu suka bercerita.", "zh": "那位领导喜欢讲故事。"},
+      {"id": "berkisah", "root": "kisah (故事/传说)", "sentence": "Dia sedang berkisah tentang Pulau Lombok.", "zh": "他正在讲述龙目岛的故事。"}
+    ]
+  },
+  {
+    "lesson": 2,
+    "pattern": "ber- + 词根重叠",
+    "meaning": "强调「一起做某事」",
+    "explain": "ber- 加上重叠的词根，表示强调大家一起、热热闹闹地做某事。beramai-ramai 和 bersama-sama 是最常见的两个。",
+    "examples": [
+      {"id": "beramai-ramai", "root": "ramai (热闹)", "sentence": "Mari kita menonton film beramai-ramai.", "zh": "我们一起热热闹闹地看电影吧。"},
+      {"id": "bersama-sama", "root": "sama (同)", "sentence": "Mereka suka berbelanja bersama-sama.", "zh": "他们喜欢一起购物。"}
+    ]
+  },
+  {
+    "lesson": 2,
+    "pattern": "me- + 动词词根",
+    "meaning": "做词根所示的动作或行为（及物动词）",
+    "explain": "me- 是最重要的动词前缀，加在动词词根前构成及物动词。me- 有6个变体（me-/mem-/men-/meng-/meny-/menge-），由词根首字母决定。口语中 me- 经常省略（menonton→nonton）。",
+    "examples": [
+      {"id": "menonton", "root": "tonton (看)", "sentence": "Saya suka menonton TV.", "zh": "我喜欢看电视。"},
+      {"id": "menggelar", "root": "gelar (展开)", "sentence": "Mereka menggelar pertunjukan wayang.", "zh": "他们举办了哇扬表演。"},
+      {"id": "mengundang", "root": "undang (邀请)", "sentence": "Bu Ayu mengundang tamu.", "zh": "Bu Ayu邀请了客人。"}
+    ]
+  },
+  {
+    "lesson": 2,
+    "pattern": "me- + 词根 + -i",
+    "meaning": "做与词根含义相关的行为（及物动词）",
+    "explain": "me-...-i 构成及物动词，表示「对某物/某人施加词根所表达的动作」。后缀 -i 常暗示动作指向某个对象或地点。注意 KPST 规则：p/k/s/t 开头且第二个字母是元音时，首辅音被吸收。",
+    "examples": [
+      {"id": "memahami", "root": "paham (理解)", "sentence": "Budaya Jawa sulit dipahami.", "zh": "爪哇文化很难理解。"},
+      {"id": "menguasai", "root": "kuasa (权力/掌控)", "sentence": "Sebaiknya kita dapat menguasai diri kita sendiri.", "zh": "我们最好能控制好自己。"}
+    ]
+  },
+  {
+    "lesson": 2,
+    "pattern": "me- + 词根 + -kan",
+    "meaning": "做与词根相关的动作；使动",
+    "explain": "me-...-kan 有2种常见用法：(1) me- + 名词 + -kan 表示「做与词根相关的动作」；(2) me- + 形容词/动词 + -kan 表示「使动」——使某人/某物变成词根的状态。",
+    "examples": [
+      {"id": "merekomendasikan", "root": "rekomendasi (推荐)", "sentence": "Saya lebih merekomendasikan drama Korea.", "zh": "我更推荐韩剧。"},
+      {"id": "mengagumkan", "root": "kagum (佩服)", "sentence": "Dia salah satu orang yang paling mengagumkan tahun ini.", "zh": "他是今年最令人钦佩的人之一。"},
+      {"id": "melewatkan", "root": "lewat (经过)", "sentence": "Kesempatan ini jangan Anda lewatkan ya.", "zh": "这个机会您可别错过哦。"}
+    ]
+  },
+  {
+    "lesson": 2,
+    "pattern": "memper- + 词根 + -i/-kan",
+    "meaning": "做与词根相关的行为（及物动词，加强语气）",
+    "explain": "memper- 是 me- 的加强形式，词根可以是动词、名词、形容词、数词等。memper-...-i/kan 构成的都是及物动词。变音规律与 ber- 相同。",
+    "examples": [
+      {"id": "memperkenalkan", "root": "kenal (认识)", "sentence": "Saya ingin memperkenalkan budaya Jawa kepada kalian.", "zh": "我想向你们介绍爪哇文化。"},
+      {"id": "memperbaiki", "root": "baik (好)", "sentence": "Pemerintah berjanji memperbaiki jalan yang rusak.", "zh": "政府承诺修复损坏的道路。"},
+      {"id": "mempelajari", "root": "ajar (教)", "sentence": "Dia telah lama mempelajari budaya Indonesia.", "zh": "他已经研究印尼文化很久了。"}
+    ]
+  },
+  {
+    "lesson": 2,
+    "pattern": "merupakan",
+    "meaning": "是；构成（正式系动词，= adalah）",
+    "explain": "merupakan 是 me-kan 形式的特殊动词，词根是 rupa（形态）。作系动词时与 adalah/menjadi 含义相同，用于正式书面语。后面跟名词补语。",
+    "examples": [
+      {"id": "merupakan-1", "root": "rupa (形态)", "sentence": "Indonesia merupakan negeri kepulauan terbesar di dunia.", "zh": "印尼是世界上最大的群岛国家。"},
+      {"id": "merupakan-2", "root": "rupa (形态)", "sentence": "Wayang merupakan seni sandiwara Indonesia yang paling unik.", "zh": "哇扬是印尼最独特的戏剧艺术。"}
+    ]
+  },
+  {
+    "lesson": 2,
+    "pattern": "per- + 词根 + -an",
+    "meaning": "动作本身或结果（名词化）",
+    "explain": "per-...-an 把动词或名词变成表示「动作过程/结果」的名词。这是印尼语最高产的名词化手段之一。",
+    "examples": [
+      {"id": "percintaan", "root": "cinta (爱)", "sentence": "Drama Korea bercerita tentang percintaan yang romantis.", "zh": "韩剧讲述浪漫的爱情故事。"},
+      {"id": "pertunjukan", "root": "tunjuk (指/展示)", "sentence": "Malam ini ada pertunjukan wayang kulit.", "zh": "今晚有皮影戏表演。"},
+      {"id": "pertempuran", "root": "tempur (战斗)", "sentence": "Ini suasana pertempuran terakhir hidup mati.", "zh": "这是最后生死大战的氛围。"}
+    ]
+  },
+  {
+    "lesson": 2,
+    "pattern": "-nya",
+    "meaning": "他的/她的/它的；定冠词（the）",
+    "explain": "-nya 是印尼语最高频的后缀之一，有3种用法：(1) 作代词定语，表示「他/她/它的」；(2) 指代上文提到的事物，相当于 the；(3) 强调语气。",
+    "examples": [
+      {"id": "nya-1", "root": "", "sentence": "Bonekanya lucu-lucu!", "zh": "那些木偶好可爱！（-nya 指代前面提到的木偶）"},
+      {"id": "nya-2", "root": "", "sentence": "Gerakan bonekanya lincah sekali.", "zh": "木偶的动作好灵活。（-nya = 它的）"},
+      {"id": "nya-3", "root": "", "sentence": "Ributnya bukan main!", "zh": "吵得厉害！（-nya 强调语气）"}
+    ]
+  },
+  {
+    "lesson": 2,
+    "pattern": "baik ... maupun ...",
+    "meaning": "不管……还是……；无论……还是……",
+    "explain": "连接两个并列成分，表示「两者都」。baik 和 maupun 分别放在两个并列成分前面。可以连接名词、动词或句子。",
+    "examples": [
+      {"id": "baik-maupun-1", "root": "", "sentence": "Saya suka drama dan film, baik dari Inggris maupun dari Jepang.", "zh": "我喜欢戏剧和电影，不管是英国的还是日本的。"},
+      {"id": "baik-maupun-2", "root": "", "sentence": "Baik murid maupun mahasiswa suka membaca.", "zh": "不管是中小学生还是大学生都喜欢阅读。"}
+    ]
+  },
+  {
+    "lesson": 2,
+    "pattern": "apalagi",
+    "meaning": "更何况；何况（递进关系连词）",
+    "explain": "用于递进关系的复合句中，表示在前一个事实基础上进一步补充。也可以用 pun 加强语气。",
+    "examples": [
+      {"id": "apalagi-1", "root": "", "sentence": "Drama Korea paling menarik, apalagi baju pemainnya bagus-bagus.", "zh": "韩剧最有趣，更何况演员的衣服都很漂亮。"},
+      {"id": "apalagi-2", "root": "", "sentence": "Berjalan pun belum bisa, apalagi berlari.", "zh": "走路都不行，更别说跑步了。"}
+    ]
+  },
+  {
+    "lesson": 2,
+    "pattern": "yang + 动词/形容词",
+    "meaning": "……的（定语从句/关系代词）",
+    "explain": "yang 是印尼语的关系代词，引导定语从句修饰前面的名词。相当于英语的 who/which/that。yang 后面可以跟动词、形容词或被动句。",
+    "examples": [
+      {"id": "yang-1", "root": "", "sentence": "Ada yang dapat Ika rekomendasikan?", "zh": "有什么Ika可以推荐的吗？"},
+      {"id": "yang-2", "root": "", "sentence": "Sedikit sekali orang yang mampu mengundang dalang.", "zh": "很少有人有能力请皮影戏师。"},
+      {"id": "yang-3", "root": "", "sentence": "Wayang merupakan seni yang paling unik dan mengagumkan.", "zh": "哇扬是最独特且令人赞叹的艺术。"}
+    ]
+  },
+  {
+    "lesson": 2,
+    "pattern": "KPST 规则",
+    "meaning": "k/p/s/t 开头的词根加 me-/pe- 时首辅音被吸收",
+    "explain": "当词根以 k、p、s、t 开头，且第二个字母是元音时，加 me-/pe- 前缀后首辅音消失（被鼻音吸收）。如果第二个字母是辅音（辅音簇），则不吸收。这是印尼语词缀系统最重要的语音规则。",
+    "examples": [
+      {"id": "kpst-k", "root": "kagum → meng+agum+kan", "sentence": "mengagumkan: k 被 meng- 吸收", "zh": "kagum 的 k 后面是元音 a，所以 k 消失"},
+      {"id": "kpst-p", "root": "paham → mem+aham+i", "sentence": "memahami: p 被 mem- 吸收", "zh": "paham 的 p 后面是元音 a，所以 p 消失"},
+      {"id": "kpst-t", "root": "tulis → men+ulis", "sentence": "menulis: t 被 men- 吸收", "zh": "tulis 的 t 后面是元音 u，所以 t 消失"},
+      {"id": "kpst-no", "root": "kritik → meng+kritik", "sentence": "mengkritik: k 后面是辅音 r，不吸收", "zh": "辅音簇 kr- 不触发 KPST 规则"}
+    ]
+  },
+  {
+    "lesson": 2,
+    "pattern": "kami vs kita",
+    "meaning": "kami = 我们（不含听者）；kita = 咱们（含听者）",
+    "explain": "印尼语区分包含式和排除式的「我们」。kita 包括说话人和听话人（咱们），kami 只包括说话人一方（我们，不包括你）。中文和英文都没有这个区分，需要特别注意。",
+    "examples": [
+      {"id": "kami-1", "root": "", "sentence": "Nanti kami ajak kalian nonton wayang ya.", "zh": "到时候我们带你们去看皮影戏哦。（kami=我们这边的人，不包括你们）"},
+      {"id": "kita-1", "root": "", "sentence": "Kita pulang bersama-sama deh.", "zh": "咱们一起回去吧。（kita=在场所有人）"}
+    ]
+  }
+]

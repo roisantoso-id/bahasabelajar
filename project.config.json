@@ -1,0 +1,13 @@
+{
+  "description": "BahasaBelajar 印尼语背词小程序",
+  "miniprogramRoot": "miniprogram/",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "postcss": true,
+    "minified": true
+  },
+  "compileType": "miniprogram",
+  "appid": "touristappid",
+  "projectname": "BahasaBelajar"
+}

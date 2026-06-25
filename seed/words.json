@@ -6890,5 +6890,510 @@
         "zh": "请用更简单的方式解释一下。"
       }
     ]
+  },
+  {
+    "word": "menonton",
+    "pos": "v.",
+    "meaning": "观看（表演、比赛等）",
+    "level": 2,
+    "examples": [
+      {"id": "Saya dan Caini suka menonton sinetron dan film.", "zh": "我和彩妮喜欢看电视剧和电影。"},
+      {"id": "Siapa yang mau ikut menonton?", "zh": "谁想一起去看？"}
+    ]
+  },
+  {
+    "word": "wayang",
+    "pos": "n.",
+    "meaning": "哇扬（印尼传统戏剧）",
+    "level": 2,
+    "examples": [
+      {"id": "Wayang merupakan seni sandiwara Indonesia yang paling unik.", "zh": "哇扬是印尼最独特的戏剧艺术。"},
+      {"id": "Malam ini ada pertunjukan wayang kulit di rumah teman saya.", "zh": "今晚在我朋友家有皮影戏表演。"}
+    ]
+  },
+  {
+    "word": "drama",
+    "pos": "n.",
+    "meaning": "戏剧",
+    "level": 2,
+    "examples": [
+      {"id": "Ika paling suka nonton drama Korea.", "zh": "Ika最喜欢看韩剧。"},
+      {"id": "Saya suka drama dan film, baik dari Inggris maupun dari Jepang.", "zh": "我喜欢戏剧和电影，不管是英国的还是日本的。"}
+    ]
+  },
+  {
+    "word": "lokal",
+    "pos": "adj.",
+    "meaning": "当地的；本地的",
+    "level": 2,
+    "examples": [
+      {"id": "Saya ingin merekomendasikan drama lokal kepada kalian.", "zh": "我想向你们推荐本地戏剧。"},
+      {"id": "Bagaimana kalau sinetron lokal?", "zh": "本地电视剧怎么样？"}
+    ]
+  },
+  {
+    "word": "kok",
+    "pos": "adv.",
+    "meaning": "怎么会（口语反问词）",
+    "level": 2,
+    "examples": [
+      {"id": "Kok kamu tahu?", "zh": "你怎么知道的？"},
+      {"id": "Kok bisa begitu?", "zh": "怎么会那样？"}
+    ]
+  },
+  {
+    "word": "logika",
+    "pos": "n.",
+    "meaning": "逻辑",
+    "level": 2,
+    "examples": [
+      {"id": "Saya suka logika, misalnya The Adventures of Sherlock Holmes.", "zh": "我喜欢逻辑类的，比如《福尔摩斯探案集》。"}
+    ]
+  },
+  {
+    "word": "romantis",
+    "pos": "adj.",
+    "meaning": "浪漫的",
+    "level": 2,
+    "examples": [
+      {"id": "Drama Korea kebanyakan bercerita tentang percintaan yang romantis.", "zh": "韩剧大多讲述浪漫的爱情故事。"}
+    ]
+  },
+  {
+    "word": "unik",
+    "pos": "adj.",
+    "meaning": "独特的",
+    "level": 2,
+    "examples": [
+      {"id": "Wayang merupakan seni sandiwara Indonesia yang paling unik dan mengagumkan.", "zh": "哇扬是印尼最独特且令人赞叹的戏剧艺术。"}
+    ]
+  },
+  {
+    "word": "ingin",
+    "pos": "v.",
+    "meaning": "想要",
+    "level": 1,
+    "examples": [
+      {"id": "Saya ingin merekomendasikan drama lokal kepada kalian.", "zh": "我想向你们推荐本地戏剧。"},
+      {"id": "Saya ingin belajar bahasa Indonesia.", "zh": "我想学印尼语。"}
+    ]
+  },
+  {
+    "word": "dapat",
+    "pos": "v.",
+    "meaning": "可以；能够；得到",
+    "level": 1,
+    "examples": [
+      {"id": "Ada yang dapat Ika rekomendasikan?", "zh": "有什么Ika可以推荐的吗？"},
+      {"id": "Kita dapat memahami lakon wayang dengan rasa kita masing-masing.", "zh": "我们可以用各自的感受来理解哇扬的剧目。"}
+    ]
+  },
+  {
+    "word": "lebih",
+    "pos": "adv.",
+    "meaning": "更；更加（比较级）",
+    "level": 1,
+    "examples": [
+      {"id": "Saya lebih merekomendasikan drama Korea.", "zh": "我更推荐韩剧。"},
+      {"id": "Kamar ini lebih besar daripada kamar itu.", "zh": "这个房间比那个房间更大。"}
+    ]
+  },
+  {
+    "word": "paling",
+    "pos": "adv.",
+    "meaning": "最（最高级）",
+    "level": 1,
+    "examples": [
+      {"id": "Ika paling suka nonton drama Korea ya?", "zh": "Ika最喜欢看韩剧吧？"},
+      {"id": "Rasa paling penting bagi orang Jawa.", "zh": "感觉对爪哇人来说最重要。"}
+    ]
+  },
+  {
+    "word": "seni",
+    "pos": "n.",
+    "meaning": "艺术",
+    "level": 2,
+    "examples": [
+      {"id": "Wayang merupakan seni sandiwara Indonesia yang paling unik.", "zh": "哇扬是印尼最独特的戏剧艺术。"}
+    ]
+  },
+  {
+    "word": "apalagi",
+    "pos": "conj.",
+    "meaning": "更何况；何况",
+    "level": 2,
+    "examples": [
+      {"id": "Apalagi baju para pemain bagus-bagus.", "zh": "更何况演员们的衣服都很漂亮。"},
+      {"id": "Berjalan pun belum bisa, apalagi berlari.", "zh": "走路都不行，更别说跑步了。"}
+    ]
+  },
+  {
+    "word": "sandiwara",
+    "pos": "n.",
+    "meaning": "戏剧",
+    "level": 2,
+    "examples": [
+      {"id": "Orang Indonesia pasti jago main sandiwara.", "zh": "印尼人一定很擅长演戏。"}
+    ]
+  },
+  {
+    "word": "mampu",
+    "pos": "adj.",
+    "meaning": "有能力的；有钱的",
+    "level": 2,
+    "examples": [
+      {"id": "Sedikit sekali orang yang mampu mengundang dalang untuk pentas.", "zh": "很少有人有能力请皮影戏师来表演。"}
+    ]
+  },
+  {
+    "word": "dalang",
+    "pos": "n.",
+    "meaning": "皮影戏操控师；幕后操纵者",
+    "level": 2,
+    "examples": [
+      {"id": "Coba perhatikan dalangnya.", "zh": "试着观察一下皮影戏师。"},
+      {"id": "Hebat sekali! Bisa menguasai begitu banyak boneka.", "zh": "太厉害了！能操控那么多木偶。"}
+    ]
+  },
+  {
+    "word": "pertunjukan",
+    "pos": "n.",
+    "meaning": "表演；演出",
+    "level": 2,
+    "examples": [
+      {"id": "Malam ini ada pertunjukan wayang kulit di rumah teman saya.", "zh": "今晚在我朋友家有皮影戏表演。"},
+      {"id": "Pertunjukan wayang digelar tiap sebulan sekali.", "zh": "哇扬表演每个月举办一次。"}
+    ]
+  },
+  {
+    "word": "keraton",
+    "pos": "n.",
+    "meaning": "王宫；宫廷",
+    "level": 2,
+    "examples": [
+      {"id": "Kalau di Keraton, pertunjukan wayang digelar tiap sebulan sekali.", "zh": "在王宫的话，哇扬表演每个月举办一次。"}
+    ]
+  },
+  {
+    "word": "lakon",
+    "pos": "n.",
+    "meaning": "剧目；剧本；主角",
+    "level": 2,
+    "examples": [
+      {"id": "Apa lakon wayang kulit malam ini?", "zh": "今晚皮影戏演什么剧目？"},
+      {"id": "Kita dapat memahami lakon wayang dengan rasa kita masing-masing.", "zh": "我们可以用各自的感受来理解哇扬的剧目。"}
+    ]
+  },
+  {
+    "word": "rasa",
+    "pos": "n.",
+    "meaning": "感觉；感受；味道",
+    "level": 2,
+    "examples": [
+      {"id": "Kalau menonton wayang, kita pakai rasa.", "zh": "看哇扬的话，我们用感受来体会。"},
+      {"id": "Rasa paling penting bagi orang Jawa.", "zh": "感受对爪哇人来说最重要。"}
+    ]
+  },
+  {
+    "word": "boneka",
+    "pos": "n.",
+    "meaning": "木偶；玩偶",
+    "level": 2,
+    "examples": [
+      {"id": "Bonekanya lucu-lucu!", "zh": "那些木偶好可爱！"},
+      {"id": "Bisa menguasai begitu banyak boneka.", "zh": "能操控那么多木偶。"}
+    ]
+  },
+  {
+    "word": "lincah",
+    "pos": "adj.",
+    "meaning": "灵活的；敏捷的",
+    "level": 2,
+    "examples": [
+      {"id": "Wah, gerakan bonekanya lincah sekali.", "zh": "哇，木偶的动作好灵活啊。"}
+    ]
+  },
+  {
+    "word": "manja",
+    "pos": "adj.",
+    "meaning": "撒娇的；娇气的",
+    "level": 2,
+    "examples": [
+      {"id": "Anak manja! Perlu saya temani?", "zh": "娇气鬼！需要我陪你吗？"}
+    ]
+  },
+  {
+    "word": "kuping",
+    "pos": "n.",
+    "meaning": "耳朵",
+    "level": 2,
+    "examples": [
+      {"id": "Ributnya bukan main! Kuping saya sakit.", "zh": "太吵了！我耳朵疼。"}
+    ]
+  },
+  {
+    "word": "ribut",
+    "pos": "adj.",
+    "meaning": "吵闹的；喧嚣的",
+    "level": 2,
+    "examples": [
+      {"id": "Ributnya bukan main!", "zh": "太吵了！"}
+    ]
+  },
+  {
+    "word": "panggung",
+    "pos": "n.",
+    "meaning": "舞台",
+    "level": 2,
+    "examples": [
+      {"id": "Semua mahasiswa telah duduk di bawah panggung.", "zh": "所有学生都已经坐在舞台下面。"}
+    ]
+  },
+  {
+    "word": "pekarangan",
+    "pos": "n.",
+    "meaning": "院子",
+    "level": 2,
+    "examples": [
+      {"id": "Semua mahasiswa telah duduk di bawah panggung di pekarangan rumah teman Bu Ayu.", "zh": "所有学生都坐在Bu Ayu朋友家院子里的舞台下面。"}
+    ]
+  },
+  {
+    "word": "suasana",
+    "pos": "n.",
+    "meaning": "气氛；氛围",
+    "level": 2,
+    "examples": [
+      {"id": "Ini suasana pertempuran terakhir hidup mati?", "zh": "这是最后生死大战的氛围吗？"}
+    ]
+  },
+  {
+    "word": "hidup",
+    "pos": "n.",
+    "meaning": "生命；活的",
+    "level": 1,
+    "examples": [
+      {"id": "Ini suasana pertempuran terakhir hidup mati?", "zh": "这是最后生死大战的氛围吗？"},
+      {"id": "Dia tetap hidup sederhana.", "zh": "他依然过着朴素的生活。"}
+    ]
+  },
+  {
+    "word": "mati",
+    "pos": "v.",
+    "meaning": "死；死亡",
+    "level": 2,
+    "examples": [
+      {"id": "Ini suasana pertempuran terakhir hidup mati?", "zh": "这是最后生死大战的氛围吗？"}
+    ]
+  },
+  {
+    "word": "terakhir",
+    "pos": "adj.",
+    "meaning": "最后的",
+    "level": 2,
+    "examples": [
+      {"id": "Ini suasana pertempuran terakhir hidup mati?", "zh": "这是最后生死大战的氛围吗？"},
+      {"id": "Lakon yang terakhir bulan ini berasal dari seorang pemain drama.", "zh": "这个月最后一个剧目来自一位戏剧演员。"}
+    ]
+  },
+  {
+    "word": "merupakan",
+    "pos": "v.",
+    "meaning": "是；构成（正式系动词）",
+    "level": 2,
+    "examples": [
+      {"id": "Wayang merupakan seni sandiwara Indonesia yang paling unik.", "zh": "哇扬是印尼最独特的戏剧艺术。"},
+      {"id": "Indonesia merupakan negeri kepulauan terbesar di dunia.", "zh": "印尼是世界上最大的群岛国家。"}
+    ]
+  },
+  {
+    "word": "mengagumkan",
+    "pos": "v.",
+    "meaning": "令人赞叹的；令人佩服的",
+    "level": 2,
+    "examples": [
+      {"id": "Wayang merupakan seni sandiwara Indonesia yang paling unik dan mengagumkan.", "zh": "哇扬是印尼最独特且令人赞叹的戏剧艺术。"},
+      {"id": "Dia salah satu orang yang paling mengagumkan tahun ini.", "zh": "他是今年最令人钦佩的人之一。"}
+    ]
+  },
+  {
+    "word": "merekomendasikan",
+    "pos": "v.",
+    "meaning": "推荐",
+    "level": 2,
+    "examples": [
+      {"id": "Saya lebih merekomendasikan drama Korea.", "zh": "我更推荐韩剧。"},
+      {"id": "Ada yang dapat Ika rekomendasikan?", "zh": "有什么Ika可以推荐的吗？"}
+    ]
+  },
+  {
+    "word": "bercerita",
+    "pos": "v.",
+    "meaning": "讲故事（不及物）",
+    "level": 2,
+    "examples": [
+      {"id": "Drama Korea kebanyakan bercerita tentang percintaan yang romantis.", "zh": "韩剧大多讲述浪漫的爱情故事。"},
+      {"id": "Pemimpin itu suka bercerita.", "zh": "那位领导喜欢讲故事。"}
+    ]
+  },
+  {
+    "word": "berkisah",
+    "pos": "v.",
+    "meaning": "讲述故事（不及物）",
+    "level": 2,
+    "examples": [
+      {"id": "Bukankah itu berkisah tentang keluarga Bharata?", "zh": "那不是讲述婆罗多族的故事吗？"}
+    ]
+  },
+  {
+    "word": "memahami",
+    "pos": "v.",
+    "meaning": "理解；领会",
+    "level": 2,
+    "examples": [
+      {"id": "Kita dapat memahami lakon wayang dengan rasa kita masing-masing.", "zh": "我们可以用各自的感受来理解哇扬的剧目。"},
+      {"id": "Budaya Jawa sulit dipahami.", "zh": "爪哇文化很难理解。"}
+    ]
+  },
+  {
+    "word": "menguasai",
+    "pos": "v.",
+    "meaning": "掌控；统治；精通",
+    "level": 2,
+    "examples": [
+      {"id": "Bisa menguasai begitu banyak boneka.", "zh": "能操控那么多木偶。"},
+      {"id": "Sebaiknya kita dapat menguasai diri kita sendiri.", "zh": "我们最好能够控制好自己。"}
+    ]
+  },
+  {
+    "word": "mengundang",
+    "pos": "v.",
+    "meaning": "邀请（正式）",
+    "level": 2,
+    "examples": [
+      {"id": "Sedikit sekali orang yang mampu mengundang dalang untuk pentas.", "zh": "很少有人有能力请皮影戏师来表演。"}
+    ]
+  },
+  {
+    "word": "menggelar",
+    "pos": "v.",
+    "meaning": "举办；展开；表演",
+    "level": 2,
+    "examples": [
+      {"id": "Pertunjukan wayang digelar tiap sebulan sekali.", "zh": "哇扬表演每个月举办一次。"}
+    ]
+  },
+  {
+    "word": "melewatkan",
+    "pos": "v.",
+    "meaning": "错过；放过",
+    "level": 2,
+    "examples": [
+      {"id": "Kesempatan menonton wayang kulit tidak akan kami lewatkan.", "zh": "看皮影戏的机会我们不会错过。"},
+      {"id": "Kesempatan ini jangan Anda lewatkan ya.", "zh": "这个机会您可别错过哦。"}
+    ]
+  },
+  {
+    "word": "memperkenalkan",
+    "pos": "v.",
+    "meaning": "介绍",
+    "level": 2,
+    "examples": [
+      {"id": "Hari ini saya ingin memperkenalkan budaya Jawa kepada kalian.", "zh": "今天我想向你们介绍爪哇文化。"}
+    ]
+  },
+  {
+    "word": "memperbaiki",
+    "pos": "v.",
+    "meaning": "改善；修理",
+    "level": 2,
+    "examples": [
+      {"id": "Pemerintah berjanji memperbaiki jalan yang rusak.", "zh": "政府承诺修复损坏的道路。"}
+    ]
+  },
+  {
+    "word": "mempelajari",
+    "pos": "v.",
+    "meaning": "学习；研究",
+    "level": 2,
+    "examples": [
+      {"id": "Dia telah lama mempelajari budaya Indonesia.", "zh": "他已经研究印尼文化很久了。"}
+    ]
+  },
+  {
+    "word": "percintaan",
+    "pos": "n.",
+    "meaning": "爱情",
+    "level": 2,
+    "examples": [
+      {"id": "Drama Korea kebanyakan bercerita tentang percintaan yang romantis.", "zh": "韩剧大多讲述浪漫的爱情故事。"}
+    ]
+  },
+  {
+    "word": "pertempuran",
+    "pos": "n.",
+    "meaning": "战斗",
+    "level": 2,
+    "examples": [
+      {"id": "Ini suasana pertempuran terakhir hidup mati?", "zh": "这是最后生死大战的氛围吗？"}
+    ]
+  },
+  {
+    "word": "sinetron",
+    "pos": "n.",
+    "meaning": "电视剧",
+    "level": 2,
+    "examples": [
+      {"id": "Saya dan Caini suka menonton sinetron dan film.", "zh": "我和彩妮喜欢看电视剧和电影。"},
+      {"id": "Sinetron lokal atau sinetron luar negeri?", "zh": "本地电视剧还是外国电视剧？"}
+    ]
+  },
+  {
+    "word": "epos",
+    "pos": "n.",
+    "meaning": "史诗",
+    "level": 3,
+    "examples": [
+      {"id": "Baratayuda, epos Mahabharata.", "zh": "《俱卢之战》，《摩诃婆罗多》这部史诗的。"},
+      {"id": "Pernah dengar nama eposnya.", "zh": "曾经听说过那部史诗的名字。"}
+    ]
+  },
+  {
+    "word": "kayon",
+    "pos": "n.",
+    "meaning": "卡雍（皮影戏道具）",
+    "level": 3,
+    "examples": [
+      {"id": "Itu namanya Kayon atau Gunungan wayang.", "zh": "那个叫卡雍或者皮影山。"}
+    ]
+  },
+  {
+    "word": "gunungan",
+    "pos": "n.",
+    "meaning": "皮影戏中的假山道具",
+    "level": 3,
+    "examples": [
+      {"id": "Itu namanya Kayon atau Gunungan wayang.", "zh": "那个叫卡雍或者皮影山。"}
+    ]
+  },
+  {
+    "word": "deh",
+    "pos": "interj.",
+    "meaning": "好了；就这样吧（语气词）",
+    "level": 2,
+    "examples": [
+      {"id": "Kita pulang bersama-sama deh.", "zh": "我们一起回去吧。"},
+      {"id": "Oke deh, saya setuju.", "zh": "好吧，我同意。"}
+    ]
+  },
+  {
+    "word": "pantas",
+    "pos": "adj.",
+    "meaning": "难怪；合适的",
+    "level": 2,
+    "examples": [
+      {"id": "Oh … pantas.", "zh": "哦……难怪。"},
+      {"id": "Pantas saja dia tidak datang, ternyata dia sakit.", "zh": "难怪他没来，原来是生病了。"}
+    ]
   }
 ]

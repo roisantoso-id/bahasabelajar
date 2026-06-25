@@ -1,0 +1,33 @@
+<view class="page home-page">
+  <view class="safe-head"></view>
+  <view class="topline">
+    <view><view class="eyebrow">{{greeting}}</view><view class="date">{{dateLabel}}</view></view>
+    <view class="streak"><text class="flame">◆</text><text class="streak-num">{{home.streak}}</text><text>天</text></view>
+  </view>
+  <view class="hero card">
+    <view class="hero-copy">
+      <view class="hero-kicker">BAHASA HARI INI</view>
+      <view class="hero-title">每天一点，<br/>印尼语自然会。</view>
+      <view class="hero-progress"><view class="progress-track"><view class="progress-fill" style="width: {{progress}}%"></view></view><text>{{progress}}%</text></view>
+    </view>
+    <image class="hero-image" src="/assets/hero.png" mode="aspectFit"></image>
+  </view>
+  <view class="section-head"><text class="section-title">今日训练</text><text class="muted">保持轻松，记得更牢</text></view>
+  <view class="task learn-task" bindtap="startLearn">
+    <view class="task-icon"><text>Aa</text></view><view class="task-body"><view class="task-name">学习新词</view><view class="task-desc">认识它，再理解它</view></view>
+    <view class="task-count"><text class="count-num">{{home.newRemaining}}</text><text> 个</text></view><view class="arrow">›</view>
+  </view>
+  <view class="task grammar-task" bindtap="startGrammar">
+    <view class="task-icon"><text>文</text></view><view class="task-body"><view class="task-name">语法笔记</view><view class="task-desc">词缀规则、句型拆解</view></view>
+    <view class="arrow">›</view>
+  </view>
+  <view class="task review-task" bindtap="startReview">
+    <view class="task-icon"><text>↻</text></view><view class="task-body"><view class="task-name">巩固复习</view><view class="task-desc">在忘记之前再见一面</view></view>
+    <view class="task-count"><text class="count-num">{{home.reviewDue}}</text><text> 个</text></view><view class="arrow">›</view>
+  </view>
+  <view class="mini-stats card">
+    <view><text class="stat-value">{{home.learnedWords}}</text><text class="stat-label">已学单词</text></view><view class="divider"></view>
+    <view><text class="stat-value">{{home.totalWords}}</text><text class="stat-label">完整词库</text></view><view class="divider"></view>
+    <view><text class="stat-value">{{home.checkin.completed ? '✓' : '—'}}</text><text class="stat-label">今日打卡</text></view>
+  </view>
+</view>

@@ -1,0 +1,28 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/study/index",
+    "pages/grammar/index",
+    "pages/words/index",
+    "pages/calendar/index",
+    "pages/settings/index"
+  ],
+  "window": {
+    "navigationStyle": "custom",
+    "backgroundColor": "#F4F1E9",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#8A8F88",
+    "selectedColor": "#123D33",
+    "backgroundColor": "#FFFDF8",
+    "list": [
+      { "pagePath": "pages/home/index", "text": "今日" },
+      { "pagePath": "pages/words/index", "text": "词库" },
+      { "pagePath": "pages/calendar/index", "text": "日历" },
+      { "pagePath": "pages/settings/index", "text": "设置" }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

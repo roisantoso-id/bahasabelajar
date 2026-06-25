@@ -1,0 +1,516 @@
+[
+  {
+    "title": "Kecerdasan Buatan: Peluang dan Tantangan",
+    "title_zh": "人工智能：机遇与挑战",
+    "level": 3,
+    "category": "科技",
+    "summary": "讲 AI 的发展、应用与隐忧。注释聚焦 me-/ke-an/di- 被动等词缀，边读边复习语法。",
+    "sentences": [
+      {
+        "id": "Kecerdasan buatan kini menjadi salah satu teknologi yang paling banyak dibicarakan di dunia.",
+        "zh": "人工智能如今成为世界上最受热议的技术之一。",
+        "note": "kecerdasan ← cerdas（聪明）ke-an；buatan ← buat（制造）；dibicarakan ← bicara，di- 被动「被谈论」"
+      },
+      {
+        "id": "Istilah ini merujuk pada kemampuan mesin untuk meniru cara berpikir manusia.",
+        "zh": "这个术语指的是机器模仿人类思维方式的能力。",
+        "note": "merujuk pada = 指向/指的是；kemampuan ← mampu（能够）；meniru ← tiru（模仿）"
+      },
+      {
+        "id": "Dalam beberapa tahun terakhir, perkembangannya berlangsung sangat cepat.",
+        "zh": "近几年，它的发展进行得非常快。",
+        "note": "perkembangan ← kembang（发展）per-an；-nya 指代 AI；berlangsung = 进行/持续"
+      },
+      {
+        "id": "Banyak perusahaan besar berlomba-lomba mengembangkan sistem mereka sendiri.",
+        "zh": "许多大公司争相开发自己的系统。",
+        "note": "berlomba-lomba = 争先恐后（叠词加强）；mengembangkan ← kembang，me-kan 及物「使发展」"
+      },
+      {
+        "id": "Teknologi ini sudah digunakan di berbagai bidang, mulai dari kesehatan hingga pendidikan.",
+        "zh": "这项技术已被用于各个领域，从医疗到教育。",
+        "note": "digunakan ← guna，di- 被动；mulai dari … hingga … = 从…到…；kesehatan ← sehat（健康）"
+      },
+      {
+        "id": "Di bidang kesehatan, kecerdasan buatan dapat membantu dokter mendiagnosis penyakit lebih cepat.",
+        "zh": "在医疗领域，人工智能能帮助医生更快地诊断疾病。",
+        "note": "membantu ← bantu（帮助）；penyakit ← sakit（病）pe-an；lebih cepat = 更快"
+      },
+      {
+        "id": "Di bidang transportasi, mobil tanpa pengemudi mulai diuji coba di beberapa negara.",
+        "zh": "在交通领域，无人驾驶汽车开始在一些国家试验。",
+        "note": "tanpa = 没有/无；pengemudi ← kemudi（方向盘）pe-；diuji coba = 被试验"
+      },
+      {
+        "id": "Namun, kemajuan ini juga menimbulkan berbagai kekhawatiran.",
+        "zh": "然而，这一进步也引发了种种担忧。",
+        "note": "namun = 然而；menimbulkan ← timbul（出现），使…产生；kekhawatiran ← khawatir（担心）ke-an"
+      },
+      {
+        "id": "Salah satu kekhawatiran terbesar adalah hilangnya banyak lapangan pekerjaan.",
+        "zh": "最大的担忧之一是大量工作岗位的消失。",
+        "note": "hilangnya = 消失（hilang + -nya 名词化）；lapangan pekerjaan = 就业岗位"
+      },
+      {
+        "id": "Banyak pekerjaan yang dulu dilakukan oleh manusia kini dapat digantikan oleh mesin.",
+        "zh": "许多过去由人完成的工作如今可被机器取代。",
+        "note": "dilakukan oleh = 由…做（被动 + oleh 引出施事）；digantikan ← ganti（替换）"
+      },
+      {
+        "id": "Selain itu, muncul pula masalah mengenai privasi dan keamanan data.",
+        "zh": "此外，还出现了关于隐私和数据安全的问题。",
+        "note": "selain itu = 此外；mengenai = 关于；keamanan ← aman（安全）ke-an"
+      },
+      {
+        "id": "Oleh karena itu, banyak pakar menyerukan perlunya aturan yang jelas.",
+        "zh": "因此，许多专家呼吁需要明确的规则。",
+        "note": "oleh karena itu = 因此；menyerukan ← seru（呼喊）；aturan ← atur（安排）"
+      },
+      {
+        "id": "Pemerintah di berbagai negara mulai menyusun kebijakan untuk mengatur penggunaan teknologi ini.",
+        "zh": "各国政府开始制定政策来规范这项技术的使用。",
+        "note": "menyusun ← susun（编排）；kebijakan ← bijak（明智）；mengatur ← atur；penggunaan ← guna pe-an"
+      },
+      {
+        "id": "Meskipun demikian, kecerdasan buatan tetap membawa banyak manfaat bagi kehidupan manusia.",
+        "zh": "尽管如此，人工智能仍为人类生活带来许多益处。",
+        "note": "meskipun demikian = 尽管如此；manfaat = 益处；bagi = 对于；kehidupan ← hidup（生活）ke-an"
+      },
+      {
+        "id": "Kuncinya adalah bagaimana manusia menggunakan teknologi ini secara bijaksana.",
+        "zh": "关键在于人类如何明智地使用这项技术。",
+        "note": "kuncinya = 关键所在（kunci + -nya）；secara + 形容词 = 「…地」，secara bijaksana = 明智地"
+      }
+    ]
+  },
+  {
+    "title": "Ekonomi Digital Indonesia",
+    "title_zh": "印尼的数字经济",
+    "level": 3,
+    "category": "经济",
+    "summary": "印尼数字经济为何东南亚最猛：人口红利、Gojek/Tokopedia、电商与数字支付，以及短板。",
+    "sentences": [
+      {
+        "id": "Indonesia memiliki ekonomi digital yang tumbuh paling pesat di Asia Tenggara.",
+        "zh": "印尼拥有东南亚增长最快的数字经济。",
+        "note": "memiliki ← milik（拥有）；tumbuh = 生长/增长；pesat = 迅猛；Asia Tenggara = 东南亚"
+      },
+      {
+        "id": "Hal ini didukung oleh jumlah penduduk yang besar dan usia yang relatif muda.",
+        "zh": "这得益于庞大的人口数量和相对年轻的年龄结构。",
+        "note": "didukung oleh = 由…支撑（dukung，di-…-oleh 被动）；penduduk ← duduk（坐/居住）pe-；usia = 年龄"
+      },
+      {
+        "id": "Lebih dari separuh penduduk Indonesia kini sudah menggunakan internet.",
+        "zh": "印尼超过一半的人口如今已使用互联网。",
+        "note": "lebih dari = 超过；separuh = 一半；menggunakan ← guna"
+      },
+      {
+        "id": "Telepon pintar telah menjadi alat utama untuk mengakses dunia digital.",
+        "zh": "智能手机已成为接入数字世界的主要工具。",
+        "note": "telepon pintar = 智能手机（pintar 聪明）；alat = 工具；utama = 主要的；mengakses = 接入"
+      },
+      {
+        "id": "Perusahaan rintisan seperti Gojek dan Tokopedia lahir dari kebutuhan masyarakat sehari-hari.",
+        "zh": "像 Gojek、Tokopedia 这样的初创企业，诞生于民众的日常需求。",
+        "note": "perusahaan rintisan = 初创企业（startup）；lahir = 出生/诞生；kebutuhan ← butuh（需要）ke-an；sehari-hari = 日常"
+      },
+      {
+        "id": "Layanan transportasi daring mengubah cara orang bepergian di kota-kota besar.",
+        "zh": "网约交通服务改变了人们在大城市出行的方式。",
+        "note": "layanan ← layan（服务）；daring = 在线（dalam jaringan 缩写）；mengubah ← ubah；bepergian ← pergi（出门）"
+      },
+      {
+        "id": "Selain itu, perdagangan elektronik berkembang dengan sangat cepat.",
+        "zh": "此外，电子商务发展得非常快。",
+        "note": "perdagangan ← dagang（做买卖）per-an；perdagangan elektronik = 电子商务；berkembang ← kembang"
+      },
+      {
+        "id": "Masyarakat kini dapat membeli berbagai barang hanya melalui layar ponsel.",
+        "zh": "民众如今只需通过手机屏幕就能购买各种商品。",
+        "note": "membeli ← beli（买）；melalui = 通过；layar = 屏幕；ponsel = 手机（telepon seluler 缩写）"
+      },
+      {
+        "id": "Sistem pembayaran digital juga semakin populer di kalangan anak muda.",
+        "zh": "数字支付系统在年轻人中也越来越流行。",
+        "note": "pembayaran ← bayar（付）pe-an；semakin = 越来越；di kalangan = 在…当中；anak muda = 年轻人"
+      },
+      {
+        "id": "Banyak orang tidak lagi membawa uang tunai ke mana-mana.",
+        "zh": "很多人不再随身携带现金。",
+        "note": "tidak lagi = 不再；membawa ← bawa（带）；uang tunai = 现金；ke mana-mana = 到处"
+      },
+      {
+        "id": "Pertumbuhan ini membuka banyak peluang kerja baru, terutama bagi generasi muda.",
+        "zh": "这种增长开辟了许多新就业机会，尤其是对年轻一代。",
+        "note": "pertumbuhan ← tumbuh per-an；peluang = 机会；terutama = 尤其；generasi muda = 年轻一代"
+      },
+      {
+        "id": "Namun, masih ada tantangan yang harus dihadapi.",
+        "zh": "然而，仍有必须面对的挑战。",
+        "note": "tantangan ← tantang（挑战）；dihadapi ← hadap（面向），di-…-i 被动「被面对」"
+      },
+      {
+        "id": "Jaringan internet di daerah terpencil belum merata dan sering kali lambat.",
+        "zh": "偏远地区的网络尚不均衡，而且常常很慢。",
+        "note": "jaringan ← jaring（网）；terpencil = 偏僻的；merata ← rata（平）；sering kali = 常常；lambat = 慢"
+      },
+      {
+        "id": "Pemerintah berupaya membangun infrastruktur agar manfaatnya dapat dirasakan semua orang.",
+        "zh": "政府努力建设基础设施，好让其益处能被所有人感受到。",
+        "note": "berupaya ← upaya（努力）；membangun ← bangun（建）；agar = 以便；dirasakan ← rasa，di-…-kan 被动"
+      },
+      {
+        "id": "Dengan persiapan yang matang, ekonomi digital dapat menjadi tulang punggung perekonomian nasional.",
+        "zh": "经过充分准备，数字经济能成为国民经济的支柱。",
+        "note": "persiapan ← siap（准备）per-an；matang = 成熟的；tulang punggung = 支柱（字面「脊梁骨」）；perekonomian ← ekonomi per-an"
+      }
+    ]
+  },
+  {
+    "title": "Ibu Kota Baru Nusantara",
+    "title_zh": "新首都努山塔拉",
+    "level": 3,
+    "category": "时政",
+    "summary": "印尼为何把首都从雅加达迁到加里曼丹？地陷、拥堵、发展失衡，以及随之而来的争议。",
+    "sentences": [
+      {
+        "id": "Indonesia sedang memindahkan ibu kota negaranya dari Jakarta ke Pulau Kalimantan.",
+        "zh": "印尼正在把国家首都从雅加达迁往加里曼丹岛。",
+        "note": "sedang = 正在；memindahkan ← pindah（迁移），me-kan 及物；ibu kota = 首都（字面「母城」）"
+      },
+      {
+        "id": "Ibu kota baru itu diberi nama Nusantara.",
+        "zh": "这个新首都被命名为「努山塔拉」。",
+        "note": "diberi nama = 被命名为（beri 给，di- 被动）；Nusantara 意为「群岛/印尼全境」"
+      },
+      {
+        "id": "Rencana pemindahan ini sebenarnya sudah dibahas sejak lama.",
+        "zh": "这个迁都计划其实早已讨论已久。",
+        "note": "rencana = 计划；pemindahan ← pindah pe-an；dibahas ← bahas（讨论）；sejak lama = 很久以来"
+      },
+      {
+        "id": "Ada beberapa alasan utama di balik keputusan besar ini.",
+        "zh": "这一重大决定背后有几个主要原因。",
+        "note": "alasan ← alas（基础）→理由；di balik = 在…背后；keputusan ← putus（断/决定）ke-an"
+      },
+      {
+        "id": "Jakarta saat ini menghadapi banyak masalah yang serius.",
+        "zh": "雅加达目前面临许多严重问题。",
+        "note": "menghadapi ← hadap（面向），me-…-i 「面对」；serius = 严重的"
+      },
+      {
+        "id": "Kota itu sangat padat penduduk dan sering dilanda kemacetan parah.",
+        "zh": "这座城市人口极度稠密，经常遭遇严重的交通堵塞。",
+        "note": "padat = 拥挤的；dilanda ← landa（袭击）di- 被动；kemacetan ← macet（堵塞）ke-an；parah = 严重的"
+      },
+      {
+        "id": "Selain itu, sebagian wilayah Jakarta terus mengalami penurunan permukaan tanah.",
+        "zh": "此外，雅加达部分地区持续出现地面下沉。",
+        "note": "mengalami ← alam（经历）；penurunan ← turun（下降）pe-an；permukaan tanah = 地面"
+      },
+      {
+        "id": "Pembangunan di Indonesia juga dinilai terlalu terpusat di Pulau Jawa.",
+        "zh": "印尼的发展也被认为过度集中在爪哇岛。",
+        "note": "pembangunan ← bangun pe-an；dinilai ← nilai（评价）di- 被动；terpusat ← pusat（中心）ter- 状态"
+      },
+      {
+        "id": "Dengan memindahkan ibu kota, pemerintah berharap pembangunan menjadi lebih merata.",
+        "zh": "通过迁都，政府希望发展变得更加均衡。",
+        "note": "dengan + 动词 = 通过…；berharap ← harap（希望）；merata ← rata（平均）"
+      },
+      {
+        "id": "Pulau Kalimantan dipilih karena letaknya berada di tengah wilayah Indonesia.",
+        "zh": "加里曼丹岛被选中，因为它位于印尼版图的中央。",
+        "note": "dipilih ← pilih（选）di- 被动；letaknya ← letak（位置）+ -nya；berada = 处于；wilayah = 区域/版图"
+      },
+      {
+        "id": "Daerah itu juga relatif aman dari gempa bumi dan letusan gunung berapi.",
+        "zh": "那个地区也相对不受地震和火山喷发的威胁。",
+        "note": "gempa bumi = 地震；letusan ← letus（爆裂）；gunung berapi = 火山（字面「有火的山」）"
+      },
+      {
+        "id": "Pemerintah merancang Nusantara sebagai kota hijau yang ramah lingkungan.",
+        "zh": "政府把努山塔拉设计为环保的绿色城市。",
+        "note": "merancang ← rancang（设计）；sebagai = 作为；ramah lingkungan = 环保的（ramah 友善 + lingkungan 环境）"
+      },
+      {
+        "id": "Meskipun demikian, proyek ini menuai pula kritik dari sebagian masyarakat.",
+        "zh": "尽管如此，这个项目也招致了部分民众的批评。",
+        "note": "meskipun demikian = 尽管如此；menuai ← tuai（收割）→招致；kritik = 批评"
+      },
+      {
+        "id": "Mereka mengkhawatirkan besarnya biaya serta dampaknya terhadap lingkungan dan suku asli.",
+        "zh": "他们担忧巨大的费用以及对环境和原住民的影响。",
+        "note": "mengkhawatirkan ← khawatir，me-…-kan「为…担忧」；biaya = 费用；dampak = 影响；suku asli = 原住民族"
+      },
+      {
+        "id": "Proses pemindahan ini diperkirakan akan berlangsung selama bertahun-tahun.",
+        "zh": "这个迁移过程预计将持续多年。",
+        "note": "diperkirakan ← kira（估计）di-per-…-kan；berlangsung = 持续；bertahun-tahun = 长达数年（ber- + 叠词）"
+      }
+    ]
+  },
+  {
+    "title": "Indonesia Menyiapkan Peta Jalan Kecerdasan Buatan",
+    "title_zh": "印尼制定人工智能路线图",
+    "level": 3,
+    "category": "科技",
+    "summary": "报刊体硬文：政府拟定 AI 国家路线图（Perpres）。长句、被动、per-an/ke-an 名词化密集，基于 2026 年真实报道。",
+    "sentences": [
+      {
+        "id": "Pemerintah Indonesia tengah menyiapkan peta jalan resmi untuk pengembangan kecerdasan buatan.",
+        "zh": "印尼政府正在制定一份人工智能发展的官方路线图。",
+        "note": "tengah = 正在（书面，≈sedang）；peta jalan = 路线图；pengembangan ← kembang，per-...-an 名词化"
+      },
+      {
+        "id": "Kementerian Komunikasi dan Digital telah mengirimkan izin prakarsa rancangan peraturan presiden kepada Sekretariat Negara.",
+        "zh": "通信和数字部已将总统条例草案的立项许可送交国家秘书处。",
+        "note": "mengirimkan ← kirim，me-...-kan；izin prakarsa = 立项许可；rancangan ← rancang；peraturan ← atur per-an"
+      },
+      {
+        "id": "Peraturan itu diharapkan dapat ditetapkan dalam waktu dekat.",
+        "zh": "该条例有望在近期颁布。",
+        "note": "diharapkan ← harap，di-...-kan 被动；ditetapkan ← tetap，「被确定/颁布」；dalam waktu dekat = 近期"
+      },
+      {
+        "id": "Lewat regulasi ini, pemerintah ingin meletakkan dasar hukum bagi pemanfaatan teknologi yang berkembang sangat pesat.",
+        "zh": "通过这项法规，政府想为这项飞速发展的技术的应用奠定法律基础。",
+        "note": "meletakkan ← letak「奠定」；pemanfaatan ← manfaat pe-an；bagi = 为/对于；berkembang pesat = 迅猛发展"
+      },
+      {
+        "id": "Peta jalan tersebut disusun untuk periode 2026 hingga 2029.",
+        "zh": "该路线图是为 2026 至 2029 年这一时期编制的。",
+        "note": "disusun ← susun，di- 被动；tersebut = 上述的（书面指代）；hingga = 至"
+      },
+      {
+        "id": "Nilai investasi yang disebut-sebut menyertai program ini mencapai sekitar 267 triliun rupiah.",
+        "zh": "据称伴随这一计划的投资额高达约 267 万亿盾。",
+        "note": "disebut-sebut = 被屡屡提及（叠词 + 被动）；menyertai ← serta，me-...-i「伴随」；mencapai = 达到"
+      },
+      {
+        "id": "Pemerintah menargetkan Indonesia menjadi salah satu pusat kecerdasan buatan di kawasan Asia Tenggara.",
+        "zh": "政府的目标是让印尼成为东南亚地区的人工智能中心之一。",
+        "note": "menargetkan ← target「以…为目标」；pusat = 中心；kawasan = 地区/区域"
+      },
+      {
+        "id": "Untuk itu, infrastruktur digital seperti pusat data dan keamanan siber ditempatkan sebagai pilar utama.",
+        "zh": "为此，数据中心和网络安全等数字基础设施被置于支柱地位。",
+        "note": "untuk itu = 为此；pusat data = 数据中心；keamanan siber = 网络安全；ditempatkan ← tempat di-...-kan；pilar = 支柱"
+      },
+      {
+        "id": "Pada tahap awal, AI akan dimanfaatkan untuk sejumlah program prioritas nasional.",
+        "zh": "在初期阶段，AI 将被用于若干国家优先计划。",
+        "note": "tahap = 阶段；dimanfaatkan ← manfaat di-...-kan 被动；sejumlah = 若干；prioritas = 优先（事项）"
+      },
+      {
+        "id": "Beberapa di antaranya adalah penyaringan penyakit, pemetaan wilayah rawan gizi buruk, serta pendeteksian berita bohong.",
+        "zh": "其中一些是疾病筛查、营养不良高风险地区测绘，以及假新闻侦测。",
+        "note": "penyaringan ← saring pe-an「筛查」；pemetaan ← peta pe-an「测绘」；rawan = 高风险的；pendeteksian ← deteksi；berita bohong = 假新闻"
+      },
+      {
+        "id": "Meskipun demikian, para ahli mengingatkan adanya sejumlah risiko yang tidak boleh diabaikan.",
+        "zh": "尽管如此，专家们提醒存在一些不容忽视的风险。",
+        "note": "para = （人的）复数标记，para ahli = 专家们；mengingatkan ← ingat me-...-kan「提醒」；diabaikan ← abai di-...-kan「被忽视」"
+      },
+      {
+        "id": "Salah satu risiko terbesar adalah penerapan otomatisasi yang terlalu dini.",
+        "zh": "最大的风险之一是过早地推行自动化。",
+        "note": "penerapan ← terap pe-an「实施」；otomatisasi = 自动化；terlalu dini = 太早"
+      },
+      {
+        "id": "Teknologi ini dikhawatirkan diadopsi sebelum fondasi digital dan kesiapan tenaga kerja benar-benar matang.",
+        "zh": "令人担忧的是，这项技术在数字基础和劳动力准备真正成熟之前就被采用。",
+        "note": "dikhawatirkan ← khawatir di-...-kan「令人担忧」；diadopsi = 被采用；kesiapan ← siap ke-an；tenaga kerja = 劳动力；matang = 成熟"
+      },
+      {
+        "id": "Oleh sebab itu, ketersediaan tenaga kerja yang terampil secara digital menjadi penentu daya saing bangsa.",
+        "zh": "因此，具备数字技能的劳动力的充足程度，成为国家竞争力的决定因素。",
+        "note": "ketersediaan ← sedia ke-an「可获得性」；terampil = 熟练的；penentu ← tentu「决定者」；daya saing = 竞争力"
+      },
+      {
+        "id": "Pemerintah juga harus menyeimbangkan dorongan inovasi dengan perlindungan privasi warga.",
+        "zh": "政府还必须在推动创新与保护公民隐私之间取得平衡。",
+        "note": "menyeimbangkan ← imbang me-...-kan「使平衡」；dorongan ← dorong「推动力」；perlindungan ← lindung per-an「保护」；warga = 公民"
+      },
+      {
+        "id": "Pada akhirnya, keberhasilan strategi ini bergantung pada kesiapan manusia, bukan semata-mata pada kecanggihan mesin.",
+        "zh": "归根结底，这一战略的成败取决于人的准备程度，而非单纯取决于机器的先进。",
+        "note": "pada akhirnya = 最终；keberhasilan ← hasil ke-an「成功」；bergantung pada = 取决于；semata-mata = 单纯/仅仅；kecanggihan ← canggih ke-an「先进性」"
+      }
+    ]
+  },
+  {
+    "title": "Hilirisasi Nikel dan Ambisi Baterai Indonesia",
+    "title_zh": "镍下游化与印尼的电池雄心",
+    "level": 3,
+    "category": "经济",
+    "summary": "印尼凭全球第一的镍储量冲击电池产业链：下游化政策、卡拉旺电池厂、税收优惠，以及「有量无值」的隐忧。",
+    "sentences": [
+      {
+        "id": "Indonesia merupakan pemilik cadangan nikel terbesar di dunia.",
+        "zh": "印尼是世界上最大的镍储量拥有国。",
+        "note": "merupakan = 是（书面，← rupa）；pemilik ← milik，pe- 施事「拥有者」；cadangan ← cadang「储备」"
+      },
+      {
+        "id": "Negara ini menguasai lebih dari separuh pasokan nikel global.",
+        "zh": "这个国家掌控着全球镍供应的一半以上。",
+        "note": "menguasai ← kuasa me-...-i「掌控」；separuh = 一半；pasokan ← pasok「供应」"
+      },
+      {
+        "id": "Kekayaan sumber daya ini menjadi modal utama dalam rantai pasok baterai kendaraan listrik.",
+        "zh": "这一资源财富成为电动汽车电池供应链中的主要资本。",
+        "note": "kekayaan ← kaya ke-an；sumber daya = 资源；modal = 资本；rantai pasok = 供应链；kendaraan listrik = 电动车"
+      },
+      {
+        "id": "Sejak beberapa tahun terakhir, pemerintah gencar mendorong kebijakan hilirisasi.",
+        "zh": "近几年来，政府大力推动下游化政策。",
+        "note": "gencar = 密集/大力地；mendorong ← dorong「推动」；hilirisasi = 下游化（hilir 下游 + -isasi）"
+      },
+      {
+        "id": "Hilirisasi adalah upaya mengolah bahan mentah menjadi produk bernilai tambah tinggi di dalam negeri.",
+        "zh": "下游化是把原材料在国内加工成高附加值产品的努力。",
+        "note": "upaya = 努力；mengolah ← olah「加工」；bahan mentah = 原料；bernilai tambah = 有附加值的；dalam negeri = 国内"
+      },
+      {
+        "id": "Dengan cara itu, keuntungan terbesar tidak lagi dinikmati oleh negara lain.",
+        "zh": "通过这种方式，最大的利润不再被别国享有。",
+        "note": "keuntungan ← untung ke-an「利润」；dinikmati ← nikmat di-...-i「被享用」；tidak lagi = 不再"
+      },
+      {
+        "id": "Pemerintah kini membatasi pembangunan pabrik peleburan yang hanya menghasilkan produk setengah jadi.",
+        "zh": "政府如今限制只生产半成品的冶炼厂建设。",
+        "note": "membatasi ← batas me-...-i「限制」；pabrik peleburan ← lebur pe-an「冶炼厂」；setengah jadi = 半成品"
+      },
+      {
+        "id": "Sebagai gantinya, investasi diarahkan ke produksi bahan baku baterai dan industri hijau.",
+        "zh": "作为替代，投资被引向电池原料生产和绿色产业。",
+        "note": "sebagai gantinya = 作为替代；diarahkan ← arah di-...-kan「被引向」；bahan baku = 原料；industri hijau = 绿色产业"
+      },
+      {
+        "id": "Sebuah pabrik baterai berskala besar dijadwalkan mulai beroperasi di Karawang pada tahun ini.",
+        "zh": "一座大型电池厂计划于今年在卡拉旺投产。",
+        "note": "berskala besar = 大规模的（ber- + skala）；dijadwalkan ← jadwal di-...-kan「被排定」；beroperasi = 运营"
+      },
+      {
+        "id": "Proyek tersebut menelan investasi miliaran dolar dan menyerap ribuan tenaga kerja.",
+        "zh": "该项目耗资数十亿美元，并吸纳数千名劳动力。",
+        "note": "menelan ← telan「吞/耗费」，惯用 menelan biaya/investasi = 耗资；menyerap ← serap「吸纳」；ribuan = 数千"
+      },
+      {
+        "id": "Untuk mempercepat penyerapan kendaraan listrik, pemerintah memberikan berbagai insentif pajak.",
+        "zh": "为加快电动车的普及，政府提供各种税收优惠。",
+        "note": "mempercepat ← cepat，memper- 加速；penyerapan ← serap pe-an「吸纳/普及」；insentif pajak = 税收优惠"
+      },
+      {
+        "id": "Namun, sejumlah pengamat menyoroti sebuah paradoks dalam strategi ini.",
+        "zh": "然而，一些观察人士指出这一战略中的一个悖论。",
+        "note": "pengamat ← amat pe-「观察家」；menyoroti ← sorot me-...-i「聚焦/指出」；paradoks = 悖论"
+      },
+      {
+        "id": "Meskipun pangsa pasarnya besar, Indonesia masih mengimpor sebagian produk nikel jadi.",
+        "zh": "尽管市场份额很大，印尼仍进口部分镍成品。",
+        "note": "pangsa pasar = 市场份额；mengimpor = 进口；produk jadi = 成品（与上文 setengah jadi 半成品对照）"
+      },
+      {
+        "id": "Tantangan lain adalah dampak lingkungan dari penambangan yang berlangsung secara masif.",
+        "zh": "另一个挑战是大规模采矿带来的环境影响。",
+        "note": "dampak lingkungan = 环境影响；penambangan ← tambang pe-an「采矿」；masif = 大规模的"
+      },
+      {
+        "id": "Pemerintah menargetkan Indonesia masuk lima besar produsen baterai dunia pada 2045.",
+        "zh": "政府的目标是让印尼在 2045 年跻身世界电池生产五强。",
+        "note": "menargetkan = 以…为目标；lima besar = 五强；produsen = 生产商"
+      },
+      {
+        "id": "Keberhasilan ambisi itu akan ditentukan oleh keseimbangan antara pertumbuhan ekonomi dan kelestarian lingkungan.",
+        "zh": "这一雄心的成败，将取决于经济增长与环境可持续性之间的平衡。",
+        "note": "ditentukan ← tentu di-...-kan；keseimbangan ← imbang ke-an「平衡」；kelestarian ← lestari ke-an「可持续性」"
+      }
+    ]
+  },
+  {
+    "title": "Polemik Anggaran Makan Bergizi Gratis",
+    "title_zh": "免费营养餐预算之争",
+    "level": 3,
+    "category": "时政",
+    "summary": "旗舰民生项目 MBG 预算从 268 万亿削到 228 万亿，受益人调整引发赞成与反对——一场关于覆盖面、质量与可持续的公共政策辩论。",
+    "sentences": [
+      {
+        "id": "Program Makan Bergizi Gratis menjadi salah satu kebijakan unggulan pemerintah saat ini.",
+        "zh": "免费营养餐计划是当前政府的标志性政策之一。",
+        "note": "bergizi ← gizi ber-「有营养的」；kebijakan unggulan = 旗舰政策（unggul 优秀）；saat ini = 当前"
+      },
+      {
+        "id": "Program ini bertujuan memperbaiki gizi anak sekolah dan menekan angka kekurangan gizi.",
+        "zh": "该计划旨在改善学童营养并压低营养不良率。",
+        "note": "bertujuan = 旨在（ber- + tujuan）；memperbaiki ← baik，memper-...-i「改善」；menekan ← tekan「压低」；kekurangan ← kurang ke-an「不足」"
+      },
+      {
+        "id": "Sejak diluncurkan, anggaran yang diserap program ini sangat besar.",
+        "zh": "自启动以来，该计划所消耗的预算非常庞大。",
+        "note": "diluncurkan ← luncur di-...-kan「被推出/启动」；anggaran = 预算；diserap ← serap di-「被吸收/消耗」"
+      },
+      {
+        "id": "Belakangan, pemerintah memutuskan untuk memangkas anggaran tersebut secara signifikan.",
+        "zh": "近来，政府决定大幅削减这笔预算。",
+        "note": "belakangan = 近来；memutuskan ← putus me-...-kan「决定」；memangkas ← pangkas「削减」；secara signifikan = 显著地"
+      },
+      {
+        "id": "Pagu awal yang mencapai 268 triliun rupiah dipangkas menjadi sekitar 228 triliun rupiah.",
+        "zh": "最初高达 268 万亿盾的限额被削减至约 228 万亿盾。",
+        "note": "pagu = 预算上限/限额；dipangkas ← pangkas di- 被动；menjadi = 变为"
+      },
+      {
+        "id": "Pemangkasan ini merupakan bagian dari evaluasi menyeluruh atas pelaksanaan program.",
+        "zh": "这次削减是对计划执行情况进行全面评估的一部分。",
+        "note": "pemangkasan ← pangkas pe-an；menyeluruh ← seluruh「全面的」；pelaksanaan ← laksana pe-an「执行」；atas = 对（书面）"
+      },
+      {
+        "id": "Salah satu langkah penghematan adalah menghentikan insentif harian bagi dapur penyedia makanan saat libur sekolah.",
+        "zh": "一项节约措施是在学校放假期间停止给供餐厨房的每日补贴。",
+        "note": "penghematan ← hemat pe-an「节约」；menghentikan ← henti me-...-kan「停止」；harian = 每日的；penyedia ← sedia pe-「提供者」"
+      },
+      {
+        "id": "Langkah itu diperkirakan dapat menghemat anggaran hingga tiga triliun rupiah.",
+        "zh": "该措施预计可节省高达三万亿盾的预算。",
+        "note": "diperkirakan ← kira di-per-...-kan「被估计」；menghemat ← hemat「节省」；hingga = 多达"
+      },
+      {
+        "id": "Selain itu, pemerintah berencana menata ulang daftar penerima manfaat.",
+        "zh": "此外，政府计划重新整理受益人名单。",
+        "note": "berencana = 计划（ber- + rencana）；menata ulang = 重新整理（tata 整理 + ulang 再）；penerima manfaat = 受益人"
+      },
+      {
+        "id": "Sekitar delapan juta penerima dikabarkan akan dikeluarkan dari daftar agar bantuan lebih tepat sasaran.",
+        "zh": "据称约八百万受益人将被移出名单，以使援助更精准。",
+        "note": "dikabarkan ← kabar di-...-kan「据报道」；dikeluarkan ← keluar di-...-kan「被移出」；tepat sasaran = 精准（命中目标）"
+      },
+      {
+        "id": "Kebijakan ini langsung menuai pro dan kontra di tengah masyarakat.",
+        "zh": "这项政策立刻在社会上招致赞成与反对。",
+        "note": "menuai ← tuai「收割→招致」；pro dan kontra = 赞成与反对；di tengah = 在…当中"
+      },
+      {
+        "id": "Sebagian pihak menilai efisiensi anggaran memang diperlukan agar program berkelanjutan.",
+        "zh": "一部分人认为，预算节流确实有必要，以使计划可持续。",
+        "note": "menilai ← nilai「评价/认为」；memang = 确实；diperlukan ← perlu di-...-kan「被需要」；berkelanjutan ← lanjut「可持续的」"
+      },
+      {
+        "id": "Namun, pihak lain mengkhawatirkan berkurangnya jumlah anak yang memperoleh manfaat.",
+        "zh": "然而，另一些人担忧获得受益的儿童数量减少。",
+        "note": "mengkhawatirkan ← khawatir me-...-kan「担忧」；berkurangnya = 减少（ber- + kurang + -nya 名词化）；memperoleh = 获得"
+      },
+      {
+        "id": "Dalam sebuah forum keagamaan besar, sejumlah tokoh mendesak agar tata kelola program dievaluasi secara total.",
+        "zh": "在一场大型宗教论坛上，一些人士敦促对计划的治理进行彻底评估。",
+        "note": "keagamaan ← agama ke-an「宗教的」；tokoh = 知名人士；mendesak = 敦促；tata kelola = 治理；dievaluasi ← evaluasi di-；secara total = 彻底地"
+      },
+      {
+        "id": "Perdebatan ini mencerminkan tantangan klasik dalam kebijakan publik: menyeimbangkan cakupan, mutu, dan keberlanjutan anggaran.",
+        "zh": "这场争论折射出公共政策中的一个经典难题：在覆盖面、质量与预算可持续性之间取得平衡。",
+        "note": "perdebatan ← debat per-an「争论」；mencerminkan ← cermin me-...-kan「反映」；cakupan ← cakup「覆盖范围」；mutu = 质量；keberlanjutan ← lanjut ke-an「可持续性」"
+      }
+    ]
+  }
+]

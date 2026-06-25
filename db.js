@@ -5,6 +5,7 @@ const path = require('node:path');
 
 const DB_PATH = path.join(__dirname, 'data.db');
 const SEED_PATH = path.join(__dirname, 'seed', 'words.json');
+const GRAMMAR_SEED_PATH = path.join(__dirname, 'seed', 'grammar.json');
 
 const db = new DatabaseSync(DB_PATH);
 
@@ -43,6 +44,15 @@ CREATE TABLE IF NOT EXISTS settings (
   key   TEXT PRIMARY KEY,
   value TEXT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS grammar (
+  id       INTEGER PRIMARY KEY,
+  lesson   INTEGER NOT NULL,
+  pattern  TEXT NOT NULL,
+  meaning  TEXT NOT NULL,
+  explain  TEXT NOT NULL,
+  examples TEXT NOT NULL
+);
 `);
 
 // 首次启动：导入种子词库 + 默认设置（幂等，删 data.db 重启即重置）
@@ -76,7 +86,29 @@ function initSettings() {
   for (const [k, v] of Object.entries(DEFAULT_SETTINGS)) insert.run(k, v);
 }
 
+function seedGrammarIfEmpty() {
+  const { c } = db.prepare('SELECT COUNT(*) AS c FROM grammar').get();
+  if (c > 0) return;
+  if (!fs.existsSync(GRAMMAR_SEED_PATH)) return;
+  const items = JSON.parse(fs.readFileSync(GRAMMAR_SEED_PATH, 'utf8'));
+  const insert = db.prepare(
+    'INSERT INTO grammar (lesson, pattern, meaning, explain, examples) VALUES (?, ?, ?, ?, ?)'
+  );
+  db.exec('BEGIN');
+  try {
+    for (const g of items) {
+      insert.run(g.lesson, g.pattern, g.meaning, g.explain, JSON.stringify(g.examples));
+    }
+    db.exec('COMMIT');
+  } catch (e) {
+    db.exec('ROLLBACK');
+    throw e;
+  }
+  console.log(`[db] 已导入 ${items.length} 条语法规则`);
+}
+
 seedIfEmpty();
+seedGrammarIfEmpty();
 initSettings();
 
 function getSettings() {

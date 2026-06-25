@@ -1,0 +1,32 @@
+page { background: #174d40; }
+.study-page { min-height: 100vh; display: flex; flex-direction: column; padding: 0 28rpx calc(24rpx + env(safe-area-inset-bottom)); }
+.study-head { height: 100rpx; display: flex; align-items: center; gap: 22rpx; color: #fff; }
+.close { width: 58rpx; height: 58rpx; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.78); font-size: 46rpx; font-weight: 300; }
+.head-progress { flex: 1; height: 10rpx; overflow: hidden; border-radius: 99rpx; background: rgba(255,255,255,.16); }
+.head-progress-fill { height: 100%; border-radius: inherit; background: #f4c95d; }
+.counter { width: 66rpx; text-align: right; color: rgba(255,255,255,.68); font-size: 22rpx; }
+.word-card { flex: 1; height: 0; border-radius: 38rpx; background: #fffdf8; box-shadow: 0 20rpx 50rpx rgba(5,25,19,.18); }
+.word-meta { display: flex; justify-content: space-between; align-items: center; padding: 34rpx 38rpx 0; }
+.level { padding: 10rpx 18rpx; border-radius: 99rpx; color: #2d745f; background: #dcebdc; font-size: 20rpx; font-weight: 800; }
+.sound { width: 58rpx; height: 58rpx; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #174d40; background: #edf3eb; font-size: 28rpx; }
+.word-main { margin-top: 104rpx; padding: 0 30rpx; text-align: center; font-family: Georgia, serif; font-size: 88rpx; line-height: 1.1; font-weight: 700; letter-spacing: -3rpx; color: #16352e; }
+.word-pos { margin-top: 22rpx; text-align: center; color: #98a099; font-size: 25rpx; font-style: italic; }
+.think-hint { display: flex; align-items: center; gap: 18rpx; margin: 118rpx 52rpx 0; color: #abb1ac; font-size: 20rpx; }
+.hint-line { flex: 1; height: 1rpx; background: #e5e4dd; }
+.answer { margin: 76rpx 36rpx 50rpx; padding-top: 34rpx; border-top: 1rpx solid #e5e4dd; }
+.meaning { margin-bottom: 34rpx; font-size: 38rpx; font-weight: 900; color: #16352e; }
+.example { margin-bottom: 24rpx; padding: 25rpx 28rpx; border-radius: 22rpx; background: #f2f5ee; }
+.sentence { font-size: 27rpx; line-height: 1.55; font-weight: 650; }
+.translation { margin-top: 10rpx; color: #78827b; font-size: 23rpx; line-height: 1.5; }
+.actions { height: 150rpx; display: flex; align-items: flex-end; gap: 20rpx; }
+.actions button { flex: 1; height: 100rpx; display: flex; align-items: center; justify-content: center; gap: 12rpx; border-radius: 28rpx; font-size: 29rpx; font-weight: 800; }
+.unknown, .easy { color: #174d40; background: #fffdf8; }
+.know { color: #fff; background: #f17455; box-shadow: 0 14rpx 28rpx rgba(241,116,85,.25); }
+.btn-symbol { font-size: 34rpx; }
+.actions .single { color: #174d40; background: #f4c95d; box-shadow: none; }
+.state { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; text-align: center; }
+.state-mark { width: 130rpx; height: 130rpx; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #dcebdc; color: #174d40; font-size: 62rpx; font-weight: 900; }
+.state-mark.coral { color: #fff; background: #f17455; transform: rotate(45deg); }
+.state-title { margin-top: 44rpx; font-size: 48rpx; font-weight: 900; }
+.state-text { margin-top: 18rpx; color: rgba(255,255,255,.67); font-size: 25rpx; }
+.state-button { width: 420rpx; margin-top: 66rpx; color: #174d40; background: #f4c95d; box-shadow: none; }

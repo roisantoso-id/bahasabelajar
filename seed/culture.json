@@ -1,0 +1,86 @@
+[
+  {
+    "title": "皮影戏 Wayang Kulit",
+    "title_id": "Wayang Kulit",
+    "category": "艺术",
+    "emoji": "🎭",
+    "body": "皮影戏是印尼最负盛名的传统艺术之一，尤其盛行于爪哇与巴厘岛。人偶用水牛皮雕刻、上色，再装上水牛角制的操纵杆。表演者叫 dalang（皮影师），独自一人在白幕后操纵所有人偶、配出每个角色的声音，并指挥乐队——是绝对的灵魂人物。剧目多取材自印度史诗《罗摩衍那》与《摩诃婆罗多》，常通宵演出，由 gamelan（甘美兰打击乐队）伴奏。2003 年，皮影戏被联合国教科文组织列为「人类口头与非物质文化遗产」代表作。",
+    "terms": [
+      { "word": "wayang", "meaning": "皮影/木偶（戏）" },
+      { "word": "dalang", "meaning": "皮影师（操纵者）" },
+      { "word": "kulit", "meaning": "皮、皮革" },
+      { "word": "pertunjukan", "meaning": "演出、表演" },
+      { "word": "cerita", "meaning": "故事" }
+    ]
+  },
+  {
+    "title": "蜡染布 Batik",
+    "title_id": "Batik",
+    "category": "手工艺",
+    "emoji": "🎨",
+    "body": "Batik 是印尼最具标志性的染布工艺：用一种叫 canting 的小铜壶蘸熔蜡，在白布上描出花纹，浸染时上了蜡的地方不着色，如此反复多次，形成层层叠叠的繁复图案。不同地区、不同纹样含义各异，某些图案过去只有王室才能穿。2009 年 batik 被列入教科文组织非遗名录。如今每年 10 月 2 日是「全国蜡染日」(Hari Batik Nasional)，这天印尼人上班上学都会穿 batik。",
+    "terms": [
+      { "word": "batik", "meaning": "蜡染布" },
+      { "word": "kain", "meaning": "布、布料" },
+      { "word": "motif", "meaning": "花纹、图案" },
+      { "word": "lilin", "meaning": "蜡、蜡烛" },
+      { "word": "membatik", "meaning": "制作蜡染（ber-/me- 动词）" }
+    ]
+  },
+  {
+    "title": "印尼炒饭 Nasi Goreng",
+    "title_id": "Nasi Goreng",
+    "category": "饮食",
+    "emoji": "🍚",
+    "body": "Nasi goreng 字面就是「炒饭」，是印尼的国民美食，从路边摊到五星酒店随处可见。做法是把隔夜米饭和 kecap manis（甜酱油）、蒜、红葱、辣椒一起爆炒，常配一个煎蛋、黄瓜片和 krupuk（虾片）。每个家庭、每个摊位都有自己的版本。印尼饮食整体偏重口味，离不开 sambal（辣椒酱）。2011 年 CNN 的一次网络评选中，nasi goreng 曾名列「全球最美味食物」前茅。",
+    "terms": [
+      { "word": "nasi", "meaning": "米饭" },
+      { "word": "goreng", "meaning": "炒、炸" },
+      { "word": "telur", "meaning": "蛋" },
+      { "word": "pedas", "meaning": "辣的" },
+      { "word": "enak", "meaning": "好吃的、美味的" }
+    ]
+  },
+  {
+    "title": "印尼语小史 Bahasa Indonesia",
+    "title_id": "Bahasa Indonesia",
+    "category": "语言",
+    "emoji": "🗣️",
+    "body": "印尼语由马来语规范而来。1928 年的「青年誓言」(Sumpah Pemuda) 确立它为民族共同语，独立后成为官方语言。它用拉丁字母书写，对初学者很友好：没有时态变化、没有阴阳性、没有声调，时间靠 sudah（已经）、sedang（正在）、akan（将要）等词表达。不过印尼全国有 700 多种地方语言(bahasa daerah)，如爪哇语、巽他语，多数人从小就是双语者。印尼语和马来西亚的马来语高度互通，能听懂彼此。",
+    "terms": [
+      { "word": "bahasa", "meaning": "语言" },
+      { "word": "daerah", "meaning": "地区、地方" },
+      { "word": "resmi", "meaning": "官方的、正式的" },
+      { "word": "belajar", "meaning": "学习（ber- 动词）" },
+      { "word": "sehari-hari", "meaning": "日常的" }
+    ]
+  },
+  {
+    "title": "开斋节 Lebaran",
+    "title_id": "Idul Fitri / Lebaran",
+    "category": "节日",
+    "emoji": "🌙",
+    "body": "印尼是世界上穆斯林人口最多的国家，开斋节(Idul Fitri，民间叫 Lebaran)是一年中最重要的节日，标志着斋月(Ramadan)结束。节前人们纷纷「mudik」——返乡与家人团聚，形成全球规模数一数二的人口大迁徙。当天大家互道「Mohon maaf lahir dan batin」（请原谅我身心上的过错），长辈给晚辈发红包(THR)，餐桌上少不了 ketupat（棕叶编织、内填米饭蒸成的糕）。整座城市沉浸在团圆与宽恕的气氛里。",
+    "terms": [
+      { "word": "puasa", "meaning": "斋戒、禁食" },
+      { "word": "Lebaran", "meaning": "开斋节" },
+      { "word": "maaf", "meaning": "原谅、抱歉" },
+      { "word": "mudik", "meaning": "返乡（过节）" },
+      { "word": "keluarga", "meaning": "家庭、家人" }
+    ]
+  },
+  {
+    "title": "互助精神 Gotong Royong",
+    "title_id": "Gotong Royong",
+    "category": "社会",
+    "emoji": "🤝",
+    "body": "Gotong royong 指社区成员不计报酬、齐心协力共同完成一件事，是印尼社会最核心的价值观之一。盖房子、清扫村道、办红白喜事时都能看到它。这个理念被写进国家哲学，开国总统苏加诺曾说，印尼的整个精神可以浓缩成这一个词。即便在高度城市化的今天，邻里之间的 gotong royong 依然在以新的形式延续——比如社区一起应对水灾、互相照应。",
+    "terms": [
+      { "word": "gotong royong", "meaning": "互助合作" },
+      { "word": "bersama", "meaning": "一起、共同（ber- 词）" },
+      { "word": "masyarakat", "meaning": "社会、社区" },
+      { "word": "membantu", "meaning": "帮助（me- 动词，← bantu）" },
+      { "word": "tetangga", "meaning": "邻居" }
+    ]
+  }
+]

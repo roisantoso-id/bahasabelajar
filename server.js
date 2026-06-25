@@ -200,6 +200,22 @@ const routes = {
     return { month, days, streak: getStreak(today()), totalDays };
   },
 
+  'GET /api/grammar'(req, url) {
+    const lesson = url.searchParams.get('lesson');
+    if (lesson) {
+      const rows = db.prepare('SELECT * FROM grammar WHERE lesson = ? ORDER BY id').all(Number(lesson));
+      return rows.map(r => ({ ...r, examples: JSON.parse(r.examples) }));
+    }
+    const rows = db.prepare('SELECT * FROM grammar ORDER BY lesson, id').all();
+    return rows.map(r => ({ ...r, examples: JSON.parse(r.examples) }));
+  },
+
+  'GET /api/grammar/lessons'() {
+    return db.prepare(
+      'SELECT lesson, COUNT(*) AS count FROM grammar GROUP BY lesson ORDER BY lesson'
+    ).all();
+  },
+
   'GET /api/settings'() {
     return getSettings();
   },
