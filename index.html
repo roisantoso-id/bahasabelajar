@@ -458,15 +458,6 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
     </div>
   </div>
 
-  <div class="group-title">发音引擎</div>
-  <div class="setting-card">
-    <div class="setting-row">
-      <div class="setting-icon green">🔊</div>
-      <div class="setting-copy"><div>朗读语音</div><span id="ttsDesc">Qwen 语音（在线，需边缘函数）</span></div>
-      <button class="tts-toggle" id="ttsToggle" onclick="toggleTTS()">Qwen</button>
-    </div>
-  </div>
-
   <div class="group-title">高级 · 数据连接</div>
   <div class="setting-card" style="padding:16px">
     <details>
@@ -1129,20 +1120,9 @@ function webSpeak(text, rate) {
     speechSynthesis.speak(u)
   } catch (e) {}
 }
-let qwenAudio = null
-async function speak(text, rate) {
-  if (!text) return
-  if (ttsEngine !== 'qwen') return webSpeak(text, rate)
-  // Qwen TTS：取音频字节播放，失败回退 Web Speech
-  try {
-    if (qwenAudio) { qwenAudio.pause(); qwenAudio = null }
-    if ('speechSynthesis' in window) speechSynthesis.cancel()
-    const url = await qwenTTSUrl(text)
-    qwenAudio = new Audio(url)
-    await qwenAudio.play()
-  } catch (e) {
-    webSpeak(text, rate)
-  }
+// 发音用系统自带的真印尼语语音（id-ID）。Qwen TTS 不支持印尼语，已停用。
+function speak(text, rate) {
+  webSpeak(text, rate)
 }
 function speakStudyWord() { const w = studyQueue[studyIdx]; if (w) speak(w.word) }
 function speakArticleSentence(i) { if (artCurrent && artCurrent.sentences[i]) speak(artCurrent.sentences[i].id) }
