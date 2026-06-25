@@ -500,21 +500,6 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
     </div>
   </div>
 
-  <div class="group-title">高级 · 数据连接</div>
-  <div class="setting-card" style="padding:16px">
-    <details>
-      <summary style="font-size:13px;font-weight:700;color:var(--muted);cursor:pointer">Supabase 配置（一般不用改）</summary>
-      <div style="margin-top:14px">
-        <div style="font-weight:700;margin-bottom:4px;font-size:13px">Supabase URL</div>
-        <input id="cfgUrl" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:10px;font-size:13px" placeholder="https://xxx.supabase.co">
-        <div style="font-weight:700;margin:14px 0 4px;font-size:13px">Supabase Anon Key</div>
-        <input id="cfgKey" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:10px;font-size:13px" placeholder="eyJ...">
-        <button onclick="saveConfig()" style="width:100%;height:44px;margin-top:12px;border-radius:12px;background:var(--green);color:#fff;font-size:14px;font-weight:800">保存并连接</button>
-        <div id="cfgStatus" style="margin-top:10px;text-align:center;font-size:12px;color:var(--muted)"></div>
-      </div>
-    </details>
-  </div>
-
   <button class="logout-btn" onclick="doLogout()">退出登录</button>
   <div class="app-version">BahasaBelajar · H5 版</div>
 </div>
@@ -652,17 +637,6 @@ async function loadProfileData() {
     if (data) { profile = data }
     else { await sb.from('profiles').insert({}); }
   } catch (e) { /* profiles 表可能还没建，用默认值 */ }
-}
-
-function saveConfig() {
-  SUPABASE_URL = document.getElementById('cfgUrl').value.trim()
-  SUPABASE_KEY = document.getElementById('cfgKey').value.trim()
-  localStorage.setItem('sb_url', SUPABASE_URL)
-  localStorage.setItem('sb_key', SUPABASE_KEY)
-  if (initSupabase()) {
-    document.getElementById('cfgStatus').textContent = '已连接！'
-    loadHome()
-  }
 }
 
 // ===== NAV =====
@@ -1345,8 +1319,6 @@ function loadProfile() {
   document.getElementById('profAvatar').textContent = (name[0] || 'B').toUpperCase()
   document.getElementById('planNew').textContent = profile.daily_new_words || 10
   document.getElementById('planReview').textContent = profile.daily_review_limit || 100
-  document.getElementById('cfgUrl').value = SUPABASE_URL
-  document.getElementById('cfgKey').value = SUPABASE_KEY
   syncTTSToggle()
   loadProfileStats()
 }
@@ -1432,8 +1404,6 @@ async function deleteNote(id) {
 
 // ===== INIT =====
 window.addEventListener('DOMContentLoaded', async () => {
-  document.getElementById('cfgUrl').value = SUPABASE_URL
-  document.getElementById('cfgKey').value = SUPABASE_KEY
   if (!initSupabase()) { enterAuth(); return }
   try {
     const { data: { session } } = await sb.auth.getSession()
