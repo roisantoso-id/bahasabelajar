@@ -17,7 +17,8 @@
    - **猎奇/病毒信源**（适合猎奇社会批次）：`tribunnews.com`、`kumparan.com`、`idntimes.com`、`merdeka.com`、`suara.com`、`viva.co.id`
    - 注意：bbc.com 不可访问。必要时 WebFetch 取 1-2 篇原文，校准地道的报刊语体与真实数据。
 2. 据此写 2 篇文章，每篇 14-16 句。**事实要准**，数字按报道写，不编造具体引语。
-   - 格式：`{title(印尼语), title_zh, level:3, category:"时政"/"经济"/"科技"/"猎奇", summary, sentences:[{id:印尼语句, zh:中文, note:词缀/语法注释}]}`
+   - 格式：`{title(印尼语), title_zh, level:3, category:"时政"/"经济"/"科技"/"猎奇", image_url, summary, sentences:[{id:印尼语句, zh:中文, note:词缀/语法注释}]}`
+   - **`image_url`（封面图）**：用 WebFetch 取原文页面的 `og:image` meta 标签 content URL 填进去（前端列表/详情会显示）。取不到就省略该字段，别编造。
    - **猎奇批次选题方向**：印尼奇闻趣事（鳄鱼/火山/神话）、病毒社媒事件、奇特饮食/风俗、野生动物入侵、名人搞笑糗事、印尼版「世界之最」等，要真实有趣、语言地道。
    - 注释专挑词缀（拆词根），把阅读和语法模块挂钩。
 3. 写到 `seed/_tmp-articles.json`，上传：`node scripts/add-articles.js seed/_tmp-articles.json`（按标题去重）。

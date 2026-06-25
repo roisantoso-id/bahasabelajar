@@ -9,6 +9,11 @@ const URL = 'https://bzdelpmcewjdvmgyafux.supabase.co'
 const ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ6ZGVscG1jZXdqZHZtZ3lhZnV4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzMjY1MDksImV4cCI6MjA4ODkwMjUwOX0.x_D0VGGmXCY9rueAh0lV4f7r9wOJIGCHs19w5S2BNpg'
 function loadKey() {
   if (process.env.SUPABASE_SERVICE_KEY) return process.env.SUPABASE_SERVICE_KEY
+  try {
+    const env = require('fs').readFileSync(require('path').join(__dirname, '..', '.env'), 'utf8')
+    const m = env.match(/^SUPABASE_SERVICE_KEY=(.+)$/m)
+    if (m) return m[1].trim()
+  } catch (e) {}
   try { return require('fs').readFileSync(require('path').join(__dirname, '..', 'supabase', 'service-key'), 'utf8').trim() } catch (e) {}
   return ANON
 }

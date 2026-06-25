@@ -10,8 +10,8 @@
     },
     {
       "name": "h5",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "4173", "--directory", "h5"],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["h5/serve.js"],
       "port": 4173,
       "autoPort": true
     }
