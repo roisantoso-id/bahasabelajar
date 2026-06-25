@@ -117,6 +117,7 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .wl-info{flex:1;margin-left:12px;min-width:0}
 .wl-word{font-family:'Lora',Georgia,serif;font-size:15px;font-weight:800}
 .wl-pos{margin-left:6px;color:#a0a59f;font-size:11px;font-style:italic}
+.wl-topic{margin-left:6px;font-size:9px;font-weight:700;padding:1px 7px;border-radius:99px;background:var(--mint);color:var(--green2);vertical-align:middle}
 .wl-meaning{margin-top:3px;font-size:12px;color:#747e77;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .wl-examples{margin:10px 0 0 48px;padding-top:10px;border-top:1px dashed #ddd}
 .list-end{text-align:center;padding:20px;font-size:11px;color:var(--muted)}
@@ -463,8 +464,9 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ba19c" stroke-width="2.5" stroke-linecap="round" style="flex:none;margin-right:8px"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
     <input id="searchInput" placeholder="搜索单词或释义" oninput="searchWords()">
   </div>
-  <div class="filter-row">
-    <button class="filter-btn active" data-level="" onclick="filterLevel(this)">全部</button>
+  <div id="topicFilter" class="filter-row" style="margin-bottom:8px"></div>
+  <div id="levelFilter" class="filter-row">
+    <button class="filter-btn active" data-level="" onclick="filterLevel(this)">全部难度</button>
     <button class="filter-btn" data-level="1" onclick="filterLevel(this)">入门</button>
     <button class="filter-btn" data-level="2" onclick="filterLevel(this)">初级</button>
     <button class="filter-btn" data-level="3" onclick="filterLevel(this)">中级</button>
@@ -789,7 +791,7 @@ function showView(name, tabEl) {
   document.getElementById('tabBar').style.display = (name === 'auth') ? 'none' : ''
   if (name !== 'auth') window.scrollTo(0, 0)
   if (name === 'home') loadHome()
-  if (name === 'words') { wordsOffset = 0; loadWords() }
+  if (name === 'words') { wordsOffset = 0; buildTopicChips(); loadWords() }
   if (name === 'articles') loadArticles()
   if (name === 'culture') loadCulture()
   if (name === 'calendar') loadCalendar()
@@ -1195,16 +1197,50 @@ function toggleRule(i) {
 function closeGrammar() { showView('home', document.querySelector('.tab')) }
 
 // ===== WORDS =====
-let wordsOffset = 0, currentLevel = '', wordItems = []
+let wordsOffset = 0, currentLevel = '', currentTopic = '', wordItems = []
+// 领域顺序与 scripts/classify-topic.js 的 TOPICS 一致
+const WORD_TOPICS = ['人称指代','数字时间','家庭人物','身体健康','饮食','居家物品','交通出行','自然地理','教育语言','工作商务','社会时政','文娱科技','问候寒暄','动作行为','性质状态','虚词语法','其他']
+
+async function buildTopicChips() {
+  const row = document.getElementById('topicFilter')
+  // 探测库里已有哪些领域；列不存在或全空（未跑分类 SQL）则隐藏整行，优雅降级
+  let present = []
+  try {
+    const { data, error } = await sb.from('words').select('topic').limit(2000)
+    if (error) throw error
+    present = [...new Set((data || []).map(r => r.topic).filter(Boolean))]
+  } catch (e) { present = [] }
+  if (!present.length) { row.innerHTML = ''; row.style.display = 'none'; return }
+  row.style.display = ''
+  const order = WORD_TOPICS.filter(t => present.includes(t)).concat(present.filter(t => !WORD_TOPICS.includes(t)))
+  const chips = [`<button class="filter-btn${currentTopic ? '' : ' active'}" data-topic="" onclick="filterTopic(this)">全部领域</button>`]
+    .concat(order.map(t => `<button class="filter-btn${currentTopic === t ? ' active' : ''}" data-topic="${esc(t)}" onclick="filterTopic(this)">${esc(t)}</button>`))
+  row.innerHTML = chips.join('')
+}
+function filterTopic(btn) {
+  document.querySelectorAll('#topicFilter .filter-btn').forEach(b => b.classList.remove('active'))
+  btn.classList.add('active')
+  currentTopic = btn.dataset.topic || ''
+  loadWords()
+}
 
 async function loadWords() {
   if (!sb) return
+  // 不在服务端 order by topic：库可能还没 topic 列，会让整个查询报错。改为客户端按领域分组排序。
   let q = sb.from('words').select('*, learning(stage,status)').order('level').order('id')
   if (currentLevel) q = q.eq('level', Number(currentLevel))
+  if (currentTopic) q = q.eq('topic', currentTopic)   // 仅在已有领域 chips 时触发，那时列必然存在
   const search = document.getElementById('searchInput').value.trim().replace(/[,()%*:]/g, '')
   if (search) q = q.or(`word.ilike.%${search}%,meaning.ilike.%${search}%`)
-  const {data, count} = await q.range(0, 99)
+  const {data, count} = await q.range(0, 599)
   wordItems = data || []
+  // 没选具体领域时，按领域顺序分组排序（让「全部」也按领域聚拢，而非乱序）
+  if (!currentTopic) {
+    wordItems.sort((a, b) => {
+      const ia = WORD_TOPICS.indexOf(a.topic), ib = WORD_TOPICS.indexOf(b.topic)
+      return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib)
+    })
+  }
   renderWords()
 }
 
@@ -1218,7 +1254,7 @@ function renderWords() {
       <div class="wl-line">
         <div class="wl-letter">${esc((w.word[0]||'').toUpperCase())}</div>
         <div class="wl-info">
-          <span class="wl-word">${esc(w.word)}</span><span class="wl-pos">${esc(w.pos)}</span>
+          <span class="wl-word">${esc(w.word)}</span><span class="wl-pos">${esc(w.pos)}</span>${w.topic ? `<span class="wl-topic">${esc(w.topic)}</span>` : ''}
           <div class="wl-meaning">${esc(w.meaning)}</div>
         </div>
         <button class="speak-btn wl-speak" onclick="event.stopPropagation(); speakListWord(${i})">🔊</button>
@@ -1232,7 +1268,7 @@ function renderWords() {
 
 function searchWords() { loadWords() }
 function filterLevel(el) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'))
+  document.querySelectorAll('#levelFilter .filter-btn').forEach(b => b.classList.remove('active'))
   el.classList.add('active')
   currentLevel = el.dataset.level
   loadWords()
