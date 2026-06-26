@@ -297,6 +297,8 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .auth-btn:disabled{opacity:.6}
 .auth-msg{min-height:18px;margin-top:12px;font-size:13px;font-weight:600}
 .auth-msg.err{color:#c0392b}.auth-msg.ok{color:var(--green2)}
+.auth-remember{display:flex;align-items:center;gap:6px;margin:8px 0 2px;font-size:13px;color:var(--muted);cursor:pointer;justify-content:flex-start}
+.auth-remember input{width:16px;height:16px;accent-color:var(--green);cursor:pointer}
 .auth-toggle{margin-top:18px;font-size:13px;color:var(--muted)}
 .auth-toggle a{color:var(--green);font-weight:800;cursor:pointer}
 /* ===== CALENDAR ===== */
@@ -732,25 +734,30 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 #v-leaderboard .cal-title{margin:4px 16px 16px}
 .lb-tabs{display:flex;gap:8px;margin:0 16px 16px;background:var(--card-bg,#f5f5f5);border-radius:12px;padding:4px}
 .lb-tab{flex:1;text-align:center;padding:8px 0;border-radius:10px;font-size:14px;font-weight:600;color:#888;background:none;border:none;cursor:pointer;transition:all .2s}
-.lb-tab.active{background:var(--main);color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.lb-tab.active{background:var(--green);color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.1)}
 [data-theme="dark"] .lb-tabs{background:rgba(255,255,255,.06)}
 
 .lb-list{margin:0 16px}
-.lb-row{display:flex;align-items:center;gap:12px;padding:14px 12px;border-radius:14px;margin-bottom:6px;background:var(--card-bg,#fff);transition:background .2s}
-.lb-row.me{background:rgba(46,204,113,.08);border:1.5px solid rgba(46,204,113,.2)}
-.lb-rank{width:28px;text-align:center;font-weight:700;font-size:15px;color:#888;flex-shrink:0}
-.lb-rank.gold{color:#f5a623;font-size:20px}.lb-rank.silver{color:#aab2bd;font-size:20px}.lb-rank.bronze{color:#cd7f32;font-size:20px}
-.lb-avatar{width:38px;height:38px;border-radius:50%;background:var(--main);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0}
+.lb-row{display:flex;align-items:center;gap:12px;padding:14px 12px;border-radius:14px;margin-bottom:6px;background:rgba(255,255,255,.85);box-shadow:0 1px 4px rgba(0,0,0,.04);transition:background .2s}
+.lb-row.me{background:rgba(46,204,113,.1);border:1.5px solid rgba(46,204,113,.25)}
+.lb-rank{width:28px;text-align:center;font-weight:800;font-size:15px;color:var(--ink);flex-shrink:0}
+.lb-rank.gold{color:#e6a817;font-size:20px}.lb-rank.silver{color:#8a929a;font-size:20px}.lb-rank.bronze{color:#b5651d;font-size:20px}
+.lb-avatar{width:38px;height:38px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0}
 .lb-info{flex:1;min-width:0}
-.lb-name{font-weight:600;font-size:14px;color:var(--text,#333);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.lb-sub{font-size:12px;color:#999;margin-top:2px}
-.lb-val{font-weight:700;font-size:16px;color:var(--main);text-align:right;flex-shrink:0}
-.lb-unit{font-size:11px;color:#999;font-weight:400;margin-left:2px}
-.lb-empty{text-align:center;color:#999;padding:40px 0;font-size:14px}
-.lb-me-section{margin:20px 16px 0;padding-top:16px;border-top:1px solid rgba(0,0,0,.06)}
-.lb-me-title{font-size:12px;color:#999;text-align:center;margin-bottom:8px}
-[data-theme="dark"] .lb-row{background:rgba(255,255,255,.04)}
-[data-theme="dark"] .lb-row.me{background:rgba(46,204,113,.06);border-color:rgba(46,204,113,.15)}
+.lb-name{font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.lb-val{font-weight:800;font-size:17px;color:var(--green);text-align:right;flex-shrink:0}
+.lb-unit{font-size:11px;color:var(--muted);font-weight:500;margin-left:2px}
+.lb-empty{text-align:center;color:var(--muted);padding:40px 0;font-size:14px}
+.lb-me-section{margin:20px 16px 0;padding-top:16px;border-top:1px solid rgba(0,0,0,.08)}
+.lb-me-title{font-size:12px;color:var(--muted);text-align:center;margin-bottom:8px}
+[data-theme="dark"] .lb-row{background:rgba(255,255,255,.07);box-shadow:none}
+[data-theme="dark"] .lb-row.me{background:rgba(46,204,113,.1);border-color:rgba(46,204,113,.2)}
+[data-theme="dark"] .lb-name{color:#e0ece6}
+[data-theme="dark"] .lb-rank{color:#c0d0c8}
+[data-theme="dark"] .lb-val{color:#5cc99a}
+[data-theme="dark"] .lb-sub,[data-theme="dark"] .lb-unit,[data-theme="dark"] .lb-me-title{color:#8aa89a}
+[data-theme="dark"] .lb-empty{color:#8aa89a}
 </style>
 <script>(function(){var p=localStorage.getItem('dark_mode')||'auto';if(p==='on'||(p==='auto'&&matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.setAttribute('data-theme','dark')})()</script>
 </head>
@@ -771,6 +778,8 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
     <p class="auth-sub" id="authSub">登录，开始你的印尼语之旅</p>
     <input id="authEmail" class="auth-input" type="email" placeholder="邮箱" autocomplete="email">
     <input id="authPass" class="auth-input" type="password" placeholder="密码（至少 6 位）" autocomplete="current-password">
+    <input id="authName" class="auth-input" type="text" placeholder="昵称（排行榜显示名）" autocomplete="nickname" style="display:none">
+    <label class="auth-remember" id="authRememberWrap"><input type="checkbox" id="authRemember" checked> 记住我</label>
     <button class="auth-btn" id="authSubmit" onclick="doAuth()">登录</button>
     <div class="auth-msg" id="authMsg"></div>
     <div class="auth-toggle">
@@ -1179,6 +1188,8 @@ function toggleAuthMode() {
   document.getElementById('authSub').textContent = authMode === 'login' ? '登录，开始你的印尼语之旅' : '注册一个新账号'
   document.getElementById('authToggleText').textContent = authMode === 'login' ? '还没有账号？' : '已经有账号了？'
   document.getElementById('authToggleLink').textContent = authMode === 'login' ? '注册一个' : '去登录'
+  document.getElementById('authName').style.display = authMode === 'signup' ? '' : 'none'
+  document.getElementById('authRememberWrap').style.display = authMode === 'login' ? '' : 'none'
   setAuthMsg('')
 }
 function setAuthMsg(text, ok) {
@@ -1191,18 +1202,31 @@ async function doAuth() {
   const email = document.getElementById('authEmail').value.trim()
   const password = document.getElementById('authPass').value
   if (!email || password.length < 6) return setAuthMsg('请输入邮箱和至少 6 位密码')
+  const nameInput = document.getElementById('authName')
+  const displayName = nameInput.value.trim()
+  if (authMode === 'signup' && !displayName) return setAuthMsg('请填写昵称')
   const btn = document.getElementById('authSubmit'); btn.disabled = true
   setAuthMsg(authMode === 'login' ? '登录中…' : '注册中…', true)
   try {
     if (authMode === 'login') {
       const { data, error } = await sb.auth.signInWithPassword({ email, password })
       if (error) throw error
+      if (document.getElementById('authRemember').checked) {
+        localStorage.setItem('saved_email', email)
+      } else {
+        localStorage.removeItem('saved_email')
+      }
       onLoggedIn(data.user)
     } else {
       const { data, error } = await sb.auth.signUp({ email, password })
       if (error) throw error
-      if (data.session) { onLoggedIn(data.user) }
-      else { setAuthMsg('注册成功，请去邮箱确认后再登录（或在 Supabase 后台关闭邮箱确认）', true); authMode = 'login' }
+      if (data.session) {
+        await sb.from('profiles').upsert({ user_id: data.user.id, display_name: displayName }, { onConflict: 'user_id' })
+        onLoggedIn(data.user)
+      } else {
+        setAuthMsg('注册成功，请去邮箱确认后再登录（或在 Supabase 后台关闭邮箱确认）', true)
+        authMode = 'login'
+      }
     }
   } catch (e) {
     setAuthMsg(translateAuthErr(e.message || '出错了'))
@@ -1230,6 +1254,13 @@ async function doLogout() {
 function enterAuth() {
   authMode = 'login'
   document.getElementById('authSubmit').textContent = '登录'
+  document.getElementById('authName').style.display = 'none'
+  document.getElementById('authRememberWrap').style.display = ''
+  const saved = localStorage.getItem('saved_email')
+  if (saved) {
+    document.getElementById('authEmail').value = saved
+    document.getElementById('authRemember').checked = true
+  }
   showView('auth')
 }
 async function loadProfileData() {
@@ -3570,6 +3601,7 @@ function renderLbTab() {
   const uid = currentUser?.id
   const medals = ['🥇', '🥈', '🥉']
   let myIdx = -1
+  let anonCount = 0
 
   let html = '<div class="lb-list">'
   list.forEach((item, i) => {
@@ -3578,8 +3610,10 @@ function renderLbTab() {
     if (isMe) myIdx = i
     const medal = medals[i] || rank
     const rankClass = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : ''
-    const initial = (item.name || '?')[0].toUpperCase()
-    const name = isMe ? (item.name || '我') + ' (我)' : (item.name || '同学')
+    const hasName = item.name && item.name !== '同学'
+    const displayName = hasName ? item.name : '同学' + (++anonCount)
+    const initial = displayName[0].toUpperCase()
+    const name = isMe ? (hasName ? item.name : '我') + ' (我)' : displayName
     let val = '', unit = '', sub = ''
     if (lbTab === 'exam') {
       val = (item.estimate || 0).toLocaleString()
