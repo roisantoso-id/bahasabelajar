@@ -2492,32 +2492,42 @@ const VT_LEVEL_COPY = {
   A1: {
     headline: '刚开机的小可爱',
     line1: '你已经不是空白页了，至少能看懂一点点。',
-    line2: '别急着装大神，先把“能认”和“会用”分开。',
-    roast: '现在属于“点菜能说个大概，但别让我考你”。',
+    line2: '别急着装大神，先把”能认”和”会用”分开。',
+    roast: '现在属于”点菜能说个大概，但别让我考你”。',
+    id_quote: '”Halo” sama “Terima kasih” udah mentok.',
+    zh_roast: '除了「你好」和「谢谢」，剩下全靠比划。别问我 nasi goreng 以外的菜名。',
   },
   A2: {
     headline: '开始像样了',
     line1: '你已经有点印尼语味儿了，开始能顺着题目往下走。',
-    line2: '如果继续这个速度，下一次海报会更像“我真的会”。',
+    line2: '如果继续这个速度，下一次海报会更像”我真的会”。',
     roast: '不是路人了，但也还没到本地人随便乱认的程度。',
+    id_quote: 'Udah bisa pesan nasi goreng tanpa panik.',
+    zh_roast: '点菜不用指着图片了，进步巨大。但超过三轮对话就开始冒汗。',
   },
   B1: {
     headline: '已经会点了',
-    line1: '你现在是“能聊两句，而且不太像外星人”的状态。',
+    line1: '你现在是”能聊两句，而且不太像外星人”的状态。',
     line2: '再补一点词汇和结构，海报就能开始吹了。',
     roast: '已经可以在饭桌上假装自己很懂了。',
+    id_quote: 'Lumayan lah, ngobrol tanpa Google Translate.',
+    zh_roast: '已经能在饭桌上假装听懂了，演技越来越自然，偶尔还能插一嘴。',
   },
   B2: {
     headline: '像个本地人',
-    line1: '你这已经不是“知道答案”，而是“差不多真的会用”。',
+    line1: '你这已经不是”知道答案”，而是”差不多真的会用”。',
     line2: '朋友看到这分数，大概率会先沉默三秒。',
-    roast: '再练一点，就快到“别问，问就是我会”了。',
+    roast: '再练一点，就快到”别问，问就是我会”了。',
+    id_quote: 'Orang Indo kira kamu keturunan Tionghoa lokal.',
+    zh_roast: '印尼人以为你是本地华裔，你微笑着没有否认。砍价已经比导游还狠。',
   },
   'C1+': {
     headline: '嘴比脑子还快',
     line1: '你现在属于那种会把印尼语说得很自然的人。',
     line2: '这个分数已经不是炫耀，是提醒大家别小看你。',
     roast: '这不是会一点，这是已经能把场子接住了。',
+    id_quote: 'Kamu harusnya ngajar guru bahasa kami.',
+    zh_roast: '建议直接去当印尼语老师，别浪费这份天赋。说梦话估计都是印尼语。',
   },
 }
 
@@ -3092,171 +3102,158 @@ function vtDrawCoverImage(ctx, img, x, y, w, h) {
 }
 
 async function vtBuildSharePoster(result) {
-  const width = 1080
-  const height = 1440
+  const W = 1080, H = 1440
   const canvas = document.createElement('canvas')
-  canvas.width = width
-  canvas.height = height
+  canvas.width = W; canvas.height = H
   const ctx = canvas.getContext('2d')
+  const SF = 'system-ui,-apple-system,BlinkMacSystemFont,sans-serif'
   const name = vtShareName()
+  const copy = VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']
   const art = await vtLoadImage(vtLevelImage(result.level.code))
   const logo = await vtLoadImage('img/logo.png')
 
-  const bg = ctx.createLinearGradient(0, 0, 0, height)
-  bg.addColorStop(0, '#fff9ef')
-  bg.addColorStop(0.58, '#fff0d8')
-  bg.addColorStop(1, '#fffdf9')
-  ctx.fillStyle = bg
-  ctx.fillRect(0, 0, width, height)
-
-  const confetti = [
-    [90, 120, 18, '#ff6f61'], [164, 170, 10, '#ffb347'], [240, 86, 14, '#67c6a8'],
-    [860, 92, 16, '#ff8c47'], [940, 200, 9, '#7aa9ff'], [780, 286, 14, '#ffc94d'],
-    [156, 1170, 16, '#ff8c47'], [920, 1130, 12, '#67c6a8'], [840, 1240, 10, '#ff6f61'],
-  ]
-  for (const [x, y, r, c] of confetti) {
-    ctx.fillStyle = c
-    ctx.beginPath()
-    ctx.arc(x, y, r, 0, Math.PI * 2)
-    ctx.fill()
+  const palettes = {
+    A1:  { bg1:'#e8e4f0', bg2:'#f5f0fa', accent:'#6b5b95', dark:'#3a2d5a' },
+    A2:  { bg1:'#fef3dc', bg2:'#fffaf0', accent:'#c48a00', dark:'#6b4a00' },
+    B1:  { bg1:'#ddf0e8', bg2:'#f0faf5', accent:'#1f7a5c', dark:'#0d3327' },
+    B2:  { bg1:'#ffe8d6', bg2:'#fff5ed', accent:'#d4652a', dark:'#7a3008' },
+    'C1+':{ bg1:'#f0e0f8', bg2:'#faf0ff', accent:'#7b2db8', dark:'#3a0d6a' },
   }
+  const pal = palettes[result.level.code] || palettes['C1+']
 
-  ctx.fillStyle = 'rgba(255,255,255,.75)'
-  ctx.beginPath(); ctx.arc(140, 250, 88, 0, Math.PI * 2); ctx.fill()
-  ctx.beginPath(); ctx.arc(920, 320, 122, 0, Math.PI * 2); ctx.fill()
+  // --- background ---
+  const bg = ctx.createLinearGradient(0, 0, 0, H)
+  bg.addColorStop(0, pal.bg1); bg.addColorStop(0.5, pal.bg2); bg.addColorStop(1, '#fffdf8')
+  ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H)
 
+  // decorative circles
+  ctx.globalAlpha = 0.12
+  ctx.fillStyle = pal.accent
+  ctx.beginPath(); ctx.arc(100, 100, 120, 0, Math.PI*2); ctx.fill()
+  ctx.beginPath(); ctx.arc(980, 180, 80, 0, Math.PI*2); ctx.fill()
+  ctx.beginPath(); ctx.arc(160, 1380, 90, 0, Math.PI*2); ctx.fill()
+  ctx.beginPath(); ctx.arc(950, 1350, 60, 0, Math.PI*2); ctx.fill()
+  ctx.globalAlpha = 1
+
+  // --- main card ---
   ctx.save()
-  vtRoundRectPath(ctx, 62, 70, 956, 1298, 44)
-  ctx.fillStyle = 'rgba(255,255,255,.82)'
+  vtRoundRectPath(ctx, 54, 54, W-108, H-108, 48)
+  ctx.fillStyle = 'rgba(255,255,255,.88)'
   ctx.fill()
   ctx.restore()
 
+  // --- header: logo + “BIPA 测评” ---
+  if (logo && logo.width) {
+    ctx.save()
+    vtRoundRectPath(ctx, 100, 90, 64, 64, 16)
+    ctx.clip()
+    ctx.drawImage(logo, 100, 90, 64, 64)
+    ctx.restore()
+  }
+  ctx.fillStyle = pal.dark
+  ctx.font = `900 28px ${SF}`
+  ctx.textAlign = 'left'; ctx.textBaseline = 'middle'
+  ctx.fillText('BahasaBelajar', 180, 122)
+  ctx.fillStyle = pal.accent
+  ctx.font = `800 20px ${SF}`
+  ctx.fillText('BIPA 模拟测评', 180, 152)
+
+  // --- level art (big, centered) ---
+  const artW = 820, artH = 420, artX = (W-artW)/2, artY = 200
   ctx.save()
-  vtRoundRectPath(ctx, 92, 100, 896, 1240, 36)
-  ctx.fillStyle = 'rgba(255,248,236,.95)'
+  vtRoundRectPath(ctx, artX, artY, artW, artH, 36)
+  ctx.fillStyle = '#f8f4ee'
   ctx.fill()
+  ctx.clip()
+  if (art && art.width) vtDrawCoverImage(ctx, art, artX, artY, artW, artH)
+  ctx.restore()
+  ctx.strokeStyle = 'rgba(255,255,255,.9)'; ctx.lineWidth = 8
+  vtRoundRectPath(ctx, artX, artY, artW, artH, 36); ctx.stroke()
+
+  // level badge overlay on art
+  const badgeW = 180, badgeH = 70
+  const badgeX = artX + artW - badgeW - 16, badgeY = artY + artH - badgeH - 16
+  ctx.save()
+  vtRoundRectPath(ctx, badgeX, badgeY, badgeW, badgeH, 20)
+  ctx.fillStyle = pal.accent; ctx.fill()
+  ctx.restore()
+  ctx.fillStyle = '#fff'
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle'
+  ctx.font = `1000 30px ${SF}`
+  ctx.fillText(result.level.code, badgeX + badgeW/2, badgeY + 26)
+  ctx.font = `800 18px ${SF}`
+  ctx.fillText(result.level.name, badgeX + badgeW/2, badgeY + 52)
+
+  // --- big number + user name ---
+  const numY = 680
+  ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic'
+  ctx.fillStyle = pal.dark
+  ctx.font = `1000 96px Georgia,${SF}`
+  ctx.fillText(`≈ ${result.estimate.toLocaleString()}`, W/2, numY)
+  ctx.fillStyle = '#8a7e6c'
+  ctx.font = `700 28px ${SF}`
+  ctx.fillText(`词汇覆盖量`, W/2, numY + 38)
+
+  ctx.fillStyle = pal.accent
+  ctx.font = `900 36px ${SF}`
+  ctx.fillText(`${name} 的印尼语水平：`, W/2, numY + 100)
+  ctx.fillStyle = pal.dark
+  ctx.font = `1000 52px ${SF}`
+  ctx.fillText(`「${copy.headline}」`, W/2, numY + 162)
+
+  // --- bilingual roast box ---
+  const boxY = 910, boxH = 230
+  ctx.save()
+  vtRoundRectPath(ctx, 90, boxY, W-180, boxH, 32)
+  ctx.fillStyle = pal.dark; ctx.fill()
   ctx.restore()
 
-  ctx.fillStyle = 'rgba(255,255,255,.92)'
-  vtRoundRectPath(ctx, 128, 136, 260, 58, 29)
-  ctx.fill()
-  ctx.fillStyle = '#d85d30'
-  ctx.font = '900 24px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
-  ctx.textAlign = 'center'
-  ctx.textBaseline = 'middle'
-  ctx.fillText('BIPA 测评', 258, 165)
-
-  ctx.fillStyle = '#201815'
+  // Bahasa line
+  ctx.fillStyle = 'rgba(255,255,255,.5)'
+  ctx.font = `700 18px ${SF}`
   ctx.textAlign = 'left'
-  ctx.textBaseline = 'alphabetic'
-  ctx.font = '900 40px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
-  ctx.fillText(`恭喜 ${name}`, 128, 265)
-  ctx.font = '1000 64px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
-  ctx.fillStyle = '#ff5f55'
-  ctx.fillText('Bahasa Jago!', 128, 338)
-  ctx.fillStyle = '#5d513f'
-  ctx.font = '800 28px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
-  ctx.fillText(`现在是 ${result.level.code} · ${result.level.name}`, 128, 390)
+  ctx.fillText('🇮🇩 Bahasa', 134, boxY + 40)
+  ctx.fillStyle = 'rgba(255,255,255,.92)'
+  ctx.font = `italic 700 24px Georgia,${SF}`
+  vtWrapText(ctx, copy.id_quote, 134, boxY + 74, W-300, 32, 2)
 
-  const chipY = 450
+  // Chinese roast
+  ctx.fillStyle = 'rgba(255,255,255,.5)'
+  ctx.font = `700 18px ${SF}`
+  ctx.fillText('🇨🇳 翻译', 134, boxY + 136)
+  ctx.fillStyle = '#ffd66c'
+  ctx.font = `900 24px ${SF}`
+  vtWrapText(ctx, copy.zh_roast, 134, boxY + 170, W-300, 32, 2)
+
+  // --- score chips ---
+  const chipY = 1172
   const chipDefs = [
-    ['词汇', `${Math.round(result.word.rate * 100)}%`, '#ff8c47'],
-    ['句子', `${Math.round(result.sentence.rate * 100)}%`, '#f0b93a'],
-    ['阅读', `${Math.round(result.reading.rate * 100)}%`, '#67c6a8'],
+    ['单词 Word', `${Math.round(result.word.rate*100)}%`, '#ff8c47'],
+    ['句子 Kalimat', `${Math.round(result.sentence.rate*100)}%`, '#f0b93a'],
+    ['阅读 Bacaan', `${Math.round(result.reading.rate*100)}%`, '#67c6a8'],
   ]
-  let chipX = 128
+  let chipX = 100
+  const chipW = (W - 200 - 30) / 3
   for (const [label, value, color] of chipDefs) {
     ctx.fillStyle = color
-    vtRoundRectPath(ctx, chipX, chipY, 168, 72, 22)
-    ctx.fill()
+    vtRoundRectPath(ctx, chipX, chipY, chipW, 80, 20); ctx.fill()
     ctx.fillStyle = '#fff'
-    ctx.textAlign = 'center'
-    ctx.textBaseline = 'alphabetic'
-    ctx.font = '900 24px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
-    ctx.fillText(label, chipX + 84, chipY + 31)
-    ctx.font = '900 22px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
-    ctx.fillText(value, chipX + 84, chipY + 58)
-    chipX += 188
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle'
+    ctx.font = `800 19px ${SF}`
+    ctx.fillText(label, chipX + chipW/2, chipY + 28)
+    ctx.font = `1000 26px ${SF}`
+    ctx.fillText(value, chipX + chipW/2, chipY + 58)
+    chipX += chipW + 15
   }
 
-  ctx.fillStyle = '#6e5c39'
-  ctx.font = '700 22px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
-  ctx.textAlign = 'left'
-  ctx.fillText('你现在的气势：有点像已经会跟本地人点饭的人。', 128, 574)
-  ctx.font = '800 20px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
-  ctx.fillStyle = '#8a6a2e'
-  ctx.fillText('别害羞，直接发出去，让朋友看看谁更会印尼语。', 128, 612)
-
-  ctx.save()
-  vtRoundRectPath(ctx, 128, 660, 824, 286, 40)
-  ctx.fillStyle = '#fff'
-  ctx.fill()
-  ctx.clip()
-  vtDrawCoverImage(ctx, art, 128, 660, 824, 286)
-  ctx.restore()
-  ctx.strokeStyle = 'rgba(255,255,255,.9)'
-  ctx.lineWidth = 10
-  vtRoundRectPath(ctx, 128, 660, 824, 286, 40)
-  ctx.stroke()
-
-  ctx.save()
-  vtRoundRectPath(ctx, 620, 980, 332, 150, 32)
-  ctx.fillStyle = 'rgba(255,255,255,.78)'
-  ctx.fill()
-  ctx.restore()
-  ctx.fillStyle = '#1f5d4d'
-  ctx.textAlign = 'center'
-  ctx.font = '1000 30px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
-  ctx.fillText((VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']).headline, 786, 1042)
-  ctx.fillStyle = '#6d5d46'
-  ctx.font = '700 18px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
-  vtWrapText(ctx, vtShareText(result), 644, 1080, 288, 26, 3)
-
-  ctx.save()
-  vtRoundRectPath(ctx, 128, 992, 452, 236, 34)
-  ctx.fillStyle = 'rgba(255,255,255,.78)'
-  ctx.fill()
-  ctx.restore()
-  ctx.fillStyle = '#1f5d4d'
-  ctx.textAlign = 'left'
-  ctx.font = '900 30px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
-  ctx.fillText('小结不严肃，成绩很认真', 164, 1046)
-  ctx.fillStyle = '#6d5d46'
-  ctx.font = '700 21px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
-  vtWrapText(ctx, (VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']).line1, 164, 1090, 360, 30, 3)
-  vtWrapText(ctx, (VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']).line2, 164, 1140, 360, 30, 3)
-
-  ctx.save()
-  vtRoundRectPath(ctx, 128, 980, 820, 188, 36)
-  ctx.fillStyle = '#1d5a4b'
-  ctx.fill()
-  ctx.restore()
-  ctx.fillStyle = '#fff'
-  ctx.font = '900 28px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
-  ctx.fillText(`“${(VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']).headline}。”`, 164, 1054)
-  ctx.font = '700 21px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
-  ctx.fillStyle = 'rgba(255,255,255,.86)'
-  vtWrapText(ctx, (VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']).roast, 164, 1100, 740, 30, 3)
-  ctx.fillStyle = '#ffd66c'
-  ctx.font = '900 22px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
-  ctx.fillText('现在就可以去炫耀一下。', 164, 1188)
-
-  ctx.save()
-  vtRoundRectPath(ctx, 770, 1188, 120, 120, 30)
-  ctx.fillStyle = '#fff'
-  ctx.fill()
-  ctx.clip()
-  vtDrawCoverImage(ctx, logo, 770, 1188, 120, 120)
-  ctx.restore()
-  ctx.strokeStyle = 'rgba(255,255,255,.6)'
-  ctx.lineWidth = 8
-  vtRoundRectPath(ctx, 770, 1188, 120, 120, 30)
-  ctx.stroke()
-
-  ctx.fillStyle = '#7b6950'
-  ctx.font = '700 16px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
-  ctx.textAlign = 'center'
-  ctx.fillText('BahasaBelajar · 测评海报', 540, 1316)
+  // --- CTA ---
+  ctx.fillStyle = pal.accent
+  ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic'
+  ctx.font = `900 30px ${SF}`
+  ctx.fillText('你也来试试，看你有多 Jago？👇', W/2, 1320)
+  ctx.fillStyle = '#b0a594'
+  ctx.font = `700 20px ${SF}`
+  ctx.fillText('roisantoso-id.github.io/bahasabelajar', W/2, 1358)
 
   return await new Promise(resolve => {
     canvas.toBlob(blob => resolve(blob), 'image/png', 1)
