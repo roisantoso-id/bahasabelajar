@@ -794,7 +794,7 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
     <div class="vocab-banner-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6a9 3 0 0 0 18 0a9 3 0 0 0-18 0"/><path d="M3 6v6a9 3 0 0 0 18 0V6"/><path d="M3 12v6a9 3 0 0 0 18 0v-6"/></svg></div>
     <div class="vocab-banner-text">
       <div class="vocab-banner-title">BIPA 模拟测评</div>
-      <div class="vocab-banner-sub">单词、句子、阅读三段式，按答题表现动态调整难度</div>
+      <div class="vocab-banner-sub">单词、句子、阅读连着做，按答题表现自动切下一关</div>
     </div>
     <span class="vocab-banner-arrow">›</span>
   </div>
@@ -831,10 +831,10 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
       <div class="vt-hero-copy">
         <div class="vt-hero-kicker">BIPA · 欢乐闯关</div>
         <h2>看看你是不是 Bahasa Jago</h2>
-        <p>单词、句子、阅读三段式。答完不只出分，还会自动生成一张可以直接发出去的海报。</p>
+        <p>单词、句子、阅读连着做。答完不只出分，还会自动生成一张可以直接发出去的海报。</p>
       </div>
     </div>
-    <div class="vt-intro">这是一套 <b>BIPA 风格的三段式模拟测评</b>：先看词，再看句子，最后做短文阅读。单词环节的表现会决定后两部分的难度。</div>
+    <div class="vt-intro">先做单词，再自动往后走到句子和阅读。单词关的表现会决定后面的难度，做完一关就接下一关。</div>
     <div class="vt-stagebar">
       <div class="vt-stage-pill active" id="vtStageWord">单词选择<b>Word</b></div>
       <div class="vt-stage-pill" id="vtStageSentence">句子理解<b>Sentence</b></div>
@@ -2444,6 +2444,7 @@ async function loadAllNotes() {
 // ===== BIPA 模拟测评 =====
 let vocabExamBank = null
 let vtExam = null
+let vtAdvanceTimer = null
 
 const VT_STAGE_META = {
   word: { label: '单词选择', sub: '识别基础词义，判断词汇覆盖。', total: 6 },
@@ -2814,34 +2815,6 @@ function vtRender() {
     return
   }
 
-  if (vtExam.screen === 'summary') {
-    const s = vtExam.summary
-    const nextLabel = vtExam.summaryNext === 'sentence'
-      ? `继续进入句子环节（${VT_STAGE_META.sentence.label}）`
-      : vtExam.summaryNext === 'reading'
-        ? `继续进入阅读环节（${VT_STAGE_META.reading.label}）`
-        : '查看结果'
-    quizArea.innerHTML = `
-      <div class="vt-panel">
-        <div class="vt-panel-head">
-          <div>
-            <div class="vt-panel-title">${esc(s.title)}</div>
-            <div class="vt-panel-sub">${esc(s.subtitle)}</div>
-          </div>
-          <div class="vt-qcount">${s.score}/${s.total}</div>
-        </div>
-        <div class="vt-result" style="padding:10px 0 0">
-          <div class="vt-num"><span>${s.rate >= 0.83 ? '✓' : '·'}</span>${Math.round(s.rate * 100)}%</div>
-          <div class="vt-ci">${esc(s.note)}</div>
-        </div>
-      </div>
-    `
-    nextBtn.disabled = false
-    nextBtn.textContent = nextLabel
-    stateEl.textContent = s.note
-    return
-  }
-
   if (vtExam.screen === 'result') {
     const result = vtExam.result
     const levelImg = vtLevelImage(result.level.code)
@@ -2862,7 +2835,7 @@ function vtRender() {
               <div class="vt-level-id">BIPA 参考级别</div>
               <div class="vt-level-note">${esc(result.level.note)}</div>
             </div>
-            <div class="vt-funny-quote">词汇选择、句子结构、阅读理解三部分综合而成。</div>
+            <div class="vt-funny-quote">单词、句子、阅读一路闯下来，最后才知道你有多稳。</div>
             <div class="vt-bars">
               <div class="vt-bar-row">
                 <div class="vt-bar-top"><span>单词选择</span><span>${result.word.score}/${result.word.total}</span></div>
@@ -2914,20 +2887,6 @@ function vtPickAnswer(idx) {
 
 function vtNext() {
   vtEnsureExam()
-  if (vtExam.screen === 'summary') {
-    if (vtExam.summaryNext === 'sentence') {
-      const q = vtBuildSentenceQuestions(vocabExamBank, vtExam.stageDifficulty.sentence)
-      vtStartStage('sentence', q, vtExam.stageDifficulty.sentence)
-      return
-    }
-    if (vtExam.summaryNext === 'reading') {
-      const q = vtBuildReadingQuestions(vocabExamBank, vtExam.stageDifficulty.reading)
-      vtStartStage('reading', q, vtExam.stageDifficulty.reading)
-      return
-    }
-    vtShowResult()
-    return
-  }
   if (vtExam.screen === 'result') {
     startVocabTest()
     return
@@ -2967,31 +2926,13 @@ function vtFinishStage() {
   if (stage === 'word') {
     const next = vtDifficultyByRate(rate)
     vtExam.stageDifficulty.sentence = next
-    vtExam.summary = {
-      title: '单词选择完成',
-      subtitle: `你的词义识别表现决定了句子部分的难度：${VT_STAGE_META.sentence.label} · ${next === 'hard' ? '进阶' : next === 'medium' ? '标准' : '入门'}`,
-      score,
-      total,
-      rate,
-      note: rate >= 0.83 ? '词汇基础较稳，可以进入更高强度的句子理解。' : rate >= 0.55 ? '基础还不错，下一部分保持标准难度。' : '先从更基础的句子开始，避免一上来太吃力。',
-    }
-    vtExam.summaryNext = 'sentence'
-    vtExam.screen = 'summary'
+    vtAutoAdvance('sentence', next)
   } else if (stage === 'sentence') {
     const combined = (vtExam.sectionScores.word.correct + vtExam.sectionScores.sentence.correct) /
       (vtExam.sectionScores.word.total + vtExam.sectionScores.sentence.total)
     const next = vtDifficultyByRate(combined)
     vtExam.stageDifficulty.reading = next
-    vtExam.summary = {
-      title: '句子理解完成',
-      subtitle: `阅读部分将采用 ${next === 'hard' ? '进阶' : next === 'medium' ? '标准' : '入门'} 难度。`,
-      score,
-      total,
-      rate,
-      note: rate >= 0.83 ? '句法和搭配掌握较稳，可以进入阅读理解。' : rate >= 0.55 ? '句子层面表现正常，阅读会保持中等难度。' : '句子理解还有提升空间，阅读会放慢一点。',
-    }
-    vtExam.summaryNext = 'reading'
-    vtExam.screen = 'summary'
+    vtAutoAdvance('reading', next)
   } else {
     vtExam.screen = 'result'
     vtExam.result = vtBuildExamSummary()
@@ -3001,6 +2942,7 @@ function vtFinishStage() {
 }
 
 function vtShowResult() {
+  clearTimeout(vtAdvanceTimer)
   vtExam.screen = 'result'
   vtExam.result = vtBuildExamSummary()
   localStorage.setItem('bb_vocab_last', String(vtExam.result.estimate))
@@ -3008,6 +2950,24 @@ function vtShowResult() {
   document.getElementById('vtHeadTag').textContent = '结果'
   vtRender()
   refreshVocabBadge()
+}
+
+function vtAutoAdvance(nextStage, difficulty, delay = 350) {
+  clearTimeout(vtAdvanceTimer)
+  const stateEl = document.getElementById('vtState')
+  const nextBtn = document.getElementById('vtNextBtn')
+  if (stateEl) stateEl.textContent = `${VT_STAGE_META[nextStage].label}马上开始…`
+  if (nextBtn) {
+    nextBtn.disabled = true
+    nextBtn.textContent = '自动切换中…'
+  }
+  vtAdvanceTimer = setTimeout(() => {
+    if (!vtExam || !vocabExamBank) return
+    const q = nextStage === 'sentence'
+      ? vtBuildSentenceQuestions(vocabExamBank, difficulty)
+      : vtBuildReadingQuestions(vocabExamBank, difficulty)
+    vtStartStage(nextStage, q, difficulty)
+  }, delay)
 }
 
 function vtDrawCoverImage(ctx, img, x, y, w, h) {
@@ -3194,6 +3154,7 @@ async function vtBuildSharePoster(result) {
 
 async function startVocabTest() {
   if (!sb) return alert('请先登录')
+  clearTimeout(vtAdvanceTimer)
   try {
     const bank = await vtLoadBank()
     vocabExamBank = bank
@@ -3210,8 +3171,6 @@ async function startVocabTest() {
         reading: { correct: 0, total: 0 },
       },
       stageDifficulty: { word: 'mixed', sentence: 'medium', reading: 'medium' },
-      summary: null,
-      summaryNext: null,
       result: null,
     }
     showView('vocabtest')
