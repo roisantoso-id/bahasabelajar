@@ -623,27 +623,26 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 .vocab-banner-arrow{flex:none;color:rgba(255,255,255,.7);font-size:22px;position:relative;z-index:1}
 .vocab-badge{position:absolute;top:10px;right:12px;z-index:2;padding:2px 8px;border-radius:99px;background:#ff3b30;color:#fff;font-size:10px;font-weight:900;letter-spacing:.4px;box-shadow:0 4px 10px rgba(255,59,48,.4)}
 .vocab-badge.score{background:linear-gradient(180deg,#f8db85,#f4c95d);color:#174d40}
-/* 测试区 */
-.vt-intro{font-size:13px;line-height:1.6;color:var(--muted);margin-bottom:12px;padding:0 2px}
-.vt-intro b{color:var(--green2)}
-.vt-stagebar{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
-.vt-stage-pill{padding:10px 8px;border-radius:14px;background:rgba(255,253,248,.9);border:1px solid rgba(20,41,37,.08);text-align:center;font-size:11px;font-weight:900;color:#70817b}
+.vt-intro{font-size:13px;line-height:1.6;color:var(--muted);margin:0 0 12px;padding:0 4px}
+.vt-intro b{color:#d85d30}
+.vt-stagebar{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.vt-stage-pill{padding:11px 8px;border-radius:18px;background:linear-gradient(180deg,#fff,#fff8eb);border:1px solid rgba(20,41,37,.08);text-align:center;font-size:11px;font-weight:900;color:#8b7b6c;box-shadow:0 8px 18px rgba(174,114,55,.08)}
 .vt-stage-pill b{display:block;font-size:14px;color:var(--ink);margin-top:2px}
-.vt-stage-pill.active{background:linear-gradient(180deg,#eaf5ea,#d8efda);border-color:rgba(23,77,64,.16);color:var(--green)}
-.vt-stage-pill.done{background:linear-gradient(180deg,#f3f8ef,#e8f2e8);border-color:rgba(23,77,64,.10);color:#4f695f}
-.vt-panel{padding:14px;border-radius:20px;background:rgba(255,253,248,.95);border:1px solid rgba(20,41,37,.06);box-shadow:0 10px 24px rgba(23,45,39,.07)}
+.vt-stage-pill.active{background:linear-gradient(180deg,#ffe7a8,#ffd26a);border-color:rgba(211,142,32,.26);color:#8d4d00}
+.vt-stage-pill.done{background:linear-gradient(180deg,#eaf8ee,#d9f0df);border-color:rgba(45,122,79,.14);color:#4f695f}
+.vt-panel{padding:16px;border-radius:24px;background:rgba(255,255,255,.94);border:1px solid rgba(20,41,37,.06);box-shadow:0 14px 28px rgba(23,45,39,.08)}
 .vt-panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:10px}
 .vt-panel-title{font-size:16px;font-weight:900;letter-spacing:-.2px}
 .vt-panel-sub{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.4}
-.vt-qcount{font-size:11px;font-weight:800;color:var(--green2);padding:5px 10px;border-radius:99px;background:#edf6ef;flex:none}
+.vt-qcount{font-size:11px;font-weight:800;color:#9d6500;padding:5px 10px;border-radius:99px;background:#fff0cc;flex:none}
 .vt-prompt{font-size:18px;font-weight:800;line-height:1.55;margin-bottom:12px;letter-spacing:-.2px}
-.vt-passage{padding:12px;border-radius:16px;background:linear-gradient(180deg,#faf7f0,#f3efe5);border:1px solid rgba(20,41,37,.06);font-size:13px;line-height:1.75;color:#37433f;margin-bottom:12px}
+.vt-passage{padding:14px;border-radius:18px;background:linear-gradient(180deg,#fff7e8,#fdf0d9);border:1px solid rgba(255,178,68,.18);font-size:13px;line-height:1.78;color:#37433f;margin-bottom:12px}
 .vt-options{display:grid;grid-template-columns:1fr;gap:8px}
-.vt-option{display:flex;align-items:flex-start;gap:10px;padding:12px 12px 12px 14px;border-radius:16px;border:1.5px solid rgba(20,41,37,.09);background:#fff;cursor:pointer;transition:transform .12s var(--ease),border-color .12s var(--ease),background .12s var(--ease)}
+.vt-option{display:flex;align-items:flex-start;gap:10px;padding:12px 12px 12px 14px;border-radius:18px;border:1.5px solid rgba(20,41,37,.08);background:#fff;cursor:pointer;transition:transform .12s var(--ease),border-color .12s var(--ease),background .12s var(--ease),box-shadow .12s var(--ease);box-shadow:0 8px 16px rgba(30,39,34,.04)}
 .vt-option:active{transform:scale(.99)}
-.vt-option .letter{flex:none;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#eef3ea;color:var(--green);font-weight:900;font-size:12px}
+.vt-option .letter{flex:none;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#eff8ea,#dbefdc);color:#2f7358;font-weight:900;font-size:12px}
 .vt-option .txt{flex:1;font-size:14px;line-height:1.55;color:var(--ink);font-weight:700}
-.vt-option.selected{border-color:#8fc1ad;background:linear-gradient(180deg,#eef8f0,#e7f3e9)}
+.vt-option.selected{border-color:#f4b85d;background:linear-gradient(180deg,#fff9ec,#fff1cf);box-shadow:0 10px 20px rgba(225,147,52,.12)}
 .vt-option.correct{border-color:#2d7a4f;background:linear-gradient(180deg,#e6f5e4,#d8efda)}
 .vt-option.wrong{border-color:#f2b0a0;background:linear-gradient(180deg,#fff0eb,#fde7df)}
 .vt-option.correct .letter,.vt-option.wrong .letter{color:#fff;background:var(--green)}
@@ -652,17 +651,28 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 .vt-option-note.show{display:block}
 .vt-controls{display:flex;gap:10px;margin-top:12px}
 .vt-submit,.vt-retry,.vt-secondary{height:52px;border-radius:16px;font-size:15px;font-weight:900}
-.vt-submit{flex:1;background:linear-gradient(180deg,#1f5d4d,#143d34);color:#fff;box-shadow:0 14px 28px rgba(23,45,39,.22)}
+.vt-submit{flex:1;background:linear-gradient(180deg,#ff8c47,#ff5f55);color:#fff;box-shadow:0 14px 28px rgba(255,96,70,.22)}
 .vt-submit:disabled{opacity:.55;cursor:not-allowed}
-.vt-retry{flex:1;background:rgba(255,253,248,.92);border:1.5px solid rgba(20,41,37,.1);color:var(--ink)}
-.vt-secondary{flex:1;background:#eef3ea;color:#355247}
+.vt-retry{flex:1;background:rgba(255,255,255,.92);border:1.5px solid rgba(20,41,37,.1);color:var(--ink)}
+.vt-secondary{flex:1;background:#eef9f2;color:#355247}
 .vt-state{margin-top:10px;font-size:12px;color:var(--muted);line-height:1.6}
 .vt-result{text-align:center;padding:10px 0 44px}
-.vt-result-eyebrow{font-size:10px;font-weight:900;letter-spacing:1.5px;color:var(--green2);margin-bottom:8px}
-.vt-num{font-size:54px;font-weight:900;font-family:Georgia,serif;letter-spacing:-2px;color:var(--green);line-height:1.05}
-.vt-num span{font-size:22px;vertical-align:super;margin-right:3px;color:var(--green2)}
+.vt-result-eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:900;letter-spacing:1.5px;color:#d85d30;margin-bottom:8px;padding:6px 10px;border-radius:999px;background:rgba(255,116,76,.1)}
+.vt-num{font-size:54px;font-weight:900;font-family:Georgia,serif;letter-spacing:-2px;color:#d85d30;line-height:1.05}
+.vt-num span{font-size:22px;vertical-align:super;margin-right:3px;color:#ff8c47}
 .vt-ci{font-size:12.5px;color:var(--muted);margin-top:5px;line-height:1.5}
-.vt-level-badge{display:inline-flex;flex-direction:column;align-items:center;gap:4px;margin:18px auto 0;padding:16px 22px;border-radius:22px;background:linear-gradient(180deg,#f8db85,#f4c95d);box-shadow:0 12px 28px rgba(244,201,93,.38)}
+.vt-result-card{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(210px,.85fr);gap:14px;margin-top:10px;align-items:stretch}
+.vt-result-main{padding:2px 0}
+.vt-result-side{padding:16px;border-radius:24px;background:linear-gradient(180deg,#fff7ea,#ffedd0);border:1px solid rgba(255,173,55,.16);box-shadow:0 10px 24px rgba(190,125,49,.12);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;position:relative;overflow:hidden}
+.vt-result-side::before,.vt-result-side::after{content:'';position:absolute;border-radius:50%;background:rgba(255,255,255,.45)}
+.vt-result-side::before{width:74px;height:74px;top:-18px;right:-18px}
+.vt-result-side::after{width:54px;height:54px;left:-14px;bottom:-14px}
+.vt-side-tag{font-size:10px;font-weight:900;letter-spacing:1.8px;color:#d35f2a;background:rgba(255,255,255,.72);padding:6px 10px;border-radius:999px}
+.vt-side-title{font-size:26px;line-height:1;font-weight:1000;color:#174d40}
+.vt-side-sub{font-size:13px;font-weight:800;color:#885b00}
+.vt-side-art{width:172px;height:172px;object-fit:cover;border-radius:28px;background:#fff;box-shadow:0 14px 28px rgba(171,107,37,.16);border:6px solid rgba(255,255,255,.82)}
+.vt-side-copy{font-size:12px;line-height:1.55;color:#6f4c00;text-align:center;padding:0 6px}
+.vt-level-badge{display:inline-flex;flex-direction:column;align-items:center;gap:4px;margin:16px auto 0;padding:16px 22px;border-radius:24px;background:linear-gradient(180deg,#ffe499,#ffce47);box-shadow:0 12px 28px rgba(244,201,93,.34)}
 .vt-level-code{font-size:28px;font-weight:900;line-height:1;color:#174d40}
 .vt-level-name{font-size:16px;font-weight:900;color:#174d40}
 .vt-level-id{font-size:12px;font-weight:700;color:#2a6b53;letter-spacing:.5px}
@@ -673,23 +683,35 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 .vt-bar-top{display:flex;justify-content:space-between;font-size:12px;font-weight:800;color:var(--ink);margin-bottom:5px}
 .vt-bar-top span:last-child{color:var(--green2)}
 .vt-bar-track{height:8px;border-radius:99px;background:rgba(23,77,64,.1);overflow:hidden}
-.vt-bar-fill{height:100%;border-radius:inherit;background:linear-gradient(90deg,#1d5a4b,#2b7b62)}
+.vt-bar-fill{height:100%;border-radius:inherit;background:linear-gradient(90deg,#ff8c47,#ff5f55)}
 .vt-bar-meta{margin-top:4px;font-size:10.5px;color:var(--muted);text-align:right}
 .vt-actions{display:flex;gap:10px;margin-top:22px}
 .vt-actions button{flex:1}
-.vt-share{display:flex;align-items:center;justify-content:center;gap:7px;background:linear-gradient(180deg,#1f5d4d,#143d34);color:#fff;box-shadow:0 12px 24px rgba(23,45,39,.18)}
+.vt-share{display:flex;align-items:center;justify-content:center;gap:7px;background:linear-gradient(180deg,#ff8c47,#ff5f55);color:#fff;box-shadow:0 12px 24px rgba(255,96,70,.2)}
 .vt-share svg{width:18px;height:18px}
 .vt-note{font-size:11px;color:var(--muted);margin-top:14px;line-height:1.6}
+[data-theme="dark"] #v-vocabtest{background:radial-gradient(circle at top left,rgba(255,168,76,.12),transparent 32%),radial-gradient(circle at top right,rgba(255,92,92,.08),transparent 26%),linear-gradient(180deg,#171d1b,#121815 42%,#141c19)}
 [data-theme="dark"] .vt-stage-pill,
 [data-theme="dark"] .vt-panel,
 [data-theme="dark"] .vt-option{background:rgba(26,32,29,.92);border-color:rgba(200,220,210,.1)}
-[data-theme="dark"] .vt-stage-pill.active{background:linear-gradient(180deg,#16301f,#0d2014);border-color:var(--green2)}
-[data-theme="dark"] .vt-option.selected{background:linear-gradient(180deg,#16301f,#0d2014)}
+[data-theme="dark"] .vt-stage-pill.active{background:linear-gradient(180deg,#4b3413,#2e210c);border-color:#ffbe57;color:#ffd89a}
+[data-theme="dark"] .vt-option.selected{background:linear-gradient(180deg,#4b3413,#2e210c)}
 [data-theme="dark"] .vt-option.correct{background:linear-gradient(180deg,#173421,#112915)}
 [data-theme="dark"] .vt-option.wrong{background:linear-gradient(180deg,#3a1c16,#281410)}
 [data-theme="dark"] .vt-bar-track{background:rgba(200,220,210,.12)}
 [data-theme="dark"] .vt-retry,[data-theme="dark"] .vt-secondary{background:rgba(26,32,29,.92);border-color:rgba(200,220,210,.12);color:#d9e7de}
-[data-theme="dark"] .vt-num{color:#5fae8a}
+[data-theme="dark"] .vt-num{color:#ffb56f}
+[data-theme="dark"] .vt-hero{background:linear-gradient(135deg,#222b28 0%,#2d2618 48%,#362a13 100%);border-color:rgba(255,190,87,.18)}
+[data-theme="dark"] .vt-hero h2{color:#f2f6f2}
+[data-theme="dark"] .vt-hero p{color:#c1cfc7}
+[data-theme="dark"] .vt-hero-kicker{background:rgba(255,150,94,.16);color:#ffbc8a}
+[data-theme="dark"] .vt-hero-art{background:linear-gradient(180deg,#2f352f,#3f2f18)}
+[data-theme="dark"] .vt-result-side{background:linear-gradient(180deg,#2a2114,#3a2b13);border-color:rgba(255,190,87,.12)}
+[data-theme="dark"] .vt-side-tag{background:rgba(255,255,255,.08);color:#ffcf8d}
+[data-theme="dark"] .vt-side-title{color:#fff2c2}
+[data-theme="dark"] .vt-side-sub{color:#ffc36b}
+[data-theme="dark"] .vt-side-copy{color:#eed2a0}
+[data-theme="dark"] .vt-level-badge{background:linear-gradient(180deg,#ffcf62,#e4a92c)}
 
 /* dark */
 [data-theme="dark"] .journal-textarea{background:rgba(22,40,32,.8);border-color:rgba(200,220,210,.1);color:#d8e8e0}
@@ -805,7 +827,15 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
     <h1>BIPA 模拟测评</h1>
     <span class="grammar-lesson-tag" id="vtHeadTag">准备</span>
   </div>
-  <div id="vtTestArea">
+  <div id="vtTestArea" class="vt-shell">
+    <div class="vt-hero">
+      <div class="vt-hero-copy">
+        <div class="vt-hero-kicker">BIPA · 欢乐闯关</div>
+        <h2>看看你是不是 Bahasa Jago</h2>
+        <p>单词、句子、阅读三段式。答完不只出分，还会自动生成一张可以直接发出去的海报。</p>
+      </div>
+      <div class="vt-hero-art"><img src="img/logo.png" alt="BahasaBelajar"></div>
+    </div>
     <div class="vt-intro">这是一套 <b>BIPA 风格的三段式模拟测评</b>：先看词，再看句子，最后做短文阅读。单词环节的表现会决定后两部分的难度。</div>
     <div class="vt-stagebar">
       <div class="vt-stage-pill active" id="vtStageWord">第1部分<b>单词选择</b></div>
@@ -2433,6 +2463,106 @@ const VT_BIPA_LEVELS = [
   { max: Infinity, code: 'C1+', name: '高阶', note: '综合理解和表达已较稳。' },
 ]
 
+const VT_LEVEL_ART = {
+  A1: 'img/vt-lv1.webp',
+  A2: 'img/vt-lv2.webp',
+  B1: 'img/vt-lv3.webp',
+  B2: 'img/vt-lv4.webp',
+  'C1+': 'img/vt-lv5.webp',
+}
+
+const VT_LEVEL_FLAIR = {
+  A1: '刚开机的小可爱',
+  A2: '开始像样了',
+  B1: '已经会点了',
+  B2: '像个本地人',
+  'C1+': '嘴比脑子还快',
+}
+
+const VT_LEVEL_TAG = {
+  A1: '我先试试',
+  A2: '不慌不慌',
+  B1: '状态不错',
+  B2: '有点东西',
+  'C1+': '真有点强',
+}
+
+const vtImageCache = new Map()
+
+function vtAsset(path) {
+  return path
+}
+
+function vtLevelImage(code) {
+  return vtAsset(VT_LEVEL_ART[code] || VT_LEVEL_ART['C1+'])
+}
+
+function vtShareName() {
+  const name = (profile && profile.display_name) || (currentUser && currentUser.email ? currentUser.email.split('@')[0] : '')
+  return name || 'Bahasa Jago'
+}
+
+function vtShareText(result) {
+  const name = vtShareName()
+  const flair = VT_LEVEL_FLAIR[result.level.code] || 'Bahasa Jago'
+  return `${name} 现在是 ${flair} 了。≈ ${result.estimate.toLocaleString()} 词，${result.level.code}（${result.level.name}）。`
+}
+
+function vtShareSlogan(result) {
+  const name = vtShareName()
+  return `${name} 现在是 Bahasa Jago 了，别装了，已经会不少了。`
+}
+
+function vtRoundRectPath(ctx, x, y, w, h, r) {
+  const rr = Math.min(r, w / 2, h / 2)
+  ctx.beginPath()
+  ctx.moveTo(x + rr, y)
+  ctx.arcTo(x + w, y, x + w, y + h, rr)
+  ctx.arcTo(x + w, y + h, x, y + h, rr)
+  ctx.arcTo(x, y + h, x, y, rr)
+  ctx.arcTo(x, y, x + w, y, rr)
+  ctx.closePath()
+}
+
+function vtWrapText(ctx, text, x, y, maxWidth, lineHeight, maxLines) {
+  const raw = String(text || '').trim()
+  const words = raw.includes(' ') ? raw.split(/\s+/) : Array.from(raw)
+  let line = ''
+  let lines = 0
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i]
+    const test = line ? line + ' ' + word : word
+    if (ctx.measureText(test).width > maxWidth && line) {
+      ctx.fillText(line, x, y)
+      line = word
+      y += lineHeight
+      lines++
+      if (maxLines && lines >= maxLines - 1) {
+        const remaining = [line].concat(words.slice(i + 1)).join(' ')
+        const clipped = remaining.replace(/\s+/g, ' ').trim()
+        ctx.fillText(clipped.length > 0 ? clipped : line, x, y)
+        return y
+      }
+    } else {
+      line = test
+    }
+  }
+  if (line) ctx.fillText(line, x, y)
+  return y
+}
+
+function vtLoadImage(src) {
+  if (vtImageCache.has(src)) return vtImageCache.get(src)
+  const p = new Promise((resolve, reject) => {
+    const img = new Image()
+    img.onload = () => resolve(img)
+    img.onerror = reject
+    img.src = src
+  })
+  vtImageCache.set(src, p)
+  return p
+}
+
 function vtShuffle(arr) {
   const a = arr.slice()
   for (let i = a.length - 1; i > 0; i--) {
@@ -2683,42 +2813,54 @@ function vtRender() {
 
   if (vtExam.screen === 'result') {
     const result = vtExam.result
+    const levelImg = vtLevelImage(result.level.code)
     quizArea.innerHTML = ''
     document.getElementById('vtResultArea').style.display = ''
     document.getElementById('vtHeadTag').textContent = '结果'
     document.getElementById('vtResultArea').innerHTML = `
       <div class="vt-result">
         <div class="vt-result-eyebrow">BIPA 模拟测评结果</div>
-        <div class="vt-num"><span>≈</span>${result.estimate.toLocaleString()}</div>
-        <div class="vt-ci">词汇覆盖估算 · ${result.level.code} · ${result.level.name}</div>
-        <div class="vt-level-badge">
-          <div class="vt-level-code">${result.level.code}</div>
-          <div class="vt-level-name">${result.level.name}</div>
-          <div class="vt-level-id">BIPA 参考级别</div>
-          <div class="vt-level-note">${esc(result.level.note)}</div>
-        </div>
-        <div class="vt-funny-quote">词汇选择、句子结构、阅读理解三部分综合而成。</div>
-        <div class="vt-bars">
-          <div class="vt-bar-row">
-            <div class="vt-bar-top"><span>单词选择</span><span>${result.word.score}/${result.word.total}</span></div>
-            <div class="vt-bar-track"><div class="vt-bar-fill" style="width:${Math.round(result.word.rate * 100)}%"></div></div>
-            <div class="vt-bar-meta">${result.word.difficultyLabel}</div>
+        <div class="vt-result-card">
+          <div class="vt-result-main">
+            <div class="vt-num"><span>≈</span>${result.estimate.toLocaleString()}</div>
+            <div class="vt-ci">词汇覆盖估算 · ${result.level.code} · ${result.level.name}</div>
+            <div class="vt-level-badge">
+              <div class="vt-level-code">${result.level.code}</div>
+              <div class="vt-level-name">${result.level.name}</div>
+              <div class="vt-level-id">BIPA 参考级别</div>
+              <div class="vt-level-note">${esc(result.level.note)}</div>
+            </div>
+            <div class="vt-funny-quote">词汇选择、句子结构、阅读理解三部分综合而成。</div>
+            <div class="vt-bars">
+              <div class="vt-bar-row">
+                <div class="vt-bar-top"><span>单词选择</span><span>${result.word.score}/${result.word.total}</span></div>
+                <div class="vt-bar-track"><div class="vt-bar-fill" style="width:${Math.round(result.word.rate * 100)}%"></div></div>
+                <div class="vt-bar-meta">${result.word.difficultyLabel}</div>
+              </div>
+              <div class="vt-bar-row">
+                <div class="vt-bar-top"><span>句子理解</span><span>${result.sentence.score}/${result.sentence.total}</span></div>
+                <div class="vt-bar-track"><div class="vt-bar-fill" style="width:${Math.round(result.sentence.rate * 100)}%"></div></div>
+                <div class="vt-bar-meta">${result.sentence.difficultyLabel}</div>
+              </div>
+              <div class="vt-bar-row">
+                <div class="vt-bar-top"><span>阅读理解</span><span>${result.reading.score}/${result.reading.total}</span></div>
+                <div class="vt-bar-track"><div class="vt-bar-fill" style="width:${Math.round(result.reading.rate * 100)}%"></div></div>
+                <div class="vt-bar-meta">${result.reading.difficultyLabel}</div>
+              </div>
+            </div>
           </div>
-          <div class="vt-bar-row">
-            <div class="vt-bar-top"><span>句子理解</span><span>${result.sentence.score}/${result.sentence.total}</span></div>
-            <div class="vt-bar-track"><div class="vt-bar-fill" style="width:${Math.round(result.sentence.rate * 100)}%"></div></div>
-            <div class="vt-bar-meta">${result.sentence.difficultyLabel}</div>
-          </div>
-          <div class="vt-bar-row">
-            <div class="vt-bar-top"><span>阅读理解</span><span>${result.reading.score}/${result.reading.total}</span></div>
-            <div class="vt-bar-track"><div class="vt-bar-fill" style="width:${Math.round(result.reading.rate * 100)}%"></div></div>
-            <div class="vt-bar-meta">${result.reading.difficultyLabel}</div>
+          <div class="vt-result-side">
+            <div class="vt-side-tag">${VT_LEVEL_TAG[result.level.code] || '太强了'}</div>
+            <div class="vt-side-title">Bahasa Jago</div>
+            <div class="vt-side-sub">${esc(vtShareName())}</div>
+            <img class="vt-side-art" src="${esc(levelImg)}" alt="level art">
+            <div class="vt-side-copy">${esc(vtShareSlogan(result))}</div>
           </div>
         </div>
         <div class="vt-actions">
           <button class="vt-share" onclick="shareVocabExam()">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
-            分享结果
+            生成分享图
           </button>
           <button class="vt-retry" onclick="startVocabTest()">重新测评</button>
         </div>
@@ -2836,6 +2978,188 @@ function vtShowResult() {
   refreshVocabBadge()
 }
 
+function vtDrawCoverImage(ctx, img, x, y, w, h) {
+  if (!img || !img.width || !img.height) return
+  const scale = Math.max(w / img.width, h / img.height)
+  const sw = w / scale
+  const sh = h / scale
+  const sx = Math.max(0, (img.width - sw) / 2)
+  const sy = Math.max(0, (img.height - sh) / 2)
+  ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h)
+}
+
+async function vtBuildSharePoster(result) {
+  const width = 1080
+  const height = 1440
+  const canvas = document.createElement('canvas')
+  canvas.width = width
+  canvas.height = height
+  const ctx = canvas.getContext('2d')
+  const name = vtShareName()
+  const art = await vtLoadImage(vtLevelImage(result.level.code))
+  const logo = await vtLoadImage('img/logo.png')
+
+  const bg = ctx.createLinearGradient(0, 0, 0, height)
+  bg.addColorStop(0, '#fff9ef')
+  bg.addColorStop(0.58, '#fff0d8')
+  bg.addColorStop(1, '#fffdf9')
+  ctx.fillStyle = bg
+  ctx.fillRect(0, 0, width, height)
+
+  const confetti = [
+    [90, 120, 18, '#ff6f61'], [164, 170, 10, '#ffb347'], [240, 86, 14, '#67c6a8'],
+    [860, 92, 16, '#ff8c47'], [940, 200, 9, '#7aa9ff'], [780, 286, 14, '#ffc94d'],
+    [156, 1170, 16, '#ff8c47'], [920, 1130, 12, '#67c6a8'], [840, 1240, 10, '#ff6f61'],
+  ]
+  for (const [x, y, r, c] of confetti) {
+    ctx.fillStyle = c
+    ctx.beginPath()
+    ctx.arc(x, y, r, 0, Math.PI * 2)
+    ctx.fill()
+  }
+
+  ctx.fillStyle = 'rgba(255,255,255,.75)'
+  ctx.beginPath(); ctx.arc(140, 250, 88, 0, Math.PI * 2); ctx.fill()
+  ctx.beginPath(); ctx.arc(920, 320, 122, 0, Math.PI * 2); ctx.fill()
+
+  ctx.save()
+  vtRoundRectPath(ctx, 62, 70, 956, 1298, 44)
+  ctx.fillStyle = 'rgba(255,255,255,.82)'
+  ctx.fill()
+  ctx.restore()
+
+  ctx.save()
+  vtRoundRectPath(ctx, 92, 100, 896, 1240, 36)
+  ctx.fillStyle = 'rgba(255,248,236,.95)'
+  ctx.fill()
+  ctx.restore()
+
+  ctx.fillStyle = 'rgba(255,255,255,.92)'
+  vtRoundRectPath(ctx, 128, 136, 260, 58, 29)
+  ctx.fill()
+  ctx.fillStyle = '#d85d30'
+  ctx.font = '900 24px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'middle'
+  ctx.fillText('BIPA 测评', 258, 165)
+
+  ctx.fillStyle = '#201815'
+  ctx.textAlign = 'left'
+  ctx.textBaseline = 'alphabetic'
+  ctx.font = '900 40px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
+  ctx.fillText(`恭喜 ${name}`, 128, 265)
+  ctx.font = '1000 64px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
+  ctx.fillStyle = '#ff5f55'
+  ctx.fillText('Bahasa Jago!', 128, 338)
+  ctx.fillStyle = '#5d513f'
+  ctx.font = '800 28px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
+  ctx.fillText(`现在是 ${result.level.code} · ${result.level.name}`, 128, 390)
+
+  const chipY = 450
+  const chipDefs = [
+    ['词汇', `${Math.round(result.word.rate * 100)}%`, '#ff8c47'],
+    ['句子', `${Math.round(result.sentence.rate * 100)}%`, '#f0b93a'],
+    ['阅读', `${Math.round(result.reading.rate * 100)}%`, '#67c6a8'],
+  ]
+  let chipX = 128
+  for (const [label, value, color] of chipDefs) {
+    ctx.fillStyle = color
+    vtRoundRectPath(ctx, chipX, chipY, 168, 72, 22)
+    ctx.fill()
+    ctx.fillStyle = '#fff'
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'alphabetic'
+    ctx.font = '900 24px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
+    ctx.fillText(label, chipX + 84, chipY + 31)
+    ctx.font = '900 22px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
+    ctx.fillText(value, chipX + 84, chipY + 58)
+    chipX += 188
+  }
+
+  ctx.fillStyle = '#6e5c39'
+  ctx.font = '700 22px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
+  ctx.textAlign = 'left'
+  ctx.fillText('你现在的气势：有点像已经会跟本地人点饭的人。', 128, 574)
+  ctx.font = '800 20px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
+  ctx.fillStyle = '#8a6a2e'
+  ctx.fillText('别害羞，直接发出去，让朋友看看谁更会印尼语。', 128, 612)
+
+  ctx.save()
+  vtRoundRectPath(ctx, 610, 235, 348, 520, 40)
+  ctx.fillStyle = '#fff'
+  ctx.fill()
+  ctx.clip()
+  vtDrawCoverImage(ctx, art, 610, 235, 348, 520)
+  ctx.restore()
+  ctx.strokeStyle = 'rgba(255,255,255,.9)'
+  ctx.lineWidth = 10
+  vtRoundRectPath(ctx, 610, 235, 348, 520, 40)
+  ctx.stroke()
+
+  ctx.save()
+  vtRoundRectPath(ctx, 620, 746, 328, 128, 32)
+  ctx.fillStyle = 'rgba(255,255,255,.78)'
+  ctx.fill()
+  ctx.restore()
+  ctx.fillStyle = '#1f5d4d'
+  ctx.textAlign = 'center'
+  ctx.font = '1000 30px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
+  ctx.fillText(VT_LEVEL_FLAIR[result.level.code] || 'Bahasa Jago', 784, 796)
+  ctx.fillStyle = '#6d5d46'
+  ctx.font = '700 18px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
+  vtWrapText(ctx, vtShareText(result), 644, 834, 278, 26, 3)
+
+  ctx.save()
+  vtRoundRectPath(ctx, 128, 716, 452, 236, 34)
+  ctx.fillStyle = 'rgba(255,255,255,.78)'
+  ctx.fill()
+  ctx.restore()
+  ctx.fillStyle = '#1f5d4d'
+  ctx.textAlign = 'left'
+  ctx.font = '900 30px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
+  ctx.fillText('小结不严肃，成绩很认真', 164, 770)
+  ctx.fillStyle = '#6d5d46'
+  ctx.font = '700 21px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
+  vtWrapText(ctx, '词汇、句子、阅读三连击后，你已经不是“看看就算了”的阶段了。', 164, 814, 360, 30, 3)
+  vtWrapText(ctx, `BIPA 参考级别：${result.level.code} · ${result.level.name}`, 164, 912, 360, 30, 2)
+
+  ctx.save()
+  vtRoundRectPath(ctx, 128, 980, 820, 188, 36)
+  ctx.fillStyle = '#1d5a4b'
+  ctx.fill()
+  ctx.restore()
+  ctx.fillStyle = '#fff'
+  ctx.font = '900 28px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
+  ctx.fillText('“我不一定很强，但我现在会更多了。”', 164, 1054)
+  ctx.font = '700 21px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
+  ctx.fillStyle = 'rgba(255,255,255,.86)'
+  vtWrapText(ctx, '这张图可以直接转发，顺便问问朋友：你觉得我这算不算 Bahasa Jago？', 164, 1100, 740, 30, 3)
+  ctx.fillStyle = '#ffd66c'
+  ctx.font = '900 22px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
+  ctx.fillText('现在就可以去炫耀一下。', 164, 1188)
+
+  ctx.save()
+  vtRoundRectPath(ctx, 770, 1188, 120, 120, 30)
+  ctx.fillStyle = '#fff'
+  ctx.fill()
+  ctx.clip()
+  vtDrawCoverImage(ctx, logo, 770, 1188, 120, 120)
+  ctx.restore()
+  ctx.strokeStyle = 'rgba(255,255,255,.6)'
+  ctx.lineWidth = 8
+  vtRoundRectPath(ctx, 770, 1188, 120, 120, 30)
+  ctx.stroke()
+
+  ctx.fillStyle = '#7b6950'
+  ctx.font = '700 16px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
+  ctx.textAlign = 'center'
+  ctx.fillText('BahasaBelajar · 测评海报', 540, 1316)
+
+  return await new Promise(resolve => {
+    canvas.toBlob(blob => resolve(blob), 'image/png', 1)
+  })
+}
+
 async function startVocabTest() {
   if (!sb) return alert('请先登录')
   try {
@@ -2871,14 +3195,30 @@ async function startVocabTest() {
   }
 }
 
-function shareVocabExam() {
+async function shareVocabExam() {
   vtEnsureExam()
   const result = vtExam.result || vtBuildExamSummary()
-  const text = `我的 BIPA 模拟测评结果：≈ ${result.estimate.toLocaleString()} 词，${result.level.code}（${result.level.name}）。单词 ${result.wordRate ? Math.round(result.wordRate * 100) : 0}% / 句子 ${result.sentenceRate ? Math.round(result.sentenceRate * 100) : 0}% / 阅读 ${result.readingRate ? Math.round(result.readingRate * 100) : 0}%。`
-  if (navigator.share) {
-    navigator.share({ title: 'BIPA 模拟测评结果', text }).catch(() => {})
-  } else {
-    navigator.clipboard.writeText(text).then(() => alert('结果文案已复制')).catch(() => alert(text))
+  try {
+    const blob = await vtBuildSharePoster(result)
+    if (!blob) throw new Error('海报生成失败')
+    const text = vtShareText(result)
+    const file = new File([blob], `bahasa-jago-${result.level.code}.png`, { type: 'image/png' })
+    if (navigator.share && (!navigator.canShare || navigator.canShare({ files: [file] }))) {
+      await navigator.share({ title: 'BahasaBelajar 测评海报', text, files: [file] })
+      return
+    }
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `bahasa-jago-${result.level.code}.png`
+    document.body.appendChild(a)
+    a.click()
+    a.remove()
+    setTimeout(() => URL.revokeObjectURL(url), 4000)
+    alert('分享图已生成，已尝试下载到本地。')
+  } catch (e) {
+    const text = vtShareText(result)
+    navigator.clipboard.writeText(text).then(() => alert('图片生成失败，已复制分享文案')).catch(() => alert(text))
   }
 }
 
