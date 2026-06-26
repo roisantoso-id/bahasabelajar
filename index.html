@@ -1194,6 +1194,13 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
       <button class="tts-toggle" id="darkToggle" onclick="cycleDarkMode()">自动</button>
     </div>
   </div>
+  <div class="setting-card">
+    <div class="setting-row">
+      <div class="setting-icon" style="background:#fff3cd;color:#856404">🔔</div>
+      <div class="setting-copy"><div>复习提醒</div><span id="notifDesc">未开启</span></div>
+      <button class="tts-toggle" id="notifToggle" onclick="requestNotifyPermission()">开启</button>
+    </div>
+  </div>
 
   <!-- 学习日记 -->
   <div class="group-title">学习日记</div>
@@ -1499,6 +1506,7 @@ async function loadHome() {
 
   document.getElementById('newCount').textContent = newRemaining
   document.getElementById('dueCount').textContent = dueCount || 0
+  maybeNotify(dueCount || 0, newRemaining)
   document.getElementById('learnedStat').textContent = learnedWords || 0
   document.getElementById('totalStat').textContent = totalWords || 0
   document.getElementById('learnedStatMini').textContent = learnedWords || 0
@@ -4008,6 +4016,72 @@ window.addEventListener('DOMContentLoaded', async () => {
     if (event === 'SIGNED_OUT') enterAuth()
   })
 })
+
+// ===== 通知 / SERVICE WORKER =====
+let _swReg = null
+
+async function initSW() {
+  if (!('serviceWorker' in navigator)) return
+  try {
+    _swReg = await navigator.serviceWorker.register('sw.js', { scope: './' })
+    await navigator.serviceWorker.ready
+  } catch (e) {}
+  updateNotifUI()
+}
+
+function updateNotifUI() {
+  const btn = document.getElementById('notifToggle')
+  const desc = document.getElementById('notifDesc')
+  if (!btn || !desc) return
+  if (!('Notification' in window)) {
+    desc.textContent = '此浏览器不支持'; btn.disabled = true; btn.textContent = '不支持'; return
+  }
+  const p = Notification.permission
+  if (p === 'granted') {
+    desc.textContent = '已开启，有待复习时提醒'; btn.textContent = '已开启'; btn.style.background = 'var(--green)'; btn.style.color = '#fff'
+  } else if (p === 'denied') {
+    desc.textContent = '已被浏览器屏蔽，请在系统设置里允许'; btn.textContent = '已屏蔽'; btn.disabled = true
+  } else {
+    desc.textContent = '未开启'; btn.textContent = '开启'
+  }
+}
+
+async function requestNotifyPermission() {
+  if (!('Notification' in window)) return
+  if (Notification.permission === 'denied') { alert('通知已被屏蔽，请到系统设置 → Safari/浏览器 → 通知 里手动开启'); return }
+  const result = await Notification.requestPermission()
+  updateNotifUI()
+  if (result === 'granted') {
+    sendNotif('🎉 提醒已开启！', '有词语待复习时，我会来提醒你。')
+  }
+}
+
+function sendNotif(title, body) {
+  if (Notification.permission !== 'granted') return
+  if (_swReg && _swReg.active) {
+    _swReg.active.postMessage({ type: 'SHOW_NOTIFICATION', title, body })
+  } else {
+    new Notification(title, { body, icon: 'img/logo.png', tag: 'bahasa-review' })
+  }
+}
+
+// Called from loadHome() after counts are known
+function maybeNotify(dueCount, newCount) {
+  if (Notification.permission !== 'granted') return
+  const key = 'bb_notif_last'
+  const last = parseInt(localStorage.getItem(key) || '0')
+  const now = Date.now()
+  if (now - last < 4 * 60 * 60 * 1000) return  // 每4小时最多一次
+  if (dueCount > 0) {
+    localStorage.setItem(key, now)
+    sendNotif('📚 BahasaBelajar', `你有 ${dueCount} 个词语待复习，别让它们跑掉！`)
+  } else if (newCount > 0) {
+    localStorage.setItem(key, now)
+    sendNotif('📖 BahasaBelajar', `今天还有 ${newCount} 个新词等你来学`)
+  }
+}
+
+initSW()
 </script>
 </body>
 </html>
