@@ -2906,14 +2906,14 @@ function vtRender() {
   if (vtExam.screen === 'question') {
     const q = vtExam.questions[vtExam.index]
     const pct = Math.round((vtExam.index / vtExam.questions.length) * 100)
-    const passageHtml = q.passageText ? `<div class=”vt-passage”><b>${esc(q.passageTitle || '短文')}</b><br>${esc(q.passageText)}</div>` : ''
+    const passageHtml = q.passageText ? `<div class="vt-passage"><b>${esc(q.passageTitle || '短文')}</b><br>${esc(q.passageText)}</div>` : ''
     const locked = vtExam.locked
     const correctIdx = locked ? q.options.indexOf(q.answer) : -1
     quizArea.innerHTML = `
-      <div class=”vt-progress”><div class=”vt-progress-fill” style=”width:${pct}%”></div></div>
+      <div class="vt-progress"><div class="vt-progress-fill" style="width:${pct}%"></div></div>
       ${passageHtml}
-      <div class=”vt-prompt”>${esc(q.prompt)}</div>
-      <div class=”vt-options”>
+      <div class="vt-prompt">${esc(q.prompt)}</div>
+      <div class="vt-options">
         ${q.options.map((opt, idx) => {
           let cls = 'vt-option'
           if (locked) {
@@ -2924,7 +2924,7 @@ function vtRender() {
           } else if (vtExam.selected === idx) {
             cls += ' selected'
           }
-          return `<button type=”button” class=”${cls}” onclick=”vtPickAnswer(${idx})”>${esc(opt)}</button>`
+          return `<button type="button" class="${cls}" onclick="vtPickAnswer(${idx})">${esc(opt)}</button>`
         }).join('')}
       </div>
     `
