@@ -623,39 +623,33 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 .vocab-banner-arrow{flex:none;color:rgba(255,255,255,.7);font-size:22px;position:relative;z-index:1}
 .vocab-badge{position:absolute;top:10px;right:12px;z-index:2;padding:2px 8px;border-radius:99px;background:#ff3b30;color:#fff;font-size:10px;font-weight:900;letter-spacing:.4px;box-shadow:0 4px 10px rgba(255,59,48,.4)}
 .vocab-badge.score{background:linear-gradient(180deg,#f8db85,#f4c95d);color:#174d40}
-.vt-intro{font-size:13px;line-height:1.6;color:var(--muted);margin:0 0 12px;padding:0 4px}
-.vt-intro b{color:#d85d30}
-.vt-stagebar{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
-.vt-stage-pill{padding:11px 8px;border-radius:18px;background:linear-gradient(180deg,#fff,#fff8eb);border:1px solid rgba(20,41,37,.08);text-align:center;font-size:11px;font-weight:900;color:#8b7b6c;box-shadow:0 8px 18px rgba(174,114,55,.08)}
-.vt-stage-pill b{display:block;font-size:14px;color:var(--ink);margin-top:2px}
-.vt-stage-pill.active{background:linear-gradient(180deg,#ffe7a8,#ffd26a);border-color:rgba(211,142,32,.26);color:#8d4d00}
-.vt-stage-pill.done{background:linear-gradient(180deg,#eaf8ee,#d9f0df);border-color:rgba(45,122,79,.14);color:#4f695f}
-.vt-panel{padding:16px;border-radius:24px;background:rgba(255,255,255,.94);border:1px solid rgba(20,41,37,.06);box-shadow:0 14px 28px rgba(23,45,39,.08)}
-.vt-panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:10px}
-.vt-panel-title{font-size:16px;font-weight:900;letter-spacing:-.2px}
-.vt-panel-sub{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.4}
-.vt-qcount{font-size:11px;font-weight:800;color:#9d6500;padding:5px 10px;border-radius:99px;background:#fff0cc;flex:none}
-.vt-prompt{font-size:18px;font-weight:800;line-height:1.55;margin-bottom:12px;letter-spacing:-.2px}
-.vt-passage{padding:14px;border-radius:18px;background:linear-gradient(180deg,#fff7e8,#fdf0d9);border:1px solid rgba(255,178,68,.18);font-size:13px;line-height:1.78;color:#37433f;margin-bottom:12px}
-.vt-options{display:grid;grid-template-columns:1fr;gap:8px}
-.vt-option{display:flex;align-items:flex-start;gap:10px;padding:12px 12px 12px 14px;border-radius:18px;border:1.5px solid rgba(20,41,37,.08);background:#fff;cursor:pointer;transition:transform .12s var(--ease),border-color .12s var(--ease),background .12s var(--ease),box-shadow .12s var(--ease);box-shadow:0 8px 16px rgba(30,39,34,.04)}
-.vt-option:active{transform:scale(.99)}
-.vt-option .letter{flex:none;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#eff8ea,#dbefdc);color:#2f7358;font-weight:900;font-size:12px}
-.vt-option .txt{flex:1;font-size:14px;line-height:1.55;color:var(--ink);font-weight:700}
-.vt-option.selected{border-color:#f4b85d;background:linear-gradient(180deg,#fff9ec,#fff1cf);box-shadow:0 10px 20px rgba(225,147,52,.12)}
-.vt-option.correct{border-color:#2d7a4f;background:linear-gradient(180deg,#e6f5e4,#d8efda)}
-.vt-option.wrong{border-color:#f2b0a0;background:linear-gradient(180deg,#fff0eb,#fde7df)}
-.vt-option.correct .letter,.vt-option.wrong .letter{color:#fff;background:var(--green)}
-.vt-option.wrong .letter{background:#d66b4d}
-.vt-option-note{margin-top:10px;font-size:11px;color:var(--muted);line-height:1.55;display:none}
-.vt-option-note.show{display:block}
-.vt-controls{display:flex;gap:10px;margin-top:12px}
+.vt-shell.quizzing .vt-hero{display:none}
+.vt-stagebar{display:flex;align-items:center;justify-content:center;gap:0;margin:0 auto 6px;max-width:260px}
+.vt-step{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#c0bdb5;background:#f0ede6;border:2.5px solid #e0ddd4;z-index:1;transition:all .25s var(--ease)}
+.vt-step.active{color:#fff;background:linear-gradient(180deg,#ffc440,#f4a020);border-color:transparent;box-shadow:0 6px 16px rgba(244,160,32,.35)}
+.vt-step.done{color:#fff;background:var(--green);border-color:var(--green)}
+.vt-step-line{flex:1;height:3px;background:#e0ddd4;border-radius:99px;transition:background .3s var(--ease)}
+.vt-step-line.done{background:var(--green)}
+.vt-step-labels{display:flex;justify-content:space-between;max-width:260px;margin:0 auto 18px;padding:0 2px}
+.vt-step-labels span{font-size:10px;font-weight:800;color:var(--muted);text-align:center;width:36px}
+.vt-progress{height:4px;border-radius:99px;background:rgba(20,41,37,.06);margin-bottom:20px;overflow:hidden}
+.vt-progress-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#ffc440,#ff8c47);transition:width .35s var(--ease)}
+.vt-prompt{font-size:19px;font-weight:800;line-height:1.55;margin-bottom:16px;letter-spacing:-.2px;color:var(--ink)}
+.vt-passage{padding:14px;border-radius:18px;background:linear-gradient(180deg,#fff7e8,#fdf0d9);border:1px solid rgba(255,178,68,.18);font-size:13px;line-height:1.78;color:#37433f;margin-bottom:14px}
+.vt-options{display:grid;gap:10px}
+.vt-option{padding:15px 18px;border-radius:16px;border:2px solid rgba(20,41,37,.08);background:rgba(255,253,248,.96);font-size:15px;font-weight:700;color:var(--ink);line-height:1.5;cursor:pointer;transition:all .15s var(--ease);box-shadow:0 4px 12px rgba(30,39,34,.04)}
+.vt-option:active{transform:scale(.98)}
+.vt-option.selected{border-color:#f4b85d;background:linear-gradient(180deg,#fff9ec,#fff1cf);box-shadow:0 8px 20px rgba(225,147,52,.15)}
+.vt-option.correct{border-color:#2d7a4f;background:linear-gradient(180deg,#e6f5e4,#d8efda);pointer-events:none}
+.vt-option.wrong{border-color:#e85d3a;background:linear-gradient(180deg,#fff0eb,#fde7df);opacity:.72;pointer-events:none}
+.vt-option.locked{pointer-events:none;opacity:.5}
+.vt-controls{display:none}
 .vt-submit,.vt-retry,.vt-secondary{height:52px;border-radius:16px;font-size:15px;font-weight:900}
 .vt-submit{flex:1;background:linear-gradient(180deg,#ff8c47,#ff5f55);color:#fff;box-shadow:0 14px 28px rgba(255,96,70,.22)}
 .vt-submit:disabled{opacity:.55;cursor:not-allowed}
 .vt-retry{flex:1;background:rgba(255,255,255,.92);border:1.5px solid rgba(20,41,37,.1);color:var(--ink)}
 .vt-secondary{flex:1;background:#eef9f2;color:#355247}
-.vt-state{margin-top:10px;font-size:12px;color:var(--muted);line-height:1.6}
+.vt-state{display:none}
 .vt-result{text-align:center;padding:10px 0 44px}
 .vt-result-eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:900;letter-spacing:1.5px;color:#d85d30;margin-bottom:8px;padding:6px 10px;border-radius:999px;background:rgba(255,116,76,.1)}
 .vt-num{font-size:54px;font-weight:900;font-family:Georgia,serif;letter-spacing:-2px;color:#d85d30;line-height:1.05}
@@ -695,10 +689,11 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 .vt-share svg{width:18px;height:18px}
 .vt-note{font-size:11px;color:var(--muted);margin-top:14px;line-height:1.6}
 [data-theme="dark"] #v-vocabtest{background:radial-gradient(circle at top left,rgba(255,168,76,.12),transparent 32%),radial-gradient(circle at top right,rgba(255,92,92,.08),transparent 26%),linear-gradient(180deg,#171d1b,#121815 42%,#141c19)}
-[data-theme="dark"] .vt-stage-pill,
-[data-theme="dark"] .vt-panel,
+[data-theme="dark"] .vt-step{background:rgba(26,32,29,.92);border-color:rgba(200,220,210,.15);color:#7a857c}
+[data-theme="dark"] .vt-step.active{background:linear-gradient(180deg,#c48a00,#8a5d00);border-color:#ffbe57;color:#fff}
+[data-theme="dark"] .vt-step.done{background:var(--green);border-color:var(--green)}
+[data-theme="dark"] .vt-step-line{background:rgba(200,220,210,.12)}
 [data-theme="dark"] .vt-option{background:rgba(26,32,29,.92);border-color:rgba(200,220,210,.1)}
-[data-theme="dark"] .vt-stage-pill.active{background:linear-gradient(180deg,#4b3413,#2e210c);border-color:#ffbe57;color:#ffd89a}
 [data-theme="dark"] .vt-option.selected{background:linear-gradient(180deg,#4b3413,#2e210c)}
 [data-theme="dark"] .vt-option.correct{background:linear-gradient(180deg,#173421,#112915)}
 [data-theme="dark"] .vt-option.wrong{background:linear-gradient(180deg,#3a1c16,#281410)}
@@ -833,25 +828,26 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
     <span class="grammar-lesson-tag" id="vtHeadTag">准备</span>
   </div>
   <div id="vtTestArea" class="vt-shell">
-    <div class="vt-hero">
+    <div class="vt-hero" id="vtHero">
       <div class="vt-hero-copy">
         <div class="vt-hero-kicker">BIPA · 欢乐闯关</div>
         <h2>看看你是不是 Bahasa Jago</h2>
-        <p>单词、句子、阅读连着做。答完不只出分，还会自动生成一张可以直接发出去的海报。</p>
+        <p>单词 → 句子 → 阅读，三关闯完出分 + 海报</p>
       </div>
     </div>
-    <div class="vt-intro">先做单词，再自动往后走到句子和阅读。单词关的表现会决定后面的难度，做完一关就接下一关。</div>
-    <div class="vt-stagebar">
-      <div class="vt-stage-pill active" id="vtStageWord">单词选择<b>Word</b></div>
-      <div class="vt-stage-pill" id="vtStageSentence">句子理解<b>Sentence</b></div>
-      <div class="vt-stage-pill" id="vtStageReading">阅读理解<b>Reading</b></div>
+    <div class="vt-stagebar" id="vtStagebar">
+      <div class="vt-step active" id="vtStepWord"><span>1</span></div>
+      <div class="vt-step-line" id="vtLine1"></div>
+      <div class="vt-step" id="vtStepSentence"><span>2</span></div>
+      <div class="vt-step-line" id="vtLine2"></div>
+      <div class="vt-step" id="vtStepReading"><span>3</span></div>
     </div>
+    <div class="vt-step-labels"><span>单词</span><span>句子</span><span>阅读</span></div>
     <div id="vtQuizArea"></div>
-    <div class="vt-controls">
-      <button class="vt-submit" id="vtNextBtn" onclick="vtNext()" disabled>选择答案后继续</button>
-      <button class="vt-retry" id="vtRestartBtn" onclick="startVocabTest()">重新开始</button>
+    <div class="vt-controls" id="vtControls">
+      <button class="vt-submit" id="vtNextBtn" onclick="vtNext()">重新测评</button>
     </div>
-    <div class="vt-state" id="vtState">点击上方的词汇入口开始测评。</div>
+    <div class="vt-state" id="vtState"></div>
   </div>
   <div id="vtResultArea" style="display:none"></div>
 </div>
@@ -2819,15 +2815,23 @@ function vtResetUi() {
   document.getElementById('vtResultArea').style.display = 'none'
   document.getElementById('vtResultArea').innerHTML = ''
   document.getElementById('vtTestArea').style.display = ''
+  document.getElementById('vtTestArea').classList.remove('quizzing')
 }
 
 function vtSetStagePills(active) {
+  const ai = VT_STAGE_ORDER.indexOf(active)
+  const ids = { word:'vtStepWord', sentence:'vtStepSentence', reading:'vtStepReading' }
   for (const key of VT_STAGE_ORDER) {
-    const el = document.getElementById(`vtStage${key[0].toUpperCase()}${key.slice(1)}`)
+    const el = document.getElementById(ids[key])
     if (!el) continue
+    const ki = VT_STAGE_ORDER.indexOf(key)
     el.classList.toggle('active', key === active)
-    el.classList.toggle('done', VT_STAGE_ORDER.indexOf(key) < VT_STAGE_ORDER.indexOf(active))
+    el.classList.toggle('done', ki < ai)
   }
+  const l1 = document.getElementById('vtLine1')
+  const l2 = document.getElementById('vtLine2')
+  if (l1) l1.classList.toggle('done', ai > 0)
+  if (l2) l2.classList.toggle('done', ai > 1)
 }
 
 function vtBuildWordQuestions(bank) {
@@ -2858,11 +2862,12 @@ function vtStartStage(stage, questions, difficulty) {
   vtExam.questions = questions
   vtExam.index = 0
   vtExam.selected = null
+  vtExam.locked = false
   vtExam.screen = 'question'
   vtExam.stageDifficulty[stage] = difficulty
   vtSetStagePills(stage)
+  document.getElementById('vtTestArea').classList.add('quizzing')
   document.getElementById('vtHeadTag').textContent = VT_STAGE_META[stage].label
-  document.getElementById('vtState').textContent = `${VT_STAGE_META[stage].label}开始，${VT_STAGE_META[stage].sub}`
   vtRender()
 }
 
@@ -2890,34 +2895,29 @@ function vtRender() {
 
   if (vtExam.screen === 'question') {
     const q = vtExam.questions[vtExam.index]
-    const stageMeta = VT_STAGE_META[vtExam.stage]
-    const letterMap = ['A', 'B', 'C', 'D']
-    const passageHtml = q.passageText ? `<div class="vt-passage"><b>${esc(q.passageTitle || '短文')}</b><br>${esc(q.passageText)}</div>` : ''
+    const pct = Math.round((vtExam.index / vtExam.questions.length) * 100)
+    const passageHtml = q.passageText ? `<div class=”vt-passage”><b>${esc(q.passageTitle || '短文')}</b><br>${esc(q.passageText)}</div>` : ''
+    const locked = vtExam.locked
+    const correctIdx = locked ? q.options.indexOf(q.answer) : -1
     quizArea.innerHTML = `
-      <div class="vt-panel">
-        <div class="vt-panel-head">
-          <div>
-            <div class="vt-panel-title">${esc(stageMeta.label)}</div>
-            <div class="vt-panel-sub">${esc(stageMeta.sub)}</div>
-          </div>
-          <div class="vt-qcount">${vtExam.index + 1} / ${vtExam.questions.length}</div>
-        </div>
-        ${passageHtml}
-        <div class="vt-prompt">${esc(q.prompt)}</div>
-        <div class="vt-options">
-          ${q.options.map((opt, idx) => `
-            <button type="button" class="vt-option${vtExam.selected === idx ? ' selected' : ''}" onclick="vtPickAnswer(${idx})">
-              <span class="letter">${letterMap[idx] || idx + 1}</span>
-              <span class="txt">${esc(opt)}</span>
-            </button>
-          `).join('')}
-        </div>
-        <div class="vt-option-note${vtExam.selected != null ? ' show' : ''}">${vtExam.selected == null ? '先选一个答案，再继续。' : '选好了，按“下一题”提交。'}</div>
+      <div class=”vt-progress”><div class=”vt-progress-fill” style=”width:${pct}%”></div></div>
+      ${passageHtml}
+      <div class=”vt-prompt”>${esc(q.prompt)}</div>
+      <div class=”vt-options”>
+        ${q.options.map((opt, idx) => {
+          let cls = 'vt-option'
+          if (locked) {
+            if (idx === vtExam.selected && idx === correctIdx) cls += ' correct'
+            else if (idx === vtExam.selected) cls += ' wrong'
+            else if (idx === correctIdx) cls += ' correct'
+            else cls += ' locked'
+          } else if (vtExam.selected === idx) {
+            cls += ' selected'
+          }
+          return `<button type=”button” class=”${cls}” onclick=”vtPickAnswer(${idx})”>${esc(opt)}</button>`
+        }).join('')}
       </div>
     `
-    nextBtn.disabled = vtExam.selected == null
-    nextBtn.textContent = vtExam.index === vtExam.questions.length - 1 ? '提交本部分' : '下一题'
-    stateEl.textContent = `当前进度：${VT_STAGE_META[vtExam.stage].label} ${vtExam.index + 1}/${vtExam.questions.length}`
     return
   }
 
@@ -2992,42 +2992,40 @@ function vtRender() {
 
 function vtPickAnswer(idx) {
   vtEnsureExam()
-  if (vtExam.screen !== 'question') return
+  if (vtExam.screen !== 'question' || vtExam.locked) return
   vtExam.selected = idx
+  vtExam.locked = true
+
+  const q = vtExam.questions[vtExam.index]
+  const chosen = q.options[idx]
+  const isCorrect = chosen === q.answer
+  const stageKey = vtExam.stage
+  vtExam.sectionScores[stageKey].total++
+  if (isCorrect) vtExam.sectionScores[stageKey].correct++
+  vtExam.answers.push({
+    stage: stageKey, id: q.id, prompt: q.prompt,
+    chosen, answer: q.answer, correct: isCorrect,
+  })
+
   vtRender()
+
+  setTimeout(() => {
+    vtExam.locked = false
+    vtExam.selected = null
+    vtExam.index++
+    if (vtExam.index < vtExam.questions.length) {
+      vtRender()
+    } else {
+      vtFinishStage()
+    }
+  }, isCorrect ? 600 : 1200)
 }
 
 function vtNext() {
   vtEnsureExam()
   if (vtExam.screen === 'result') {
     startVocabTest()
-    return
   }
-  if (vtExam.selected == null) return
-
-  const q = vtExam.questions[vtExam.index]
-  const chosen = q.options[vtExam.selected]
-  const correct = chosen === q.answer
-  const stageKey = vtExam.stage
-  vtExam.sectionScores[stageKey].total++
-  if (correct) vtExam.sectionScores[stageKey].correct++
-  vtExam.answers.push({
-    stage: stageKey,
-    id: q.id,
-    prompt: q.prompt,
-    chosen,
-    answer: q.answer,
-    correct,
-  })
-  vtExam.selected = null
-  vtExam.index++
-
-  if (vtExam.index < vtExam.questions.length) {
-    vtRender()
-    return
-  }
-
-  vtFinishStage()
 }
 
 function vtFinishStage() {
@@ -3074,13 +3072,6 @@ function vtShowResult() {
 
 function vtAutoAdvance(nextStage, difficulty, delay = 350) {
   clearTimeout(vtAdvanceTimer)
-  const stateEl = document.getElementById('vtState')
-  const nextBtn = document.getElementById('vtNextBtn')
-  if (stateEl) stateEl.textContent = `${VT_STAGE_META[nextStage].label}马上开始…`
-  if (nextBtn) {
-    nextBtn.disabled = true
-    nextBtn.textContent = '自动切换中…'
-  }
   vtAdvanceTimer = setTimeout(() => {
     if (!vtExam || !vocabExamBank) return
     const q = nextStage === 'sentence'
