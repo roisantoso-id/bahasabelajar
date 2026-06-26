@@ -11,8 +11,21 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4f1e9">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#16201d">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%3E%3Crect%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%22112%22%20fill%3D%22%23174d40%22%2F%3E%3Cg%20transform%3D%22translate(106%20118)%20scale(12.5)%22%20fill%3D%22none%22%20stroke%3D%22%23f4f1e9%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M2%204h7a2%202%200%200%201%202%202v14a1%201%200%200%200-1-1H2zM22%204h-7a2%202%200%200%200-2%202v14a1%201%200%200%201%201-1h8z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
-<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22BahasaBelajar%20%E5%8D%B0%E5%B0%BC%E8%AF%AD%22%2C%22short_name%22%3A%22%E5%8D%B0%E5%B0%BC%E8%AF%AD%22%2C%22start_url%22%3A%22.%2F%22%2C%22scope%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait%22%2C%22background_color%22%3A%22%23f4f1e9%22%2C%22theme_color%22%3A%22%23f4f1e9%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%253D%2522http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%2522%2520viewBox%253D%25220%25200%2520512%2520512%2522%253E%253Crect%2520width%253D%2522512%2522%2520height%253D%2522512%2522%2520rx%253D%2522112%2522%2520fill%253D%2522%2523174d40%2522%252F%253E%253Cg%2520transform%253D%2522translate(106%2520118)%2520scale(12.5)%2522%2520fill%253D%2522none%2522%2520stroke%253D%2522%2523f4f1e9%2522%2520stroke-width%253D%25222%2522%2520stroke-linecap%253D%2522round%2522%2520stroke-linejoin%253D%2522round%2522%253E%253Cpath%2520d%253D%2522M2%25204h7a2%25202%25200%25200%25201%25202%25202v14a1%25201%25200%25200%25200-1-1H2zM22%25204h-7a2%25202%25200%25200%25200-2%25202v14a1%25201%25200%25200%25201%25201-1h8z%2522%252F%253E%253C%252Fg%253E%253C%252Fsvg%253E%22%2C%22sizes%22%3A%22any%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%22%7D%5D%7D">
+<link rel="apple-touch-icon" href="img/logo.png">
+<link rel="icon" type="image/png" href="img/logo.png">
+<link rel="manifest" id="pwaManifest" href="">
+<script>
+(function(){
+  try{
+    var m={name:'BahasaBelajar 印尼语',short_name:'印尼语',start_url:'./',scope:'./',
+      display:'standalone',orientation:'portrait',
+      background_color:'#174d40',theme_color:'#f4f1e9',
+      icons:[{src:'img/logo.png',sizes:'1254x1254',type:'image/png',purpose:'any maskable'}]};
+    var b=new Blob([JSON.stringify(m)],{type:'application/manifest+json'});
+    document.getElementById('pwaManifest').href=URL.createObjectURL(b);
+  }catch(e){}
+})();
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800;900&display=swap');
@@ -634,7 +647,8 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 .vt-num span{font-size:22px;vertical-align:super;margin-right:3px;color:var(--green2)}
 .vt-ci{font-size:12.5px;color:var(--muted);margin-top:5px;line-height:1.5}
 .vt-level-badge{display:inline-flex;flex-direction:column;align-items:center;gap:5px;margin:18px auto 0;padding:18px 32px;border-radius:22px;background:linear-gradient(180deg,#f8db85,#f4c95d);box-shadow:0 12px 28px rgba(244,201,93,.38)}
-.vt-level-emoji{font-size:40px;line-height:1.1}
+.vt-level-img{width:90px;height:90px;object-fit:contain;border-radius:14px}
+.vt-level-emoji-fb{font-size:54px;line-height:1.1;display:block}
 .vt-level-name{font-size:16px;font-weight:900;color:#174d40}
 .vt-level-id{font-size:12px;font-weight:700;color:#2a6b53;letter-spacing:.5px}
 .vt-funny-quote{font-size:14px;color:var(--muted);font-style:italic;margin:12px 8px 0;line-height:1.6}
@@ -2374,11 +2388,11 @@ async function loadAllNotes() {
 // ===== 词汇量测算 =====
 let vocabPool = null, vtSample = []
 const VT_LEVELS = [
-  { key:'buta',     max:200,      emoji:'😵', zh:'啥也不认识', id:'Buta Huruf',    quote:'你可能只认识「Halo」！',      color:['#3a3a4a','#1a1a2a'] },
-  { key:'pemula',   max:1000,     emoji:'🐣', zh:'印尼鸡宝',  id:'Pemula',        quote:'点菜还得靠手比脚划，加油！',  color:['#8b4513','#4a2008'] },
-  { key:'menengah', max:3000,     emoji:'🍜', zh:'能混过去',  id:'Lumayan Jago',  quote:'市场砍价勉强够用！',          color:['#1f5d4d','#0d3327'] },
-  { key:'jago',     max:6500,     emoji:'🔥', zh:'Bahasa Jago',id:'Jago Sekali',  quote:'印尼人都以为你是华裔！',      color:['#c25c10','#7a3008'] },
-  { key:'master',   max:Infinity, emoji:'👑', zh:'封神了！',  id:'Bahasa Master', quote:'你应该去教我们老师！',        color:['#5a2090','#28086a'] },
+  { key:'buta',     max:200,      emoji:'😵', img:'img/vt-lv1.webp', zh:'啥也不认识', id:'Buta Huruf',    quote:'你可能只认识「Halo」！',      color:['#3a3a4a','#1a1a2a'] },
+  { key:'pemula',   max:1000,     emoji:'🐣', img:'img/vt-lv2.webp', zh:'印尼鸡宝',  id:'Pemula',        quote:'点菜还得靠手比脚划，加油！',  color:['#8b4513','#4a2008'] },
+  { key:'menengah', max:3000,     emoji:'🍜', img:'img/vt-lv3.gif',  zh:'能混过去',  id:'Lumayan Jago',  quote:'市场砍价勉强够用！',          color:['#1f5d4d','#0d3327'] },
+  { key:'jago',     max:6500,     emoji:'🔥', img:'img/vt-lv4.webp', zh:'Bahasa Jago',id:'Jago Sekali',  quote:'印尼人都以为你是华裔！',      color:['#c25c10','#7a3008'] },
+  { key:'master',   max:Infinity, emoji:'👑', img:'img/vt-lv5.webp', zh:'封神了！',  id:'Bahasa Master', quote:'你应该去教我们老师！',        color:['#5a2090','#28086a'] },
 ]
 const VT_BANDS = { 1:1000, 2:3000, 3:6000 }
 const VT_PER_LEVEL = { 1:14, 2:14, 3:12 }
@@ -2483,7 +2497,7 @@ async function finishVocabTest() {
       <div class="vt-num"><span>≈</span>${estimate.toLocaleString()}</div>
       <div class="vt-ci">${ciLow.toLocaleString()} – ${ciHigh.toLocaleString()} 词（95% 置信区间）</div>
       <div class="vt-level-badge">
-        <div class="vt-level-emoji">${lvInfo.emoji}</div>
+        <img class="vt-level-img" src="${lvInfo.img}" alt="${esc(lvInfo.zh)}" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'vt-level-emoji-fb',textContent:'${lvInfo.emoji}'}))">
         <div class="vt-level-name">${esc(lvInfo.zh)}</div>
         <div class="vt-level-id">${esc(lvInfo.id)}</div>
       </div>
@@ -2522,7 +2536,7 @@ function vtWrapText(ctx, text, x, y, maxW, lh) {
   return lines.length
 }
 
-function drawShareCard(estimate, ciLow, ciHigh, lvIdx) {
+async function drawShareCard(estimate, ciLow, ciHigh, lvIdx) {
   const lv = VT_LEVELS[lvIdx] || VT_LEVELS[2]
   const W=540, H=530, DPR=2
   const canvas = document.createElement('canvas')
@@ -2553,10 +2567,25 @@ function drawShareCard(estimate, ciLow, ciHigh, lvIdx) {
   ctx.font='600 14px -apple-system,Helvetica,sans-serif'
   ctx.fillText(ciLow.toLocaleString()+' – '+ciHigh.toLocaleString()+' 词（95% 置信区间）', W/2, 208)
 
-  ctx.font='62px sans-serif'
-  ctx.fillText(lv.emoji, W/2, 275)
+  // 等级图片（加载失败降级到 emoji）
+  const imgSize = 92
+  const imgX = W/2 - imgSize/2, imgY = 232
+  try {
+    const lvImg = await new Promise((res, rej) => {
+      const i = new Image(); i.onload=()=>res(i); i.onerror=rej
+      i.src = lv.img
+    })
+    ctx.save()
+    vtRRectPath(ctx, imgX, imgY, imgSize, imgSize, 16)
+    ctx.clip()
+    ctx.drawImage(lvImg, imgX, imgY, imgSize, imgSize)
+    ctx.restore()
+  } catch {
+    ctx.font='62px sans-serif'
+    ctx.fillText(lv.emoji, W/2, imgY + imgSize/2)
+  }
 
-  const bW=320,bH=84,bX=(W-bW)/2,bY=308
+  const bW=320,bH=84,bX=(W-bW)/2,bY=340
   ctx.fillStyle='rgba(255,255,255,.13)'
   vtRRectPath(ctx,bX,bY,bW,bH,18); ctx.fill()
   ctx.fillStyle='#fff'
@@ -2567,21 +2596,21 @@ function drawShareCard(estimate, ciLow, ciHigh, lvIdx) {
   vtWrapText(ctx,'「'+lv.quote+'」',W/2,bY+57,bW-24,22)
 
   ctx.strokeStyle='rgba(255,255,255,.2)'; ctx.lineWidth=1
-  ctx.beginPath(); ctx.moveTo(56,420); ctx.lineTo(W-56,420); ctx.stroke()
+  ctx.beginPath(); ctx.moveTo(56,440); ctx.lineTo(W-56,440); ctx.stroke()
 
   ctx.fillStyle='#fff'
   ctx.font='900 17px -apple-system,Helvetica,sans-serif'
-  ctx.fillText('来测测你的印尼语词汇量！', W/2, 452)
+  ctx.fillText('来测测你的印尼语词汇量！', W/2, 468)
   ctx.fillStyle='rgba(255,255,255,.48)'
   ctx.font='600 12px -apple-system,Helvetica,sans-serif'
-  ctx.fillText('roisantoso-id.github.io/bahasabelajar', W/2, 472)
+  ctx.fillText('roisantoso-id.github.io/bahasabelajar', W/2, 490)
 
   return canvas
 }
 
 async function shareVocab(estimate, ciLow, ciHigh, lvIdx) {
   const lv = VT_LEVELS[lvIdx] || VT_LEVELS[2]
-  const canvas = drawShareCard(estimate, ciLow, ciHigh, lvIdx)
+  const canvas = await drawShareCard(estimate, ciLow, ciHigh, lvIdx)
   canvas.toBlob(async blob => {
     const file = new File([blob], 'bahasa-vocab.png', { type:'image/png' })
     if (navigator.share && navigator.canShare && navigator.canShare({ files:[file] })) {
