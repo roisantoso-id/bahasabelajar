@@ -80,8 +80,8 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .hero-cal-day.hc-done{color:#fff;background:linear-gradient(180deg,#2b7b62,#1f5d4d);font-size:9px}
 .hero-cal-day.hc-active{background:rgba(23,77,64,.08)}
 .hero-cal-day.hc-today{outline:1.5px solid var(--coral);outline-offset:-1px;border-radius:8px}
-.section-title{font-size:11px;font-weight:900;margin:8px 2px 6px;letter-spacing:.3px;color:#53635d;text-transform:uppercase}
-.task-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px}
+.section-title{font-size:11px;font-weight:900;margin:12px 2px 8px;letter-spacing:.3px;color:#53635d;text-transform:uppercase}
+.task-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
 .task{position:relative;display:flex;flex-direction:row;align-items:center;padding:10px;border-radius:14px;background:rgba(255,253,248,.86);border:1px solid rgba(20,41,37,.05);box-shadow:0 8px 20px rgba(23,45,39,.06);gap:8px}
 .task-top{flex-shrink:0;display:flex;align-items:center}
 .task-body{flex:1;min-width:0}
@@ -102,12 +102,11 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .task-badge[hidden]{display:none}
 .task-dot{position:absolute;top:12px;right:12px;width:10px;height:10px;border-radius:50%;background:#ff3b30;box-shadow:0 2px 6px rgba(255,59,48,.35)}
 .task-dot[hidden]{display:none}
-.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:6px}
-.quick-item{position:relative;display:flex;flex-direction:column;align-items:center;padding:10px 4px 8px;border-radius:14px;background:rgba(255,253,248,.86);border:1px solid rgba(20,41,37,.05);box-shadow:0 4px 12px rgba(23,45,39,.04);cursor:pointer;gap:4px}
-.quick-item .task-icon{width:34px;height:34px;border-radius:10px}
-.quick-item .task-name{font-size:10px;text-align:center}
-.quick-item .task-dot{top:6px;right:6px;width:8px;height:8px}
-.banner-row{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px}
+.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px}
+.quick-item{position:relative;display:flex;flex-direction:column;align-items:center;padding:14px 4px 10px;border-radius:14px;background:rgba(255,253,248,.86);border:1px solid rgba(20,41,37,.05);box-shadow:0 4px 12px rgba(23,45,39,.04);cursor:pointer;gap:6px}
+.quick-item .task-icon{width:38px;height:38px;border-radius:11px}
+.quick-item .task-name{font-size:11px;text-align:center;font-weight:800}
+.quick-item .task-dot{top:8px;right:8px;width:8px;height:8px}
 .stats-row{display:none}
 .stat{text-align:center}
 .stat-val{font-size:20px;font-weight:900;letter-spacing:-.3px}
@@ -494,8 +493,8 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 .listen-hint{text-align:center;color:var(--muted);font-size:12px;margin-top:18px}
 .hidden{display:none!important}
 /* ===== 本周趋势 ===== */
-.week-chart{padding:8px 10px;border-radius:14px;background:rgba(255,253,248,.92);border:1px solid rgba(20,41,37,.05);box-shadow:0 8px 20px rgba(23,45,39,.06)}
-.wc-bars{display:flex;align-items:flex-end;gap:6px;height:40px;margin-bottom:4px}
+.week-chart{padding:12px 10px;border-radius:14px;background:rgba(255,253,248,.92);border:1px solid rgba(20,41,37,.05);box-shadow:0 8px 20px rgba(23,45,39,.06)}
+.wc-bars{display:flex;align-items:flex-end;gap:6px;height:72px;margin-bottom:4px}
 .wc-bar{flex:1;border-radius:5px 5px 0 0;background:linear-gradient(180deg,#e8f2e8,#d7e7d7);min-height:4px;position:relative;transition:height .4s var(--ease)}
 .wc-bar.has{background:linear-gradient(180deg,var(--green2),var(--green))}
 .wc-val{position:absolute;top:-14px;left:0;right:0;text-align:center;font-size:9px;font-weight:700;color:var(--muted)}
@@ -651,7 +650,7 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 .ani-empty{text-align:center;color:var(--muted);font-size:13px;padding:20px 0}
 
 /* ===== 词汇量测算 ===== */
-.vocab-banner{position:relative;display:flex;align-items:center;gap:10px;margin-bottom:8px;padding:12px 14px;border-radius:16px;cursor:pointer;overflow:hidden;background:linear-gradient(135deg,#1f5d4d,#2d745f 60%,#3a8f6f);box-shadow:0 14px 30px rgba(23,77,64,.22);transition:transform .14s var(--ease)}
+.vocab-banner{position:relative;display:flex;align-items:center;gap:10px;margin-bottom:10px;padding:14px 14px;border-radius:16px;cursor:pointer;overflow:hidden;background:linear-gradient(135deg,#1f5d4d,#2d745f 60%,#3a8f6f);box-shadow:0 14px 30px rgba(23,77,64,.22);transition:transform .14s var(--ease)}
 .vocab-banner:active{transform:scale(.98)}
 .vocab-banner::after{content:'';position:absolute;right:-30px;top:-30px;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,rgba(244,201,93,.30),transparent 70%);pointer-events:none}
 .vocab-banner-icon{flex:none;width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.16);color:#fff}
@@ -758,7 +757,7 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 [data-theme="dark"] .session-wrong{background:rgba(241,116,85,.06);border-color:rgba(241,116,85,.14)}
 
 /* ===== 排行榜 ===== */
-.lb-banner{display:flex;align-items:center;gap:10px;margin:0 0 8px;padding:10px 14px;border-radius:14px;background:linear-gradient(135deg,#fff7e6 0%,#ffe8cc 100%);cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.lb-banner{display:flex;align-items:center;gap:10px;margin:0 0 10px;padding:12px 14px;border-radius:14px;background:linear-gradient(135deg,#fff7e6 0%,#ffe8cc 100%);cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.06)}
 .lb-banner-icon{font-size:22px;flex-shrink:0}
 .lb-banner-text{flex:1;min-width:0}
 .lb-banner-title{font-weight:700;font-size:14px;color:#333}
@@ -931,24 +930,22 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
       <div class="task-name">印尼文化</div>
     </div>
   </div>
-  <div class="banner-row">
-    <div class="vocab-banner" onclick="startVocabTest()" style="margin-bottom:0">
-      <span class="vocab-badge" id="vocabBadge">NEW</span>
-      <div class="vocab-banner-icon"><img src="img/home-bipa.svg" alt=""></div>
-      <div class="vocab-banner-text">
-        <div class="vocab-banner-title">BIPA 测评</div>
-        <div class="vocab-banner-sub">词汇量测算</div>
-      </div>
-      <span class="vocab-banner-arrow">›</span>
+  <div class="vocab-banner" onclick="startVocabTest()">
+    <span class="vocab-badge" id="vocabBadge">NEW</span>
+    <div class="vocab-banner-icon"><img src="img/home-bipa.svg" alt=""></div>
+    <div class="vocab-banner-text">
+      <div class="vocab-banner-title">BIPA 模拟测评</div>
+      <div class="vocab-banner-sub">单词、句子、阅读连着做，按答题表现自动切下一关</div>
     </div>
-    <div class="lb-banner" onclick="showView('leaderboard')" style="margin-bottom:0">
-      <div class="lb-banner-icon">🏆</div>
-      <div class="lb-banner-text">
-        <div class="lb-banner-title">排行榜</div>
-        <div class="lb-banner-sub">比比谁更厉害</div>
-      </div>
-      <span class="lb-banner-arrow">›</span>
+    <span class="vocab-banner-arrow">›</span>
+  </div>
+  <div class="lb-banner" onclick="showView('leaderboard')">
+    <div class="lb-banner-icon">🏆</div>
+    <div class="lb-banner-text">
+      <div class="lb-banner-title">排行榜</div>
+      <div class="lb-banner-sub">和其他同学比比谁更厉害</div>
     </div>
+    <span class="lb-banner-arrow">›</span>
   </div>
   <div class="section-title">本周趋势</div>
   <div class="week-chart" id="weekChart"></div>
@@ -2161,6 +2158,7 @@ function artWrapText(ctx, text, maxW) {
 }
 
 async function artBuildShareImage(a) {
+  const DPR = Math.max(window.devicePixelRatio || 1, 2)
   const W = 1080
   const PAD = 72
   const CW = W - PAD * 2
@@ -2272,11 +2270,12 @@ async function artBuildShareImage(a) {
     ctx.fillText('扫码或复制链接打开', W - PAD - qrSize, by + 158)
   }, footerH)
 
-  // now render
+  // now render at DPR resolution for crisp text
   const H = y + 40
   const canvas = document.createElement('canvas')
-  canvas.width = W; canvas.height = H
+  canvas.width = W * DPR; canvas.height = H * DPR
   const ctx = canvas.getContext('2d')
+  ctx.scale(DPR, DPR)
 
   // background
   ctx.fillStyle = '#fff'
