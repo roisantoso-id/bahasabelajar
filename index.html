@@ -2844,21 +2844,25 @@ function vtSetStagePills(active) {
   if (l2) l2.classList.toggle('done', ai > 1)
 }
 
+function vtShuffleOptions(q) {
+  return { ...q, options: vtShuffle(q.options) }
+}
+
 function vtBuildWordQuestions(bank) {
   return [
     ...vtSelectByDifficulty(bank.word, 'easy', 2),
     ...vtSelectByDifficulty(bank.word, 'medium', 2),
     ...vtSelectByDifficulty(bank.word, 'hard', 2),
-  ].map((q, idx) => ({ ...q, idx }))
+  ].map((q, idx) => vtShuffleOptions({ ...q, idx }))
 }
 
 function vtBuildSentenceQuestions(bank, difficulty) {
-  return vtSelectByDifficulty(bank.sentence, difficulty, VT_STAGE_META.sentence.total).map((q, idx) => ({ ...q, idx }))
+  return vtSelectByDifficulty(bank.sentence, difficulty, VT_STAGE_META.sentence.total).map((q, idx) => vtShuffleOptions({ ...q, idx }))
 }
 
 function vtBuildReadingQuestions(bank, difficulty) {
   const passage = vtPickReadingPassage(bank, difficulty)
-  return (passage.questions || []).slice(0, VT_STAGE_META.reading.total).map((q, idx) => ({
+  return (passage.questions || []).slice(0, VT_STAGE_META.reading.total).map((q, idx) => vtShuffleOptions({
     ...q,
     idx,
     passageTitle: passage.title,
@@ -3106,10 +3110,15 @@ function vtDrawCoverImage(ctx, img, x, y, w, h) {
 }
 
 async function vtBuildSharePoster(result) {
-  const W = 1080, H = 1440
+  const dpr = window.devicePixelRatio || 2
+  const baseW = Math.min(window.innerWidth || 390, 480)
+  const RW = 1080, RH = 1440
+  const W = Math.round(baseW * dpr), H = Math.round(W * RH / RW)
+  const S = W / RW
   const canvas = document.createElement('canvas')
   canvas.width = W; canvas.height = H
   const ctx = canvas.getContext('2d')
+  ctx.scale(S, S)
   const SF = 'system-ui,-apple-system,BlinkMacSystemFont,sans-serif'
   const name = vtShareName()
   const copy = VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']
@@ -3126,9 +3135,9 @@ async function vtBuildSharePoster(result) {
   const pal = palettes[result.level.code] || palettes['C1+']
 
   // --- background ---
-  const bg = ctx.createLinearGradient(0, 0, 0, H)
+  const bg = ctx.createLinearGradient(0, 0, 0, RH)
   bg.addColorStop(0, pal.bg1); bg.addColorStop(0.5, pal.bg2); bg.addColorStop(1, '#fffdf8')
-  ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H)
+  ctx.fillStyle = bg; ctx.fillRect(0, 0, RW, RH)
 
   // decorative circles
   ctx.globalAlpha = 0.12
@@ -3141,7 +3150,7 @@ async function vtBuildSharePoster(result) {
 
   // --- main card ---
   ctx.save()
-  vtRoundRectPath(ctx, 54, 54, W-108, H-108, 48)
+  vtRoundRectPath(ctx, 54, 54, RW-108, RH-108, 48)
   ctx.fillStyle = 'rgba(255,255,255,.88)'
   ctx.fill()
   ctx.restore()
@@ -3163,7 +3172,7 @@ async function vtBuildSharePoster(result) {
   ctx.fillText('BIPA 模拟测评', 180, 152)
 
   // --- level art (big, centered) ---
-  const artW = 820, artH = 420, artX = (W-artW)/2, artY = 200
+  const artW = 820, artH = 420, artX = (RW-artW)/2, artY = 200
   ctx.save()
   vtRoundRectPath(ctx, artX, artY, artW, artH, 36)
   ctx.fillStyle = '#f8f4ee'
@@ -3193,22 +3202,22 @@ async function vtBuildSharePoster(result) {
   ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic'
   ctx.fillStyle = pal.dark
   ctx.font = `1000 96px Georgia,${SF}`
-  ctx.fillText(`≈ ${result.estimate.toLocaleString()}`, W/2, numY)
+  ctx.fillText(`≈ ${result.estimate.toLocaleString()}`, RW/2, numY)
   ctx.fillStyle = '#8a7e6c'
   ctx.font = `700 28px ${SF}`
-  ctx.fillText(`词汇覆盖量`, W/2, numY + 38)
+  ctx.fillText(`词汇覆盖量`, RW/2, numY + 38)
 
   ctx.fillStyle = pal.accent
   ctx.font = `900 36px ${SF}`
-  ctx.fillText(`${name} 的印尼语水平：`, W/2, numY + 100)
+  ctx.fillText(`${name} 的印尼语水平：`, RW/2, numY + 100)
   ctx.fillStyle = pal.dark
   ctx.font = `1000 52px ${SF}`
-  ctx.fillText(`「${copy.headline}」`, W/2, numY + 162)
+  ctx.fillText(`「${copy.headline}」`, RW/2, numY + 162)
 
   // --- bilingual roast box ---
   const boxY = 910, boxH = 230
   ctx.save()
-  vtRoundRectPath(ctx, 90, boxY, W-180, boxH, 32)
+  vtRoundRectPath(ctx, 90, boxY, RW-180, boxH, 32)
   ctx.fillStyle = pal.dark; ctx.fill()
   ctx.restore()
 
@@ -3219,7 +3228,7 @@ async function vtBuildSharePoster(result) {
   ctx.fillText('🇮🇩 Bahasa', 134, boxY + 40)
   ctx.fillStyle = 'rgba(255,255,255,.92)'
   ctx.font = `italic 700 24px Georgia,${SF}`
-  vtWrapText(ctx, copy.id_quote, 134, boxY + 74, W-300, 32, 2)
+  vtWrapText(ctx, copy.id_quote, 134, boxY + 74, RW-300, 32, 2)
 
   // Chinese roast
   ctx.fillStyle = 'rgba(255,255,255,.5)'
@@ -3227,7 +3236,7 @@ async function vtBuildSharePoster(result) {
   ctx.fillText('🇨🇳 翻译', 134, boxY + 136)
   ctx.fillStyle = '#ffd66c'
   ctx.font = `900 24px ${SF}`
-  vtWrapText(ctx, copy.zh_roast, 134, boxY + 170, W-300, 32, 2)
+  vtWrapText(ctx, copy.zh_roast, 134, boxY + 170, RW-300, 32, 2)
 
   // --- score chips ---
   const chipY = 1172
@@ -3237,7 +3246,7 @@ async function vtBuildSharePoster(result) {
     ['阅读 Bacaan', `${Math.round(result.reading.rate*100)}%`, '#67c6a8'],
   ]
   let chipX = 100
-  const chipW = (W - 200 - 30) / 3
+  const chipW = (RW - 200 - 30) / 3
   for (const [label, value, color] of chipDefs) {
     ctx.fillStyle = color
     vtRoundRectPath(ctx, chipX, chipY, chipW, 80, 20); ctx.fill()
@@ -3254,10 +3263,10 @@ async function vtBuildSharePoster(result) {
   ctx.fillStyle = pal.accent
   ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic'
   ctx.font = `900 30px ${SF}`
-  ctx.fillText('你也来试试，看你有多 Jago？👇', W/2, 1320)
+  ctx.fillText('你也来试试，看你有多 Jago？👇', RW/2, 1320)
   ctx.fillStyle = '#b0a594'
   ctx.font = `700 20px ${SF}`
-  ctx.fillText('roisantoso-id.github.io/bahasabelajar', W/2, 1358)
+  ctx.fillText('roisantoso-id.github.io/bahasabelajar', RW/2, 1358)
 
   return await new Promise(resolve => {
     canvas.toBlob(blob => resolve(blob), 'image/png', 1)
