@@ -2901,6 +2901,7 @@ function vtBuildExamSummary() {
   const diffLabel = d => d === 'hard' ? '困难' : d === 'medium' ? '中等' : '基础'
   return {
     estimate, level, overallRate,
+    stageDifficulty: { ...vtExam.stageDifficulty },
     word: { score: w.correct, total: w.total, rate: wordRate, difficultyLabel: diffLabel(vtExam.stageDifficulty.word || 'mixed') },
     sentence: { score: s.correct, total: s.total, rate: sentenceRate, difficultyLabel: diffLabel(vtExam.stageDifficulty.sentence) },
     reading: { score: r.correct, total: r.total, rate: readingRate, difficultyLabel: diffLabel(vtExam.stageDifficulty.reading) },
