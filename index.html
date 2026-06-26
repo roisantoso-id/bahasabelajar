@@ -3061,11 +3061,12 @@ function vtShowResult() {
   document.getElementById('vtHeadTag').textContent = '结果'
   vtRender()
   refreshVocabBadge()
-  if (!vtExam.resultSaved) {
-    vtExam.resultSaved = true
+  if (!vtExam.resultSaving && !vtExam.resultSaved) {
+    vtExam.resultSaving = true
     void vtPersistVocabExamResult(vtExam.result).then(payload => {
+      vtExam.resultSaving = false
+      vtExam.resultSaved = !!(payload && payload.stored !== false)
       if (payload && payload.previous) vtExam.previousResult = payload.previous
-      if (payload && payload.result && payload.result.previous) vtExam.previousResult = payload.result.previous
       if (payload && payload.result && payload.result.created_at) vtExam.lastSavedResult = payload.result
     })
   }
@@ -3295,6 +3296,7 @@ async function startVocabTest() {
       previousResult,
       lastSavedResult: null,
       resultSaved: false,
+      resultSaving: false,
     }
     showView('vocabtest')
     vtResetUi()
