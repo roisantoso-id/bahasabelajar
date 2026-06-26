@@ -2469,17 +2469,78 @@ function vtDifficultyByRate(rate) {
   return 'easy'
 }
 
-function vtLoadBank() {
-  if (vocabExamBank) return Promise.resolve(vocabExamBank)
-  return fetch('./vocab-exam-bank.json', { cache: 'no-store' })
-    .then(r => {
-      if (!r.ok) throw new Error(`题库加载失败 ${r.status}`)
-      return r.json()
-    })
-    .then(data => {
-      vocabExamBank = data
-      return data
-    })
+function vtNormalizeOptions(value) {
+  if (Array.isArray(value)) return value.map(v => String(v))
+  if (typeof value === 'string' && value) {
+    try {
+      const parsed = JSON.parse(value)
+      if (Array.isArray(parsed)) return parsed.map(v => String(v))
+    } catch (e) {}
+    return [value]
+  }
+  return []
+}
+
+function vtNormalizeExamRows(rows) {
+  const bank = { word: [], sentence: [], reading: [] }
+  const readingMap = new Map()
+
+  for (const row of rows || []) {
+    if (!row || !row.section || !row.difficulty || !row.prompt) continue
+    const item = {
+      id: String(row.id ?? ''),
+      difficulty: String(row.difficulty),
+      prompt: String(row.prompt),
+      options: vtNormalizeOptions(row.options),
+      answer: String(row.answer ?? ''),
+      explain: String(row.explain ?? ''),
+      sortOrder: Number(row.sort_order ?? 0),
+    }
+    if (!item.id || !item.options.length || !item.answer) continue
+
+    if (row.section === 'reading') {
+      const key = `${row.difficulty}::${row.passage_title || ''}::${row.passage_text || ''}`
+      if (!readingMap.has(key)) {
+        readingMap.set(key, {
+          title: row.passage_title || '阅读材料',
+          passage: row.passage_text || '',
+          difficulty: String(row.difficulty),
+          questions: [],
+        })
+      }
+      readingMap.get(key).questions.push(item)
+      continue
+    }
+
+    if (bank[row.section]) bank[row.section].push(item)
+  }
+
+  for (const passage of readingMap.values()) {
+    passage.questions.sort((a, b) => a.sortOrder - b.sortOrder)
+    bank.reading.push(passage)
+  }
+  return bank
+}
+
+async function vtLoadBank() {
+  if (vocabExamBank) return vocabExamBank
+  if (!sb) throw new Error('Supabase 未初始化')
+  const { data, error } = await sb
+    .from('vocab_exam_bank')
+    .select('id,section,difficulty,prompt,options,answer,explain,passage_title,passage_text,sort_order,active')
+    .eq('active', true)
+    .order('section', { ascending: true })
+    .order('difficulty', { ascending: true })
+    .order('sort_order', { ascending: true })
+    .order('id', { ascending: true })
+  if (error) throw new Error(`题库加载失败：${error.message || error.code || 'unknown'}`)
+  if (!data || !data.length) throw new Error('题库为空，请先在 Supabase 导入数据')
+  const bank = vtNormalizeExamRows(data)
+  if (!bank.word.length || !bank.sentence.length || !bank.reading.length) {
+    throw new Error('题库不完整，请检查 Supabase 的题目数据')
+  }
+  vocabExamBank = bank
+  return bank
 }
 
 function vtEnsureExam() {
