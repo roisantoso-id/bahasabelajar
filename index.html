@@ -663,14 +663,14 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 .vt-ci{font-size:12.5px;color:var(--muted);margin-top:5px;line-height:1.5}
 .vt-result-card{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(210px,.85fr);gap:14px;margin-top:10px;align-items:stretch}
 .vt-result-main{padding:2px 0}
-.vt-result-side{padding:16px;border-radius:24px;background:linear-gradient(180deg,#fff7ea,#ffedd0);border:1px solid rgba(255,173,55,.16);box-shadow:0 10px 24px rgba(190,125,49,.12);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;position:relative;overflow:hidden}
+.vt-result-side{padding:16px;border-radius:24px;background:linear-gradient(180deg,#fff7ea,#ffedd0);border:1px solid rgba(255,173,55,.16);box-shadow:0 10px 24px rgba(190,125,49,.12);display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:10px;position:relative;overflow:hidden}
 .vt-result-side::before,.vt-result-side::after{content:'';position:absolute;border-radius:50%;background:rgba(255,255,255,.45)}
 .vt-result-side::before{width:74px;height:74px;top:-18px;right:-18px}
 .vt-result-side::after{width:54px;height:54px;left:-14px;bottom:-14px}
 .vt-side-tag{font-size:10px;font-weight:900;letter-spacing:1.8px;color:#d35f2a;background:rgba(255,255,255,.72);padding:6px 10px;border-radius:999px}
 .vt-side-title{font-size:26px;line-height:1;font-weight:1000;color:#174d40}
 .vt-side-sub{font-size:13px;font-weight:800;color:#885b00}
-.vt-side-art{width:172px;height:172px;object-fit:cover;border-radius:28px;background:#fff;box-shadow:0 14px 28px rgba(171,107,37,.16);border:6px solid rgba(255,255,255,.82)}
+.vt-side-art{width:100%;height:146px;object-fit:cover;border-radius:24px;background:#fff;box-shadow:0 14px 28px rgba(171,107,37,.16);border:6px solid rgba(255,255,255,.82)}
 .vt-side-copy{font-size:12px;line-height:1.55;color:#6f4c00;text-align:center;padding:0 6px}
 .vt-level-badge{display:inline-flex;flex-direction:column;align-items:center;gap:4px;margin:16px auto 0;padding:16px 22px;border-radius:24px;background:linear-gradient(180deg,#ffe499,#ffce47);box-shadow:0 12px 28px rgba(244,201,93,.34)}
 .vt-level-code{font-size:28px;font-weight:900;line-height:1;color:#174d40}
@@ -705,7 +705,6 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 [data-theme="dark"] .vt-hero h2{color:#f2f6f2}
 [data-theme="dark"] .vt-hero p{color:#c1cfc7}
 [data-theme="dark"] .vt-hero-kicker{background:rgba(255,150,94,.16);color:#ffbc8a}
-[data-theme="dark"] .vt-hero-art{background:linear-gradient(180deg,#2f352f,#3f2f18)}
 [data-theme="dark"] .vt-result-side{background:linear-gradient(180deg,#2a2114,#3a2b13);border-color:rgba(255,190,87,.12)}
 [data-theme="dark"] .vt-side-tag{background:rgba(255,255,255,.08);color:#ffcf8d}
 [data-theme="dark"] .vt-side-title{color:#fff2c2}
@@ -834,13 +833,12 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
         <h2>看看你是不是 Bahasa Jago</h2>
         <p>单词、句子、阅读三段式。答完不只出分，还会自动生成一张可以直接发出去的海报。</p>
       </div>
-      <div class="vt-hero-art"><img src="img/logo.png" alt="BahasaBelajar"></div>
     </div>
     <div class="vt-intro">这是一套 <b>BIPA 风格的三段式模拟测评</b>：先看词，再看句子，最后做短文阅读。单词环节的表现会决定后两部分的难度。</div>
     <div class="vt-stagebar">
-      <div class="vt-stage-pill active" id="vtStageWord">第1部分<b>单词选择</b></div>
-      <div class="vt-stage-pill" id="vtStageSentence">第2部分<b>句子理解</b></div>
-      <div class="vt-stage-pill" id="vtStageReading">第3部分<b>阅读理解</b></div>
+      <div class="vt-stage-pill active" id="vtStageWord">单词选择<b>Word</b></div>
+      <div class="vt-stage-pill" id="vtStageSentence">句子理解<b>Sentence</b></div>
+      <div class="vt-stage-pill" id="vtStageReading">阅读理解<b>Reading</b></div>
     </div>
     <div id="vtQuizArea"></div>
     <div class="vt-controls">
@@ -2756,7 +2754,7 @@ function vtStartStage(stage, questions, difficulty) {
   vtExam.screen = 'question'
   vtExam.stageDifficulty[stage] = difficulty
   vtSetStagePills(stage)
-  document.getElementById('vtHeadTag').textContent = stage === 'word' ? '第1部分' : stage === 'sentence' ? '第2部分' : '第3部分'
+  document.getElementById('vtHeadTag').textContent = VT_STAGE_META[stage].label
   document.getElementById('vtState').textContent = `${VT_STAGE_META[stage].label}开始，${VT_STAGE_META[stage].sub}`
   vtRender()
 }
@@ -3119,43 +3117,43 @@ async function vtBuildSharePoster(result) {
   ctx.fillText('别害羞，直接发出去，让朋友看看谁更会印尼语。', 128, 612)
 
   ctx.save()
-  vtRoundRectPath(ctx, 610, 235, 348, 520, 40)
+  vtRoundRectPath(ctx, 128, 660, 824, 286, 40)
   ctx.fillStyle = '#fff'
   ctx.fill()
   ctx.clip()
-  vtDrawCoverImage(ctx, art, 610, 235, 348, 520)
+  vtDrawCoverImage(ctx, art, 128, 660, 824, 286)
   ctx.restore()
   ctx.strokeStyle = 'rgba(255,255,255,.9)'
   ctx.lineWidth = 10
-  vtRoundRectPath(ctx, 610, 235, 348, 520, 40)
+  vtRoundRectPath(ctx, 128, 660, 824, 286, 40)
   ctx.stroke()
 
   ctx.save()
-  vtRoundRectPath(ctx, 620, 746, 328, 128, 32)
+  vtRoundRectPath(ctx, 620, 980, 332, 150, 32)
   ctx.fillStyle = 'rgba(255,255,255,.78)'
   ctx.fill()
   ctx.restore()
   ctx.fillStyle = '#1f5d4d'
   ctx.textAlign = 'center'
   ctx.font = '1000 30px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
-  ctx.fillText((VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']).headline, 784, 796)
+  ctx.fillText((VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']).headline, 786, 1042)
   ctx.fillStyle = '#6d5d46'
   ctx.font = '700 18px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
-  vtWrapText(ctx, vtShareText(result), 644, 834, 278, 26, 3)
+  vtWrapText(ctx, vtShareText(result), 644, 1080, 288, 26, 3)
 
   ctx.save()
-  vtRoundRectPath(ctx, 128, 716, 452, 236, 34)
+  vtRoundRectPath(ctx, 128, 992, 452, 236, 34)
   ctx.fillStyle = 'rgba(255,255,255,.78)'
   ctx.fill()
   ctx.restore()
   ctx.fillStyle = '#1f5d4d'
   ctx.textAlign = 'left'
   ctx.font = '900 30px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
-  ctx.fillText('小结不严肃，成绩很认真', 164, 770)
+  ctx.fillText('小结不严肃，成绩很认真', 164, 1046)
   ctx.fillStyle = '#6d5d46'
   ctx.font = '700 21px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
-  vtWrapText(ctx, '词汇、句子、阅读三连击后，你已经不是“看看就算了”的阶段了。', 164, 814, 360, 30, 3)
-  vtWrapText(ctx, `BIPA 参考级别：${result.level.code} · ${result.level.name}`, 164, 912, 360, 30, 2)
+  vtWrapText(ctx, (VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']).line1, 164, 1090, 360, 30, 3)
+  vtWrapText(ctx, (VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']).line2, 164, 1140, 360, 30, 3)
 
   ctx.save()
   vtRoundRectPath(ctx, 128, 980, 820, 188, 36)
@@ -3167,8 +3165,7 @@ async function vtBuildSharePoster(result) {
   ctx.fillText(`“${(VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']).headline}。”`, 164, 1054)
   ctx.font = '700 21px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
   ctx.fillStyle = 'rgba(255,255,255,.86)'
-  vtWrapText(ctx, (VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']).line1, 164, 1100, 740, 30, 3)
-  vtWrapText(ctx, (VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']).line2, 164, 1150, 740, 30, 3)
+  vtWrapText(ctx, (VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']).roast, 164, 1100, 740, 30, 3)
   ctx.fillStyle = '#ffd66c'
   ctx.font = '900 22px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
   ctx.fillText('现在就可以去炫耀一下。', 164, 1188)
@@ -3219,7 +3216,7 @@ async function startVocabTest() {
     }
     showView('vocabtest')
     vtResetUi()
-    document.getElementById('vtHeadTag').textContent = '第1部分'
+    document.getElementById('vtHeadTag').textContent = VT_STAGE_META.word.label
     vtSetStagePills('word')
     const questions = vtBuildWordQuestions(bank)
     vtExam.questions = questions
