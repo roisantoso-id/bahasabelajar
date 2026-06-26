@@ -624,52 +624,71 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 .vocab-badge{position:absolute;top:10px;right:12px;z-index:2;padding:2px 8px;border-radius:99px;background:#ff3b30;color:#fff;font-size:10px;font-weight:900;letter-spacing:.4px;box-shadow:0 4px 10px rgba(255,59,48,.4)}
 .vocab-badge.score{background:linear-gradient(180deg,#f8db85,#f4c95d);color:#174d40}
 /* 测试区 */
-.vt-intro{font-size:13px;line-height:1.6;color:var(--muted);margin-bottom:14px;padding:0 2px}
+.vt-intro{font-size:13px;line-height:1.6;color:var(--muted);margin-bottom:12px;padding:0 2px}
 .vt-intro b{color:var(--green2)}
-.vt-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:70px}
-.vt-word{position:relative;display:flex;flex-direction:column;padding:14px 50px 13px 16px;border-radius:16px;border:2px solid rgba(20,41,37,.08);background:rgba(255,253,248,.95);text-align:left;transition:all .15s var(--ease);cursor:pointer}
-.vt-word:active{transform:scale(.99)}
-.vt-word-top{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
-.vt-w{font-family:Georgia,serif;font-size:18px;font-weight:900;color:var(--ink)}
-.vt-pos{font-size:11px;color:#a0a59f;font-style:italic}
-.vt-zh{font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:5px}
-.vt-ex{font-size:11.5px;color:var(--muted);font-style:italic;line-height:1.5;border-left:2px solid rgba(20,41,37,.12);padding-left:8px}
-.vt-ex-zh{display:block;font-style:normal;font-size:11px;opacity:.8;margin-top:2px}
-.vt-check{position:absolute;top:50%;right:14px;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;border:2px solid rgba(20,41,37,.15);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:transparent;transition:all .15s var(--ease)}
-.vt-word.known{border-color:var(--green);background:linear-gradient(135deg,#eaf5ea,#d8efda)}
-.vt-word.known .vt-w{color:var(--green)}
-.vt-word.known .vt-check{background:var(--green);border-color:var(--green);color:#fff}
-.vt-submit{position:sticky;bottom:calc(14px + env(safe-area-inset-bottom));width:100%;height:54px;border-radius:16px;background:linear-gradient(180deg,#1f5d4d,#143d34);color:#fff;font-size:15px;font-weight:900;box-shadow:0 14px 28px rgba(23,45,39,.22);z-index:10}
-/* 结果 */
-.vt-result{text-align:center;padding:12px 0 50px}
+.vt-stagebar{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.vt-stage-pill{padding:10px 8px;border-radius:14px;background:rgba(255,253,248,.9);border:1px solid rgba(20,41,37,.08);text-align:center;font-size:11px;font-weight:900;color:#70817b}
+.vt-stage-pill b{display:block;font-size:14px;color:var(--ink);margin-top:2px}
+.vt-stage-pill.active{background:linear-gradient(180deg,#eaf5ea,#d8efda);border-color:rgba(23,77,64,.16);color:var(--green)}
+.vt-stage-pill.done{background:linear-gradient(180deg,#f3f8ef,#e8f2e8);border-color:rgba(23,77,64,.10);color:#4f695f}
+.vt-panel{padding:14px;border-radius:20px;background:rgba(255,253,248,.95);border:1px solid rgba(20,41,37,.06);box-shadow:0 10px 24px rgba(23,45,39,.07)}
+.vt-panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:10px}
+.vt-panel-title{font-size:16px;font-weight:900;letter-spacing:-.2px}
+.vt-panel-sub{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.4}
+.vt-qcount{font-size:11px;font-weight:800;color:var(--green2);padding:5px 10px;border-radius:99px;background:#edf6ef;flex:none}
+.vt-prompt{font-size:18px;font-weight:800;line-height:1.55;margin-bottom:12px;letter-spacing:-.2px}
+.vt-passage{padding:12px;border-radius:16px;background:linear-gradient(180deg,#faf7f0,#f3efe5);border:1px solid rgba(20,41,37,.06);font-size:13px;line-height:1.75;color:#37433f;margin-bottom:12px}
+.vt-options{display:grid;grid-template-columns:1fr;gap:8px}
+.vt-option{display:flex;align-items:flex-start;gap:10px;padding:12px 12px 12px 14px;border-radius:16px;border:1.5px solid rgba(20,41,37,.09);background:#fff;cursor:pointer;transition:transform .12s var(--ease),border-color .12s var(--ease),background .12s var(--ease)}
+.vt-option:active{transform:scale(.99)}
+.vt-option .letter{flex:none;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#eef3ea;color:var(--green);font-weight:900;font-size:12px}
+.vt-option .txt{flex:1;font-size:14px;line-height:1.55;color:var(--ink);font-weight:700}
+.vt-option.selected{border-color:#8fc1ad;background:linear-gradient(180deg,#eef8f0,#e7f3e9)}
+.vt-option.correct{border-color:#2d7a4f;background:linear-gradient(180deg,#e6f5e4,#d8efda)}
+.vt-option.wrong{border-color:#f2b0a0;background:linear-gradient(180deg,#fff0eb,#fde7df)}
+.vt-option.correct .letter,.vt-option.wrong .letter{color:#fff;background:var(--green)}
+.vt-option.wrong .letter{background:#d66b4d}
+.vt-option-note{margin-top:10px;font-size:11px;color:var(--muted);line-height:1.55;display:none}
+.vt-option-note.show{display:block}
+.vt-controls{display:flex;gap:10px;margin-top:12px}
+.vt-submit,.vt-retry,.vt-secondary{height:52px;border-radius:16px;font-size:15px;font-weight:900}
+.vt-submit{flex:1;background:linear-gradient(180deg,#1f5d4d,#143d34);color:#fff;box-shadow:0 14px 28px rgba(23,45,39,.22)}
+.vt-submit:disabled{opacity:.55;cursor:not-allowed}
+.vt-retry{flex:1;background:rgba(255,253,248,.92);border:1.5px solid rgba(20,41,37,.1);color:var(--ink)}
+.vt-secondary{flex:1;background:#eef3ea;color:#355247}
+.vt-state{margin-top:10px;font-size:12px;color:var(--muted);line-height:1.6}
+.vt-result{text-align:center;padding:10px 0 44px}
 .vt-result-eyebrow{font-size:10px;font-weight:900;letter-spacing:1.5px;color:var(--green2);margin-bottom:8px}
-.vt-num{font-size:56px;font-weight:900;font-family:Georgia,serif;letter-spacing:-2px;color:var(--green);line-height:1.05}
+.vt-num{font-size:54px;font-weight:900;font-family:Georgia,serif;letter-spacing:-2px;color:var(--green);line-height:1.05}
 .vt-num span{font-size:22px;vertical-align:super;margin-right:3px;color:var(--green2)}
 .vt-ci{font-size:12.5px;color:var(--muted);margin-top:5px;line-height:1.5}
-.vt-level-badge{display:inline-flex;flex-direction:column;align-items:center;gap:5px;margin:18px auto 0;padding:18px 32px;border-radius:22px;background:linear-gradient(180deg,#f8db85,#f4c95d);box-shadow:0 12px 28px rgba(244,201,93,.38)}
-.vt-level-img{width:90px;height:90px;object-fit:contain;border-radius:14px}
-.vt-level-emoji-fb{font-size:54px;line-height:1.1;display:block}
+.vt-level-badge{display:inline-flex;flex-direction:column;align-items:center;gap:4px;margin:18px auto 0;padding:16px 22px;border-radius:22px;background:linear-gradient(180deg,#f8db85,#f4c95d);box-shadow:0 12px 28px rgba(244,201,93,.38)}
+.vt-level-code{font-size:28px;font-weight:900;line-height:1;color:#174d40}
 .vt-level-name{font-size:16px;font-weight:900;color:#174d40}
 .vt-level-id{font-size:12px;font-weight:700;color:#2a6b53;letter-spacing:.5px}
+.vt-level-note{font-size:11px;color:#2f5c52;margin-top:2px}
 .vt-funny-quote{font-size:14px;color:var(--muted);font-style:italic;margin:12px 8px 0;line-height:1.6}
-.vt-bars{margin:22px 4px 0;text-align:left}
+.vt-bars{margin:18px 4px 0;text-align:left}
 .vt-bar-row{margin-bottom:12px}
 .vt-bar-top{display:flex;justify-content:space-between;font-size:12px;font-weight:800;color:var(--ink);margin-bottom:5px}
 .vt-bar-top span:last-child{color:var(--green2)}
 .vt-bar-track{height:8px;border-radius:99px;background:rgba(23,77,64,.1);overflow:hidden}
 .vt-bar-fill{height:100%;border-radius:inherit;background:linear-gradient(90deg,#1d5a4b,#2b7b62)}
-.vt-actions{display:flex;gap:10px;margin-top:26px}
-.vt-actions button{flex:1;height:52px;border-radius:16px;font-size:15px;font-weight:900}
+.vt-bar-meta{margin-top:4px;font-size:10.5px;color:var(--muted);text-align:right}
+.vt-actions{display:flex;gap:10px;margin-top:22px}
+.vt-actions button{flex:1}
 .vt-share{display:flex;align-items:center;justify-content:center;gap:7px;background:linear-gradient(180deg,#1f5d4d,#143d34);color:#fff;box-shadow:0 12px 24px rgba(23,45,39,.18)}
 .vt-share svg{width:18px;height:18px}
-.vt-retry{background:rgba(255,253,248,.92);border:1.5px solid rgba(20,41,37,.1);color:var(--ink)}
-.vt-note{font-size:11px;color:var(--muted);margin-top:16px;line-height:1.6}
-[data-theme="dark"] .vt-word{background:rgba(26,32,29,.92);border-color:rgba(200,220,210,.1)}
-[data-theme="dark"] .vt-word.known{background:linear-gradient(135deg,#16301f,#0d2014);border-color:var(--green2)}
-[data-theme="dark"] .vt-check{border-color:rgba(200,220,210,.22)}
-[data-theme="dark"] .vt-ex{border-color:rgba(200,220,210,.18)}
+.vt-note{font-size:11px;color:var(--muted);margin-top:14px;line-height:1.6}
+[data-theme="dark"] .vt-stage-pill,
+[data-theme="dark"] .vt-panel,
+[data-theme="dark"] .vt-option{background:rgba(26,32,29,.92);border-color:rgba(200,220,210,.1)}
+[data-theme="dark"] .vt-stage-pill.active{background:linear-gradient(180deg,#16301f,#0d2014);border-color:var(--green2)}
+[data-theme="dark"] .vt-option.selected{background:linear-gradient(180deg,#16301f,#0d2014)}
+[data-theme="dark"] .vt-option.correct{background:linear-gradient(180deg,#173421,#112915)}
+[data-theme="dark"] .vt-option.wrong{background:linear-gradient(180deg,#3a1c16,#281410)}
 [data-theme="dark"] .vt-bar-track{background:rgba(200,220,210,.12)}
-[data-theme="dark"] .vt-retry{background:rgba(26,32,29,.92);border-color:rgba(200,220,210,.12)}
+[data-theme="dark"] .vt-retry,[data-theme="dark"] .vt-secondary{background:rgba(26,32,29,.92);border-color:rgba(200,220,210,.12);color:#d9e7de}
 [data-theme="dark"] .vt-num{color:#5fae8a}
 
 /* dark */
@@ -753,8 +772,8 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
     <span class="vocab-badge" id="vocabBadge">NEW</span>
     <div class="vocab-banner-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6a9 3 0 0 0 18 0a9 3 0 0 0-18 0"/><path d="M3 6v6a9 3 0 0 0 18 0V6"/><path d="M3 12v6a9 3 0 0 0 18 0v-6"/></svg></div>
     <div class="vocab-banner-text">
-      <div class="vocab-banner-title">测测我的词汇量</div>
-      <div class="vocab-banner-sub">点选认识的词，估算掌握量 · 可分享</div>
+      <div class="vocab-banner-title">BIPA 模拟测评</div>
+      <div class="vocab-banner-sub">单词、句子、阅读三段式，按答题表现动态调整难度</div>
     </div>
     <span class="vocab-banner-arrow">›</span>
   </div>
@@ -783,13 +802,22 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 <div id="v-vocabtest" class="view">
   <div class="grammar-head">
     <button class="back" onclick="showView('home', document.querySelector('.tab'))">‹</button>
-    <h1>词汇量测算</h1>
-    <span class="grammar-lesson-tag" id="vtHeadTag">选词</span>
+    <h1>BIPA 模拟测评</h1>
+    <span class="grammar-lesson-tag" id="vtHeadTag">准备</span>
   </div>
   <div id="vtTestArea">
-    <div class="vt-intro">看看下面每个词。<b>认识就点选它</b> — 每词附有例句帮你判断，不确定就跳过。我们按词频三层抽样，用统计置信区间估算你的印尼语词汇量。</div>
-    <div class="vt-grid" id="vtGrid"></div>
-    <button class="vt-submit" onclick="finishVocabTest()">看结果 · 已选 <span id="vtSelCount">0</span> / 40</button>
+    <div class="vt-intro">这是一套 <b>BIPA 风格的三段式模拟测评</b>：先看词，再看句子，最后做短文阅读。单词环节的表现会决定后两部分的难度。</div>
+    <div class="vt-stagebar">
+      <div class="vt-stage-pill active" id="vtStageWord">第1部分<b>单词选择</b></div>
+      <div class="vt-stage-pill" id="vtStageSentence">第2部分<b>句子理解</b></div>
+      <div class="vt-stage-pill" id="vtStageReading">第3部分<b>阅读理解</b></div>
+    </div>
+    <div id="vtQuizArea"></div>
+    <div class="vt-controls">
+      <button class="vt-submit" id="vtNextBtn" onclick="vtNext()" disabled>选择答案后继续</button>
+      <button class="vt-retry" id="vtRestartBtn" onclick="startVocabTest()">重新开始</button>
+    </div>
+    <div class="vt-state" id="vtState">点击上方的词汇入口开始测评。</div>
   </div>
   <div id="vtResultArea" style="display:none"></div>
 </div>
@@ -2385,248 +2413,425 @@ async function loadAllNotes() {
   } catch(e) { if (el) el.innerHTML = '' }
 }
 
-// ===== 词汇量测算 =====
-let vocabPool = null, vtSample = []
-const VT_LEVELS = [
-  { key:'buta',     max:200,      emoji:'😵', img:'img/vt-lv1.webp', zh:'啥也不认识', id:'Buta Huruf',    quote:'你可能只认识「Halo」！',      color:['#3a3a4a','#1a1a2a'] },
-  { key:'pemula',   max:1000,     emoji:'🐣', img:'img/vt-lv2.webp', zh:'印尼鸡宝',  id:'Pemula',        quote:'点菜还得靠手比脚划，加油！',  color:['#8b4513','#4a2008'] },
-  { key:'menengah', max:3000,     emoji:'🍜', img:'img/vt-lv3.webp', zh:'能混过去',  id:'Lumayan Jago',  quote:'市场砍价勉强够用！',          color:['#1f5d4d','#0d3327'] },
-  { key:'jago',     max:6500,     emoji:'🔥', img:'img/vt-lv4.webp', zh:'Bahasa Jago',id:'Jago Sekali',  quote:'印尼人都以为你是华裔！',      color:['#c25c10','#7a3008'] },
-  { key:'master',   max:Infinity, emoji:'👑', img:'img/vt-lv5.webp', zh:'封神了！',  id:'Bahasa Master', quote:'你应该去教我们老师！',        color:['#5a2090','#28086a'] },
+// ===== BIPA 模拟测评 =====
+let vocabExamBank = null
+let vtExam = null
+
+const VT_STAGE_META = {
+  word: { label: '单词选择', sub: '识别基础词义，判断词汇覆盖。', total: 6 },
+  sentence: { label: '句子理解', sub: '补全句子，判断结构和搭配。', total: 6 },
+  reading: { label: '阅读理解', sub: '短文阅读，判断整体理解能力。', total: 4 },
+}
+
+const VT_STAGE_ORDER = ['word', 'sentence', 'reading']
+
+const VT_BIPA_LEVELS = [
+  { max: 1500, code: 'A1', name: '入门', note: '适合从最常见词汇开始。' },
+  { max: 3000, code: 'A2', name: '基础', note: '能处理常见生活场景。' },
+  { max: 5000, code: 'B1', name: '中级', note: '能应对较多日常与校园场景。' },
+  { max: 7000, code: 'B2', name: '进阶', note: '能阅读较完整的文章。' },
+  { max: Infinity, code: 'C1+', name: '高阶', note: '综合理解和表达已较稳。' },
 ]
-const VT_BANDS = { 1:1000, 2:3000, 3:6000 }
-const VT_PER_LEVEL = { 1:14, 2:14, 3:12 }
 
 function vtShuffle(arr) {
   const a = arr.slice()
-  for (let i = a.length-1; i > 0; i--) { const j = Math.floor(Math.random()*(i+1)); const t=a[i]; a[i]=a[j]; a[j]=t }
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    const t = a[i]
+    a[i] = a[j]
+    a[j] = t
+  }
   return a
 }
-function wilsonCI(k, n, z=1.96) {
-  if (!n) return [0, 1]
-  const p = k/n, denom = 1 + z*z/n
-  const center = (p + z*z/(2*n)) / denom
-  const margin = z * Math.sqrt(p*(1-p)/n + z*z/(4*n*n)) / denom
-  return [Math.max(0, center-margin), Math.min(1, center+margin)]
+
+function vtRound10(n) {
+  return Math.round(n / 10) * 10
+}
+
+function vtSelectByDifficulty(pool, difficulty, count) {
+  const ranked = pool.filter(q => q.difficulty === difficulty)
+  const fallback = pool.filter(q => q.difficulty !== difficulty)
+  const merged = vtShuffle(ranked).concat(vtShuffle(fallback))
+  return merged.slice(0, count)
+}
+
+function vtPickReadingPassage(bank, difficulty) {
+  const pool = bank.reading.filter(p => p.difficulty === difficulty)
+  const fallback = bank.reading.filter(p => p.difficulty !== difficulty)
+  const source = (pool.length ? pool : fallback)
+  const passage = vtShuffle(source)[0]
+  return passage
+}
+
+function vtDifficultyByRate(rate) {
+  if (rate >= 0.83) return 'hard'
+  if (rate >= 0.55) return 'medium'
+  return 'easy'
+}
+
+function vtLoadBank() {
+  if (vocabExamBank) return Promise.resolve(vocabExamBank)
+  return fetch('./vocab-exam-bank.json', { cache: 'no-store' })
+    .then(r => {
+      if (!r.ok) throw new Error(`题库加载失败 ${r.status}`)
+      return r.json()
+    })
+    .then(data => {
+      vocabExamBank = data
+      return data
+    })
+}
+
+function vtEnsureExam() {
+  if (!vtExam) throw new Error('测评未初始化')
+}
+
+function vtResetUi() {
+  document.getElementById('vtResultArea').style.display = 'none'
+  document.getElementById('vtResultArea').innerHTML = ''
+  document.getElementById('vtTestArea').style.display = ''
+}
+
+function vtSetStagePills(active) {
+  for (const key of VT_STAGE_ORDER) {
+    const el = document.getElementById(`vtStage${key[0].toUpperCase()}${key.slice(1)}`)
+    if (!el) continue
+    el.classList.toggle('active', key === active)
+    el.classList.toggle('done', VT_STAGE_ORDER.indexOf(key) < VT_STAGE_ORDER.indexOf(active))
+  }
+}
+
+function vtBuildWordQuestions(bank) {
+  return [
+    ...vtSelectByDifficulty(bank.word, 'easy', 2),
+    ...vtSelectByDifficulty(bank.word, 'medium', 2),
+    ...vtSelectByDifficulty(bank.word, 'hard', 2),
+  ].map((q, idx) => ({ ...q, idx }))
+}
+
+function vtBuildSentenceQuestions(bank, difficulty) {
+  return vtSelectByDifficulty(bank.sentence, difficulty, VT_STAGE_META.sentence.total).map((q, idx) => ({ ...q, idx }))
+}
+
+function vtBuildReadingQuestions(bank, difficulty) {
+  const passage = vtPickReadingPassage(bank, difficulty)
+  return (passage.questions || []).slice(0, VT_STAGE_META.reading.total).map((q, idx) => ({
+    ...q,
+    idx,
+    passageTitle: passage.title,
+    passageText: passage.passage,
+    passageDifficulty: passage.difficulty,
+  }))
+}
+
+function vtStartStage(stage, questions, difficulty) {
+  vtExam.stage = stage
+  vtExam.questions = questions
+  vtExam.index = 0
+  vtExam.selected = null
+  vtExam.screen = 'question'
+  vtExam.stageDifficulty[stage] = difficulty
+  vtSetStagePills(stage)
+  document.getElementById('vtHeadTag').textContent = stage === 'word' ? '第1部分' : stage === 'sentence' ? '第2部分' : '第3部分'
+  document.getElementById('vtState').textContent = `${VT_STAGE_META[stage].label}开始，${VT_STAGE_META[stage].sub}`
+  vtRender()
+}
+
+function vtBuildExamSummary() {
+  const word = vtExam.sectionScores.word
+  const sentence = vtExam.sectionScores.sentence
+  const reading = vtExam.sectionScores.reading
+  const wordRate = word.correct / word.total
+  const sentenceRate = sentence.correct / sentence.total
+  const readingRate = reading.correct / reading.total
+  const overallRate = (word.correct + sentence.correct + reading.correct) / (word.total + sentence.total + reading.total)
+  const rawEstimate = 700 + wordRate * 2600 + sentenceRate * 2500 + readingRate * 2200
+    + (vtExam.stageDifficulty.sentence === 'medium' ? 250 : vtExam.stageDifficulty.sentence === 'hard' ? 650 : 0)
+    + (vtExam.stageDifficulty.reading === 'medium' ? 220 : vtExam.stageDifficulty.reading === 'hard' ? 650 : 0)
+  const estimate = vtRound10(rawEstimate)
+  const level = VT_BIPA_LEVELS.find(l => estimate < l.max) || VT_BIPA_LEVELS[VT_BIPA_LEVELS.length - 1]
+  return { estimate, level, overallRate, wordRate, sentenceRate, readingRate }
+}
+
+function vtRender() {
+  vtEnsureExam()
+  const quizArea = document.getElementById('vtQuizArea')
+  const nextBtn = document.getElementById('vtNextBtn')
+  const stateEl = document.getElementById('vtState')
+
+  if (vtExam.screen === 'question') {
+    const q = vtExam.questions[vtExam.index]
+    const stageMeta = VT_STAGE_META[vtExam.stage]
+    const letterMap = ['A', 'B', 'C', 'D']
+    const passageHtml = q.passageText ? `<div class="vt-passage"><b>${esc(q.passageTitle || '短文')}</b><br>${esc(q.passageText)}</div>` : ''
+    quizArea.innerHTML = `
+      <div class="vt-panel">
+        <div class="vt-panel-head">
+          <div>
+            <div class="vt-panel-title">${esc(stageMeta.label)}</div>
+            <div class="vt-panel-sub">${esc(stageMeta.sub)}</div>
+          </div>
+          <div class="vt-qcount">${vtExam.index + 1} / ${vtExam.questions.length}</div>
+        </div>
+        ${passageHtml}
+        <div class="vt-prompt">${esc(q.prompt)}</div>
+        <div class="vt-options">
+          ${q.options.map((opt, idx) => `
+            <button type="button" class="vt-option${vtExam.selected === idx ? ' selected' : ''}" onclick="vtPickAnswer(${idx})">
+              <span class="letter">${letterMap[idx] || idx + 1}</span>
+              <span class="txt">${esc(opt)}</span>
+            </button>
+          `).join('')}
+        </div>
+        <div class="vt-option-note${vtExam.selected != null ? ' show' : ''}">${vtExam.selected == null ? '先选一个答案，再继续。' : '选好了，按“下一题”提交。'}</div>
+      </div>
+    `
+    nextBtn.disabled = vtExam.selected == null
+    nextBtn.textContent = vtExam.index === vtExam.questions.length - 1 ? '提交本部分' : '下一题'
+    stateEl.textContent = `当前进度：${VT_STAGE_META[vtExam.stage].label} ${vtExam.index + 1}/${vtExam.questions.length}`
+    return
+  }
+
+  if (vtExam.screen === 'summary') {
+    const s = vtExam.summary
+    const nextLabel = vtExam.summaryNext === 'sentence'
+      ? `继续进入句子环节（${VT_STAGE_META.sentence.label}）`
+      : vtExam.summaryNext === 'reading'
+        ? `继续进入阅读环节（${VT_STAGE_META.reading.label}）`
+        : '查看结果'
+    quizArea.innerHTML = `
+      <div class="vt-panel">
+        <div class="vt-panel-head">
+          <div>
+            <div class="vt-panel-title">${esc(s.title)}</div>
+            <div class="vt-panel-sub">${esc(s.subtitle)}</div>
+          </div>
+          <div class="vt-qcount">${s.score}/${s.total}</div>
+        </div>
+        <div class="vt-result" style="padding:10px 0 0">
+          <div class="vt-num"><span>${s.rate >= 0.83 ? '✓' : '·'}</span>${Math.round(s.rate * 100)}%</div>
+          <div class="vt-ci">${esc(s.note)}</div>
+        </div>
+      </div>
+    `
+    nextBtn.disabled = false
+    nextBtn.textContent = nextLabel
+    stateEl.textContent = s.note
+    return
+  }
+
+  if (vtExam.screen === 'result') {
+    const result = vtExam.result
+    quizArea.innerHTML = ''
+    document.getElementById('vtResultArea').style.display = ''
+    document.getElementById('vtHeadTag').textContent = '结果'
+    document.getElementById('vtResultArea').innerHTML = `
+      <div class="vt-result">
+        <div class="vt-result-eyebrow">BIPA 模拟测评结果</div>
+        <div class="vt-num"><span>≈</span>${result.estimate.toLocaleString()}</div>
+        <div class="vt-ci">词汇覆盖估算 · ${result.level.code} · ${result.level.name}</div>
+        <div class="vt-level-badge">
+          <div class="vt-level-code">${result.level.code}</div>
+          <div class="vt-level-name">${result.level.name}</div>
+          <div class="vt-level-id">BIPA 参考级别</div>
+          <div class="vt-level-note">${esc(result.level.note)}</div>
+        </div>
+        <div class="vt-funny-quote">词汇选择、句子结构、阅读理解三部分综合而成。</div>
+        <div class="vt-bars">
+          <div class="vt-bar-row">
+            <div class="vt-bar-top"><span>单词选择</span><span>${result.word.score}/${result.word.total}</span></div>
+            <div class="vt-bar-track"><div class="vt-bar-fill" style="width:${Math.round(result.word.rate * 100)}%"></div></div>
+            <div class="vt-bar-meta">${result.word.difficultyLabel}</div>
+          </div>
+          <div class="vt-bar-row">
+            <div class="vt-bar-top"><span>句子理解</span><span>${result.sentence.score}/${result.sentence.total}</span></div>
+            <div class="vt-bar-track"><div class="vt-bar-fill" style="width:${Math.round(result.sentence.rate * 100)}%"></div></div>
+            <div class="vt-bar-meta">${result.sentence.difficultyLabel}</div>
+          </div>
+          <div class="vt-bar-row">
+            <div class="vt-bar-top"><span>阅读理解</span><span>${result.reading.score}/${result.reading.total}</span></div>
+            <div class="vt-bar-track"><div class="vt-bar-fill" style="width:${Math.round(result.reading.rate * 100)}%"></div></div>
+            <div class="vt-bar-meta">${result.reading.difficultyLabel}</div>
+          </div>
+        </div>
+        <div class="vt-actions">
+          <button class="vt-share" onclick="shareVocabExam()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
+            分享结果
+          </button>
+          <button class="vt-retry" onclick="startVocabTest()">重新测评</button>
+        </div>
+        <div class="vt-note">这是 BIPA 风格的模拟测评，不是官方认证考试。题库可继续扩充。</div>
+      </div>
+    `
+    nextBtn.disabled = false
+    nextBtn.textContent = '重新测评'
+    stateEl.textContent = '测评完成'
+  }
+}
+
+function vtPickAnswer(idx) {
+  vtEnsureExam()
+  if (vtExam.screen !== 'question') return
+  vtExam.selected = idx
+  vtRender()
+}
+
+function vtNext() {
+  vtEnsureExam()
+  if (vtExam.screen === 'summary') {
+    if (vtExam.summaryNext === 'sentence') {
+      const q = vtBuildSentenceQuestions(vocabExamBank, vtExam.stageDifficulty.sentence)
+      vtStartStage('sentence', q, vtExam.stageDifficulty.sentence)
+      return
+    }
+    if (vtExam.summaryNext === 'reading') {
+      const q = vtBuildReadingQuestions(vocabExamBank, vtExam.stageDifficulty.reading)
+      vtStartStage('reading', q, vtExam.stageDifficulty.reading)
+      return
+    }
+    vtShowResult()
+    return
+  }
+  if (vtExam.screen === 'result') {
+    startVocabTest()
+    return
+  }
+  if (vtExam.selected == null) return
+
+  const q = vtExam.questions[vtExam.index]
+  const chosen = q.options[vtExam.selected]
+  const correct = chosen === q.answer
+  const stageKey = vtExam.stage
+  vtExam.sectionScores[stageKey].total++
+  if (correct) vtExam.sectionScores[stageKey].correct++
+  vtExam.answers.push({
+    stage: stageKey,
+    id: q.id,
+    prompt: q.prompt,
+    chosen,
+    answer: q.answer,
+    correct,
+  })
+  vtExam.selected = null
+  vtExam.index++
+
+  if (vtExam.index < vtExam.questions.length) {
+    vtRender()
+    return
+  }
+
+  vtFinishStage()
+}
+
+function vtFinishStage() {
+  const stage = vtExam.stage
+  const score = vtExam.sectionScores[stage].correct
+  const total = vtExam.sectionScores[stage].total
+  const rate = total ? score / total : 0
+  if (stage === 'word') {
+    const next = vtDifficultyByRate(rate)
+    vtExam.stageDifficulty.sentence = next
+    vtExam.summary = {
+      title: '单词选择完成',
+      subtitle: `你的词义识别表现决定了句子部分的难度：${VT_STAGE_META.sentence.label} · ${next === 'hard' ? '进阶' : next === 'medium' ? '标准' : '入门'}`,
+      score,
+      total,
+      rate,
+      note: rate >= 0.83 ? '词汇基础较稳，可以进入更高强度的句子理解。' : rate >= 0.55 ? '基础还不错，下一部分保持标准难度。' : '先从更基础的句子开始，避免一上来太吃力。',
+    }
+    vtExam.summaryNext = 'sentence'
+    vtExam.screen = 'summary'
+  } else if (stage === 'sentence') {
+    const combined = (vtExam.sectionScores.word.correct + vtExam.sectionScores.sentence.correct) /
+      (vtExam.sectionScores.word.total + vtExam.sectionScores.sentence.total)
+    const next = vtDifficultyByRate(combined)
+    vtExam.stageDifficulty.reading = next
+    vtExam.summary = {
+      title: '句子理解完成',
+      subtitle: `阅读部分将采用 ${next === 'hard' ? '进阶' : next === 'medium' ? '标准' : '入门'} 难度。`,
+      score,
+      total,
+      rate,
+      note: rate >= 0.83 ? '句法和搭配掌握较稳，可以进入阅读理解。' : rate >= 0.55 ? '句子层面表现正常，阅读会保持中等难度。' : '句子理解还有提升空间，阅读会放慢一点。',
+    }
+    vtExam.summaryNext = 'reading'
+    vtExam.screen = 'summary'
+  } else {
+    vtExam.screen = 'result'
+    vtExam.result = vtBuildExamSummary()
+    localStorage.setItem('bb_vocab_last', String(vtExam.result.estimate))
+  }
+  vtRender()
+}
+
+function vtShowResult() {
+  vtExam.screen = 'result'
+  vtExam.result = vtBuildExamSummary()
+  localStorage.setItem('bb_vocab_last', String(vtExam.result.estimate))
+  vtSetStagePills('reading')
+  document.getElementById('vtHeadTag').textContent = '结果'
+  vtRender()
+  refreshVocabBadge()
 }
 
 async function startVocabTest() {
   if (!sb) return alert('请先登录')
-  if (!vocabPool) {
-    try { const { data } = await sb.from('words').select('word,pos,meaning,level,examples').range(0, 1999); vocabPool = data || [] }
-    catch (e) { vocabPool = [] }
-  }
-  if (!vocabPool.length) return alert('词库加载失败，稍后再试')
-  vtSample = []
-  for (const lv of [1,2,3]) {
-    vtSample = vtSample.concat(vtShuffle(vocabPool.filter(w => w.level === lv)).slice(0, VT_PER_LEVEL[lv]))
-  }
-  vtSample = vtShuffle(vtSample)
-  document.getElementById('vtGrid').innerHTML = vtSample.map((w, i) => {
-    const ex = Array.isArray(w.examples) && w.examples[0] ? w.examples[0] : null
-    return `<button class="vt-word" data-i="${i}" onclick="toggleVtWord(this)">
-      <div class="vt-word-top"><span class="vt-w">${esc(w.word)}</span><span class="vt-pos">${esc(w.pos||'')}</span></div>
-      <div class="vt-zh">${esc(w.meaning||'')}</div>
-      ${ex ? `<div class="vt-ex">${esc(ex.id||'')}<span class="vt-ex-zh">${esc(ex.zh||'')}</span></div>` : ''}
-      <div class="vt-check">✓</div>
-    </button>`
-  }).join('')
-  document.getElementById('vtSelCount').textContent = '0'
-  document.getElementById('vtTestArea').style.display = ''
-  const ra = document.getElementById('vtResultArea'); ra.style.display = 'none'; ra.innerHTML = ''
-  document.getElementById('vtHeadTag').textContent = '选词'
-  showView('vocabtest')
-  window.scrollTo(0, 0)
-}
-
-function toggleVtWord(el) {
-  el.classList.toggle('known')
-  document.getElementById('vtSelCount').textContent = document.querySelectorAll('#vtGrid .vt-word.known').length
-}
-
-async function finishVocabTest() {
-  const byLevel = { 1:{s:0,k:0}, 2:{s:0,k:0}, 3:{s:0,k:0} }
-  document.querySelectorAll('#vtGrid .vt-word').forEach(el => {
-    const w = vtSample[+el.dataset.i]; if (!w || !byLevel[w.level]) return
-    byLevel[w.level].s++; if (el.classList.contains('known')) byLevel[w.level].k++
-  })
-  const samples = [1,2,3].map(lv => ({ level:lv, sampled:byLevel[lv].s, known:byLevel[lv].k }))
-  const LV_NAMES = ['入门高频词','初级词','中级词']
-
-  let estimate, ciLow, ciHigh, rows
   try {
-    const { data: { session } } = await sb.auth.getSession()
-    const token = session && session.access_token
-    const r = await fetch(`${SUPABASE_URL}/functions/v1/vocab-test`, {
-      method:'POST',
-      headers:{ 'Content-Type':'application/json', apikey:SUPABASE_KEY, ...(token?{Authorization:'Bearer '+token}:{}) },
-      body: JSON.stringify({ samples })
-    })
-    if (!r.ok) throw new Error(r.status)
-    const d = await r.json()
-    estimate=d.estimate; ciLow=d.ciLow; ciHigh=d.ciHigh
-    rows = d.rows.map((r,i)=>({ name:LV_NAMES[i]||LV_NAMES[r.level-1], rate:r.sampled?r.known/r.sampled:0, est:r.est }))
-  } catch(e) {
-    estimate=0; ciLow=0; ciHigh=0; rows=[]
-    for (let i=0; i<3; i++) {
-      const lv=i+1, b=byLevel[lv]
-      const [pL,pH] = wilsonCI(b.k, b.s)
-      const rate=b.s?b.k/b.s:0, band=VT_BANDS[lv], est=Math.round(rate*band)
-      ciLow+=Math.round(pL*band); ciHigh+=Math.round(pH*band); estimate+=est
-      rows.push({ name:LV_NAMES[i], rate, est })
+    const bank = await vtLoadBank()
+    vocabExamBank = bank
+    vtExam = {
+      stage: 'word',
+      screen: 'question',
+      questions: [],
+      index: 0,
+      selected: null,
+      answers: [],
+      sectionScores: {
+        word: { correct: 0, total: 0 },
+        sentence: { correct: 0, total: 0 },
+        reading: { correct: 0, total: 0 },
+      },
+      stageDifficulty: { word: 'mixed', sentence: 'medium', reading: 'medium' },
+      summary: null,
+      summaryNext: null,
+      result: null,
     }
-    estimate=Math.round(estimate/10)*10
-    ciLow=Math.round(ciLow/10)*10; ciHigh=Math.round(ciHigh/10)*10
+    showView('vocabtest')
+    vtResetUi()
+    document.getElementById('vtHeadTag').textContent = '第1部分'
+    vtSetStagePills('word')
+    const questions = vtBuildWordQuestions(bank)
+    vtExam.questions = questions
+    document.getElementById('vtState').textContent = '先完成单词选择，系统会据此决定后两部分的难度。'
+    vtRender()
+  } catch (e) {
+    alert(e.message || '题库加载失败')
   }
-
-  const lvInfo = VT_LEVELS.find(l => estimate < l.max) || VT_LEVELS[VT_LEVELS.length-1]
-  const lvIdx = VT_LEVELS.indexOf(lvInfo)
-  localStorage.setItem('bb_vocab_last', String(estimate))
-
-  const barsHtml = rows.map(r=>`
-    <div class="vt-bar-row">
-      <div class="vt-bar-top"><span>${esc(r.name)}</span><span>${r.est.toLocaleString()} 词</span></div>
-      <div class="vt-bar-track"><div class="vt-bar-fill" style="width:${Math.min(100,Math.round(r.rate*100))}%"></div></div>
-    </div>`).join('')
-
-  document.getElementById('vtTestArea').style.display = 'none'
-  const ra = document.getElementById('vtResultArea')
-  ra.innerHTML = `
-    <div class="vt-result">
-      <div class="vt-result-eyebrow">PERKIRAAN KOSAKATA · 估算词汇量</div>
-      <div class="vt-num"><span>≈</span>${estimate.toLocaleString()}</div>
-      <div class="vt-ci">${ciLow.toLocaleString()} – ${ciHigh.toLocaleString()} 词（95% 置信区间）</div>
-      <div class="vt-level-badge">
-        <img class="vt-level-img" src="${lvInfo.img}" alt="${esc(lvInfo.zh)}" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'vt-level-emoji-fb',textContent:'${lvInfo.emoji}'}))">
-        <div class="vt-level-name">${esc(lvInfo.zh)}</div>
-        <div class="vt-level-id">${esc(lvInfo.id)}</div>
-      </div>
-      <div class="vt-funny-quote">「${esc(lvInfo.quote)}」</div>
-      <div class="vt-bars">${barsHtml}</div>
-      <div class="vt-actions">
-        <button class="vt-share" onclick="shareVocab(${estimate},${ciLow},${ciHigh},${lvIdx})">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
-          生成分享图
-        </button>
-        <button class="vt-retry" onclick="startVocabTest()">重新测</button>
-      </div>
-      <div class="vt-note">词频分层抽样 · Wilson 置信区间 · 仅供娱乐参考</div>
-    </div>`
-  ra.style.display = ''
-  document.getElementById('vtHeadTag').textContent = '结果'
-  window.scrollTo(0, 0)
-  refreshVocabBadge()
 }
 
-function vtRRectPath(ctx, x, y, w, h, r) {
-  ctx.beginPath()
-  ctx.moveTo(x+r, y); ctx.lineTo(x+w-r, y)
-  ctx.arcTo(x+w,y,x+w,y+r,r); ctx.lineTo(x+w,y+h-r)
-  ctx.arcTo(x+w,y+h,x+w-r,y+h,r); ctx.lineTo(x+r,y+h)
-  ctx.arcTo(x,y+h,x,y+h-r,r); ctx.lineTo(x,y+r)
-  ctx.arcTo(x,y,x+r,y,r); ctx.closePath()
-}
-function vtWrapText(ctx, text, x, y, maxW, lh) {
-  const chars=[...text]; let line=''; const lines=[]
-  for (const c of chars) {
-    if (ctx.measureText(line+c).width>maxW && line) { lines.push(line); line=c } else line+=c
+function shareVocabExam() {
+  vtEnsureExam()
+  const result = vtExam.result || vtBuildExamSummary()
+  const text = `我的 BIPA 模拟测评结果：≈ ${result.estimate.toLocaleString()} 词，${result.level.code}（${result.level.name}）。单词 ${result.wordRate ? Math.round(result.wordRate * 100) : 0}% / 句子 ${result.sentenceRate ? Math.round(result.sentenceRate * 100) : 0}% / 阅读 ${result.readingRate ? Math.round(result.readingRate * 100) : 0}%。`
+  if (navigator.share) {
+    navigator.share({ title: 'BIPA 模拟测评结果', text }).catch(() => {})
+  } else {
+    navigator.clipboard.writeText(text).then(() => alert('结果文案已复制')).catch(() => alert(text))
   }
-  if (line) lines.push(line)
-  lines.forEach((l,i)=>ctx.fillText(l, x, y+i*lh))
-  return lines.length
-}
-
-async function drawShareCard(estimate, ciLow, ciHigh, lvIdx) {
-  const lv = VT_LEVELS[lvIdx] || VT_LEVELS[2]
-  const W=540, H=530, DPR=2
-  const canvas = document.createElement('canvas')
-  canvas.width=W*DPR; canvas.height=H*DPR
-  const ctx = canvas.getContext('2d')
-  ctx.scale(DPR, DPR)
-
-  const g = ctx.createLinearGradient(0,0,W,H)
-  g.addColorStop(0, lv.color[0]); g.addColorStop(1, lv.color[1])
-  ctx.fillStyle=g; ctx.fillRect(0,0,W,H)
-
-  ctx.fillStyle='rgba(255,255,255,.04)'
-  for (let i=0;i<5;i++){ctx.beginPath();ctx.arc(W*.84,H*.14,50+i*36,0,Math.PI*2);ctx.fill()}
-
-  ctx.textAlign='center'; ctx.textBaseline='middle'
-  ctx.fillStyle='rgba(255,255,255,.55)'
-  ctx.font='700 14px -apple-system,Helvetica,sans-serif'
-  ctx.fillText('BahasaBelajar · 印尼语学习', W/2, 40)
-  ctx.fillStyle='rgba(255,255,255,.38)'
-  ctx.font='600 11px -apple-system,Helvetica,sans-serif'
-  ctx.fillText('PERKIRAAN KOSAKATA', W/2, 60)
-
-  ctx.fillStyle='#fff'
-  ctx.font='900 76px Georgia,serif'
-  ctx.fillText('≈ '+estimate.toLocaleString()+' 词', W/2, 148)
-
-  ctx.fillStyle='rgba(255,255,255,.62)'
-  ctx.font='600 14px -apple-system,Helvetica,sans-serif'
-  ctx.fillText(ciLow.toLocaleString()+' – '+ciHigh.toLocaleString()+' 词（95% 置信区间）', W/2, 208)
-
-  // 等级图片（加载失败降级到 emoji）
-  const imgSize = 92
-  const imgX = W/2 - imgSize/2, imgY = 232
-  try {
-    const lvImg = await new Promise((res, rej) => {
-      const i = new Image(); i.onload=()=>res(i); i.onerror=rej
-      i.src = lv.img
-    })
-    ctx.save()
-    vtRRectPath(ctx, imgX, imgY, imgSize, imgSize, 16)
-    ctx.clip()
-    ctx.drawImage(lvImg, imgX, imgY, imgSize, imgSize)
-    ctx.restore()
-  } catch {
-    ctx.font='62px sans-serif'
-    ctx.fillText(lv.emoji, W/2, imgY + imgSize/2)
-  }
-
-  const bW=320,bH=84,bX=(W-bW)/2,bY=340
-  ctx.fillStyle='rgba(255,255,255,.13)'
-  vtRRectPath(ctx,bX,bY,bW,bH,18); ctx.fill()
-  ctx.fillStyle='#fff'
-  ctx.font='900 20px -apple-system,Helvetica,sans-serif'
-  ctx.fillText(lv.zh+'  ·  '+lv.id, W/2, bY+27)
-  ctx.fillStyle='rgba(255,255,255,.75)'
-  ctx.font='italic 600 15px -apple-system,Helvetica,sans-serif'
-  vtWrapText(ctx,'「'+lv.quote+'」',W/2,bY+57,bW-24,22)
-
-  ctx.strokeStyle='rgba(255,255,255,.2)'; ctx.lineWidth=1
-  ctx.beginPath(); ctx.moveTo(56,440); ctx.lineTo(W-56,440); ctx.stroke()
-
-  ctx.fillStyle='#fff'
-  ctx.font='900 17px -apple-system,Helvetica,sans-serif'
-  ctx.fillText('来测测你的印尼语词汇量！', W/2, 468)
-  ctx.fillStyle='rgba(255,255,255,.48)'
-  ctx.font='600 12px -apple-system,Helvetica,sans-serif'
-  ctx.fillText('roisantoso-id.github.io/bahasabelajar', W/2, 490)
-
-  return canvas
-}
-
-async function shareVocab(estimate, ciLow, ciHigh, lvIdx) {
-  const lv = VT_LEVELS[lvIdx] || VT_LEVELS[2]
-  const canvas = await drawShareCard(estimate, ciLow, ciHigh, lvIdx)
-  canvas.toBlob(async blob => {
-    const file = new File([blob], 'bahasa-vocab.png', { type:'image/png' })
-    if (navigator.share && navigator.canShare && navigator.canShare({ files:[file] })) {
-      try { await navigator.share({ files:[file], title:'我的印尼语词汇量', text:`≈ ${estimate.toLocaleString()} 词  ${lv.emoji} ${lv.zh}` }); return } catch(e) {}
-    }
-    const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='bahasa-vocab.png'; a.click()
-    const text = `我的印尼语词汇量约 ${estimate.toLocaleString()} 词（${lv.zh}）！${lv.quote} 来 BahasaBelajar 测测你的👇\nhttps://roisantoso-id.github.io/bahasabelajar/`
-    try { await navigator.clipboard.writeText(text); setTimeout(()=>alert('图片已保存，文案已复制！去粘贴分享吧 🎉'),300) } catch(e) {}
-  }, 'image/png')
 }
 
 function refreshVocabBadge() {
-  const el = document.getElementById('vocabBadge'); if (!el) return
+  const el = document.getElementById('vocabBadge')
+  if (!el) return
   const last = localStorage.getItem('bb_vocab_last')
-  if (last) { el.textContent = '≈' + Number(last).toLocaleString(); el.classList.add('score') }
-  else { el.textContent = 'NEW'; el.classList.remove('score') }
+  if (last) {
+    el.textContent = '≈' + Number(last).toLocaleString()
+    el.classList.add('score')
+  } else {
+    el.textContent = 'NEW'
+    el.classList.remove('score')
+  }
 }
 
 // ===== 暗黑模式 =====
