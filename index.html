@@ -2487,6 +2487,39 @@ const VT_LEVEL_TAG = {
   'C1+': '真有点强',
 }
 
+const VT_LEVEL_COPY = {
+  A1: {
+    headline: '刚开机的小可爱',
+    line1: '你已经不是空白页了，至少能看懂一点点。',
+    line2: '别急着装大神，先把“能认”和“会用”分开。',
+    roast: '现在属于“点菜能说个大概，但别让我考你”。',
+  },
+  A2: {
+    headline: '开始像样了',
+    line1: '你已经有点印尼语味儿了，开始能顺着题目往下走。',
+    line2: '如果继续这个速度，下一次海报会更像“我真的会”。',
+    roast: '不是路人了，但也还没到本地人随便乱认的程度。',
+  },
+  B1: {
+    headline: '已经会点了',
+    line1: '你现在是“能聊两句，而且不太像外星人”的状态。',
+    line2: '再补一点词汇和结构，海报就能开始吹了。',
+    roast: '已经可以在饭桌上假装自己很懂了。',
+  },
+  B2: {
+    headline: '像个本地人',
+    line1: '你这已经不是“知道答案”，而是“差不多真的会用”。',
+    line2: '朋友看到这分数，大概率会先沉默三秒。',
+    roast: '再练一点，就快到“别问，问就是我会”了。',
+  },
+  'C1+': {
+    headline: '嘴比脑子还快',
+    line1: '你现在属于那种会把印尼语说得很自然的人。',
+    line2: '这个分数已经不是炫耀，是提醒大家别小看你。',
+    roast: '这不是会一点，这是已经能把场子接住了。',
+  },
+}
+
 const vtImageCache = new Map()
 
 function vtAsset(path) {
@@ -2504,13 +2537,13 @@ function vtShareName() {
 
 function vtShareText(result) {
   const name = vtShareName()
-  const flair = VT_LEVEL_FLAIR[result.level.code] || 'Bahasa Jago'
-  return `${name} 现在是 ${flair} 了。≈ ${result.estimate.toLocaleString()} 词，${result.level.code}（${result.level.name}）。`
+  const copy = VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']
+  return `${name} 现在是 ${copy.headline}。≈ ${result.estimate.toLocaleString()} 词，${result.level.code}（${result.level.name}）。`
 }
 
 function vtShareSlogan(result) {
-  const name = vtShareName()
-  return `${name} 现在是 Bahasa Jago 了，别装了，已经会不少了。`
+  const copy = VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']
+  return copy.roast
 }
 
 function vtRoundRectPath(ctx, x, y, w, h, r) {
@@ -2814,6 +2847,7 @@ function vtRender() {
   if (vtExam.screen === 'result') {
     const result = vtExam.result
     const levelImg = vtLevelImage(result.level.code)
+    const levelCopy = VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']
     quizArea.innerHTML = ''
     document.getElementById('vtResultArea').style.display = ''
     document.getElementById('vtHeadTag').textContent = '结果'
@@ -2851,10 +2885,10 @@ function vtRender() {
           </div>
           <div class="vt-result-side">
             <div class="vt-side-tag">${VT_LEVEL_TAG[result.level.code] || '太强了'}</div>
-            <div class="vt-side-title">Bahasa Jago</div>
+            <div class="vt-side-title">${esc(levelCopy.headline)}</div>
             <div class="vt-side-sub">${esc(vtShareName())}</div>
             <img class="vt-side-art" src="${esc(levelImg)}" alt="level art">
-            <div class="vt-side-copy">${esc(vtShareSlogan(result))}</div>
+            <div class="vt-side-copy">${esc(levelCopy.line1)}</div>
           </div>
         </div>
         <div class="vt-actions">
@@ -3104,7 +3138,7 @@ async function vtBuildSharePoster(result) {
   ctx.fillStyle = '#1f5d4d'
   ctx.textAlign = 'center'
   ctx.font = '1000 30px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
-  ctx.fillText(VT_LEVEL_FLAIR[result.level.code] || 'Bahasa Jago', 784, 796)
+  ctx.fillText((VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']).headline, 784, 796)
   ctx.fillStyle = '#6d5d46'
   ctx.font = '700 18px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
   vtWrapText(ctx, vtShareText(result), 644, 834, 278, 26, 3)
@@ -3130,10 +3164,11 @@ async function vtBuildSharePoster(result) {
   ctx.restore()
   ctx.fillStyle = '#fff'
   ctx.font = '900 28px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
-  ctx.fillText('“我不一定很强，但我现在会更多了。”', 164, 1054)
+  ctx.fillText(`“${(VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']).headline}。”`, 164, 1054)
   ctx.font = '700 21px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
   ctx.fillStyle = 'rgba(255,255,255,.86)'
-  vtWrapText(ctx, '这张图可以直接转发，顺便问问朋友：你觉得我这算不算 Bahasa Jago？', 164, 1100, 740, 30, 3)
+  vtWrapText(ctx, (VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']).line1, 164, 1100, 740, 30, 3)
+  vtWrapText(ctx, (VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']).line2, 164, 1150, 740, 30, 3)
   ctx.fillStyle = '#ffd66c'
   ctx.font = '900 22px system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
   ctx.fillText('现在就可以去炫耀一下。', 164, 1188)
