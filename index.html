@@ -81,7 +81,7 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .hero-cal-day.hc-active{background:rgba(23,77,64,.08)}
 .hero-cal-day.hc-today{outline:1.5px solid var(--coral);outline-offset:-1px;border-radius:8px}
 .section-title{font-size:11px;font-weight:900;margin:8px 2px 6px;letter-spacing:.3px;color:#53635d;text-transform:uppercase}
-.task-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
+.task-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px}
 .task{position:relative;display:flex;flex-direction:row;align-items:center;padding:10px;border-radius:14px;background:rgba(255,253,248,.86);border:1px solid rgba(20,41,37,.05);box-shadow:0 8px 20px rgba(23,45,39,.06);gap:8px}
 .task-top{flex-shrink:0;display:flex;align-items:center}
 .task-body{flex:1;min-width:0}
@@ -102,6 +102,12 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .task-badge[hidden]{display:none}
 .task-dot{position:absolute;top:12px;right:12px;width:10px;height:10px;border-radius:50%;background:#ff3b30;box-shadow:0 2px 6px rgba(255,59,48,.35)}
 .task-dot[hidden]{display:none}
+.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:6px}
+.quick-item{position:relative;display:flex;flex-direction:column;align-items:center;padding:10px 4px 8px;border-radius:14px;background:rgba(255,253,248,.86);border:1px solid rgba(20,41,37,.05);box-shadow:0 4px 12px rgba(23,45,39,.04);cursor:pointer;gap:4px}
+.quick-item .task-icon{width:34px;height:34px;border-radius:10px}
+.quick-item .task-name{font-size:10px;text-align:center}
+.quick-item .task-dot{top:6px;right:6px;width:8px;height:8px}
+.banner-row{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px}
 .stats-row{display:none}
 .stat{text-align:center}
 .stat-val{font-size:20px;font-weight:900;letter-spacing:-.3px}
@@ -452,7 +458,7 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
   @keyframes pop{0%{transform:scale(.82)}55%{transform:scale(1.12)}100%{transform:scale(1)}}
   @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
   .view.active{animation:viewIn .34s var(--ease)}
-  #v-home.active .task-grid .task,#v-home.active .hero,#v-home.active .week-chart,#lessonList .lesson-card,#articleList .art-card,#cultureList .cul-card{animation:rise .42s var(--ease) both}
+  #v-home.active .task-grid .task,#v-home.active .quick-grid .quick-item,#v-home.active .hero,#v-home.active .week-chart,#v-home.active .banner-row,#lessonList .lesson-card,#articleList .art-card,#cultureList .cul-card{animation:rise .42s var(--ease) both}
   #v-home.active .task:nth-child(2){animation-delay:.03s}#v-home.active .task:nth-child(3){animation-delay:.06s}#v-home.active .task:nth-child(4){animation-delay:.09s}
   #lessonList .lesson-card:nth-child(2){animation-delay:.05s}#lessonList .lesson-card:nth-child(3){animation-delay:.1s}
   #answerArea>*{animation:fadeUp .34s var(--ease) both}
@@ -519,7 +525,7 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 [data-theme="dark"] .hero-cal{background:rgba(26,32,29,.62);border-color:rgba(200,220,210,.08)}
 [data-theme="dark"] .hero-cal-day{color:#c0ccc6}
 [data-theme="dark"] .hero-cal-day.hc-active{background:rgba(43,123,98,.15)}
-[data-theme="dark"] .task{background:rgba(26,32,29,.92);border-color:rgba(200,220,210,.08);box-shadow:0 1px 2px rgba(0,0,0,.15),0 6px 18px -6px rgba(0,0,0,.25)}
+[data-theme="dark"] .task,[data-theme="dark"] .quick-item{background:rgba(26,32,29,.92);border-color:rgba(200,220,210,.08);box-shadow:0 1px 2px rgba(0,0,0,.15),0 6px 18px -6px rgba(0,0,0,.25)}
 [data-theme="dark"] .task-icon.learn{background:linear-gradient(180deg,#162a22,#0d1f18);color:var(--green)}
 [data-theme="dark"] .task-icon.review{background:linear-gradient(180deg,#3d2020,#2a1414);color:#e8694e}
 [data-theme="dark"] .task-icon.grammar{background:linear-gradient(180deg,#281f3d,#1e1630);color:var(--purple)}
@@ -905,60 +911,44 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
         <div class="task-desc">到点就复习，别让词跑了</div>
       </div>
     </div>
-    <div class="task" onclick="startGrammar()">
-      <div class="task-top">
-        <div class="task-icon grammar"><img src="img/home-grammar.svg" alt=""></div>
-      </div>
-      <div class="task-body">
-        <div class="task-name">语法笔记</div>
-        <div class="task-desc">规则拆开看，更容易记住</div>
-      </div>
+  </div>
+  <div class="quick-grid">
+    <div class="quick-item" onclick="startGrammar()">
+      <div class="task-icon grammar"><img src="img/home-grammar.svg" alt=""></div>
+      <div class="task-name">语法笔记</div>
     </div>
-    <div class="task" onclick="startExtra()">
-      <div class="task-top">
-        <div class="task-icon extra"><img src="img/home-extra.svg" alt=""></div>
-      </div>
-      <div class="task-body">
-        <div class="task-name">拓展词</div>
-        <div class="task-desc">顺手补点场景词</div>
-      </div>
+    <div class="quick-item" onclick="startExtra()">
+      <div class="task-icon extra"><img src="img/home-extra.svg" alt=""></div>
+      <div class="task-name">拓展词</div>
     </div>
-    <div class="task" onclick="showView('articles', document.querySelectorAll('.tab')[3])">
+    <div class="quick-item" onclick="showView('articles', document.querySelectorAll('.tab')[3])">
       <span class="task-dot" id="homeArticleBadge" hidden></span>
-      <div class="task-top">
-        <div class="task-icon article"><img src="img/home-article.svg" alt=""></div>
-      </div>
-      <div class="task-body">
-        <div class="task-name">印尼文章</div>
-        <div class="task-desc">每日新文，未读会提醒你</div>
-      </div>
+      <div class="task-icon article"><img src="img/home-article.svg" alt=""></div>
+      <div class="task-name">印尼文章</div>
     </div>
-    <div class="task" onclick="showView('culture')">
-      <div class="task-top">
-        <div class="task-icon culture"><img src="img/home-culture.svg" alt=""></div>
-      </div>
-      <div class="task-body">
-        <div class="task-name">印尼文化</div>
-        <div class="task-desc">风俗、梗图、地方感一起学</div>
-      </div>
+    <div class="quick-item" onclick="showView('culture')">
+      <div class="task-icon culture"><img src="img/home-culture.svg" alt=""></div>
+      <div class="task-name">印尼文化</div>
     </div>
   </div>
-  <div class="vocab-banner" onclick="startVocabTest()">
-    <span class="vocab-badge" id="vocabBadge">NEW</span>
-    <div class="vocab-banner-icon"><img src="img/home-bipa.svg" alt=""></div>
-    <div class="vocab-banner-text">
-      <div class="vocab-banner-title">BIPA 模拟测评</div>
-      <div class="vocab-banner-sub">单词、句子、阅读连着做，按答题表现自动切下一关</div>
+  <div class="banner-row">
+    <div class="vocab-banner" onclick="startVocabTest()" style="margin-bottom:0">
+      <span class="vocab-badge" id="vocabBadge">NEW</span>
+      <div class="vocab-banner-icon"><img src="img/home-bipa.svg" alt=""></div>
+      <div class="vocab-banner-text">
+        <div class="vocab-banner-title">BIPA 测评</div>
+        <div class="vocab-banner-sub">词汇量测算</div>
+      </div>
+      <span class="vocab-banner-arrow">›</span>
     </div>
-    <span class="vocab-banner-arrow">›</span>
-  </div>
-  <div class="lb-banner" onclick="showView('leaderboard')">
-    <div class="lb-banner-icon">🏆</div>
-    <div class="lb-banner-text">
-      <div class="lb-banner-title">排行榜</div>
-      <div class="lb-banner-sub">和其他同学比比谁更厉害</div>
+    <div class="lb-banner" onclick="showView('leaderboard')" style="margin-bottom:0">
+      <div class="lb-banner-icon">🏆</div>
+      <div class="lb-banner-text">
+        <div class="lb-banner-title">排行榜</div>
+        <div class="lb-banner-sub">比比谁更厉害</div>
+      </div>
+      <span class="lb-banner-arrow">›</span>
     </div>
-    <span class="lb-banner-arrow">›</span>
   </div>
   <div class="section-title">本周趋势</div>
   <div class="week-chart" id="weekChart"></div>
