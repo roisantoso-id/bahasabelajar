@@ -678,6 +678,10 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 .vt-level-id{font-size:12px;font-weight:700;color:#2a6b53;letter-spacing:.5px}
 .vt-level-note{font-size:11px;color:#2f5c52;margin-top:2px}
 .vt-funny-quote{font-size:14px;color:var(--muted);font-style:italic;margin:12px 8px 0;line-height:1.6}
+.vt-compare{margin-top:14px;padding:14px 16px;border-radius:18px;background:rgba(255,255,255,.88);border:1px solid rgba(20,41,37,.08);text-align:left;box-shadow:0 10px 20px rgba(23,45,39,.05)}
+.vt-compare-title{font-size:11px;font-weight:900;letter-spacing:1.4px;color:#d85d30;margin-bottom:6px}
+.vt-compare-main{font-size:15px;font-weight:900;color:var(--ink);line-height:1.5}
+.vt-compare-sub{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.55}
 .vt-bars{margin:18px 4px 0;text-align:left}
 .vt-bar-row{margin-bottom:12px}
 .vt-bar-top{display:flex;justify-content:space-between;font-size:12px;font-weight:800;color:var(--ink);margin-bottom:5px}
@@ -711,6 +715,8 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 [data-theme="dark"] .vt-side-sub{color:#ffc36b}
 [data-theme="dark"] .vt-side-copy{color:#eed2a0}
 [data-theme="dark"] .vt-level-badge{background:linear-gradient(180deg,#ffcf62,#e4a92c)}
+[data-theme="dark"] .vt-compare{background:rgba(26,32,29,.92);border-color:rgba(200,220,210,.1)}
+[data-theme="dark"] .vt-compare-main{color:#eef5f0}
 
 /* dark */
 [data-theme="dark"] .journal-textarea{background:rgba(22,40,32,.8);border-color:rgba(200,220,210,.1);color:#d8e8e0}
@@ -2705,6 +2711,106 @@ async function vtLoadBank() {
   return bank
 }
 
+async function vtLoadLatestVocabExamResult() {
+  if (!sb || !currentUser) return null
+  try {
+    const { data, error } = await sb
+      .from('vocab_exam_results')
+      .select('id,estimate,level_code,level_name,word_correct,word_total,sentence_correct,sentence_total,reading_correct,reading_total,overall_rate,stage_difficulty,created_at')
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .maybeSingle()
+    if (error) throw error
+    return data || null
+  } catch (e) {
+    return null
+  }
+}
+
+function vtFormatResultCompare(prev, current) {
+  if (!prev) {
+    return {
+      title: '首次记录',
+      main: '这是你的第一条测评记录',
+      sub: '下次再测一次，就能直接对比进步幅度了。',
+    }
+  }
+  const prevEstimate = Number(prev.estimate || 0)
+  const currEstimate = Number(current.estimate || 0)
+  const delta = currEstimate - prevEstimate
+  const abs = Math.abs(delta).toLocaleString()
+  const levelText = prev.level_code && prev.level_name
+    ? `上次是 ${prev.level_code} · ${prev.level_name}`
+    : '上次的级别记录已经留好了'
+  let main = '和上次一样稳'
+  if (delta > 0) main = `比上次进步 +${abs} 词`
+  else if (delta < 0) main = `这次少了 ${abs} 词，别慌，下次补回来`
+  return {
+    title: '和上次对比',
+    main,
+    sub: `${levelText} · 这次 ≈ ${currEstimate.toLocaleString()} 词`,
+  }
+}
+
+async function vtPersistVocabExamResult(result) {
+  if (!sb || !currentUser || !result) return null
+  const payload = {
+    mode: 'exam',
+    result: {
+      estimate: result.estimate,
+      level: {
+        code: result.level?.code || result.level_code || 'A1',
+        name: result.level?.name || result.level_name || '入门',
+      },
+      level_code: result.level?.code || result.level_code || 'A1',
+      level_name: result.level?.name || result.level_name || '入门',
+      wordRate: result.wordRate ?? result.word?.rate ?? 0,
+      sentenceRate: result.sentenceRate ?? result.sentence?.rate ?? 0,
+      readingRate: result.readingRate ?? result.reading?.rate ?? 0,
+      word: result.word || { score: 0, total: 0 },
+      sentence: result.sentence || { score: 0, total: 0 },
+      reading: result.reading || { score: 0, total: 0 },
+      overallRate: result.overallRate ?? 0,
+      stageDifficulty: result.stageDifficulty || {},
+    },
+  }
+  const { data: { session } } = await sb.auth.getSession()
+  const token = session && session.access_token
+  if (token) {
+    try {
+      const r = await fetch(SUPABASE_URL + '/functions/v1/vocab-test', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: SUPABASE_KEY,
+          Authorization: 'Bearer ' + token,
+        },
+        body: JSON.stringify(payload),
+      })
+      if (r.ok) return await r.json().catch(() => ({}))
+    } catch (e) {}
+  }
+  try {
+    const { data, error } = await sb.from('vocab_exam_results').insert({
+      estimate: Number(result.estimate || 0),
+      level_code: String(result.level?.code || result.level_code || 'A1'),
+      level_name: String(result.level?.name || result.level_name || '入门'),
+      word_correct: Number(result.word?.score || 0),
+      word_total: Number(result.word?.total || 0),
+      sentence_correct: Number(result.sentence?.score || 0),
+      sentence_total: Number(result.sentence?.total || 0),
+      reading_correct: Number(result.reading?.score || 0),
+      reading_total: Number(result.reading?.total || 0),
+      overall_rate: Number(result.overallRate || 0),
+      stage_difficulty: result.stageDifficulty || {},
+    }).select('id,estimate,level_code,level_name,created_at').single()
+    if (error) throw error
+    return { stored: true, result: data }
+  } catch (e) {
+    return { stored: false, error: e }
+  }
+}
+
 function vtEnsureExam() {
   if (!vtExam) throw new Error('测评未初始化')
 }
@@ -2819,6 +2925,7 @@ function vtRender() {
     const result = vtExam.result
     const levelImg = vtLevelImage(result.level.code)
     const levelCopy = VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']
+    const compare = vtFormatResultCompare(vtExam.previousResult, result)
     quizArea.innerHTML = ''
     document.getElementById('vtResultArea').style.display = ''
     document.getElementById('vtHeadTag').textContent = '结果'
@@ -2861,6 +2968,11 @@ function vtRender() {
             <img class="vt-side-art" src="${esc(levelImg)}" alt="level art">
             <div class="vt-side-copy">${esc(levelCopy.line1)}</div>
           </div>
+        </div>
+        <div class="vt-compare">
+          <div class="vt-compare-title">${esc(compare.title)}</div>
+          <div class="vt-compare-main">${esc(compare.main)}</div>
+          <div class="vt-compare-sub">${esc(compare.sub)}</div>
         </div>
         <div class="vt-actions">
           <button class="vt-share" onclick="shareVocabExam()">
@@ -2934,9 +3046,8 @@ function vtFinishStage() {
     vtExam.stageDifficulty.reading = next
     vtAutoAdvance('reading', next)
   } else {
-    vtExam.screen = 'result'
-    vtExam.result = vtBuildExamSummary()
-    localStorage.setItem('bb_vocab_last', String(vtExam.result.estimate))
+    vtShowResult()
+    return
   }
   vtRender()
 }
@@ -2950,6 +3061,14 @@ function vtShowResult() {
   document.getElementById('vtHeadTag').textContent = '结果'
   vtRender()
   refreshVocabBadge()
+  if (!vtExam.resultSaved) {
+    vtExam.resultSaved = true
+    void vtPersistVocabExamResult(vtExam.result).then(payload => {
+      if (payload && payload.previous) vtExam.previousResult = payload.previous
+      if (payload && payload.result && payload.result.previous) vtExam.previousResult = payload.result.previous
+      if (payload && payload.result && payload.result.created_at) vtExam.lastSavedResult = payload.result
+    })
+  }
 }
 
 function vtAutoAdvance(nextStage, difficulty, delay = 350) {
@@ -3157,6 +3276,7 @@ async function startVocabTest() {
   clearTimeout(vtAdvanceTimer)
   try {
     const bank = await vtLoadBank()
+    const previousResult = await vtLoadLatestVocabExamResult()
     vocabExamBank = bank
     vtExam = {
       stage: 'word',
@@ -3172,6 +3292,9 @@ async function startVocabTest() {
       },
       stageDifficulty: { word: 'mixed', sentence: 'medium', reading: 'medium' },
       result: null,
+      previousResult,
+      lastSavedResult: null,
+      resultSaved: false,
     }
     showView('vocabtest')
     vtResetUi()
