@@ -2882,19 +2882,25 @@ function vtStartStage(stage, questions, difficulty) {
 }
 
 function vtBuildExamSummary() {
-  const word = vtExam.sectionScores.word
-  const sentence = vtExam.sectionScores.sentence
-  const reading = vtExam.sectionScores.reading
-  const wordRate = word.correct / word.total
-  const sentenceRate = sentence.correct / sentence.total
-  const readingRate = reading.correct / reading.total
-  const overallRate = (word.correct + sentence.correct + reading.correct) / (word.total + sentence.total + reading.total)
+  const w = vtExam.sectionScores.word
+  const s = vtExam.sectionScores.sentence
+  const r = vtExam.sectionScores.reading
+  const wordRate = w.total ? w.correct / w.total : 0
+  const sentenceRate = s.total ? s.correct / s.total : 0
+  const readingRate = r.total ? r.correct / r.total : 0
+  const overallRate = (w.correct + s.correct + r.correct) / (w.total + s.total + r.total)
   const rawEstimate = 700 + wordRate * 2600 + sentenceRate * 2500 + readingRate * 2200
     + (vtExam.stageDifficulty.sentence === 'medium' ? 250 : vtExam.stageDifficulty.sentence === 'hard' ? 650 : 0)
     + (vtExam.stageDifficulty.reading === 'medium' ? 220 : vtExam.stageDifficulty.reading === 'hard' ? 650 : 0)
   const estimate = vtRound10(rawEstimate)
   const level = VT_BIPA_LEVELS.find(l => estimate < l.max) || VT_BIPA_LEVELS[VT_BIPA_LEVELS.length - 1]
-  return { estimate, level, overallRate, wordRate, sentenceRate, readingRate }
+  const diffLabel = d => d === 'hard' ? '困难' : d === 'medium' ? '中等' : '基础'
+  return {
+    estimate, level, overallRate,
+    word: { score: w.correct, total: w.total, rate: wordRate, difficultyLabel: diffLabel(vtExam.stageDifficulty.word || 'mixed') },
+    sentence: { score: s.correct, total: s.total, rate: sentenceRate, difficultyLabel: diffLabel(vtExam.stageDifficulty.sentence) },
+    reading: { score: r.correct, total: r.total, rate: readingRate, difficultyLabel: diffLabel(vtExam.stageDifficulty.reading) },
+  }
 }
 
 function vtRender() {
@@ -3055,9 +3061,7 @@ function vtFinishStage() {
     vtAutoAdvance('reading', next)
   } else {
     vtShowResult()
-    return
   }
-  vtRender()
 }
 
 function vtShowResult() {
