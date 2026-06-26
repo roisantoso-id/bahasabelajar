@@ -1066,6 +1066,7 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
     <button class="back" onclick="showView('articles', document.querySelectorAll('.tab')[3])">‹</button>
     <h1 id="artTitle" style="font-size:16px"></h1>
     <button id="transToggle" class="grammar-lesson-tag" onclick="toggleTrans()">隐藏中文</button>
+    <button class="grammar-lesson-tag" onclick="shareArticle()" style="margin-left:6px;background:var(--green);color:#fff">分享</button>
   </div>
   <div class="art-read-bar"><div class="art-read-fill" id="artReadBar"></div></div>
   <div id="artMeta" class="grammar-subtitle" style="font-size:11px"></div>
@@ -2129,6 +2130,176 @@ function toggleTrans() {
   const body = document.getElementById('artBody')
   const hidden = body.classList.toggle('trans-hidden')
   document.getElementById('transToggle').textContent = hidden ? '显示中文' : '隐藏中文'
+}
+
+async function shareArticle() {
+  if (!artCurrent) return
+  const a = artCurrent
+  const btn = event && event.target
+  if (btn) { btn.disabled = true; btn.textContent = '生成中…' }
+  try {
+    const blob = await artBuildShareImage(a)
+    if (!blob) throw new Error('生成失败')
+    const file = new File([blob], `article-${a.id}.png`, { type: 'image/png' })
+    if (navigator.share && (!navigator.canShare || navigator.canShare({ files: [file] }))) {
+      await navigator.share({ title: a.title_zh, text: `${a.title_zh}｜BahasaBelajar`, files: [file] })
+    } else {
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url; link.download = `article-${a.id}.png`
+      document.body.appendChild(link); link.click(); link.remove()
+      setTimeout(() => URL.revokeObjectURL(url), 4000)
+      alert('长图已下载')
+    }
+  } catch (e) {
+    if (e.name !== 'AbortError') alert(e.message || '分享失败')
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = '分享' }
+  }
+}
+
+function artWrapText(ctx, text, maxW) {
+  const chars = [...text]
+  const lines = []
+  let line = ''
+  for (const ch of chars) {
+    if (ctx.measureText(line + ch).width > maxW) { lines.push(line); line = ch }
+    else line += ch
+  }
+  if (line) lines.push(line)
+  return lines
+}
+
+async function artBuildShareImage(a) {
+  const W = 1080
+  const PAD = 72
+  const CW = W - PAD * 2
+  const SF = '-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC",sans-serif'
+  const GREEN = '#1a6b4f'
+  const GREEN2 = '#e8f2e8'
+  const INK = '#222'
+  const MUTED = '#6a736c'
+
+  let qr = null, logo = null
+  try { qr = await vtLoadImage('img/share-qrcode.jpg') } catch(e) {}
+  try { logo = await vtLoadImage('img/logo.png') } catch(e) {}
+
+  const measure = document.createElement('canvas').getContext('2d')
+
+  let y = 0
+  const blocks = []
+  const push = (fn, h) => { blocks.push({ fn, y, h }); y += h }
+
+  // header
+  push((ctx, by) => {
+    ctx.fillStyle = GREEN
+    ctx.fillRect(0, by, W, 160)
+    if (logo) { ctx.save(); ctx.beginPath(); ctx.arc(PAD + 28, by + 80, 28, 0, Math.PI*2); ctx.clip(); ctx.drawImage(logo, PAD, by + 52, 56, 56); ctx.restore() }
+    ctx.fillStyle = '#fff'
+    ctx.font = `bold 36px ${SF}`
+    ctx.fillText('BahasaBelajar', PAD + 72, by + 90)
+    ctx.font = `22px ${SF}`
+    ctx.fillText('轻松学印尼语', PAD + 72, by + 120)
+  }, 160)
+
+  // title area
+  const lv = a.level===1?'入门':a.level===2?'初级':'中级'
+  measure.font = `bold 44px ${SF}`
+  const titleLines = artWrapText(measure, a.title_zh, CW)
+  const titleH = 60 + titleLines.length * 56 + 40 + 36 + 40
+  push((ctx, by) => {
+    ctx.fillStyle = INK
+    ctx.font = `bold 44px ${SF}`
+    titleLines.forEach((l, i) => ctx.fillText(l, PAD, by + 60 + i * 56))
+    const tagY = by + 60 + titleLines.length * 56 + 20
+    ctx.fillStyle = MUTED
+    ctx.font = `20px ${SF}`
+    ctx.fillText(`${a.title}  ·  ${a.category}  ·  ${lv}  ·  ${a.sentences.length} 句`, PAD, tagY)
+  }, titleH)
+
+  // divider
+  push((ctx, by) => {
+    ctx.strokeStyle = '#e0e0e0'; ctx.lineWidth = 2
+    ctx.beginPath(); ctx.moveTo(PAD, by + 10); ctx.lineTo(W - PAD, by + 10); ctx.stroke()
+  }, 20)
+
+  // sentences
+  a.sentences.forEach((s, i) => {
+    measure.font = `bold 30px ${SF}`
+    const idLines = artWrapText(measure, `${i+1}. ${s.id}`, CW - 8)
+    measure.font = `26px ${SF}`
+    const zhLines = artWrapText(measure, s.zh, CW - 8)
+    let noteLines = []
+    if (s.note) { measure.font = `24px ${SF}`; noteLines = artWrapText(measure, '💡 ' + s.note, CW - 16) }
+    const sentH = 28 + idLines.length * 40 + 12 + zhLines.length * 36 + (noteLines.length ? 16 + noteLines.length * 32 : 0) + 28
+    push((ctx, by) => {
+      let cy = by + 28
+      ctx.fillStyle = INK
+      ctx.font = `bold 30px ${SF}`
+      idLines.forEach(l => { ctx.fillText(l, PAD + 4, cy); cy += 40 })
+      cy += 4
+      ctx.fillStyle = MUTED
+      ctx.font = `26px ${SF}`
+      zhLines.forEach(l => { ctx.fillText(l, PAD + 4, cy); cy += 36 })
+      if (noteLines.length) {
+        cy += 8
+        ctx.fillStyle = '#8a6d3b'
+        ctx.font = `24px ${SF}`
+        noteLines.forEach(l => { ctx.fillText(l, PAD + 8, cy); cy += 32 })
+      }
+    }, sentH)
+
+    if (i < a.sentences.length - 1) {
+      push((ctx, by) => {
+        ctx.strokeStyle = '#f0f0f0'; ctx.lineWidth = 1
+        ctx.beginPath(); ctx.moveTo(PAD + 4, by + 4); ctx.lineTo(W - PAD - 4, by + 4); ctx.stroke()
+      }, 8)
+    }
+  })
+
+  // footer divider
+  push((ctx, by) => {
+    ctx.strokeStyle = '#e0e0e0'; ctx.lineWidth = 2
+    ctx.beginPath(); ctx.moveTo(PAD, by + 20); ctx.lineTo(W - PAD, by + 20); ctx.stroke()
+  }, 40)
+
+  // footer with QR + URL
+  const footerH = 180
+  push((ctx, by) => {
+    const qrSize = 120
+    if (qr) ctx.drawImage(qr, W - PAD - qrSize, by + 20, qrSize, qrSize)
+    ctx.fillStyle = GREEN
+    ctx.font = `bold 28px ${SF}`
+    ctx.fillText('BahasaBelajar', PAD, by + 50)
+    ctx.fillStyle = MUTED
+    ctx.font = `22px ${SF}`
+    ctx.fillText('免费印尼语学习 · 浏览器打开即用', PAD, by + 84)
+    ctx.fillStyle = INK
+    ctx.font = `20px ${SF}`
+    ctx.fillText('roisantoso-id.github.io/bahasabelajar', PAD, by + 118)
+    ctx.fillStyle = '#bbb'
+    ctx.font = `18px ${SF}`
+    ctx.fillText('扫码或复制链接打开', W - PAD - qrSize, by + 158)
+  }, footerH)
+
+  // now render
+  const H = y + 40
+  const canvas = document.createElement('canvas')
+  canvas.width = W; canvas.height = H
+  const ctx = canvas.getContext('2d')
+
+  // background
+  ctx.fillStyle = '#fff'
+  ctx.fillRect(0, 0, W, H)
+  const topBg = ctx.createLinearGradient(0, 0, 0, 300)
+  topBg.addColorStop(0, GREEN2)
+  topBg.addColorStop(1, '#fff')
+  ctx.fillStyle = topBg
+  ctx.fillRect(0, 0, W, 300)
+
+  blocks.forEach(b => b.fn(ctx, b.y))
+
+  return await new Promise(resolve => canvas.toBlob(blob => resolve(blob), 'image/png', 1))
 }
 
 // ===== CULTURE =====
