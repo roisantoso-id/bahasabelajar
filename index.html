@@ -717,6 +717,40 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 [data-theme="dark"] .journal-textarea{background:rgba(22,40,32,.8);border-color:rgba(200,220,210,.1);color:#d8e8e0}
 [data-theme="dark"] .journal-entry,[data-theme="dark"] .all-notes-item{background:rgba(18,28,23,.7);border-color:rgba(200,220,210,.07)}
 [data-theme="dark"] .session-wrong{background:rgba(241,116,85,.06);border-color:rgba(241,116,85,.14)}
+
+/* ===== 排行榜 ===== */
+.lb-banner{display:flex;align-items:center;gap:12px;margin:16px;padding:14px 16px;border-radius:16px;background:linear-gradient(135deg,#fff7e6 0%,#ffe8cc 100%);cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.lb-banner-icon{font-size:28px;flex-shrink:0}
+.lb-banner-text{flex:1;min-width:0}
+.lb-banner-title{font-weight:700;font-size:15px;color:#333}
+.lb-banner-sub{font-size:12px;color:#888;margin-top:2px}
+.lb-banner-arrow{font-size:22px;color:#ccc;font-weight:300}
+[data-theme="dark"] .lb-banner{background:linear-gradient(135deg,rgba(255,180,50,.12) 0%,rgba(255,140,20,.1) 100%)}
+[data-theme="dark"] .lb-banner-title{color:#e8e0d8}
+
+#v-leaderboard .cal-eyebrow{margin:0 16px}
+#v-leaderboard .cal-title{margin:4px 16px 16px}
+.lb-tabs{display:flex;gap:8px;margin:0 16px 16px;background:var(--card-bg,#f5f5f5);border-radius:12px;padding:4px}
+.lb-tab{flex:1;text-align:center;padding:8px 0;border-radius:10px;font-size:14px;font-weight:600;color:#888;background:none;border:none;cursor:pointer;transition:all .2s}
+.lb-tab.active{background:var(--main);color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+[data-theme="dark"] .lb-tabs{background:rgba(255,255,255,.06)}
+
+.lb-list{margin:0 16px}
+.lb-row{display:flex;align-items:center;gap:12px;padding:14px 12px;border-radius:14px;margin-bottom:6px;background:var(--card-bg,#fff);transition:background .2s}
+.lb-row.me{background:rgba(46,204,113,.08);border:1.5px solid rgba(46,204,113,.2)}
+.lb-rank{width:28px;text-align:center;font-weight:700;font-size:15px;color:#888;flex-shrink:0}
+.lb-rank.gold{color:#f5a623;font-size:20px}.lb-rank.silver{color:#aab2bd;font-size:20px}.lb-rank.bronze{color:#cd7f32;font-size:20px}
+.lb-avatar{width:38px;height:38px;border-radius:50%;background:var(--main);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0}
+.lb-info{flex:1;min-width:0}
+.lb-name{font-weight:600;font-size:14px;color:var(--text,#333);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb-sub{font-size:12px;color:#999;margin-top:2px}
+.lb-val{font-weight:700;font-size:16px;color:var(--main);text-align:right;flex-shrink:0}
+.lb-unit{font-size:11px;color:#999;font-weight:400;margin-left:2px}
+.lb-empty{text-align:center;color:#999;padding:40px 0;font-size:14px}
+.lb-me-section{margin:20px 16px 0;padding-top:16px;border-top:1px solid rgba(0,0,0,.06)}
+.lb-me-title{font-size:12px;color:#999;text-align:center;margin-bottom:8px}
+[data-theme="dark"] .lb-row{background:rgba(255,255,255,.04)}
+[data-theme="dark"] .lb-row.me{background:rgba(46,204,113,.06);border-color:rgba(46,204,113,.15)}
 </style>
 <script>(function(){var p=localStorage.getItem('dark_mode')||'auto';if(p==='on'||(p==='auto'&&matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.setAttribute('data-theme','dark')})()</script>
 </head>
@@ -799,9 +833,30 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
     </div>
     <span class="vocab-banner-arrow">›</span>
   </div>
+  <div class="lb-banner" onclick="showView('leaderboard')">
+    <div class="lb-banner-icon">🏆</div>
+    <div class="lb-banner-text">
+      <div class="lb-banner-title">排行榜</div>
+      <div class="lb-banner-sub">和其他同学比比谁更厉害</div>
+    </div>
+    <span class="lb-banner-arrow">›</span>
+  </div>
   <div class="section-title">本周趋势</div>
   <div class="week-chart" id="weekChart"></div>
   <div id="learnedStat" style="display:none">0</div><div id="totalStat" style="display:none">0</div><div id="todayDone" style="display:none">—</div>
+</div>
+
+<!-- ===== LEADERBOARD ===== -->
+<div id="v-leaderboard" class="view">
+  <button class="back" onclick="showView('home', document.querySelector('.tab'))">‹</button>
+  <div class="cal-eyebrow">PERINGKAT</div>
+  <h1 class="cal-title">排行榜</h1>
+  <div class="lb-tabs">
+    <button class="lb-tab active" onclick="switchLbTab('exam',this)">测评</button>
+    <button class="lb-tab" onclick="switchLbTab('streak',this)">打卡</button>
+    <button class="lb-tab" onclick="switchLbTab('words',this)">词汇</button>
+  </div>
+  <div id="lbContent"></div>
 </div>
 
 <!-- ===== STUDY ===== -->
@@ -1220,6 +1275,7 @@ function showView(name, tabEl) {
   if (name === 'calendar') loadCalendar()
   if (name === 'profile') loadProfile()
   if (name === 'lessons') loadLessons()
+  if (name === 'leaderboard') loadLeaderboard()
 }
 
 // ===== DATE HELPERS =====
@@ -2492,20 +2548,20 @@ const VT_LEVEL_COPY = {
   A1: {
     headline: '刚开机的小可爱',
     line1: '你已经不是空白页了，至少能看懂一点点。',
-    line2: '别急着装大神，先把”能认”和”会用”分开。',
-    roast: '现在属于”点菜能说个大概，但别让我考你”。',
-    id_quote: '”Halo” sama “Terima kasih” udah mentok.',
-    zh_roast: '除了「你好」和「谢谢」，剩下全靠比划。别问我 nasi goreng 以外的菜名。',
+    line2: '别急着装大神，先把“能认”和“会用”分开。',
+    roast: '现在属于“点菜能说个大概，但别让我考你”。',
+    id_quote: 'Halo, aku masih tahap kenalan.',
+    zh_roast: '我还在打基础，先别让我装老手。',
     shareQuote: 'Aku masih belajar, tapi aku sudah jalan.',
     shareTranslation: '我还在学，不过已经开始往前走了。',
   },
   A2: {
     headline: '开始像样了',
     line1: '你已经有点印尼语味儿了，开始能顺着题目往下走。',
-    line2: '如果继续这个速度，下一次海报会更像”我真的会”。',
+    line2: '如果继续这个速度，下一次海报会更像“我真的会”。',
     roast: '不是路人了，但也还没到本地人随便乱认的程度。',
-    id_quote: 'Udah bisa pesan nasi goreng tanpa panik.',
-    zh_roast: '点菜不用指着图片了，进步巨大。但超过三轮对话就开始冒汗。',
+    id_quote: 'Pelan-pelan, udah mulai nyambung.',
+    zh_roast: '慢慢能接上话了，离“真会”只差一点点。',
     shareQuote: 'Pelan-pelan, aku makin paham.',
     shareTranslation: '慢慢来，我已经越来越懂了。',
   },
@@ -2515,7 +2571,7 @@ const VT_LEVEL_COPY = {
     line2: '再补一点词汇和结构，海报就能开始吹了。',
     roast: '已经可以在饭桌上假装自己很懂了。',
     id_quote: 'Lumayan lah, ngobrol tanpa Google Translate.',
-    zh_roast: '已经能在饭桌上假装听懂了，演技越来越自然，偶尔还能插一嘴。',
+    zh_roast: '已经能顺着聊几句了，演技很自然。',
     shareQuote: 'Sekarang aku berani ngobrol.',
     shareTranslation: '现在我已经敢开口聊天了。',
   },
@@ -2524,8 +2580,8 @@ const VT_LEVEL_COPY = {
     line1: '你这已经不是”知道答案”，而是”差不多真的会用”。',
     line2: '朋友看到这分数，大概率会先沉默三秒。',
     roast: '再练一点，就快到”别问，问就是我会”了。',
-    id_quote: 'Orang Indo kira kamu keturunan Tionghoa lokal.',
-    zh_roast: '印尼人以为你是本地华裔，你微笑着没有否认。砍价已经比导游还狠。',
+    id_quote: 'Orang Indo bisa kira aku lokal.',
+    zh_roast: '别人可能真的会把你当本地人。',
     shareQuote: 'Orang bisa kira aku orang lokal.',
     shareTranslation: '别人可能会以为我是本地人。',
   },
@@ -2535,7 +2591,7 @@ const VT_LEVEL_COPY = {
     line2: '这个分数已经不是炫耀，是提醒大家别小看你。',
     roast: '这不是会一点，这是已经能把场子接住了。',
     id_quote: 'Kamu harusnya ngajar guru bahasa kami.',
-    zh_roast: '建议直接去当印尼语老师，别浪费这份天赋。说梦话估计都是印尼语。',
+    zh_roast: '建议直接去当印尼语老师，别浪费这份天赋。',
     shareQuote: 'Kalau serius, gurunya juga ikut waspada.',
     shareTranslation: '你要是认真起来，老师都得警惕一下。',
   },
@@ -3191,7 +3247,7 @@ async function vtBuildSharePoster(result) {
   ctx.fillText('BIPA 模拟测评', 218, 170)
 
   // hero art
-  const artX = 84, artY = 226, artW = 912, artH = 470
+  const artX = 84, artY = 214, artW = 912, artH = 420
   ctx.save()
   vtRoundRectPath(ctx, artX, artY, artW, artH, 38)
   ctx.fillStyle = '#f7f2ff'
@@ -3207,7 +3263,7 @@ async function vtBuildSharePoster(result) {
   ctx.restore()
 
   // level badge
-  const badgeX = 118, badgeY = 540, badgeW = 184, badgeH = 184
+  const badgeX = 116, badgeY = 468, badgeW = 168, badgeH = 160
   ctx.save()
   vtRoundRectPath(ctx, badgeX, badgeY, badgeW, badgeH, 34)
   const badgeGrad = ctx.createLinearGradient(badgeX, badgeY, badgeX + badgeW, badgeY + badgeH)
@@ -3223,51 +3279,51 @@ async function vtBuildSharePoster(result) {
   ctx.textAlign = 'center'
   ctx.textBaseline = 'middle'
   ctx.fillStyle = '#fff'
-  ctx.font = `1000 48px Georgia,${SF}`
-  ctx.fillText(result.level.code, badgeX + badgeW / 2, badgeY + 78)
-  ctx.font = `900 24px ${SF}`
-  ctx.fillText(result.level.name, badgeX + badgeW / 2, badgeY + 126)
-  ctx.font = `700 16px ${SF}`
+  ctx.font = `1000 42px Georgia,${SF}`
+  ctx.fillText(result.level.code, badgeX + badgeW / 2, badgeY + 60)
+  ctx.font = `900 20px ${SF}`
+  ctx.fillText(result.level.name, badgeX + badgeW / 2, badgeY + 103)
+  ctx.font = `700 14px ${SF}`
   ctx.fillStyle = 'rgba(255,255,255,.84)'
-  ctx.fillText('参考级别', badgeX + badgeW / 2, badgeY + 155)
+  ctx.fillText('参考级别', badgeX + badgeW / 2, badgeY + 132)
 
   // score card
-  const scoreY = 650
+  const scoreY = 612
   ctx.save()
-  vtRoundRectPath(ctx, 76, scoreY, RW - 152, 244, 34)
-  const scoreGrad = ctx.createLinearGradient(76, scoreY, 76, scoreY + 244)
+  vtRoundRectPath(ctx, 76, scoreY, RW - 152, 222, 34)
+  const scoreGrad = ctx.createLinearGradient(76, scoreY, 76, scoreY + 222)
   scoreGrad.addColorStop(0, '#ffffff')
   scoreGrad.addColorStop(1, '#f9f2ff')
   ctx.fillStyle = scoreGrad
   ctx.fill()
   ctx.strokeStyle = 'rgba(142,104,215,.18)'
   ctx.lineWidth = 4
-  vtRoundRectPath(ctx, 76, scoreY, RW - 152, 244, 34)
+  vtRoundRectPath(ctx, 76, scoreY, RW - 152, 222, 34)
   ctx.stroke()
   ctx.restore()
 
   ctx.textAlign = 'center'
   ctx.textBaseline = 'alphabetic'
   ctx.fillStyle = pal.dark
-  ctx.font = `1000 110px Georgia,${SF}`
-  ctx.fillText(`≈ ${result.estimate.toLocaleString()}`, RW / 2, scoreY + 116)
+  ctx.font = `1000 104px Georgia,${SF}`
+  ctx.fillText(`≈ ${result.estimate.toLocaleString()}`, RW / 2, scoreY + 108)
   ctx.fillStyle = '#7b6e88'
   ctx.font = `800 24px ${SF}`
-  ctx.fillText('词汇覆盖量', RW / 2, scoreY + 160)
+  ctx.fillText('词汇覆盖量', RW / 2, scoreY + 148)
   ctx.fillStyle = '#6f42d9'
   ctx.font = `900 30px ${SF}`
-  ctx.fillText(`${name} 的印尼语水平：`, RW / 2, scoreY + 214)
+  ctx.fillText(`${name} 的印尼语水平：`, RW / 2, scoreY + 198)
 
   // headline
   ctx.fillStyle = pal.dark
-  ctx.font = `1000 54px ${SF}`
-  ctx.fillText(`「${copy.headline}」`, RW / 2, 990)
+  ctx.font = `1000 50px ${SF}`
+  ctx.fillText(`「${copy.headline}」`, RW / 2, 886)
   ctx.fillStyle = '#a48ccc'
   ctx.font = `700 18px ${SF}`
-  ctx.fillText('小结不严肃，成绩很认真', RW / 2, 1022)
+  ctx.fillText('小结不严肃，成绩很认真', RW / 2, 918)
 
   // quote card
-  const boxY = 1060, boxH = 248
+  const boxY = 950, boxH = 210
   ctx.save()
   vtRoundRectPath(ctx, 76, boxY, RW - 152, boxH, 34)
   const boxGrad = ctx.createLinearGradient(76, boxY, RW - 76, boxY + boxH)
@@ -3281,17 +3337,17 @@ async function vtBuildSharePoster(result) {
   ctx.textAlign = 'left'
   ctx.fillText('🇮🇩 Bahasa', 120, boxY + 40)
   ctx.fillStyle = 'rgba(255,255,255,.95)'
-  ctx.font = `italic 700 26px Georgia,${SF}`
-  vtWrapText(ctx, copy.shareQuote || copy.id_quote || copy.roast, 120, boxY + 82, 790, 34, 2)
+  ctx.font = `italic 700 24px Georgia,${SF}`
+  vtWrapText(ctx, copy.shareQuote || copy.id_quote || copy.roast, 120, boxY + 78, 790, 32, 2)
   ctx.fillStyle = 'rgba(255,255,255,.52)'
   ctx.font = `700 18px ${SF}`
-  ctx.fillText('🇨🇳 翻译', 120, boxY + 148)
+  ctx.fillText('🇨🇳 翻译', 120, boxY + 138)
   ctx.fillStyle = '#ffd66c'
-  ctx.font = `900 28px ${SF}`
-  vtWrapText(ctx, copy.shareTranslation || copy.zh_roast || copy.roast, 120, boxY + 188, 820, 36, 2)
+  ctx.font = `900 24px ${SF}`
+  vtWrapText(ctx, copy.shareTranslation || copy.zh_roast || copy.roast, 120, boxY + 172, 820, 30, 2)
 
   // score chips
-  const chipY = 1330
+  const chipY = 1188
   const chipDefs = [
     ['单词 Word', `${Math.round(result.word.rate * 100)}%`, '#ff8c47'],
     ['句子 Kalimat', `${Math.round(result.sentence.rate * 100)}%`, '#f0b93a'],
@@ -3321,7 +3377,7 @@ async function vtBuildSharePoster(result) {
 
   // footer CTA + QR
   ctx.save()
-  vtRoundRectPath(ctx, 76, 1330, 928, 82, 26)
+  vtRoundRectPath(ctx, 76, 1290, 928, 86, 26)
   ctx.fillStyle = '#f8f4ff'
   ctx.fill()
   ctx.restore()
@@ -3329,21 +3385,21 @@ async function vtBuildSharePoster(result) {
   ctx.textAlign = 'left'
   ctx.textBaseline = 'middle'
   ctx.font = `900 26px ${SF}`
-  ctx.fillText('你也来试试，看你有多 Jago？👇', 120, 1370)
+  ctx.fillText('你也来试试，看你有多 Jago？👇', 120, 1332)
   ctx.fillStyle = '#8b78a8'
   ctx.font = `700 18px ${SF}`
-  ctx.fillText('roisantoso-id.github.io/bahasabelajar', 120, 1400)
+  ctx.fillText('roisantoso-id.github.io/bahasabelajar', 120, 1360)
   if (qr && qr.width) {
     ctx.save()
-    vtRoundRectPath(ctx, 860, 1342, 120, 120, 22)
+    vtRoundRectPath(ctx, 860, 1302, 120, 120, 22)
     ctx.fillStyle = '#fff'
     ctx.fill()
     ctx.clip()
-    ctx.drawImage(qr, 860, 1342, 120, 120)
+    ctx.drawImage(qr, 860, 1302, 120, 120)
     ctx.restore()
     ctx.strokeStyle = 'rgba(107,51,204,.14)'
     ctx.lineWidth = 3
-    vtRoundRectPath(ctx, 860, 1342, 120, 120, 22)
+    vtRoundRectPath(ctx, 860, 1302, 120, 120, 22)
     ctx.stroke()
   }
 
@@ -3474,6 +3530,99 @@ async function loadWeekChart() {
     }).join('')
     document.getElementById('weekChart').innerHTML = `<div class="wc-bars">${bars}</div><div class="wc-days">${days}</div>`
   } catch (e) {}
+}
+
+// ===== LEADERBOARD =====
+let lbData = null
+let lbTab = 'exam'
+
+async function loadLeaderboard() {
+  if (!sb) return
+  const el = document.getElementById('lbContent')
+  el.innerHTML = '<div class="lb-empty">加载中...</div>'
+  try {
+    const { data, error } = await sb.rpc('get_leaderboard')
+    if (error) throw error
+    lbData = data
+    renderLbTab()
+  } catch (e) {
+    el.innerHTML = '<div class="lb-empty">排行榜加载失败<br><span style="font-size:12px;color:#bbb">需要先在 Supabase 执行 leaderboard.sql</span></div>'
+  }
+}
+
+function switchLbTab(tab, btn) {
+  lbTab = tab
+  document.querySelectorAll('.lb-tab').forEach(t => t.classList.remove('active'))
+  btn.classList.add('active')
+  renderLbTab()
+}
+
+function renderLbTab() {
+  const el = document.getElementById('lbContent')
+  if (!lbData) { el.innerHTML = '<div class="lb-empty">暂无数据</div>'; return }
+  const list = lbData[lbTab] || []
+  if (!list.length) {
+    const labels = { exam: '还没人参加测评', streak: '还没人打卡', words: '还没人开始学习' }
+    el.innerHTML = `<div class="lb-empty">${labels[lbTab] || '暂无数据'}</div>`
+    return
+  }
+
+  const uid = currentUser?.id
+  const medals = ['🥇', '🥈', '🥉']
+  let myIdx = -1
+
+  let html = '<div class="lb-list">'
+  list.forEach((item, i) => {
+    const rank = i + 1
+    const isMe = item.user_id === uid
+    if (isMe) myIdx = i
+    const medal = medals[i] || rank
+    const rankClass = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : ''
+    const initial = (item.name || '?')[0].toUpperCase()
+    const name = isMe ? (item.name || '我') + ' (我)' : (item.name || '同学')
+    let val = '', unit = '', sub = ''
+    if (lbTab === 'exam') {
+      val = (item.estimate || 0).toLocaleString()
+      unit = '词'
+      sub = item.level_name || ''
+    } else if (lbTab === 'streak') {
+      val = item.streak || 0
+      unit = '天'
+    } else {
+      val = (item.words || 0).toLocaleString()
+      unit = '词'
+    }
+    if (rank > 10 && !isMe) return
+    html += `<div class="lb-row${isMe ? ' me' : ''}">
+      <div class="lb-rank ${rankClass}">${typeof medal === 'string' && medal.length > 1 ? medal : rank}</div>
+      <div class="lb-avatar">${initial}</div>
+      <div class="lb-info"><div class="lb-name">${name}</div>${sub ? `<div class="lb-sub">${sub}</div>` : ''}</div>
+      <div class="lb-val">${val}<span class="lb-unit">${unit}</span></div>
+    </div>`
+  })
+  html += '</div>'
+
+  if (myIdx > 9) {
+    const item = list[myIdx]
+    const initial = (item.name || '?')[0].toUpperCase()
+    let val = '', unit = ''
+    if (lbTab === 'exam') { val = (item.estimate||0).toLocaleString(); unit = '词' }
+    else if (lbTab === 'streak') { val = item.streak||0; unit = '天' }
+    else { val = (item.words||0).toLocaleString(); unit = '词' }
+    html += `<div class="lb-me-section">
+      <div class="lb-me-title">我的排名</div>
+      <div class="lb-row me">
+        <div class="lb-rank">${myIdx + 1}</div>
+        <div class="lb-avatar">${initial}</div>
+        <div class="lb-info"><div class="lb-name">${item.name || '我'} (我)</div></div>
+        <div class="lb-val">${val}<span class="lb-unit">${unit}</span></div>
+      </div>
+    </div>`
+  } else if (myIdx === -1 && uid) {
+    html += `<div class="lb-me-section"><div class="lb-me-title">你还没有上榜，快去${lbTab === 'exam' ? '测评' : lbTab === 'streak' ? '打卡' : '学习'}吧！</div></div>`
+  }
+
+  el.innerHTML = html
 }
 
 // ===== INIT =====
