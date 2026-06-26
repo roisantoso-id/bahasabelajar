@@ -82,20 +82,26 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .hero-cal-day.hc-today{outline:1.5px solid var(--coral);outline-offset:-1px;border-radius:8px}
 .section-title{font-size:12px;font-weight:900;margin:14px 2px 8px;letter-spacing:.3px;color:#53635d;text-transform:uppercase}
 .task-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
-.task{display:flex;flex-direction:column;padding:12px;border-radius:18px;background:rgba(255,253,248,.86);border:1px solid rgba(20,41,37,.05);box-shadow:0 8px 20px rgba(23,45,39,.06)}
-.task-icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:12px;font-size:14px;font-weight:900;flex-shrink:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 6px 12px rgba(23,45,39,.06);margin-bottom:8px}
+.task{position:relative;display:flex;flex-direction:column;padding:12px 12px 10px;border-radius:18px;background:rgba(255,253,248,.86);border:1px solid rgba(20,41,37,.05);box-shadow:0 8px 20px rgba(23,45,39,.06);min-height:108px}
+.task-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.task-body{flex:1;min-width:0}
+.task-icon{width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:14px;flex-shrink:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 6px 12px rgba(23,45,39,.06);overflow:hidden}
+.task-icon img{display:block;width:100%;height:100%;object-fit:cover}
 .task-icon.learn{color:#1d5a4b;background:linear-gradient(180deg,#e8f2e8,#cfe4cf)}
 .task-icon.review{color:#9f4a34;background:linear-gradient(180deg,#fde8de,#f4cfbe)}
 .task-icon.grammar{color:#644693;background:linear-gradient(180deg,#f1e9fb,#ddcef1)}
 .task-icon.article{color:#2d745f;background:linear-gradient(180deg,#edf6ef,#d5ead8)}
-.task-icon.extra{color:#8a6d3b;background:linear-gradient(180deg,#fbf1dd,#f2e0b4);font-size:20px}
+.task-icon.extra{color:#8a6d3b;background:linear-gradient(180deg,#fbf1dd,#f2e0b4)}
 .task-icon.culture{color:#9a602b;background:linear-gradient(180deg,#fbefe2,#f6dcc1)}
-.task-body{flex:1}
 .task-name{font-size:13px;font-weight:800;letter-spacing:-.2px}
-.task-desc{display:none}
-.task-count{font-size:18px;font-weight:900;color:var(--green);margin-top:2px}
+.task-desc{display:block;margin-top:4px;font-size:10px;line-height:1.35;color:#7c867f;font-weight:700}
+.task-count{font-size:18px;font-weight:900;color:var(--green);margin-top:8px}
 .task-arrow{display:none}
 .task-row{display:flex;align-items:center;justify-content:space-between}
+.task-badge{position:absolute;top:10px;right:10px;min-width:16px;height:16px;padding:0 5px;border-radius:99px;background:#ff3b30;color:#fff;font-size:10px;font-weight:900;line-height:16px;text-align:center;box-shadow:0 2px 6px rgba(255,59,48,.35)}
+.task-badge[hidden]{display:none}
+.task-dot{position:absolute;top:12px;right:12px;width:10px;height:10px;border-radius:50%;background:#ff3b30;box-shadow:0 2px 6px rgba(255,59,48,.35)}
+.task-dot[hidden]{display:none}
 .stats-row{display:none}
 .stat{text-align:center}
 .stat-val{font-size:20px;font-weight:900;letter-spacing:-.3px}
@@ -500,6 +506,7 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 [data-theme="dark"] .task-icon.article{background:linear-gradient(180deg,#162a22,#0d1f18);color:var(--green2)}
 [data-theme="dark"] .task-icon.extra{background:linear-gradient(180deg,#2a2214,#1e180e);color:#c9a033}
 [data-theme="dark"] .task-icon.culture{background:linear-gradient(180deg,#2a2010,#1e180c);color:#c98a33}
+[data-theme="dark"] .task-badge{box-shadow:0 2px 6px rgba(0,0,0,.24)}
 [data-theme="dark"] .word-card{background:linear-gradient(180deg,#1a201d 0%,#161c19 100%);border-color:rgba(200,220,210,.08);box-shadow:0 16px 36px rgba(0,0,0,.3)}
 [data-theme="dark"] .word-card::before{background:radial-gradient(circle at 10% 6%, rgba(22,42,34,.34), transparent 22%),radial-gradient(circle at 92% 0%, rgba(60,50,18,.12), transparent 18%)}
 [data-theme="dark"] .word-level{background:linear-gradient(180deg,#162a22,#0d1f18);color:var(--green)}
@@ -618,7 +625,7 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 .vocab-banner:active{transform:scale(.98)}
 .vocab-banner::after{content:'';position:absolute;right:-30px;top:-30px;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,rgba(244,201,93,.30),transparent 70%);pointer-events:none}
 .vocab-banner-icon{flex:none;width:42px;height:42px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.16);color:#fff}
-.vocab-banner-icon svg{width:24px;height:24px}
+.vocab-banner-icon img,.vocab-banner-icon svg{width:24px;height:24px;display:block}
 .vocab-banner-text{flex:1;min-width:0;position:relative;z-index:1}
 .vocab-banner-title{font-size:15px;font-weight:900;color:#fff;letter-spacing:-.2px}
 .vocab-banner-sub{font-size:11px;color:rgba(255,255,255,.78);margin-top:3px}
@@ -809,33 +816,66 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
   </div>
   <div class="task-grid">
     <div class="task" onclick="startLearn()">
-      <div class="task-icon learn">Aa</div>
-      <div class="task-row"><div class="task-body"><div class="task-name">学习新词</div></div><span class="task-count" id="newCount">0</span></div>
+      <div class="task-top">
+        <div class="task-icon learn"><img src="img/home-learn.svg" alt=""></div>
+        <span class="task-count" id="newCount">0</span>
+      </div>
+      <div class="task-body">
+        <div class="task-name">学习新词</div>
+        <div class="task-desc">按词频和课本顺序推进</div>
+      </div>
     </div>
     <div class="task" onclick="startReview()">
-      <div class="task-icon review">↻</div>
-      <div class="task-row"><div class="task-body"><div class="task-name">巩固复习</div></div><span class="task-count" id="dueCount">0</span></div>
+      <div class="task-top">
+        <div class="task-icon review"><img src="img/home-review.svg" alt=""></div>
+        <span class="task-count" id="dueCount">0</span>
+      </div>
+      <div class="task-body">
+        <div class="task-name">巩固复习</div>
+        <div class="task-desc">到点就复习，别让词跑了</div>
+      </div>
     </div>
     <div class="task" onclick="startGrammar()">
-      <div class="task-icon grammar">文</div>
-      <div class="task-body"><div class="task-name">语法笔记</div></div>
+      <div class="task-top">
+        <div class="task-icon grammar"><img src="img/home-grammar.svg" alt=""></div>
+      </div>
+      <div class="task-body">
+        <div class="task-name">语法笔记</div>
+        <div class="task-desc">规则拆开看，更容易记住</div>
+      </div>
     </div>
     <div class="task" onclick="startExtra()">
-      <div class="task-icon extra">＋</div>
-      <div class="task-body"><div class="task-name">拓展词</div></div>
+      <div class="task-top">
+        <div class="task-icon extra"><img src="img/home-extra.svg" alt=""></div>
+      </div>
+      <div class="task-body">
+        <div class="task-name">拓展词</div>
+        <div class="task-desc">顺手补点场景词</div>
+      </div>
     </div>
     <div class="task" onclick="showView('articles', document.querySelectorAll('.tab')[3])">
-      <div class="task-icon article">📄</div>
-      <div class="task-body"><div class="task-name">印尼文章</div></div>
+      <span class="task-dot" id="homeArticleBadge" hidden></span>
+      <div class="task-top">
+        <div class="task-icon article"><img src="img/home-article.svg" alt=""></div>
+      </div>
+      <div class="task-body">
+        <div class="task-name">印尼文章</div>
+        <div class="task-desc">每日新文，未读会提醒你</div>
+      </div>
     </div>
     <div class="task" onclick="showView('culture')">
-      <div class="task-icon culture">🎭</div>
-      <div class="task-body"><div class="task-name">印尼文化</div></div>
+      <div class="task-top">
+        <div class="task-icon culture"><img src="img/home-culture.svg" alt=""></div>
+      </div>
+      <div class="task-body">
+        <div class="task-name">印尼文化</div>
+        <div class="task-desc">风俗、梗图、地方感一起学</div>
+      </div>
     </div>
   </div>
   <div class="vocab-banner" onclick="startVocabTest()">
     <span class="vocab-badge" id="vocabBadge">NEW</span>
-    <div class="vocab-banner-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6a9 3 0 0 0 18 0a9 3 0 0 0-18 0"/><path d="M3 6v6a9 3 0 0 0 18 0V6"/><path d="M3 12v6a9 3 0 0 0 18 0v-6"/></svg></div>
+    <div class="vocab-banner-icon"><img src="img/home-bipa.svg" alt=""></div>
     <div class="vocab-banner-text">
       <div class="vocab-banner-title">BIPA 模拟测评</div>
       <div class="vocab-banner-sub">单词、句子、阅读连着做，按答题表现自动切下一关</div>
@@ -1909,9 +1949,13 @@ function updateArticleBadge() {
   const read = getReadArticles()
   const unread = articleCache.filter(a => !read.has(a.id)).length
   const badge = document.getElementById('artTabBadge')
+  const homeBadge = document.getElementById('homeArticleBadge')
   if (!badge) return
   if (unread > 0) { badge.textContent = '+' + (unread > 99 ? 99 : unread); badge.style.display = '' }
   else badge.style.display = 'none'
+  if (homeBadge) {
+    homeBadge.hidden = unread <= 0
+  }
 }
 // 进 app 时就拉文章 id，让角标提前显示（不渲染列表）
 async function refreshArticleBadge() {
