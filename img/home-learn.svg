@@ -6,9 +6,11 @@
     </linearGradient>
   </defs>
   <rect x="2" y="2" width="92" height="92" rx="24" fill="url(#bg)"/>
-  <path d="M27 35c7-6 15-9 21-9s14 3 21 9v25c-7-6-15-9-21-9s-14 3-21 9V35Z" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
-  <path d="M48 26v25" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
-  <path d="M61 54h9" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
-  <path d="M66 48l6 6-6 6" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M22 26l4 4M17 36h5M74 26l-4 4M79 36h-5" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+  <path d="M48 30v36" stroke="#1d5a4b" stroke-width="4" stroke-linecap="round"/>
+  <path d="M48 30c-5-4-12-6-18-6s-10 1-10 1v32s4-1 10-1 13 2 18 6" fill="#1d5a4b" fill-opacity=".08" stroke="#1d5a4b" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M48 30c5-4 12-6 18-6s10 1 10 1v32s-4-1-10-1-13 2-18 6" fill="#1d5a4b" fill-opacity=".05" stroke="#1d5a4b" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M30 40h12M30 48h10" stroke="#1d5a4b" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+  <path d="M56 40h12M56 48h10" stroke="#1d5a4b" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+  <circle cx="68" cy="26" r="6" fill="#1d5a4b" fill-opacity=".12"/>
+  <path d="M65 26h6M68 23v6" stroke="#1d5a4b" stroke-width="2.5" stroke-linecap="round"/>
 </svg>
