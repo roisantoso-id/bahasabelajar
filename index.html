@@ -278,6 +278,8 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .speak-btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:50%;background:linear-gradient(180deg,#e8f1e8,#d7e7d7);color:var(--green);cursor:pointer;flex:none;box-shadow:0 10px 18px rgba(23,45,39,.06)}
 .speak-btn:active{transform:scale(.9)}
 .speak-btn svg{width:54%;height:54%;display:block}
+.speak-btn.tts-loading{animation:tts-spin .7s linear infinite;pointer-events:none;opacity:.6}
+@keyframes tts-spin{to{transform:rotate(360deg)}}
 .word-speak{width:44px;height:44px;margin:14px auto 0;display:flex}
 .sent-speak{width:24px;height:24px;margin-right:7px;vertical-align:middle}
 .wl-speak{width:32px;height:32px;margin-left:8px}
@@ -1957,7 +1959,7 @@ function renderStudy() {
               <div class="swi-word">${esc(w.word)}</div>
               <div class="swi-meaning">${esc(w.meaning)}</div>
             </div>
-            <button class="speak-btn" onclick="speak('${esc(w.word).replace(/'/g,'&#39;')}')" style="flex-shrink:0">${SPEAK_SVG}</button>
+            <button class="speak-btn" onclick="speak('${esc(w.word).replace(/'/g,'&#39;')}',null,this)" style="flex-shrink:0">${SPEAK_SVG}</button>
           </div>`).join('')}
       </div>` : ''
     document.getElementById('studyCard').innerHTML = `
@@ -1979,7 +1981,7 @@ function renderStudy() {
   document.getElementById('studyCard').innerHTML = `
     <span class="word-level">${levelName}${w.topic ? ` · ${esc(w.topic)}` : ''}</span>
     <div class="word-main">${esc(w.word)}</div>
-    <button class="speak-btn word-speak" onclick="speakStudyWord()">${SPEAK_SVG}</button>
+    <button class="speak-btn word-speak" onclick="speakStudyWord(this)">${SPEAK_SVG}</button>
     <div class="word-pos">${esc(w.pos)}</div>
     <div id="answerArea"><div class="think-hint">先在脑海里回想它的意思</div></div>`
   document.getElementById('studyActions').innerHTML = `
@@ -2032,7 +2034,7 @@ function produceReveal() {
 function renderListen(w, levelName) {
   document.getElementById('studyCard').innerHTML = `
     <span class="word-level">${levelName}</span>
-    <button class="listen-play" onclick="speakStudyWord()">${SPEAK_SVG}</button>
+    <button class="listen-play" onclick="speakStudyWord(this)">${SPEAK_SVG}</button>
     <div class="listen-hint">点喇叭再听一次 · 回想它的意思和拼写</div>
     <div id="answerArea"></div>`
   document.getElementById('studyActions').innerHTML = `
@@ -2304,7 +2306,7 @@ function renderWords() {
           <div class="wl-meaning">${esc(w.meaning)}</div>
         </div>
         <span class="wl-status ${stCls}">${statusLabel}</span>
-        <button class="speak-btn wl-speak" onclick="event.stopPropagation(); speakListWord(${i})">${SPEAK_SVG}</button>
+        <button class="speak-btn wl-speak" onclick="event.stopPropagation();speakListWord(${i},this)">${SPEAK_SVG}</button>
         <button class="wl-star${isStarred?' starred':''}" onclick="event.stopPropagation();toggleStar(${w.id},this)" title="${isStarred?'取消收藏':'收藏'}">★</button>
         ${chevron}
       </div>
@@ -2429,7 +2431,7 @@ function openArticle(id) {
   document.getElementById('artReadBar').style.width = '0%'
   document.getElementById('artBody').innerHTML = a.sentences.map((s, i) => `
     <div class="sent${s.note?' has-note':''}" data-si="${i}" onclick="toggleSentNote(this)">
-      <div class="sent-id"><button class="speak-btn sent-speak" onclick="event.stopPropagation();speakArticleSentence(${i})"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg></button><span class="sent-num">${i+1}</span><span class="sent-id-text">${esc(s.id)}</span>${s.note?'<span class="sent-note-hint">💡</span>':''}</div>
+      <div class="sent-id"><button class="speak-btn sent-speak" onclick="event.stopPropagation();speakArticleSentence(${i},this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg></button><span class="sent-num">${i+1}</span><span class="sent-id-text">${esc(s.id)}</span>${s.note?'<span class="sent-note-hint">💡</span>':''}</div>
       <div class="sent-zh">${esc(s.zh)}</div>
       ${s.note ? `<div class="sent-note">${esc(s.note)}</div>` : ''}
     </div>`).join('')
@@ -2778,7 +2780,7 @@ async function lookupWord(clean, rect) {
     transCurrent.hit = hit
     const ex = (hit.examples || [])[0]
     renderTransBody(`
-      <div class="tp-word">${esc(hit.word)}<button class="speak-btn tp-speak" onclick="speakSel()">${SPEAK_SVG}</button><span class="tp-pos">${esc(hit.pos)}</span><span class="tp-src">词库</span></div>
+      <div class="tp-word">${esc(hit.word)}<button class="speak-btn tp-speak" onclick="speakSel(this)">${SPEAK_SVG}</button><span class="tp-pos">${esc(hit.pos)}</span><span class="tp-src">词库</span></div>
       <div class="tp-mean">${esc(hit.meaning)}</div>
       ${ex ? `<div class="tp-ex">${esc(ex.id)}<br>${esc(ex.zh)}</div>` : ''}
       <button class="tp-btn" id="tpAction" onclick="addSelToLearning()">＋ 加入背诵</button>${noteBtn}`, rect)
@@ -2810,7 +2812,7 @@ async function lookupWord(clean, rect) {
     if (transCurrent?.text !== clean) return
     transCurrent.mt = mt
     renderTransBody(`
-      <div class="tp-word">${esc(clean)}<button class="speak-btn tp-speak" onclick="speakSel()">${SPEAK_SVG}</button><span class="tp-src">${srcLabel}</span></div>
+      <div class="tp-word">${esc(clean)}<button class="speak-btn tp-speak" onclick="speakSel(this)">${SPEAK_SVG}</button><span class="tp-src">${srcLabel}</span></div>
       <div class="tp-mean">${esc(mt)}</div>
       <button class="tp-btn" id="tpAction" onclick="collectSelWord()">＋ 收藏到词库</button>${noteBtn}`, rect)
   }
@@ -2926,23 +2928,40 @@ async function _remoteURL(text) {
   return u
 }
 
+// —— 按钮 loading 状态 ——
+let _ttsLoadingEl = null
+function _ttsLoadEl(el, on) {
+  if (_ttsLoadingEl) { _ttsLoadingEl.classList.remove('tts-loading'); _ttsLoadingEl = null }
+  if (on && el) { el.classList.add('tts-loading'); _ttsLoadingEl = el }
+}
+
+// 流式播放远端 URL（拿到 URL 即开始播，不等完整下载）
+function playUrl(url) {
+  return new Promise((res, rej) => {
+    const a = new Audio(url)
+    a.onended = res
+    a.onerror = () => rej(new Error('audio error'))
+    a.play().catch(rej)
+  })
+}
+
 // —— 双缓存发音主入口 ——
-async function azureSpeak(text) {
+async function azureSpeak(text, el) {
   if (!text) return
+  _ttsLoadEl(el, true)
   try {
-    if (!sb) return webSpeak(text)
+    if (!sb) { _ttsLoadEl(el, false); return webSpeak(text) }
     const ck = _ttsCacheKey(text)
     // L1 命中 → 直接播，0 网络
     const local = await idbGet(ck)
-    if (local) { await playBuf(local); return }
-    // L2 命中或 Azure 生成 → 拿 URL → 下载字节 → 存 L1 → 播
+    if (local) { _ttsLoadEl(el, false); await playBuf(local); return }
+    // L2/L3 → 拿 URL（Storage 命中仅需 HEAD，否则 Azure 生成）
     const url = await _remoteURL(text)
-    const resp = await fetch(url)
-    if (!resp.ok) throw new Error('fetch url')
-    const buf = await resp.arrayBuffer()
-    idbPut(ck, buf)
-    await playBuf(buf)
-  } catch { webSpeak(text) }
+    _ttsLoadEl(el, false)   // URL 到手即移除 loading，流式播放立即开始
+    await playUrl(url)
+    // 后台异步缓存到 IndexedDB，下次本地命中
+    fetch(url).then(r => r.ok ? r.arrayBuffer() : null).then(buf => { if (buf) idbPut(ck, buf) }).catch(() => {})
+  } catch { _ttsLoadEl(el, false); webSpeak(text) }
 }
 
 // —— 后台预缓存（L1 未命中才触发远程，静默失败）——
@@ -2994,14 +3013,14 @@ function webSpeak(text, rate) {
     speechSynthesis.speak(u)
   } catch (e) {}
 }
-function speak(text, rate) {
-  if (ttsEngine === 'azure') azureSpeak(text)
+function speak(text, rate, el) {
+  if (ttsEngine === 'azure') azureSpeak(text, el)
   else webSpeak(text, rate)
 }
-function speakStudyWord() { const w = studyQueue[studyIdx]; if (w) speak(w.word) }
-function speakArticleSentence(i) { if (artCurrent && artCurrent.sentences[i]) speak(artCurrent.sentences[i].id) }
-function speakListWord(i) { const w = wordItems[i]; if (w) speak(w.word) }
-function speakSel() { speak((transCurrent && (transCurrent.hit ? transCurrent.hit.word : transCurrent.text)) || '') }
+function speakStudyWord(el) { const w = studyQueue[studyIdx]; if (w) speak(w.word, null, el) }
+function speakArticleSentence(i, el) { if (artCurrent && artCurrent.sentences[i]) speak(artCurrent.sentences[i].id, null, el) }
+function speakListWord(i, el) { const w = wordItems[i]; if (w) speak(w.word, null, el) }
+function speakSel(el) { speak((transCurrent && (transCurrent.hit ? transCurrent.hit.word : transCurrent.text)) || '', null, el) }
 function toggleTTS() {
   ttsEngine = ttsEngine === 'azure' ? 'web' : 'azure'
   localStorage.setItem('tts_engine', ttsEngine)
