@@ -1783,28 +1783,47 @@ async function renderHeroCal() {
     _renderHeroCalFromData(data || [], y, m, lastDay, now.getDate())
   } catch (e) {}
 }
-async function loadHome() {
-  if (!sb) return
-  const t = todayStr()
-  const h = new Date().getHours()
-  const now = new Date()
-  document.getElementById('greeting').textContent = h < 12 ? 'Selamat pagi' : h < 18 ? 'Selamat siang' : 'Selamat malam'
-  document.getElementById('dateLabel').textContent = `${now.getMonth()+1}月${now.getDate()}日 · 今日计划`
-  refreshVocabBadge()
-
+// ===== 首页统计缓存（localStorage 同步读 = 秒显；5 min TTL；按日期失效）=====
+const _HOME_CACHE_TTL = 5 * 60 * 1000
+function _homeStatsCacheRead(uid, t) {
+  try {
+    const raw = localStorage.getItem('bb_home_' + uid)
+    if (!raw) return null
+    const p = JSON.parse(raw)
+    if (p.date !== t || Date.now() - p.ts > _HOME_CACHE_TTL) return null
+    return p.d
+  } catch { return null }
+}
+function _homeStatsCacheSave(uid, t, d) {
+  try { localStorage.setItem('bb_home_' + uid, JSON.stringify({ ts: Date.now(), date: t, d })) } catch {}
+}
+function _applyHomeStats(d, t, now) {
+  const goal = profile.daily_new_words || 10
+  const newRemaining = Math.max(0, goal - d.checkin.new_learned)
+  document.getElementById('newCount').textContent = newRemaining
+  document.getElementById('dueCount').textContent = d.dueCount
+  maybeNotify(d.dueCount, newRemaining)
+  document.getElementById('learnedStat').textContent = d.learnedWords
+  document.getElementById('totalStat').textContent = d.totalWords
+  document.getElementById('learnedStatMini').textContent = d.learnedWords
+  document.getElementById('totalStatMini').textContent = d.totalWords
+  document.getElementById('streakMini').textContent = d.streak
+  document.getElementById('todayDone').textContent = d.checkin.completed ? '✓' : '—'
+  document.getElementById('streakNum').textContent = d.streak
+  const done = d.checkin.new_learned + d.checkin.reviewed
+  const total = goal + d.dueCount + d.checkin.reviewed
+  const pct = d.checkin.completed ? 100 : Math.min(100, Math.round(done / Math.max(1, total) * 100))
+  document.getElementById('homeProgress').style.width = pct + '%'
+  _renderWeekChartFromData(d.weekRows, t)
+  _renderHeroCalFromData(d.calRows, d.calY, d.calM, d.calLastDay, now.getDate())
+}
+async function _fetchAndCacheHomeStats(t, now, uid) {
   const y = now.getFullYear(), m = now.getMonth() + 1
   const mm = String(m).padStart(2, '0')
   const lastDay = new Date(y, m, 0).getDate()
-
-  // 所有首页数据一次并发拉取，消除串行等待
   const [
-    {count: totalWords},
-    {count: learnedWords},
-    {count: dueCount},
-    {data: ci},
-    {data: streakRows},
-    {data: weekRows},
-    {data: calRows}
+    {count: totalWords}, {count: learnedWords}, {count: dueCount},
+    {data: ci}, {data: streakRows}, {data: weekRows}, {data: calRows}
   ] = await Promise.all([
     sb.from('words').select('*', {count:'exact', head:true}),
     sb.from('learning').select('*', {count:'exact', head:true}),
@@ -1814,34 +1833,40 @@ async function loadHome() {
     sb.from('checkins').select('date,new_learned,reviewed').gte('date', addDays(t,-6)).lte('date', t),
     sb.from('checkins').select('date,completed,new_learned,reviewed').gte('date', `${y}-${mm}-01`).lte('date', `${y}-${mm}-${String(lastDay).padStart(2,'0')}`)
   ])
-
   const checkin = ci || {new_learned:0, reviewed:0, completed:0}
-  const goal = profile.daily_new_words || 10
-  const newRemaining = Math.max(0, goal - checkin.new_learned)
-
-  // streak 从预取数据直接算，无需额外请求
   const streakSet = new Set((streakRows || []).map(r => r.date))
   let sd = streakSet.has(t) ? t : addDays(t, -1)
   let streak = 0
   while (streakSet.has(sd)) { streak++; sd = addDays(sd, -1) }
+  const d = {
+    totalWords: totalWords || 0, learnedWords: learnedWords || 0,
+    dueCount: dueCount || 0, checkin, streak,
+    weekRows: weekRows || [], calRows: calRows || [],
+    calY: y, calM: m, calLastDay: lastDay
+  }
+  _homeStatsCacheSave(uid, t, d)
+  return d
+}
+async function loadHome() {
+  if (!sb) return
+  const t = todayStr()
+  const h = new Date().getHours()
+  const now = new Date()
+  document.getElementById('greeting').textContent = h < 12 ? 'Selamat pagi' : h < 18 ? 'Selamat siang' : 'Selamat malam'
+  document.getElementById('dateLabel').textContent = `${now.getMonth()+1}月${now.getDate()}日 · 今日计划`
+  refreshVocabBadge()
 
-  document.getElementById('newCount').textContent = newRemaining
-  document.getElementById('dueCount').textContent = dueCount || 0
-  maybeNotify(dueCount || 0, newRemaining)
-  document.getElementById('learnedStat').textContent = learnedWords || 0
-  document.getElementById('totalStat').textContent = totalWords || 0
-  document.getElementById('learnedStatMini').textContent = learnedWords || 0
-  document.getElementById('totalStatMini').textContent = totalWords || 0
-  document.getElementById('streakMini').textContent = streak
-  document.getElementById('todayDone').textContent = checkin.completed ? '✓' : '—'
-  document.getElementById('streakNum').textContent = streak
-
-  const done = checkin.new_learned + checkin.reviewed
-  const total = goal + (dueCount||0) + checkin.reviewed
-  const pct = checkin.completed ? 100 : Math.min(100, Math.round(done / Math.max(1,total)*100))
-  document.getElementById('homeProgress').style.width = pct + '%'
-  _renderWeekChartFromData(weekRows || [], t)
-  _renderHeroCalFromData(calRows || [], y, m, lastDay, now.getDate())
+  const uid = currentUser?.id || ''
+  const cached = _homeStatsCacheRead(uid, t)
+  if (cached) {
+    _applyHomeStats(cached, t, now)
+    // 有缓存：后台静默刷新，不阻塞渲染
+    _fetchAndCacheHomeStats(t, now, uid).then(d => _applyHomeStats(d, t, now)).catch(() => {})
+    return
+  }
+  // 无缓存（首次进入）：等待拉取完再渲染
+  const d = await _fetchAndCacheHomeStats(t, now, uid)
+  _applyHomeStats(d, t, now)
 }
 
 async function getStreak(t) {
@@ -2222,14 +2247,30 @@ let wordsOffset = 0, currentLevel = '', currentTopic = '', wordItems = []
 // 领域顺序与 scripts/classify-topic.js 的 TOPICS 一致
 const WORD_TOPICS = ['人称指代','数字时间','家庭人物','身体健康','饮食','居家物品','交通出行','自然地理','教育语言','工作商务','社会时政','文娱科技','问候寒暄','动作行为','性质状态','虚词语法','其他']
 
+// ===== 单词数据缓存（IDB 1h TTL；learning 状态不缓存，保证实时准确）=====
+let _wordsRaw = null  // {ts, data: [...]}
+async function _getWordsRaw() {
+  if (_wordsRaw && Date.now() - _wordsRaw.ts < 60 * 60 * 1000) return _wordsRaw.data
+  const hit = await cacheGet('words_v1', 60 * 60 * 1000)
+  if (hit) { _wordsRaw = { ts: Date.now(), data: hit }; return hit }
+  const { data } = await sb.from('words').select('id,word,pos,meaning,level,examples,topic').order('level').order('id').range(0, 599)
+  const words = data || []
+  _wordsRaw = { ts: Date.now(), data: words }
+  cachePut('words_v1', words)
+  return words
+}
+async function _getLearningMap() {
+  const { data } = await sb.from('learning').select('word_id,stage,status')
+  const m = new Map()
+  for (const r of (data || [])) m.set(r.word_id, r)
+  return m
+}
 async function buildTopicChips() {
   const row = document.getElementById('topicFilter')
-  // 探测库里已有哪些领域；列不存在或全空（未跑分类 SQL）则隐藏整行，优雅降级
   let present = []
   try {
-    const { data, error } = await sb.from('words').select('topic').limit(2000)
-    if (error) throw error
-    present = [...new Set((data || []).map(r => r.topic).filter(Boolean))]
+    const words = await _getWordsRaw()
+    present = [...new Set(words.map(r => r.topic).filter(Boolean))]
   } catch (e) { present = [] }
   if (!present.length) { row.innerHTML = ''; row.style.display = 'none'; return }
   row.style.display = ''
@@ -2255,21 +2296,23 @@ async function loadWords() {
     wordItems = data || []
     renderWords(); wbStatLine(); return
   }
-  // 不在服务端 order by topic：库可能还没 topic 列，会让整个查询报错。改为客户端按领域分组排序。
-  let q = sb.from('words').select('*, learning(stage,status)').order('level').order('id')
-  if (currentLevel) q = q.eq('level', Number(currentLevel))
-  if (currentTopic) q = q.eq('topic', currentTopic)   // 仅在已有领域 chips 时触发，那时列必然存在
+  // 词内容从 IDB 缓存取（1h TTL），learning 状态并发拉取（不缓存，保持准确）
+  const [words, learningMap] = await Promise.all([_getWordsRaw(), _getLearningMap()])
+  let filtered = words
+  if (currentLevel) filtered = filtered.filter(w => w.level === Number(currentLevel))
+  if (currentTopic) filtered = filtered.filter(w => w.topic === currentTopic)
   const search = document.getElementById('searchInput').value.trim().replace(/[,()%*:]/g, '')
-  if (search) q = q.or(`word.ilike.%${search}%,meaning.ilike.%${search}%`)
-  const {data, count} = await q.range(0, 599)
-  wordItems = data || []
-  // 没选具体领域时，按领域顺序分组排序（让「全部」也按领域聚拢，而非乱序）
+  if (search) {
+    const s = search.toLowerCase()
+    filtered = filtered.filter(w => (w.word || '').toLowerCase().includes(s) || (w.meaning || '').toLowerCase().includes(s))
+  }
   if (!currentTopic) {
-    wordItems.sort((a, b) => {
+    filtered = [...filtered].sort((a, b) => {
       const ia = WORD_TOPICS.indexOf(a.topic), ib = WORD_TOPICS.indexOf(b.topic)
       return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib)
     })
   }
+  wordItems = filtered.map(w => ({ ...w, learning: learningMap.has(w.id) ? [learningMap.get(w.id)] : [] }))
   renderWords()
   wbStatLine()
 }
@@ -2336,18 +2379,38 @@ function filterStarred(el) {
 
 // ===== ARTICLES =====
 let articleCache = [], artCurrent = null
-
-let artFilter = '全部'
-async function loadArticles() {
-  if (!sb) return
-  const {data} = await sb.from('articles').select('*').order('id', {ascending: false})
-  articleCache = data || []
+let _articlesInMem = null  // {ts, data: [...]}
+function _renderArticleUI() {
   const cats = ['全部', ...new Set(articleCache.map(a => a.category))]
   document.getElementById('artCatBar').innerHTML = cats.map(c =>
     `<button class="art-cat-btn${c===artFilter?' active':''}" onclick="filterArticles('${c}')">${c}</button>`
   ).join('')
   renderArticleList()
   updateArticleBadge()
+}
+
+let artFilter = '全部'
+async function loadArticles() {
+  if (!sb) return
+  // 内存缓存（tab 切换秒显，无任何异步）
+  if (_articlesInMem && Date.now() - _articlesInMem.ts < 60 * 60 * 1000) {
+    articleCache = _articlesInMem.data; _renderArticleUI(); return
+  }
+  // IDB 缓存（1h TTL，跨刷新）：命中则先渲染再后台悄悄刷新
+  const hit = await cacheGet('articles_v1', 60 * 60 * 1000)
+  if (hit) {
+    articleCache = hit; _articlesInMem = { ts: Date.now(), data: hit }; _renderArticleUI()
+    sb.from('articles').select('*').order('id', {ascending: false}).then(({data}) => {
+      if (data) { articleCache = data; _articlesInMem = { ts: Date.now(), data }; cachePut('articles_v1', data); _renderArticleUI() }
+    }).catch(() => {})
+    return
+  }
+  // 无缓存：等待首次拉取
+  const {data} = await sb.from('articles').select('*').order('id', {ascending: false})
+  articleCache = data || []
+  _articlesInMem = { ts: Date.now(), data: articleCache }
+  cachePut('articles_v1', articleCache)
+  _renderArticleUI()
 }
 function filterArticles(cat) {
   artFilter = cat
@@ -2374,9 +2437,16 @@ function updateArticleBadge() {
     homeBadge.hidden = unread <= 0
   }
 }
-// 进 app 时就拉文章 id，让角标提前显示（不渲染列表）
+// 进 app 时就更新文章角标（优先走缓存，避免额外请求）
 async function refreshArticleBadge() {
-  if (!sb || articleCache.length) { updateArticleBadge(); return }
+  if (!sb) return
+  if (articleCache.length && articleCache[0].sentences !== undefined) { updateArticleBadge(); return }
+  // 先查 IDB（有完整数据则直接用）
+  const hit = await cacheGet('articles_v1', 60 * 60 * 1000)
+  if (hit) {
+    articleCache = hit; _articlesInMem = { ts: Date.now(), data: hit }; updateArticleBadge(); return
+  }
+  // 回退：只拉 id，最小请求
   try {
     const { data } = await sb.from('articles').select('id')
     if (data) articleCache = data
@@ -2870,6 +2940,41 @@ function loadVoices() {
 }
 
 // —— L1: IndexedDB ——
+// ===== 通用数据缓存（IDB bb_cache，供首页/词库/文章共用）=====
+let _cacheDb = null
+function _openCacheDb() {
+  if (_cacheDb) return Promise.resolve(_cacheDb)
+  return new Promise((res, rej) => {
+    const r = indexedDB.open('bb_cache', 1)
+    r.onupgradeneeded = e => e.target.result.createObjectStore('kv')
+    r.onsuccess = e => { _cacheDb = e.target.result; res(_cacheDb) }
+    r.onerror = () => rej(r.error)
+  })
+}
+async function cacheGet(key, ttlMs) {
+  try {
+    const db = await _openCacheDb()
+    const raw = await new Promise(res => {
+      const req = db.transaction('kv','readonly').objectStore('kv').get(key)
+      req.onsuccess = () => res(req.result ?? null)
+      req.onerror = () => res(null)
+    })
+    if (!raw) return null
+    if (ttlMs && Date.now() - raw.ts > ttlMs) return null
+    return raw.data
+  } catch { return null }
+}
+async function cachePut(key, data) {
+  try {
+    const db = await _openCacheDb()
+    await new Promise(res => {
+      const tx = db.transaction('kv','readwrite')
+      tx.objectStore('kv').put({ ts: Date.now(), data }, key)
+      tx.oncomplete = res; tx.onerror = res
+    })
+  } catch {}
+}
+
 function _openTTSDb() {
   if (_ttsDb) return Promise.resolve(_ttsDb)
   return new Promise((res, rej) => {
