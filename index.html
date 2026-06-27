@@ -1312,33 +1312,6 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
     </div>
   </div>
 
-  <div class="group-title">发音引擎</div>
-  <div class="setting-card">
-    <div class="setting-row">
-      <div class="setting-icon" style="background:#e8f4ff;color:#1a7fd4">🔊</div>
-      <div class="setting-copy"><div>TTS 引擎</div><span id="ttsDesc">Azure 神经语音（在线·印尼语优化）</span></div>
-      <button class="tts-toggle" id="ttsToggle" onclick="toggleTTS()">Azure</button>
-    </div>
-    <div class="setting-row" style="border-top:1px solid rgba(0,0,0,.06)">
-      <div class="setting-icon" style="background:#f3eeff;color:#7c4dff">🎙</div>
-      <div class="setting-copy"><div>音色</div></div>
-      <div class="tts-seg" id="voiceSeg">
-        <button onclick="setTTSVoice('male')">♂ 男</button>
-        <button onclick="setTTSVoice('female')">♀ 女</button>
-      </div>
-    </div>
-    <div class="setting-row" style="border-top:1px solid rgba(0,0,0,.06)">
-      <div class="setting-icon" style="background:#fff3e0;color:#f57c00">⚡</div>
-      <div class="setting-copy"><div>语速</div></div>
-      <div class="tts-seg" id="rateSeg">
-        <button onclick="setTTSRate(0.75)">慢</button>
-        <button onclick="setTTSRate(1.0)">正常</button>
-        <button onclick="setTTSRate(1.25)">快</button>
-        <button onclick="setTTSRate(1.5)">极快</button>
-      </div>
-    </div>
-  </div>
-
   <div class="group-title">外观</div>
   <div class="setting-card">
     <div class="setting-row">
@@ -1588,9 +1561,11 @@ const SPEAK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" st
 
 // ===== Qwen 代理（Supabase Edge Function）=====
 const QWEN_FN = SUPABASE_URL + '/functions/v1/qwen'
-let ttsEngine = localStorage.getItem('tts_engine') || 'azure'  // 'azure' | 'web'
-let ttsVoice  = localStorage.getItem('tts_voice')  || 'male'   // 'male' | 'female'
-let ttsRate   = parseFloat(localStorage.getItem('tts_rate') || '1.0')
+// 发音：固定 女声 + 慢速。所有音频用 scripts/gen-tts.js 预生成存进 Storage，
+// 前端直读 public URL（不依赖登录/实时 Azure，永不失败）；未命中才降级系统语音。
+const TTS_VOICE_NAME = 'id-ID-GadisNeural'   // Azure 印尼语女声
+const TTS_RATE = 0.75                          // 慢速
+const STORAGE_TTS_BASE = SUPABASE_URL + '/storage/v1/object/public/tts-cache/'
 let qwenTransOK = true   // 翻译代理是否可用（失败则回退 MyMemory）
 
 async function qwenCall(action, text) {
@@ -2862,6 +2837,7 @@ document.addEventListener('scroll', hideTransPop, true)
 let idVoice = null
 const _ttsUrlMap = new Map()
 let _ttsDb = null
+let _ttsDebug = localStorage.getItem('tts_debug') === '1'  // 诊断：localStorage.tts_debug='1' 开启失败 toast
 
 function loadVoices() {
   try {
@@ -2913,9 +2889,10 @@ function _stopCurrentAudio() {
 }
 
 // IndexedDB 缓存命中 → AudioContext 播放（iOS await 后仍可播）
-async function playBuf(buf) {
+// 失败时抛错，让上层降级到系统语音（不可静默吞，否则无声又无降级）
+function playBuf(buf) {
   _stopCurrentAudio()
-  return new Promise(async (res) => {
+  return new Promise(async (res, rej) => {
     try {
       const ctx = _getAudioCtx()
       const decoded = await ctx.decodeAudioData(buf.slice(0))
@@ -2925,106 +2902,62 @@ async function playBuf(buf) {
       src.connect(ctx.destination)
       src.onended = () => { if (_audioSrc === src) _audioSrc = null; res() }
       src.start(0)
-    } catch { res() }
+    } catch (e) { rej(e) }
   })
 }
 
-// —— L2: Edge Function（返回 Storage URL）——
-// cache key 含 voice+rate，不同设置的音频分开缓存
-function _ttsCacheKey(text) { return `${ttsVoice}|${ttsRate}|${text}` }
-
-async function _remoteURL(text) {
-  const ck = _ttsCacheKey(text)
-  let url = _ttsUrlMap.get(ck)
-  if (url) return url
-  const { data: { session } } = await sb.auth.getSession()
-  const token = session?.access_token
-  if (!token) throw new Error('not logged in')
-  const r = await fetch(QWEN_FN, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-    body: JSON.stringify({ action: 'azure_tts', text, voice: ttsVoice, rate: ttsRate }),
-  })
-  if (!r.ok) throw new Error('fn ' + r.status)
-  const { url: u } = await r.json()
-  if (!u) throw new Error('no url')
-  _ttsUrlMap.set(ck, u)
-  return u
+// —— Storage 直读：key = SHA-256(`voice|rate|text`).mp3，与 gen-tts.js / edge function 一致 ——
+async function _ttsStorageURL(text) {
+  let key = _ttsUrlMap.get(text)
+  if (!key) {
+    const input = `${TTS_VOICE_NAME}|${TTS_RATE}|${text}`
+    const hashBuf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(input))
+    key = [...new Uint8Array(hashBuf)].map(b => b.toString(16).padStart(2, '0')).join('') + '.mp3'
+    _ttsUrlMap.set(text, key)
+  }
+  return STORAGE_TTS_BASE + key
 }
 
 // —— 按钮 loading 状态（每个按钮独立，不互相干扰）——
 function _ttsLoadEl(el, on) { if (el) el.classList.toggle('tts-loading', on) }
 
-// 远端 URL → fetch buffer → AudioContext 播放（iOS 兼容）
-async function playUrl(url) {
-  _stopCurrentAudio()
-  try {
-    const resp = await fetch(url)
-    if (!resp.ok) return
-    const buf = await resp.arrayBuffer()
-    await playBuf(buf)
-  } catch {}
-}
-
-// —— 双缓存发音主入口（返回 Promise，供「听读全文」await）——
+// —— 发音主入口（返回 Promise，供「听读全文」await）——
+// L1 IndexedDB → L2 Storage public（预生成）→ 兜底系统语音
 async function azureSpeak(text, el) {
   if (!text) return
   _stopCurrentAudio()
   _ttsLoadEl(el, true)
   try {
-    if (!sb) { _ttsLoadEl(el, false); return webSpeak(text) }
-    const ck = _ttsCacheKey(text)
-    // L1 命中 → 直接播，0 网络
-    const local = await idbGet(ck)
+    // L1：本地 IndexedDB 命中 → 0 网络
+    const local = await idbGet(text)
     if (local) { _ttsLoadEl(el, false); await playBuf(local); return }
-    // L2/L3 → 拿 URL（Storage 命中或 Azure 生成）→ fetch → AudioContext
-    const url = await _remoteURL(text)
-    _ttsLoadEl(el, false)
-    // 下载后同时存 IndexedDB
+    // L2：直读 Supabase Storage 预生成的 mp3（public，不需登录）
+    const url = await _ttsStorageURL(text)
     const resp = await fetch(url)
-    if (!resp.ok) throw new Error('fetch ' + resp.status)
+    _ttsLoadEl(el, false)
+    if (!resp.ok) throw new Error('storage ' + resp.status)
     const buf = await resp.arrayBuffer()
-    idbPut(ck, buf.slice(0))
+    idbPut(text, buf.slice(0))   // 存 L1，下次本地命中
     await playBuf(buf)
-  } catch { _ttsLoadEl(el, false); webSpeak(text) }
+  } catch (e) {
+    _ttsLoadEl(el, false)
+    if (_ttsDebug) { try { toast('TTS: ' + (e?.message || e), 'fail') } catch {} }
+    webSpeak(text)   // 未预生成的词 → 系统语音兜底
+  }
 }
 
-// —— 后台预缓存（L1 未命中才触发远程，静默失败）——
+// —— 后台预缓存（进文章/学习时预热 IndexedDB，静默失败）——
 async function prefetchTTS(texts) {
-  if (!sb || ttsEngine !== 'azure') return
   try {
-    const { data: { session } } = await sb.auth.getSession()
-    if (!session?.access_token) return
     for (const t of texts) {
       if (!t) continue
-      const ck = _ttsCacheKey(t)
-      const hit = await idbGet(ck)
-      if (hit) continue
+      if (await idbGet(t)) continue
       try {
-        const url = await _remoteURL(t)
-        const resp = await fetch(url)
-        if (resp.ok) idbPut(ck, await resp.arrayBuffer())
+        const resp = await fetch(await _ttsStorageURL(t))
+        if (resp.ok) idbPut(t, await resp.arrayBuffer())
       } catch {}
     }
   } catch {}
-}
-
-function setTTSVoice(v) {
-  ttsVoice = v
-  localStorage.setItem('tts_voice', v)
-  syncTTSSeg()
-}
-function setTTSRate(r) {
-  ttsRate = r
-  localStorage.setItem('tts_rate', String(r))
-  syncTTSSeg()
-}
-function syncTTSSeg() {
-  document.querySelectorAll('#voiceSeg button').forEach(b => b.classList.toggle('active', b.textContent.includes(ttsVoice === 'male' ? '男' : '女')))
-  document.querySelectorAll('#rateSeg button').forEach(b => {
-    const map = {'慢':0.75,'正常':1.0,'快':1.25,'极快':1.5}
-    b.classList.toggle('active', map[b.textContent] === ttsRate)
-  })
 }
 
 function webSpeak(text, rate) {
@@ -3035,7 +2968,7 @@ function webSpeak(text, rate) {
       const u = new SpeechSynthesisUtterance(text)
       u.lang = 'id-ID'
       if (idVoice) u.voice = idVoice
-      u.rate = rate || 0.95
+      u.rate = rate || TTS_RATE
       u.onend = res; u.onerror = res
       speechSynthesis.speak(u)
     } catch { res() }
@@ -3043,8 +2976,7 @@ function webSpeak(text, rate) {
 }
 function speak(text, rate, el) {
   try { _getAudioCtx() } catch {}  // iOS: 在用户手势内同步 unlock AudioContext
-  if (ttsEngine === 'azure') return azureSpeak(text, el) || Promise.resolve()
-  return webSpeak(text, rate)
+  return azureSpeak(text, el) || Promise.resolve()
 }
 function speakStudyWord(el) { const w = studyQueue[studyIdx]; if (w) speak(w.word, null, el) }
 function speakArticleSentence(i, el) { if (artCurrent && artCurrent.sentences[i]) speak(artCurrent.sentences[i].id, null, el) }
@@ -3077,23 +3009,6 @@ function stopArticleRead() {
   document.querySelectorAll('#artBody .sent').forEach(el => el.classList.remove('reading-active'))
   const btn = document.getElementById('readAllBtn')
   if (btn) { btn.textContent = '▶ 听读'; btn.style.background = ''; btn.style.color = '' }
-}
-function toggleTTS() {
-  ttsEngine = ttsEngine === 'azure' ? 'web' : 'azure'
-  localStorage.setItem('tts_engine', ttsEngine)
-  syncTTSToggle()
-}
-function syncTTSToggle() {
-  const btn = document.getElementById('ttsToggle'), desc = document.getElementById('ttsDesc')
-  if (!btn) return
-  if (ttsEngine === 'azure') {
-    btn.textContent = 'Azure'
-    desc.textContent = 'Azure 神经语音（在线·印尼语优化）'
-  } else {
-    btn.textContent = '系统'
-    desc.textContent = '系统印尼语语音（免费·离线）'
-  }
-  syncTTSSeg()
 }
 if ('speechSynthesis' in window) {
   loadVoices()
@@ -3171,7 +3086,6 @@ function loadProfile() {
     ava.textContent = (name[0] || 'B').toUpperCase()
   }
 
-  syncTTSToggle()
   syncDarkToggle()
   loadProfileStats()
   renderJournal()
