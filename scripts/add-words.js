@@ -66,11 +66,19 @@ async function getJSON(url, headers) {
   console.log(`收到 ${incoming.length} 词，去重后新词 ${fresh.length}，跳过 ${skipped}（已存在/重复）`)
   if (!fresh.length) return console.log('无新词可上传。')
 
-  const res = await fetch(`${URL}/rest/v1/words`, {
+  // words 表 RLS 允许 anon 写入；service_role 可能缺 sequence grant，403 时降级 ANON
+  let res = await fetch(`${URL}/rest/v1/words`, {
     method: 'POST',
     headers: { apikey: KEY, Authorization: `Bearer ${KEY}`, 'Content-Type': 'application/json', Prefer: 'return=representation' },
     body: JSON.stringify(fresh)
   })
+  if (res.status === 403) {
+    res = await fetch(`${URL}/rest/v1/words`, {
+      method: 'POST',
+      headers: { apikey: ANON, Authorization: `Bearer ${ANON}`, 'Content-Type': 'application/json', Prefer: 'return=representation' },
+      body: JSON.stringify(fresh)
+    })
+  }
   if (!res.ok) throw new Error(`上传失败 ${res.status}: ${await res.text()}`)
   const inserted = JSON.parse(await res.text())
   console.log(`✓ 上传 ${inserted.length} 个新词`)

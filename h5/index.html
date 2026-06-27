@@ -11,8 +11,21 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4f1e9">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#16201d">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%3E%3Crect%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%22112%22%20fill%3D%22%23174d40%22%2F%3E%3Cg%20transform%3D%22translate(106%20118)%20scale(12.5)%22%20fill%3D%22none%22%20stroke%3D%22%23f4f1e9%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M2%204h7a2%202%200%200%201%202%202v14a1%201%200%200%200-1-1H2zM22%204h-7a2%202%200%200%200-2%202v14a1%201%200%200%201%201-1h8z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
-<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22BahasaBelajar%20%E5%8D%B0%E5%B0%BC%E8%AF%AD%22%2C%22short_name%22%3A%22%E5%8D%B0%E5%B0%BC%E8%AF%AD%22%2C%22start_url%22%3A%22.%2F%22%2C%22scope%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait%22%2C%22background_color%22%3A%22%23f4f1e9%22%2C%22theme_color%22%3A%22%23f4f1e9%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%253D%2522http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%2522%2520viewBox%253D%25220%25200%2520512%2520512%2522%253E%253Crect%2520width%253D%2522512%2522%2520height%253D%2522512%2522%2520rx%253D%2522112%2522%2520fill%253D%2522%2523174d40%2522%252F%253E%253Cg%2520transform%253D%2522translate(106%2520118)%2520scale(12.5)%2522%2520fill%253D%2522none%2522%2520stroke%253D%2522%2523f4f1e9%2522%2520stroke-width%253D%25222%2522%2520stroke-linecap%253D%2522round%2522%2520stroke-linejoin%253D%2522round%2522%253E%253Cpath%2520d%253D%2522M2%25204h7a2%25202%25200%25200%25201%25202%25202v14a1%25201%25200%25200%25200-1-1H2zM22%25204h-7a2%25202%25200%25200%25200-2%25202v14a1%25201%25200%25200%25201%25201-1h8z%2522%252F%253E%253C%252Fg%253E%253C%252Fsvg%253E%22%2C%22sizes%22%3A%22any%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%22%7D%5D%7D">
+<link rel="apple-touch-icon" href="img/logo.png">
+<link rel="icon" type="image/png" href="img/logo.png">
+<link rel="manifest" id="pwaManifest" href="">
+<script>
+(function(){
+  try{
+    var m={name:'BahasaBelajar 印尼语',short_name:'印尼语',start_url:'./',scope:'./',
+      display:'standalone',orientation:'portrait',
+      background_color:'#174d40',theme_color:'#f4f1e9',
+      icons:[{src:'img/logo.png',sizes:'1254x1254',type:'image/png',purpose:'any maskable'}]};
+    var b=new Blob([JSON.stringify(m)],{type:'application/manifest+json'});
+    document.getElementById('pwaManifest').href=URL.createObjectURL(b);
+  }catch(e){}
+})();
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800;900&display=swap');
@@ -37,16 +50,16 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .tab-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
 /* pages */
-.view{display:none;padding:calc(18px + env(safe-area-inset-top)) 14px 0}
+.view{display:none;padding:calc(12px + env(safe-area-inset-top)) 14px 0}
 .view.active{display:block}
 
 /* home */
-.greeting{font-size:11px;font-weight:800;letter-spacing:2.8px;color:var(--green2);text-transform:uppercase}
-.date-line{display:flex;justify-content:space-between;align-items:center;margin:4px 0 10px}
-.date-label{font-size:18px;font-weight:900;letter-spacing:-.5px}
+.greeting{font-size:10px;font-weight:800;letter-spacing:2.8px;color:var(--green2);text-transform:uppercase}
+.date-line{display:flex;justify-content:space-between;align-items:center;margin:2px 0 6px}
+.date-label{font-size:16px;font-weight:900;letter-spacing:-.5px}
 .streak-badge{display:flex;align-items:center;gap:6px;padding:10px 14px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(246,243,234,.96));font-size:11px;color:#68736d;box-shadow:0 10px 24px rgba(25,55,46,.08);border:1px solid rgba(26,58,49,.05)}
 .streak-num{color:var(--ink);font-size:18px;font-weight:900}
-.hero{border-radius:22px;padding:14px;margin-bottom:14px;background:
+.hero{border-radius:18px;padding:10px;margin-bottom:6px;background:
   radial-gradient(circle at 14% 18%, rgba(255,255,255,.48), transparent 22%),
   linear-gradient(145deg,#d7ead7 0%,#cbe2d0 46%,#edf3df 100%);
   box-shadow:0 16px 32px rgba(23,45,39,.08);position:relative;overflow:hidden;display:grid;grid-template-columns:1fr minmax(130px,.8fr);gap:10px;align-items:center}
@@ -54,35 +67,46 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .hero::after{content:'';position:absolute;left:-42px;bottom:-46px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(23,77,64,.10),transparent 68%)}
 .hero-copy{position:relative;z-index:1}
 .hero-metrics{display:flex;flex-wrap:wrap;gap:6px}
-.hero-chip{display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:12px;background:rgba(255,255,255,.72);border:1px solid rgba(27,60,50,.05);box-shadow:0 6px 14px rgba(23,45,39,.05);font-size:10px;font-weight:700;color:#5a6c66}
-.hero-chip b{font-size:15px;color:var(--ink);font-weight:900}
-.progress-bar{margin-top:8px;height:6px;border-radius:99px;background:rgba(23,77,64,.12);overflow:hidden}
+.hero-chip{display:flex;align-items:center;gap:4px;padding:5px 8px;border-radius:10px;background:rgba(255,255,255,.72);border:1px solid rgba(27,60,50,.05);box-shadow:0 6px 14px rgba(23,45,39,.05);font-size:9px;font-weight:700;color:#5a6c66}
+.hero-chip b{font-size:13px;color:var(--ink);font-weight:900}
+.progress-bar{margin-top:6px;height:5px;border-radius:99px;background:rgba(23,77,64,.12);overflow:hidden}
 .progress-fill{height:100%;border-radius:inherit;background:linear-gradient(90deg,#1d5a4b,#2b7b62);transition:width .3s}
 .hero-visual{position:relative;z-index:1}
-.hero-cal{border-radius:20px;background:rgba(255,255,255,.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(27,60,50,.06);padding:10px 8px 8px;box-shadow:0 10px 24px rgba(23,45,39,.08);cursor:pointer;transition:transform .15s ease}
-.hero-cal-head{display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:var(--green);margin-bottom:6px;letter-spacing:.3px}
-.hero-cal-week{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;font-size:8px;color:#9ba19c;font-weight:700;margin-bottom:3px}
-.hero-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
-.hero-cal-day{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:10px;font-weight:700;color:var(--ink)}
+.hero-cal{border-radius:16px;background:rgba(255,255,255,.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(27,60,50,.06);padding:6px 6px 5px;box-shadow:0 10px 24px rgba(23,45,39,.08);cursor:pointer;transition:transform .15s ease}
+.hero-cal-head{display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:var(--green);margin-bottom:4px;letter-spacing:.3px}
+.hero-cal-week{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;font-size:7px;color:#9ba19c;font-weight:700;margin-bottom:2px}
+.hero-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px}
+.hero-cal-day{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:6px;font-size:9px;font-weight:700;color:var(--ink)}
 .hero-cal-day.hc-done{color:#fff;background:linear-gradient(180deg,#2b7b62,#1f5d4d);font-size:9px}
 .hero-cal-day.hc-active{background:rgba(23,77,64,.08)}
 .hero-cal-day.hc-today{outline:1.5px solid var(--coral);outline-offset:-1px;border-radius:8px}
-.section-title{font-size:12px;font-weight:900;margin:14px 2px 8px;letter-spacing:.3px;color:#53635d;text-transform:uppercase}
-.task-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
-.task{display:flex;flex-direction:column;padding:12px;border-radius:18px;background:rgba(255,253,248,.86);border:1px solid rgba(20,41,37,.05);box-shadow:0 8px 20px rgba(23,45,39,.06)}
-.task-icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:12px;font-size:14px;font-weight:900;flex-shrink:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 6px 12px rgba(23,45,39,.06);margin-bottom:8px}
+.section-title{font-size:11px;font-weight:900;margin:12px 2px 8px;letter-spacing:.3px;color:#53635d;text-transform:uppercase}
+.task-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.task{position:relative;display:flex;flex-direction:row;align-items:center;padding:10px;border-radius:14px;background:rgba(255,253,248,.86);border:1px solid rgba(20,41,37,.05);box-shadow:0 8px 20px rgba(23,45,39,.06);gap:8px}
+.task-top{flex-shrink:0;display:flex;align-items:center}
+.task-body{flex:1;min-width:0}
+.task-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:12px;flex-shrink:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 6px 12px rgba(23,45,39,.06);overflow:hidden}
+.task-icon img{display:block;width:100%;height:100%;object-fit:cover}
 .task-icon.learn{color:#1d5a4b;background:linear-gradient(180deg,#e8f2e8,#cfe4cf)}
 .task-icon.review{color:#9f4a34;background:linear-gradient(180deg,#fde8de,#f4cfbe)}
 .task-icon.grammar{color:#644693;background:linear-gradient(180deg,#f1e9fb,#ddcef1)}
 .task-icon.article{color:#2d745f;background:linear-gradient(180deg,#edf6ef,#d5ead8)}
-.task-icon.extra{color:#8a6d3b;background:linear-gradient(180deg,#fbf1dd,#f2e0b4);font-size:20px}
+.task-icon.extra{color:#8a6d3b;background:linear-gradient(180deg,#fbf1dd,#f2e0b4)}
 .task-icon.culture{color:#9a602b;background:linear-gradient(180deg,#fbefe2,#f6dcc1)}
-.task-body{flex:1}
-.task-name{font-size:13px;font-weight:800;letter-spacing:-.2px}
-.task-desc{display:none}
-.task-count{font-size:18px;font-weight:900;color:var(--green);margin-top:2px}
+.task-name{font-size:12px;font-weight:800;letter-spacing:-.2px}
+.task-desc{display:block;margin-top:1px;font-size:9px;line-height:1.2;color:#7c867f;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.task-count{position:absolute;top:8px;right:10px;font-size:15px;font-weight:900;color:var(--green)}
 .task-arrow{display:none}
 .task-row{display:flex;align-items:center;justify-content:space-between}
+.task-badge{position:absolute;top:10px;right:10px;min-width:16px;height:16px;padding:0 5px;border-radius:99px;background:#ff3b30;color:#fff;font-size:10px;font-weight:900;line-height:16px;text-align:center;box-shadow:0 2px 6px rgba(255,59,48,.35)}
+.task-badge[hidden]{display:none}
+.task-dot{position:absolute;top:12px;right:12px;width:10px;height:10px;border-radius:50%;background:#ff3b30;box-shadow:0 2px 6px rgba(255,59,48,.35)}
+.task-dot[hidden]{display:none}
+.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px}
+.quick-item{position:relative;display:flex;flex-direction:column;align-items:center;padding:14px 4px 10px;border-radius:14px;background:rgba(255,253,248,.86);border:1px solid rgba(20,41,37,.05);box-shadow:0 4px 12px rgba(23,45,39,.04);cursor:pointer;gap:6px}
+.quick-item .task-icon{width:38px;height:38px;border-radius:11px}
+.quick-item .task-name{font-size:11px;text-align:center;font-weight:800}
+.quick-item .task-dot{top:8px;right:8px;width:8px;height:8px}
 .stats-row{display:none}
 .stat{text-align:center}
 .stat-val{font-size:20px;font-weight:900;letter-spacing:-.3px}
@@ -270,22 +294,44 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 #transPop.flip .tp-arrow{bottom:auto;top:-6px}
 /* ===== AUTH ===== */
 .auth-view{display:none;position:fixed;inset:0;z-index:300;background:
-  radial-gradient(circle at 16% 12%, rgba(212,230,211,.65), transparent 20%),
-  radial-gradient(circle at 84% 18%, rgba(244,201,93,.18), transparent 18%),
-  linear-gradient(180deg,#f8f5ef,#f2ede5);padding:0;align-items:center;justify-content:center}
-.auth-view.active{display:flex}
-.auth-box{width:100%;max-width:360px;padding:26px 22px 30px;text-align:center;border-radius:32px;background:rgba(255,253,248,.84);box-shadow:0 24px 50px rgba(23,45,39,.12);border:1px solid rgba(20,41,37,.05);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
-.auth-logo{line-height:1;display:flex;justify-content:center;filter:drop-shadow(0 10px 20px rgba(23,45,39,.08))}
-.auth-title{font-size:28px;font-weight:900;margin-top:10px;letter-spacing:-.8px}
-.auth-sub{color:var(--muted);font-size:13px;margin-top:8px;margin-bottom:26px}
-.auth-input{width:100%;height:52px;padding:0 16px;margin-bottom:12px;border:1.5px solid #e3e1d8;border-radius:16px;font-size:15px;background:rgba(255,255,255,.92)}
-.auth-input:focus{outline:none;border-color:var(--green)}
-.auth-btn{width:100%;height:54px;margin-top:6px;border-radius:16px;background:linear-gradient(180deg,#1f5d4d,#174d40);color:#fff;font-size:16px;font-weight:900;box-shadow:0 14px 26px rgba(23,45,39,.16)}
+  radial-gradient(circle at 14% 7%, rgba(255,236,177,.45), transparent 26%),
+  radial-gradient(circle at 90% 18%, rgba(212,230,211,.72), transparent 30%),
+  linear-gradient(180deg,#fffaf0 0%,#f5f1e7 100%);padding:calc(24px + env(safe-area-inset-top)) 18px calc(24px + env(safe-area-inset-bottom));overflow-y:auto}
+.auth-view.active{display:block}
+.auth-shell{width:100%;max-width:430px;margin:0 auto}
+.auth-brand{display:flex;align-items:center;gap:10px;margin:4px 0 16px}
+.auth-mark{width:42px;height:42px;border-radius:12px;background:linear-gradient(145deg,#1e6b58,#0f3f34);box-shadow:0 14px 24px rgba(23,77,64,.18);display:flex;align-items:center;justify-content:center;flex:none}
+.auth-mark svg{width:28px;height:28px}
+.auth-brand-name{font-size:21px;font-weight:900;letter-spacing:0;color:var(--green)}
+.auth-hero{position:relative;margin:0 -18px 12px;padding:0 18px 12px;overflow:hidden}
+.auth-hero-copy{position:relative;z-index:2}
+.auth-title{font-size:42px;line-height:1.08;font-weight:900;letter-spacing:0;color:var(--green);text-shadow:0 8px 18px rgba(23,77,64,.08)}
+.auth-sub{color:#67736d;font-size:16px;font-weight:800;line-height:1.7;margin-top:10px}
+.auth-hero-img{display:block;width:112%;max-width:none;margin:-18px -6% -28px;filter:drop-shadow(0 18px 28px rgba(23,45,39,.10))}
+.auth-feature-row{position:relative;z-index:3;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:-18px}
+.auth-feature{min-height:74px;padding:10px 8px;border-radius:18px;background:rgba(255,253,248,.82);border:1px solid rgba(20,41,37,.06);box-shadow:0 12px 24px rgba(23,45,39,.09);display:flex;align-items:center;gap:8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.auth-feature-icon{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;background:#e4f2df;color:var(--green)}
+.auth-feature-icon svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.auth-feature-title{font-size:13px;font-weight:900;color:#182e28}
+.auth-feature-sub{font-size:11px;color:#7d8580;line-height:1.35;margin-top:2px;font-weight:700}
+.auth-box{width:100%;padding:18px 18px 20px;text-align:left;border-radius:24px;background:rgba(255,253,248,.9);box-shadow:0 22px 44px rgba(23,45,39,.13);border:1px solid rgba(20,41,37,.06);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.auth-field{height:52px;margin-bottom:12px;padding:0 14px;border:1.4px solid #deddd6;border-radius:14px;background:rgba(255,255,255,.78);display:flex;align-items:center;gap:10px}
+.auth-field svg{width:22px;height:22px;stroke:#909792;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.auth-input{width:100%;height:100%;border:0;outline:0;font-size:15px;font-weight:700;background:transparent;color:var(--ink);min-width:0}
+.auth-input::placeholder{color:#9da39f;font-weight:700}
+.auth-field:focus-within{border-color:var(--green);box-shadow:0 0 0 3px rgba(23,77,64,.08)}
+.auth-btn{width:100%;height:54px;margin-top:8px;border-radius:14px;background:linear-gradient(180deg,#1f6a56,#114236);color:#fff;font-size:17px;font-weight:900;box-shadow:0 14px 26px rgba(23,45,39,.18)}
 .auth-btn:disabled{opacity:.6}
-.auth-msg{min-height:18px;margin-top:12px;font-size:13px;font-weight:600}
+.auth-msg{min-height:18px;margin-top:12px;font-size:13px;font-weight:700;text-align:center}
 .auth-msg.err{color:#c0392b}.auth-msg.ok{color:var(--green2)}
-.auth-toggle{margin-top:18px;font-size:13px;color:var(--muted)}
+.auth-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:4px 0}
+.auth-remember{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);cursor:pointer;justify-content:flex-start}
+.auth-remember input{width:16px;height:16px;accent-color:var(--green);cursor:pointer}
+.auth-forgot{font-size:13px;color:var(--green);font-weight:800;white-space:nowrap;cursor:pointer}
+.auth-toggle{margin-top:16px;font-size:14px;color:var(--muted);text-align:center}
 .auth-toggle a{color:var(--green);font-weight:800;cursor:pointer}
+.auth-legal{margin-top:18px;text-align:center;color:#7c857f;font-size:11px;line-height:1.6}
+.auth-legal a{color:var(--green);font-weight:800}
 /* ===== CALENDAR ===== */
 .cal-eyebrow{color:var(--green2);font-size:11px;font-weight:900;letter-spacing:2.6px;text-transform:uppercase}
 .cal-title{font-size:24px;font-weight:900;margin:6px 0 18px;letter-spacing:-.5px}
@@ -411,7 +457,7 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
   @keyframes pop{0%{transform:scale(.82)}55%{transform:scale(1.12)}100%{transform:scale(1)}}
   @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
   .view.active{animation:viewIn .34s var(--ease)}
-  #v-home.active .task-grid .task,#v-home.active .hero,#v-home.active .week-chart,#lessonList .lesson-card,#articleList .art-card,#cultureList .cul-card{animation:rise .42s var(--ease) both}
+  #v-home.active .task-grid .task,#v-home.active .quick-grid .quick-item,#v-home.active .hero,#v-home.active .week-chart,#v-home.active .banner-row,#lessonList .lesson-card,#articleList .art-card,#cultureList .cul-card{animation:rise .42s var(--ease) both}
   #v-home.active .task:nth-child(2){animation-delay:.03s}#v-home.active .task:nth-child(3){animation-delay:.06s}#v-home.active .task:nth-child(4){animation-delay:.09s}
   #lessonList .lesson-card:nth-child(2){animation-delay:.05s}#lessonList .lesson-card:nth-child(3){animation-delay:.1s}
   #answerArea>*{animation:fadeUp .34s var(--ease) both}
@@ -447,13 +493,13 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 .listen-hint{text-align:center;color:var(--muted);font-size:12px;margin-top:18px}
 .hidden{display:none!important}
 /* ===== 本周趋势 ===== */
-.week-chart{padding:12px;border-radius:18px;background:rgba(255,253,248,.92);border:1px solid rgba(20,41,37,.05);box-shadow:0 8px 20px rgba(23,45,39,.06)}
-.wc-bars{display:flex;align-items:flex-end;gap:8px;height:52px;margin-bottom:6px}
-.wc-bar{flex:1;border-radius:6px 6px 0 0;background:linear-gradient(180deg,#e8f2e8,#d7e7d7);min-height:4px;position:relative;transition:height .4s var(--ease)}
+.week-chart{padding:12px 10px;border-radius:14px;background:rgba(255,253,248,.92);border:1px solid rgba(20,41,37,.05);box-shadow:0 8px 20px rgba(23,45,39,.06)}
+.wc-bars{display:flex;align-items:flex-end;gap:6px;height:72px;margin-bottom:4px}
+.wc-bar{flex:1;border-radius:5px 5px 0 0;background:linear-gradient(180deg,#e8f2e8,#d7e7d7);min-height:4px;position:relative;transition:height .4s var(--ease)}
 .wc-bar.has{background:linear-gradient(180deg,var(--green2),var(--green))}
-.wc-val{position:absolute;top:-16px;left:0;right:0;text-align:center;font-size:10px;font-weight:700;color:var(--muted)}
-.wc-days{display:flex;gap:8px}
-.wc-day{flex:1;text-align:center;font-size:11px;color:var(--muted);font-weight:600}
+.wc-val{position:absolute;top:-14px;left:0;right:0;text-align:center;font-size:9px;font-weight:700;color:var(--muted)}
+.wc-days{display:flex;gap:6px}
+.wc-day{flex:1;text-align:center;font-size:10px;color:var(--muted);font-weight:600}
 .wc-day.today{color:var(--green);font-weight:800}
 /* ===== 暗黑模式 ===== */
 [data-theme="dark"]{--ink:#dfe2e0;--muted:#6e7772;--green:#3a9b74;--green2:#52b78a;--mint:#162a22;--cream:#101412;--paper:#1a201d;--coral:#e8694e;--purple:#a082c9;--purplebg:#281f3d;--yellow:#c9a033}
@@ -478,13 +524,14 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 [data-theme="dark"] .hero-cal{background:rgba(26,32,29,.62);border-color:rgba(200,220,210,.08)}
 [data-theme="dark"] .hero-cal-day{color:#c0ccc6}
 [data-theme="dark"] .hero-cal-day.hc-active{background:rgba(43,123,98,.15)}
-[data-theme="dark"] .task{background:rgba(26,32,29,.92);border-color:rgba(200,220,210,.08);box-shadow:0 1px 2px rgba(0,0,0,.15),0 6px 18px -6px rgba(0,0,0,.25)}
+[data-theme="dark"] .task,[data-theme="dark"] .quick-item{background:rgba(26,32,29,.92);border-color:rgba(200,220,210,.08);box-shadow:0 1px 2px rgba(0,0,0,.15),0 6px 18px -6px rgba(0,0,0,.25)}
 [data-theme="dark"] .task-icon.learn{background:linear-gradient(180deg,#162a22,#0d1f18);color:var(--green)}
 [data-theme="dark"] .task-icon.review{background:linear-gradient(180deg,#3d2020,#2a1414);color:#e8694e}
 [data-theme="dark"] .task-icon.grammar{background:linear-gradient(180deg,#281f3d,#1e1630);color:var(--purple)}
 [data-theme="dark"] .task-icon.article{background:linear-gradient(180deg,#162a22,#0d1f18);color:var(--green2)}
 [data-theme="dark"] .task-icon.extra{background:linear-gradient(180deg,#2a2214,#1e180e);color:#c9a033}
 [data-theme="dark"] .task-icon.culture{background:linear-gradient(180deg,#2a2010,#1e180c);color:#c98a33}
+[data-theme="dark"] .task-badge{box-shadow:0 2px 6px rgba(0,0,0,.24)}
 [data-theme="dark"] .word-card{background:linear-gradient(180deg,#1a201d 0%,#161c19 100%);border-color:rgba(200,220,210,.08);box-shadow:0 16px 36px rgba(0,0,0,.3)}
 [data-theme="dark"] .word-card::before{background:radial-gradient(circle at 10% 6%, rgba(22,42,34,.34), transparent 22%),radial-gradient(circle at 92% 0%, rgba(60,50,18,.12), transparent 18%)}
 [data-theme="dark"] .word-level{background:linear-gradient(180deg,#162a22,#0d1f18);color:var(--green)}
@@ -524,11 +571,15 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 [data-theme="dark"] .sent-id mark{background:#4a3c14;color:var(--ink)}
 [data-theme="dark"] .sent-note{background:#1a1810;border-left-color:#4a3c14;color:#a89858}
 [data-theme="dark"] .auth-view{background:
-  radial-gradient(circle at 16% 12%, rgba(22,42,34,.65), transparent 20%),
-  radial-gradient(circle at 84% 18%, rgba(60,50,18,.18), transparent 18%),
+  radial-gradient(circle at 16% 12%, rgba(22,42,34,.65), transparent 22%),
+  radial-gradient(circle at 84% 18%, rgba(101,78,28,.22), transparent 20%),
   linear-gradient(180deg,#0e120f,#101412)}
 [data-theme="dark"] .auth-box{background:rgba(26,32,29,.84);border-color:rgba(200,220,210,.08);box-shadow:0 24px 50px rgba(0,0,0,.3)}
-[data-theme="dark"] .auth-input{border-color:#2e3834;background:rgba(20,26,23,.92)}
+[data-theme="dark"] .auth-field{border-color:#2e3834;background:rgba(20,26,23,.82)}
+[data-theme="dark"] .auth-input{background:transparent;color:#e4eee8}
+[data-theme="dark"] .auth-feature{background:rgba(26,32,29,.78);border-color:rgba(200,220,210,.08)}
+[data-theme="dark"] .auth-feature-title{color:#e4eee8}
+[data-theme="dark"] .auth-feature-sub,[data-theme="dark"] .auth-sub,[data-theme="dark"] .auth-legal{color:#92a09a}
 [data-theme="dark"] .produce-input{border-color:#2e3834;background:var(--paper);box-shadow:0 10px 18px rgba(0,0,0,.12)}
 [data-theme="dark"] .note-sheet textarea{border-color:#2e3834}
 [data-theme="dark"] .note-sheet,[data-theme="dark"] .admin-sheet{background:rgba(26,32,29,.96);backdrop-filter:blur(20px)}
@@ -599,69 +650,231 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 .ani-empty{text-align:center;color:var(--muted);font-size:13px;padding:20px 0}
 
 /* ===== 词汇量测算 ===== */
-.vocab-banner{position:relative;display:flex;align-items:center;gap:12px;margin-bottom:12px;padding:16px 18px;border-radius:20px;cursor:pointer;overflow:hidden;background:linear-gradient(135deg,#1f5d4d,#2d745f 60%,#3a8f6f);box-shadow:0 14px 30px rgba(23,77,64,.22);transition:transform .14s var(--ease)}
+.vocab-banner{position:relative;display:flex;align-items:center;gap:10px;margin-bottom:10px;padding:14px 14px;border-radius:16px;cursor:pointer;overflow:hidden;background:linear-gradient(135deg,#1f5d4d,#2d745f 60%,#3a8f6f);box-shadow:0 14px 30px rgba(23,77,64,.22);transition:transform .14s var(--ease)}
 .vocab-banner:active{transform:scale(.98)}
 .vocab-banner::after{content:'';position:absolute;right:-30px;top:-30px;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,rgba(244,201,93,.30),transparent 70%);pointer-events:none}
-.vocab-banner-icon{flex:none;width:42px;height:42px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.16);color:#fff}
-.vocab-banner-icon svg{width:24px;height:24px}
+.vocab-banner-icon{flex:none;width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.16);color:#fff}
+.vocab-banner-icon img,.vocab-banner-icon svg{width:20px;height:20px;display:block}
 .vocab-banner-text{flex:1;min-width:0;position:relative;z-index:1}
-.vocab-banner-title{font-size:15px;font-weight:900;color:#fff;letter-spacing:-.2px}
-.vocab-banner-sub{font-size:11px;color:rgba(255,255,255,.78);margin-top:3px}
+.vocab-banner-title{font-size:14px;font-weight:900;color:#fff;letter-spacing:-.2px}
+.vocab-banner-sub{font-size:10px;color:rgba(255,255,255,.78);margin-top:2px}
 .vocab-banner-arrow{flex:none;color:rgba(255,255,255,.7);font-size:22px;position:relative;z-index:1}
 .vocab-badge{position:absolute;top:10px;right:12px;z-index:2;padding:2px 8px;border-radius:99px;background:#ff3b30;color:#fff;font-size:10px;font-weight:900;letter-spacing:.4px;box-shadow:0 4px 10px rgba(255,59,48,.4)}
 .vocab-badge.score{background:linear-gradient(180deg,#f8db85,#f4c95d);color:#174d40}
-/* 测试区 */
-.vt-intro{font-size:13px;line-height:1.6;color:var(--muted);margin-bottom:14px;padding:0 2px}
-.vt-intro b{color:var(--green2)}
-.vt-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:70px}
-.vt-word{position:relative;display:flex;flex-direction:column;padding:14px 50px 13px 16px;border-radius:16px;border:2px solid rgba(20,41,37,.08);background:rgba(255,253,248,.95);text-align:left;transition:all .15s var(--ease);cursor:pointer}
-.vt-word:active{transform:scale(.99)}
-.vt-word-top{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
-.vt-w{font-family:Georgia,serif;font-size:18px;font-weight:900;color:var(--ink)}
-.vt-pos{font-size:11px;color:#a0a59f;font-style:italic}
-.vt-zh{font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:5px}
-.vt-ex{font-size:11.5px;color:var(--muted);font-style:italic;line-height:1.5;border-left:2px solid rgba(20,41,37,.12);padding-left:8px}
-.vt-ex-zh{display:block;font-style:normal;font-size:11px;opacity:.8;margin-top:2px}
-.vt-check{position:absolute;top:50%;right:14px;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;border:2px solid rgba(20,41,37,.15);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:transparent;transition:all .15s var(--ease)}
-.vt-word.known{border-color:var(--green);background:linear-gradient(135deg,#eaf5ea,#d8efda)}
-.vt-word.known .vt-w{color:var(--green)}
-.vt-word.known .vt-check{background:var(--green);border-color:var(--green);color:#fff}
-.vt-submit{position:sticky;bottom:calc(14px + env(safe-area-inset-bottom));width:100%;height:54px;border-radius:16px;background:linear-gradient(180deg,#1f5d4d,#143d34);color:#fff;font-size:15px;font-weight:900;box-shadow:0 14px 28px rgba(23,45,39,.22);z-index:10}
-/* 结果 */
-.vt-result{text-align:center;padding:12px 0 50px}
-.vt-result-eyebrow{font-size:10px;font-weight:900;letter-spacing:1.5px;color:var(--green2);margin-bottom:8px}
-.vt-num{font-size:56px;font-weight:900;font-family:Georgia,serif;letter-spacing:-2px;color:var(--green);line-height:1.05}
-.vt-num span{font-size:22px;vertical-align:super;margin-right:3px;color:var(--green2)}
+.vt-shell.quizzing .vt-hero{display:none}
+.vt-stagebar{display:flex;align-items:center;justify-content:center;gap:0;margin:0 auto 6px;max-width:260px}
+.vt-step{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#c0bdb5;background:#f0ede6;border:2.5px solid #e0ddd4;z-index:1;transition:all .25s var(--ease)}
+.vt-step.active{color:#fff;background:linear-gradient(180deg,#ffc440,#f4a020);border-color:transparent;box-shadow:0 6px 16px rgba(244,160,32,.35)}
+.vt-step.done{color:#fff;background:var(--green);border-color:var(--green)}
+.vt-step-line{flex:1;height:3px;background:#e0ddd4;border-radius:99px;transition:background .3s var(--ease)}
+.vt-step-line.done{background:var(--green)}
+.vt-step-labels{display:flex;justify-content:space-between;max-width:260px;margin:0 auto 18px;padding:0 2px}
+.vt-step-labels span{font-size:10px;font-weight:800;color:var(--muted);text-align:center;width:36px}
+.vt-progress{height:4px;border-radius:99px;background:rgba(20,41,37,.06);margin-bottom:20px;overflow:hidden}
+.vt-progress-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#ffc440,#ff8c47);transition:width .35s var(--ease)}
+.vt-prompt{font-size:19px;font-weight:800;line-height:1.55;margin-bottom:16px;letter-spacing:-.2px;color:var(--ink)}
+.vt-passage{padding:14px;border-radius:18px;background:linear-gradient(180deg,#fff7e8,#fdf0d9);border:1px solid rgba(255,178,68,.18);font-size:13px;line-height:1.78;color:#37433f;margin-bottom:14px}
+.vt-options{display:grid;gap:10px}
+.vt-option{padding:15px 18px;border-radius:16px;border:2px solid rgba(20,41,37,.08);background:rgba(255,253,248,.96);font-size:15px;font-weight:700;color:var(--ink);line-height:1.5;cursor:pointer;transition:all .15s var(--ease);box-shadow:0 4px 12px rgba(30,39,34,.04)}
+.vt-option:active{transform:scale(.98)}
+.vt-option.selected{border-color:#f4b85d;background:linear-gradient(180deg,#fff9ec,#fff1cf);box-shadow:0 8px 20px rgba(225,147,52,.15)}
+.vt-option.correct{border-color:#2d7a4f;background:linear-gradient(180deg,#e6f5e4,#d8efda);pointer-events:none}
+.vt-option.wrong{border-color:#e85d3a;background:linear-gradient(180deg,#fff0eb,#fde7df);opacity:.72;pointer-events:none}
+.vt-option.locked{pointer-events:none;opacity:.5}
+.vt-controls{display:none}
+.vt-submit,.vt-retry,.vt-secondary{height:52px;border-radius:16px;font-size:15px;font-weight:900}
+.vt-submit{flex:1;background:linear-gradient(180deg,#ff8c47,#ff5f55);color:#fff;box-shadow:0 14px 28px rgba(255,96,70,.22)}
+.vt-submit:disabled{opacity:.55;cursor:not-allowed}
+.vt-retry{flex:1;background:rgba(255,255,255,.92);border:1.5px solid rgba(20,41,37,.1);color:var(--ink)}
+.vt-secondary{flex:1;background:#eef9f2;color:#355247}
+.vt-state{display:none}
+.vt-result{text-align:center;padding:10px 0 44px}
+.vt-result-eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:900;letter-spacing:1.5px;color:#d85d30;margin-bottom:8px;padding:6px 10px;border-radius:999px;background:rgba(255,116,76,.1)}
+.vt-num{font-size:54px;font-weight:900;font-family:Georgia,serif;letter-spacing:-2px;color:#d85d30;line-height:1.05}
+.vt-num span{font-size:22px;vertical-align:super;margin-right:3px;color:#ff8c47}
 .vt-ci{font-size:12.5px;color:var(--muted);margin-top:5px;line-height:1.5}
-.vt-level-badge{display:inline-flex;flex-direction:column;align-items:center;gap:5px;margin:18px auto 0;padding:18px 32px;border-radius:22px;background:linear-gradient(180deg,#f8db85,#f4c95d);box-shadow:0 12px 28px rgba(244,201,93,.38)}
-.vt-level-emoji{font-size:40px;line-height:1.1}
+.vt-result-card{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(210px,.85fr);gap:14px;margin-top:10px;align-items:stretch}
+.vt-result-main{padding:2px 0}
+.vt-result-side{padding:16px;border-radius:24px;background:linear-gradient(180deg,#fff7ea,#ffedd0);border:1px solid rgba(255,173,55,.16);box-shadow:0 10px 24px rgba(190,125,49,.12);display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:10px;position:relative;overflow:hidden}
+.vt-result-side::before,.vt-result-side::after{content:'';position:absolute;border-radius:50%;background:rgba(255,255,255,.45)}
+.vt-result-side::before{width:74px;height:74px;top:-18px;right:-18px}
+.vt-result-side::after{width:54px;height:54px;left:-14px;bottom:-14px}
+.vt-side-tag{font-size:10px;font-weight:900;letter-spacing:1.8px;color:#d35f2a;background:rgba(255,255,255,.72);padding:6px 10px;border-radius:999px}
+.vt-side-title{font-size:26px;line-height:1;font-weight:1000;color:#174d40}
+.vt-side-sub{font-size:13px;font-weight:800;color:#885b00}
+.vt-side-art{width:100%;height:146px;object-fit:cover;border-radius:24px;background:#fff;box-shadow:0 14px 28px rgba(171,107,37,.16);border:6px solid rgba(255,255,255,.82)}
+.vt-side-copy{font-size:12px;line-height:1.55;color:#6f4c00;text-align:center;padding:0 6px}
+.vt-level-badge{display:inline-flex;flex-direction:column;align-items:center;gap:4px;margin:16px auto 0;padding:16px 22px;border-radius:24px;background:linear-gradient(180deg,#ffe499,#ffce47);box-shadow:0 12px 28px rgba(244,201,93,.34)}
+.vt-level-code{font-size:28px;font-weight:900;line-height:1;color:#174d40}
 .vt-level-name{font-size:16px;font-weight:900;color:#174d40}
 .vt-level-id{font-size:12px;font-weight:700;color:#2a6b53;letter-spacing:.5px}
+.vt-level-note{font-size:11px;color:#2f5c52;margin-top:2px}
 .vt-funny-quote{font-size:14px;color:var(--muted);font-style:italic;margin:12px 8px 0;line-height:1.6}
-.vt-bars{margin:22px 4px 0;text-align:left}
+.vt-compare{margin-top:14px;padding:14px 16px;border-radius:18px;background:rgba(255,255,255,.88);border:1px solid rgba(20,41,37,.08);text-align:left;box-shadow:0 10px 20px rgba(23,45,39,.05)}
+.vt-compare-title{font-size:11px;font-weight:900;letter-spacing:1.4px;color:#d85d30;margin-bottom:6px}
+.vt-compare-main{font-size:15px;font-weight:900;color:var(--ink);line-height:1.5}
+.vt-compare-sub{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.55}
+.vt-bars{margin:18px 4px 0;text-align:left}
 .vt-bar-row{margin-bottom:12px}
 .vt-bar-top{display:flex;justify-content:space-between;font-size:12px;font-weight:800;color:var(--ink);margin-bottom:5px}
 .vt-bar-top span:last-child{color:var(--green2)}
 .vt-bar-track{height:8px;border-radius:99px;background:rgba(23,77,64,.1);overflow:hidden}
-.vt-bar-fill{height:100%;border-radius:inherit;background:linear-gradient(90deg,#1d5a4b,#2b7b62)}
-.vt-actions{display:flex;gap:10px;margin-top:26px}
-.vt-actions button{flex:1;height:52px;border-radius:16px;font-size:15px;font-weight:900}
-.vt-share{display:flex;align-items:center;justify-content:center;gap:7px;background:linear-gradient(180deg,#1f5d4d,#143d34);color:#fff;box-shadow:0 12px 24px rgba(23,45,39,.18)}
+.vt-bar-fill{height:100%;border-radius:inherit;background:linear-gradient(90deg,#ff8c47,#ff5f55)}
+.vt-bar-meta{margin-top:4px;font-size:10.5px;color:var(--muted);text-align:right}
+.vt-actions{display:flex;gap:10px;margin-top:22px}
+.vt-actions button{flex:1}
+.vt-share{display:flex;align-items:center;justify-content:center;gap:7px;background:linear-gradient(180deg,#ff8c47,#ff5f55);color:#fff;box-shadow:0 12px 24px rgba(255,96,70,.2)}
 .vt-share svg{width:18px;height:18px}
-.vt-retry{background:rgba(255,253,248,.92);border:1.5px solid rgba(20,41,37,.1);color:var(--ink)}
-.vt-note{font-size:11px;color:var(--muted);margin-top:16px;line-height:1.6}
-[data-theme="dark"] .vt-word{background:rgba(26,32,29,.92);border-color:rgba(200,220,210,.1)}
-[data-theme="dark"] .vt-word.known{background:linear-gradient(135deg,#16301f,#0d2014);border-color:var(--green2)}
-[data-theme="dark"] .vt-check{border-color:rgba(200,220,210,.22)}
-[data-theme="dark"] .vt-ex{border-color:rgba(200,220,210,.18)}
+.vt-note{font-size:11px;color:var(--muted);margin-top:14px;line-height:1.6}
+[data-theme="dark"] #v-vocabtest{background:radial-gradient(circle at top left,rgba(255,168,76,.12),transparent 32%),radial-gradient(circle at top right,rgba(255,92,92,.08),transparent 26%),linear-gradient(180deg,#171d1b,#121815 42%,#141c19)}
+[data-theme="dark"] .vt-step{background:rgba(26,32,29,.92);border-color:rgba(200,220,210,.15);color:#7a857c}
+[data-theme="dark"] .vt-step.active{background:linear-gradient(180deg,#c48a00,#8a5d00);border-color:#ffbe57;color:#fff}
+[data-theme="dark"] .vt-step.done{background:var(--green);border-color:var(--green)}
+[data-theme="dark"] .vt-step-line{background:rgba(200,220,210,.12)}
+[data-theme="dark"] .vt-option{background:rgba(26,32,29,.92);border-color:rgba(200,220,210,.1)}
+[data-theme="dark"] .vt-option.selected{background:linear-gradient(180deg,#4b3413,#2e210c)}
+[data-theme="dark"] .vt-option.correct{background:linear-gradient(180deg,#173421,#112915)}
+[data-theme="dark"] .vt-option.wrong{background:linear-gradient(180deg,#3a1c16,#281410)}
 [data-theme="dark"] .vt-bar-track{background:rgba(200,220,210,.12)}
-[data-theme="dark"] .vt-retry{background:rgba(26,32,29,.92);border-color:rgba(200,220,210,.12)}
-[data-theme="dark"] .vt-num{color:#5fae8a}
+[data-theme="dark"] .vt-retry,[data-theme="dark"] .vt-secondary{background:rgba(26,32,29,.92);border-color:rgba(200,220,210,.12);color:#d9e7de}
+[data-theme="dark"] .vt-num{color:#ffb56f}
+[data-theme="dark"] .vt-hero{background:linear-gradient(135deg,#222b28 0%,#2d2618 48%,#362a13 100%);border-color:rgba(255,190,87,.18)}
+[data-theme="dark"] .vt-hero h2{color:#f2f6f2}
+[data-theme="dark"] .vt-hero p{color:#c1cfc7}
+[data-theme="dark"] .vt-hero-kicker{background:rgba(255,150,94,.16);color:#ffbc8a}
+[data-theme="dark"] .vt-result-side{background:linear-gradient(180deg,#2a2114,#3a2b13);border-color:rgba(255,190,87,.12)}
+[data-theme="dark"] .vt-side-tag{background:rgba(255,255,255,.08);color:#ffcf8d}
+[data-theme="dark"] .vt-side-title{color:#fff2c2}
+[data-theme="dark"] .vt-side-sub{color:#ffc36b}
+[data-theme="dark"] .vt-side-copy{color:#eed2a0}
+[data-theme="dark"] .vt-level-badge{background:linear-gradient(180deg,#ffcf62,#e4a92c)}
+[data-theme="dark"] .vt-compare{background:rgba(26,32,29,.92);border-color:rgba(200,220,210,.1)}
+[data-theme="dark"] .vt-compare-main{color:#eef5f0}
 
 /* dark */
 [data-theme="dark"] .journal-textarea{background:rgba(22,40,32,.8);border-color:rgba(200,220,210,.1);color:#d8e8e0}
 [data-theme="dark"] .journal-entry,[data-theme="dark"] .all-notes-item{background:rgba(18,28,23,.7);border-color:rgba(200,220,210,.07)}
 [data-theme="dark"] .session-wrong{background:rgba(241,116,85,.06);border-color:rgba(241,116,85,.14)}
+
+/* ===== 排行榜 ===== */
+.lb-banner{display:flex;align-items:center;gap:10px;margin:0 0 10px;padding:12px 14px;border-radius:14px;background:linear-gradient(135deg,#fff7e6 0%,#ffe8cc 100%);cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.lb-banner-icon{font-size:22px;flex-shrink:0}
+.lb-banner-text{flex:1;min-width:0}
+.lb-banner-title{font-weight:700;font-size:14px;color:#333}
+.lb-banner-sub{font-size:10px;color:#888;margin-top:1px}
+.lb-banner-arrow{font-size:22px;color:#ccc;font-weight:300}
+[data-theme="dark"] .lb-banner{background:linear-gradient(135deg,rgba(255,180,50,.12) 0%,rgba(255,140,20,.1) 100%)}
+[data-theme="dark"] .lb-banner-title{color:#e8e0d8}
+
+#v-leaderboard .cal-eyebrow{margin:0 16px}
+#v-leaderboard .cal-title{margin:4px 16px 16px}
+.lb-tabs{display:flex;gap:8px;margin:0 16px 16px;background:var(--card-bg,#f5f5f5);border-radius:12px;padding:4px}
+.lb-tab{flex:1;text-align:center;padding:8px 0;border-radius:10px;font-size:14px;font-weight:600;color:#888;background:none;border:none;cursor:pointer;transition:all .2s}
+.lb-tab.active{background:var(--green);color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+[data-theme="dark"] .lb-tabs{background:rgba(255,255,255,.06)}
+
+.lb-list{margin:0 16px}
+.lb-row{display:flex;align-items:center;gap:12px;padding:14px 12px;border-radius:14px;margin-bottom:6px;background:rgba(255,255,255,.85);box-shadow:0 1px 4px rgba(0,0,0,.04);transition:background .2s}
+.lb-row.me{background:rgba(46,204,113,.1);border:1.5px solid rgba(46,204,113,.25)}
+.lb-rank{width:28px;text-align:center;font-weight:800;font-size:15px;color:var(--ink);flex-shrink:0}
+.lb-rank.gold{color:#e6a817;font-size:20px}.lb-rank.silver{color:#8a929a;font-size:20px}.lb-rank.bronze{color:#b5651d;font-size:20px}
+.lb-avatar{width:38px;height:38px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0}
+.lb-info{flex:1;min-width:0}
+.lb-name{font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.lb-val{font-weight:800;font-size:17px;color:var(--green);text-align:right;flex-shrink:0}
+.lb-unit{font-size:11px;color:var(--muted);font-weight:500;margin-left:2px}
+.lb-empty{text-align:center;color:var(--muted);padding:40px 0;font-size:14px}
+.lb-me-section{margin:20px 16px 0;padding-top:16px;border-top:1px solid rgba(0,0,0,.08)}
+.lb-me-title{font-size:12px;color:var(--muted);text-align:center;margin-bottom:8px}
+[data-theme="dark"] .lb-row{background:rgba(255,255,255,.07);box-shadow:none}
+[data-theme="dark"] .lb-row.me{background:rgba(46,204,113,.1);border-color:rgba(46,204,113,.2)}
+[data-theme="dark"] .lb-name{color:#e0ece6}
+[data-theme="dark"] .lb-rank{color:#c0d0c8}
+[data-theme="dark"] .lb-val{color:#5cc99a}
+[data-theme="dark"] .lb-sub,[data-theme="dark"] .lb-unit,[data-theme="dark"] .lb-me-title{color:#8aa89a}
+[data-theme="dark"] .lb-empty{color:#8aa89a}
+
+/* ===== 用户头像 + 性别 ===== */
+.profile-avatar{overflow:hidden}
+.profile-edit-avatar{width:80px;height:80px;border-radius:22px;background:linear-gradient(180deg,#1f5d4d,#174d40);color:#fff;font-family:Georgia,serif;font-size:36px;font-weight:800;display:flex;align-items:center;justify-content:center;text-transform:uppercase;overflow:hidden;box-shadow:0 12px 24px rgba(23,45,39,.18)}
+.profile-avatar-wrap{position:relative;cursor:pointer;flex:none;display:inline-flex}
+.avatar-cam-badge{position:absolute;bottom:-3px;right:-3px;width:20px;height:20px;background:var(--green);border:2px solid var(--bg);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;pointer-events:none;z-index:1}
+.gender-picker{display:flex;gap:5px;flex:none}
+.gender-btn{padding:5px 8px;border-radius:10px;border:1.5px solid rgba(20,41,37,.12);background:transparent;font-size:11px;font-weight:700;color:var(--muted);cursor:pointer;white-space:nowrap;line-height:1.4}
+.gender-btn.active{background:var(--green);border-color:var(--green);color:#fff}
+[data-theme="dark"] .gender-btn{border-color:rgba(200,220,210,.15);color:#8aa89a}
+[data-theme="dark"] .gender-btn.active{background:var(--green);border-color:var(--green);color:#fff}
+
+/* ===== 种草 SPOTS ===== */
+.spots-home-entry{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:linear-gradient(135deg,#e6f4ef 0%,#cce8dc 100%);cursor:pointer;margin:0 0 10px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.spots-home-icon{font-size:22px;flex-shrink:0;width:40px;height:40px;background:rgba(255,255,255,.6);border-radius:12px;display:flex;align-items:center;justify-content:center}
+.spots-home-title{font-weight:800;font-size:14px;color:#1a4a36}
+.spots-home-sub{font-size:10px;color:#4a7a62;margin-top:2px}
+[data-theme="dark"] .spots-home-entry{background:linear-gradient(135deg,rgba(30,70,50,.5) 0%,rgba(20,55,40,.5) 100%)}
+[data-theme="dark"] .spots-home-title{color:#9de0c0}
+[data-theme="dark"] .spots-home-sub{color:#6aaa8a}
+.spots-filter-wrap{display:flex;gap:6px;overflow-x:auto;margin:0 0 14px;scrollbar-width:none;padding-bottom:2px}
+.spots-filter-wrap::-webkit-scrollbar{display:none}
+.spot-chip{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;background:rgba(255,253,248,.9);border:1.5px solid rgba(20,41,37,.1);color:var(--muted);cursor:pointer;white-space:nowrap;flex-shrink:0}
+.spot-chip.active{background:var(--green);border-color:var(--green);color:#fff}
+[data-theme="dark"] .spot-chip{background:rgba(30,40,35,.8);border-color:rgba(200,220,210,.12);color:#8aa89a}
+[data-theme="dark"] .spot-chip.active{background:var(--green);border-color:var(--green);color:#fff}
+.spots-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.spot-card{border-radius:14px;overflow:hidden;background:rgba(255,253,248,.92);border:1px solid rgba(20,41,37,.06);box-shadow:0 4px 14px rgba(23,45,39,.05);cursor:pointer;transition:transform .15s}
+.spot-card:active{transform:scale(.97)}
+.spot-card-cover{height:100px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.spot-card-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.spot-card-emoji{position:relative;z-index:1;font-size:36px;text-shadow:0 2px 8px rgba(0,0,0,.12)}
+.spot-card-info{padding:8px 10px 10px}
+.spot-card-name{font-size:12px;font-weight:800;color:var(--ink);margin-bottom:2px;line-height:1.3}
+.spot-card-region{font-size:10px;color:var(--muted)}
+.spot-card-stats{display:flex;gap:8px;margin-top:4px;font-size:10px;color:var(--muted)}
+[data-theme="dark"] .spot-card{background:rgba(26,32,29,.92);border-color:rgba(200,220,210,.06)}
+.spots-add-btn{width:100%;padding:13px;border-radius:14px;border:2px dashed rgba(20,41,37,.18);background:transparent;color:var(--muted);font-size:13px;font-weight:700;cursor:pointer;margin-bottom:24px}
+[data-theme="dark"] .spots-add-btn{border-color:rgba(200,220,210,.15)}
+#v-spot.active{display:flex;flex-direction:column}
+.spot-detail-cover{height:200px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.spot-detail-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.spot-detail-emoji{font-size:64px;position:relative;z-index:1;text-shadow:0 4px 16px rgba(0,0,0,.18)}
+.spot-detail-back{position:absolute;top:calc(env(safe-area-inset-top) + 12px);left:12px;z-index:2;background:rgba(0,0,0,.32);border:none;color:#fff;border-radius:50%;width:36px;height:36px;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;flex-shrink:0}
+.spot-detail-body{padding:16px;overflow-y:auto}
+.spot-detail-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:10px}
+.spot-visited-badge{background:#e8f2e8;color:var(--green);padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800;flex-shrink:0;white-space:nowrap}
+.spot-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.spot-tag{padding:4px 10px;border-radius:12px;font-size:11px;font-weight:700}
+.spot-tag-region{background:#e8f0f8;color:#4470a0}
+.spot-tag-cat{background:#f0f8e8;color:#4a7a36}
+[data-theme="dark"] .spot-tag-region{background:rgba(68,112,160,.2);color:#88b0d8}
+[data-theme="dark"] .spot-tag-cat{background:rgba(74,122,54,.2);color:#8acd6a}
+.spot-maps-link{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;background:var(--green);color:#fff;border-radius:12px;text-decoration:none;font-size:13px;font-weight:800;margin-bottom:16px}
+.spot-desc{font-size:14px;line-height:1.75;color:var(--ink);margin:0 0 12px}
+.spot-comment-input-wrap{display:flex;gap:8px;margin:10px 0 14px;align-items:center}
+.spot-comment-input{flex:1;padding:10px 14px;border-radius:12px;border:1.5px solid rgba(20,41,37,.12);background:rgba(255,253,248,.8);font-size:13px;color:var(--ink);outline:none}
+.spot-comment-input:focus{border-color:var(--green)}
+[data-theme="dark"] .spot-comment-input{background:rgba(26,32,29,.8);border-color:rgba(200,220,210,.15);color:var(--ink)}
+.spot-comment-send{padding:10px 16px;background:var(--green);color:#fff;border:none;border-radius:12px;font-size:13px;font-weight:800;cursor:pointer;flex-shrink:0}
+.comment-item{margin-bottom:14px}
+.comment-main{display:flex;gap:8px;align-items:flex-start}
+.comment-avatar{width:30px;height:30px;border-radius:50%;background:var(--green);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.comment-bubble{flex:1;min-width:0}
+.comment-name{font-size:11px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.comment-text{font-size:13px;color:var(--ink);line-height:1.5;word-break:break-all}
+.comment-meta{font-size:10px;color:var(--muted);margin-top:3px;display:flex;gap:8px;align-items:center}
+.comment-reply-btn{background:none;border:none;color:var(--green);font-size:10px;font-weight:700;cursor:pointer;padding:0}
+.comment-del-btn{background:none;border:none;color:var(--coral);font-size:10px;cursor:pointer;padding:0}
+.comment-replies{margin-left:38px;margin-top:8px;border-left:2px solid rgba(20,41,37,.08);padding-left:10px}
+.reply-row{margin-bottom:8px}
+.spot-modal-overlay{display:none;position:fixed;inset:0;z-index:9990;background:rgba(0,0,0,.6);align-items:flex-end;justify-content:center}
+.spot-modal-overlay.open{display:flex}
+.spot-modal-sheet{width:100%;max-height:85vh;background:var(--bg);border-radius:20px 20px 0 0;overflow-y:auto;padding:20px 16px 32px}
+.spot-modal-title{font-size:17px;font-weight:900;margin-bottom:16px;color:var(--ink)}
+.spot-form-label{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:5px}
+.spot-form-input{width:100%;padding:10px 14px;border-radius:12px;border:1.5px solid rgba(20,41,37,.12);background:rgba(255,253,248,.9);font-size:14px;color:var(--ink);outline:none;box-sizing:border-box;margin-bottom:12px}
+.spot-form-input:focus{border-color:var(--green)}
+.spot-form-select{-webkit-appearance:none;appearance:none}
+[data-theme="dark"] .spot-form-input{background:rgba(26,32,29,.9);border-color:rgba(200,220,210,.15);color:var(--ink)}
+.spot-submit-btn{width:100%;padding:14px;background:var(--green);color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:800;cursor:pointer;margin-top:6px}
 </style>
 <script>(function(){var p=localStorage.getItem('dark_mode')||'auto';if(p==='on'||(p==='auto'&&matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.setAttribute('data-theme','dark')})()</script>
 </head>
@@ -669,24 +882,72 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 
 <!-- ===== AUTH (登录/注册) ===== -->
 <div id="v-auth" class="view auth-view">
-  <div class="auth-box">
-    <div class="auth-logo">
-      <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
-        <rect width="72" height="72" rx="20" fill="#174d40"/>
-        <path d="M18 26 Q27 15 36 26 Q45 37 54 26" stroke="#dcebdc" stroke-width="3.2" stroke-linecap="round" fill="none"/>
-        <path d="M18 38 Q27 27 36 38 Q45 49 54 38" stroke="#dcebdc" stroke-width="3.2" stroke-linecap="round" fill="none" opacity="0.65"/>
-        <path d="M22 50 Q29 41 36 50 Q43 59 50 50" stroke="#dcebdc" stroke-width="2.4" stroke-linecap="round" fill="none" opacity="0.35"/>
-      </svg>
+  <div class="auth-shell">
+    <div class="auth-brand">
+      <div class="auth-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none">
+          <path d="M5 10c4-5 8 5 12 0s8 5 10 0" stroke="#ecf6e8" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M5 16c4-5 8 5 12 0s8 5 10 0" stroke="#ecf6e8" stroke-width="2.5" stroke-linecap="round" opacity=".78"/>
+          <path d="M5 22c4-5 8 5 12 0s8 5 10 0" stroke="#ecf6e8" stroke-width="2.5" stroke-linecap="round" opacity=".56"/>
+        </svg>
+      </div>
+      <div class="auth-brand-name">BahasaBelajar</div>
     </div>
-    <h1 class="auth-title">BahasaBelajar</h1>
-    <p class="auth-sub" id="authSub">登录，开始你的印尼语之旅</p>
-    <input id="authEmail" class="auth-input" type="email" placeholder="邮箱" autocomplete="email">
-    <input id="authPass" class="auth-input" type="password" placeholder="密码（至少 6 位）" autocomplete="current-password">
-    <button class="auth-btn" id="authSubmit" onclick="doAuth()">登录</button>
-    <div class="auth-msg" id="authMsg"></div>
-    <div class="auth-toggle">
-      <span id="authToggleText">还没有账号？</span>
-      <a id="authToggleLink" onclick="toggleAuthMode()">注册一个</a>
+
+    <div class="auth-hero">
+      <div class="auth-hero-copy">
+        <h1 class="auth-title">轻松学印尼语</h1>
+        <p class="auth-sub" id="authSub">趣味新闻、单词记忆、比拼打榜，边玩边学</p>
+      </div>
+      <img class="auth-hero-img" src="img/auth-hero.webp" alt="">
+      <div class="auth-feature-row" aria-hidden="true">
+        <div class="auth-feature">
+          <div class="auth-feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M5 5h14v14H5z"/><path d="M8 9h8M8 13h5"/></svg>
+          </div>
+          <div><div class="auth-feature-title">趣味新闻</div><div class="auth-feature-sub">每日更新</div></div>
+        </div>
+        <div class="auth-feature">
+          <div class="auth-feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M6 4h10a2 2 0 0 1 2 2v14H8a2 2 0 0 1-2-2z"/><path d="M9 8h6"/></svg>
+          </div>
+          <div><div class="auth-feature-title">背单词</div><div class="auth-feature-sub">高效掌握</div></div>
+        </div>
+        <div class="auth-feature">
+          <div class="auth-feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M7 7H4a3 3 0 0 0 3 3M17 7h3a3 3 0 0 1-3 3"/></svg>
+          </div>
+          <div><div class="auth-feature-title">比拼打榜</div><div class="auth-feature-sub">冲击排名</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="auth-box">
+      <div class="auth-field">
+        <svg viewBox="0 0 24 24"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7" r="4"/></svg>
+        <input id="authEmail" class="auth-input" type="email" placeholder="邮箱" autocomplete="email">
+      </div>
+      <div class="auth-field">
+        <svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+        <input id="authPass" class="auth-input" type="password" placeholder="密码（至少 6 位）" autocomplete="current-password">
+      </div>
+      <div class="auth-field" id="authNameField" style="display:none">
+        <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+        <input id="authName" class="auth-input" type="text" placeholder="昵称（排行榜显示名）" autocomplete="nickname">
+      </div>
+      <div class="auth-meta">
+        <label class="auth-remember" id="authRememberWrap"><input type="checkbox" id="authRemember" checked> 记住我</label>
+        <span class="auth-forgot" onclick="forgotPassword()">忘记密码？</span>
+      </div>
+      <button class="auth-btn" id="authSubmit" onclick="doAuth()">开始学习</button>
+      <div class="auth-msg" id="authMsg"></div>
+      <div class="auth-toggle">
+        <span id="authToggleText">还没有账号？</span>
+        <a id="authToggleLink" onclick="toggleAuthMode()">立即注册</a>
+      </div>
+    </div>
+    <div class="auth-legal">
+      登录即代表同意 <a>《用户协议》</a> <a>《隐私政策》</a>
     </div>
   </div>
 </div>
@@ -711,42 +972,103 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
   </div>
   <div class="task-grid">
     <div class="task" onclick="startLearn()">
-      <div class="task-icon learn">Aa</div>
-      <div class="task-row"><div class="task-body"><div class="task-name">学习新词</div></div><span class="task-count" id="newCount">0</span></div>
+      <div class="task-top">
+        <div class="task-icon learn"><img src="img/home-learn.svg" alt=""></div>
+        <span class="task-count" id="newCount">0</span>
+      </div>
+      <div class="task-body">
+        <div class="task-name">学习新词</div>
+        <div class="task-desc">按词频和课本顺序推进</div>
+      </div>
     </div>
     <div class="task" onclick="startReview()">
-      <div class="task-icon review">↻</div>
-      <div class="task-row"><div class="task-body"><div class="task-name">巩固复习</div></div><span class="task-count" id="dueCount">0</span></div>
+      <div class="task-top">
+        <div class="task-icon review"><img src="img/home-review.svg" alt=""></div>
+        <span class="task-count" id="dueCount">0</span>
+      </div>
+      <div class="task-body">
+        <div class="task-name">巩固复习</div>
+        <div class="task-desc">到点就复习，别让词跑了</div>
+      </div>
     </div>
-    <div class="task" onclick="startGrammar()">
-      <div class="task-icon grammar">文</div>
-      <div class="task-body"><div class="task-name">语法笔记</div></div>
+  </div>
+  <div class="quick-grid">
+    <div class="quick-item" onclick="startGrammar()">
+      <div class="task-icon grammar"><img src="img/home-grammar.svg" alt=""></div>
+      <div class="task-name">语法笔记</div>
     </div>
-    <div class="task" onclick="startExtra()">
-      <div class="task-icon extra">＋</div>
-      <div class="task-body"><div class="task-name">拓展词</div></div>
+    <div class="quick-item" onclick="startExtra()">
+      <div class="task-icon extra"><img src="img/home-extra.svg" alt=""></div>
+      <div class="task-name">拓展词</div>
     </div>
-    <div class="task" onclick="showView('articles', document.querySelectorAll('.tab')[3])">
-      <div class="task-icon article">📄</div>
-      <div class="task-body"><div class="task-name">印尼文章</div></div>
+    <div class="quick-item" onclick="showView('articles', document.querySelectorAll('.tab')[3])">
+      <span class="task-dot" id="homeArticleBadge" hidden></span>
+      <div class="task-icon article"><img src="img/home-article.svg" alt=""></div>
+      <div class="task-name">印尼文章</div>
     </div>
-    <div class="task" onclick="showView('culture')">
-      <div class="task-icon culture">🎭</div>
-      <div class="task-body"><div class="task-name">印尼文化</div></div>
+    <div class="quick-item" onclick="showView('culture')">
+      <div class="task-icon culture"><img src="img/home-culture.svg" alt=""></div>
+      <div class="task-name">印尼文化</div>
     </div>
   </div>
   <div class="vocab-banner" onclick="startVocabTest()">
     <span class="vocab-badge" id="vocabBadge">NEW</span>
-    <div class="vocab-banner-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6a9 3 0 0 0 18 0a9 3 0 0 0-18 0"/><path d="M3 6v6a9 3 0 0 0 18 0V6"/><path d="M3 12v6a9 3 0 0 0 18 0v-6"/></svg></div>
+    <div class="vocab-banner-icon"><img src="img/home-bipa.svg" alt=""></div>
     <div class="vocab-banner-text">
-      <div class="vocab-banner-title">测测我的词汇量</div>
-      <div class="vocab-banner-sub">点选认识的词，估算掌握量 · 可分享</div>
+      <div class="vocab-banner-title">BIPA 模拟测评</div>
+      <div class="vocab-banner-sub">单词、句子、阅读连着做，按答题表现自动切下一关</div>
     </div>
     <span class="vocab-banner-arrow">›</span>
+  </div>
+  <div class="lb-banner" onclick="showView('leaderboard')">
+    <div class="lb-banner-icon">🏆</div>
+    <div class="lb-banner-text">
+      <div class="lb-banner-title">排行榜</div>
+      <div class="lb-banner-sub">和其他同学比比谁更厉害</div>
+    </div>
+    <span class="lb-banner-arrow">›</span>
+  </div>
+  <div class="spots-home-entry" onclick="showView('spots')">
+    <div class="spots-home-icon">🗺️</div>
+    <div style="flex:1;min-width:0">
+      <div class="spots-home-title">种草 · 印尼打卡地</div>
+      <div class="spots-home-sub">巴厘、布罗莫、科莫多…值得去的地方都在这里</div>
+    </div>
+    <span style="color:#4a9a70;font-size:20px;font-weight:300">›</span>
   </div>
   <div class="section-title">本周趋势</div>
   <div class="week-chart" id="weekChart"></div>
   <div id="learnedStat" style="display:none">0</div><div id="totalStat" style="display:none">0</div><div id="todayDone" style="display:none">—</div>
+</div>
+
+<!-- ===== ARTICLE SHARE MODAL ===== -->
+<div id="artShareModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.72);display:none;align-items:flex-end;justify-content:center" onclick="if(event.target===this)closeArtShareModal()">
+  <div style="width:100%;max-height:88vh;background:var(--bg);border-radius:20px 20px 0 0;overflow:hidden;display:flex;flex-direction:column">
+    <div style="padding:16px 16px 0;display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
+      <div style="font-size:15px;font-weight:800;color:var(--ink)">长按图片保存</div>
+      <button onclick="closeArtShareModal()" style="background:none;border:none;font-size:22px;color:var(--muted);cursor:pointer;padding:0 4px">✕</button>
+    </div>
+    <div style="flex:1;overflow-y:auto;padding:12px 16px">
+      <img id="artShareImg" src="" alt="" style="width:100%;border-radius:12px;display:block;box-shadow:0 8px 24px rgba(0,0,0,.18)">
+    </div>
+    <div style="padding:12px 16px 32px;display:flex;gap:10px;flex-shrink:0">
+      <button id="artShareSaveBtn" onclick="artShareDownload()" style="flex:1;height:44px;border:none;border-radius:12px;background:var(--green);color:#fff;font-size:14px;font-weight:800;cursor:pointer">保存图片</button>
+      <button id="artShareNativeBtn" onclick="artShareNative()" style="flex:1;height:44px;border:none;border-radius:12px;background:#f0f4f2;color:var(--ink);font-size:14px;font-weight:800;cursor:pointer">分享…</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== LEADERBOARD ===== -->
+<div id="v-leaderboard" class="view">
+  <button class="back" onclick="showView('home', document.querySelector('.tab'))">‹</button>
+  <div class="cal-eyebrow">PERINGKAT</div>
+  <h1 class="cal-title">排行榜</h1>
+  <div class="lb-tabs">
+    <button class="lb-tab active" onclick="switchLbTab('exam',this)">测评</button>
+    <button class="lb-tab" onclick="switchLbTab('streak',this)">打卡</button>
+    <button class="lb-tab" onclick="switchLbTab('words',this)">词汇</button>
+  </div>
+  <div id="lbContent"></div>
 </div>
 
 <!-- ===== STUDY ===== -->
@@ -769,13 +1091,30 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 <div id="v-vocabtest" class="view">
   <div class="grammar-head">
     <button class="back" onclick="showView('home', document.querySelector('.tab'))">‹</button>
-    <h1>词汇量测算</h1>
-    <span class="grammar-lesson-tag" id="vtHeadTag">选词</span>
+    <h1>BIPA 模拟测评</h1>
+    <span class="grammar-lesson-tag" id="vtHeadTag">准备</span>
   </div>
-  <div id="vtTestArea">
-    <div class="vt-intro">看看下面每个词。<b>认识就点选它</b> — 每词附有例句帮你判断，不确定就跳过。我们按词频三层抽样，用统计置信区间估算你的印尼语词汇量。</div>
-    <div class="vt-grid" id="vtGrid"></div>
-    <button class="vt-submit" onclick="finishVocabTest()">看结果 · 已选 <span id="vtSelCount">0</span> / 40</button>
+  <div id="vtTestArea" class="vt-shell">
+    <div class="vt-hero" id="vtHero">
+      <div class="vt-hero-copy">
+        <div class="vt-hero-kicker">BIPA · 欢乐闯关</div>
+        <h2>看看你是不是 Bahasa Jago</h2>
+        <p>单词 → 句子 → 阅读，三关闯完出分 + 海报</p>
+      </div>
+    </div>
+    <div class="vt-stagebar" id="vtStagebar">
+      <div class="vt-step active" id="vtStepWord"><span>1</span></div>
+      <div class="vt-step-line" id="vtLine1"></div>
+      <div class="vt-step" id="vtStepSentence"><span>2</span></div>
+      <div class="vt-step-line" id="vtLine2"></div>
+      <div class="vt-step" id="vtStepReading"><span>3</span></div>
+    </div>
+    <div class="vt-step-labels"><span>单词</span><span>句子</span><span>阅读</span></div>
+    <div id="vtQuizArea"></div>
+    <div class="vt-controls" id="vtControls">
+      <button class="vt-submit" id="vtNextBtn" onclick="vtNext()">重新测评</button>
+    </div>
+    <div class="vt-state" id="vtState"></div>
   </div>
   <div id="vtResultArea" style="display:none"></div>
 </div>
@@ -820,6 +1159,7 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
     <button class="back" onclick="showView('articles', document.querySelectorAll('.tab')[3])">‹</button>
     <h1 id="artTitle" style="font-size:16px"></h1>
     <button id="transToggle" class="grammar-lesson-tag" onclick="toggleTrans()">隐藏中文</button>
+    <button class="grammar-lesson-tag" onclick="shareArticle()" style="margin-left:6px;background:var(--green);color:#fff">分享</button>
   </div>
   <div class="art-read-bar"><div class="art-read-fill" id="artReadBar"></div></div>
   <div id="artMeta" class="grammar-subtitle" style="font-size:11px"></div>
@@ -893,9 +1233,12 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
   <div class="cal-eyebrow">PREFERENSI</div>
   <h1 class="cal-title">我的</h1>
   <div class="profile-card">
-    <div class="profile-avatar" id="profAvatar">B</div>
+    <div class="profile-avatar-wrap" onclick="openProfileEdit()" title="编辑个人资料" style="cursor:pointer">
+      <div class="profile-avatar" id="profAvatar">B</div>
+      <span class="avatar-cam-badge">📷</span>
+    </div>
     <div class="profile-copy">
-      <div class="prof-name-line"><span id="profName">Bahasa Learner</span><button class="name-edit" onclick="editName()" aria-label="改名"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button></div>
+      <div class="prof-name-line"><span id="profName">Bahasa Learner</span><button class="name-edit" onclick="openProfileEdit()" aria-label="编辑资料"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button></div>
       <span id="profEmail">正在建立印尼语思维</span>
     </div>
     <div class="profile-mark">PRO</div>
@@ -943,6 +1286,13 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
       <button class="tts-toggle" id="darkToggle" onclick="cycleDarkMode()">自动</button>
     </div>
   </div>
+  <div class="setting-card">
+    <div class="setting-row">
+      <div class="setting-icon" style="background:#fff3cd;color:#856404">🔔</div>
+      <div class="setting-copy"><div>复习提醒</div><span id="notifDesc">未开启</span></div>
+      <button class="tts-toggle" id="notifToggle" onclick="requestNotifyPermission()">开启</button>
+    </div>
+  </div>
 
   <!-- 学习日记 -->
   <div class="group-title">学习日记</div>
@@ -962,6 +1312,101 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 
   <button class="logout-btn" onclick="doLogout()">退出登录</button>
   <div class="app-version">BahasaBelajar · H5 版</div>
+</div>
+
+<!-- ===== 种草 SPOTS 列表 ===== -->
+<div id="v-spots" class="view">
+  <div class="cal-eyebrow">WISATA · 旅行种草</div>
+  <h1 class="cal-title">打卡地推荐</h1>
+  <div class="grammar-subtitle">印尼各地值得去的地方，大家一起种草拔草 🌴</div>
+  <div class="spots-filter-wrap" id="spotsFilter"></div>
+  <div class="spots-grid" id="spotsList"></div>
+  <button class="spots-add-btn" onclick="showSpotSubmitModal()">＋ 推荐一个地方</button>
+</div>
+
+<!-- ===== 种草 SPOT 详情 ===== -->
+<div id="v-spot" class="view" style="padding:0">
+  <div class="spot-detail-cover" id="spotDetailCover">
+    <button class="spot-detail-back" onclick="showView('spots')">‹</button>
+    <span class="spot-detail-emoji" id="spotDetailEmoji">🌿</span>
+  </div>
+  <div class="spot-detail-body">
+    <div class="spot-detail-head">
+      <div style="min-width:0">
+        <h1 id="spotDetailNameZh" style="font-size:22px;font-weight:900;margin:0 0 3px;color:var(--ink)"></h1>
+        <div id="spotDetailNameId" style="font-size:13px;color:var(--muted)"></div>
+      </div>
+      <div id="spotVisitedBadge" class="spot-visited-badge" style="display:none">✓ 已到访</div>
+    </div>
+    <div class="spot-tags" id="spotDetailTags"></div>
+    <p class="spot-desc" id="spotDetailDesc"></p>
+    <a id="spotDetailMaps" href="#" target="_blank" class="spot-maps-link" style="display:none">🗺️ 在 Google Maps 查看</a>
+    <div class="group-title">大家的评论</div>
+    <div class="spot-comment-input-wrap">
+      <input id="spotCommentInput" class="spot-comment-input" type="text" placeholder="分享你的感受…" maxlength="200">
+      <button class="spot-comment-send" onclick="submitSpotComment()">发送</button>
+    </div>
+    <div id="spotCommentsList"></div>
+  </div>
+</div>
+
+<!-- ===== 编辑个人资料 MODAL ===== -->
+<div id="profileEditModal" class="spot-modal-overlay" onclick="if(event.target===this)closeProfileEdit()">
+  <div class="spot-modal-sheet">
+    <div class="spot-modal-title">编辑个人资料</div>
+    <div style="display:flex;flex-direction:column;align-items:center;margin-bottom:22px">
+      <label for="editAvatarFile" style="position:relative;cursor:pointer;display:inline-flex">
+        <div id="editAvatarPreview" class="profile-edit-avatar">B</div>
+        <span class="avatar-cam-badge" style="width:24px;height:24px;font-size:11px;bottom:-3px;right:-3px">📷</span>
+      </label>
+      <div style="font-size:12px;color:var(--muted);margin-top:8px">点击更换头像</div>
+      <input type="file" id="editAvatarFile" accept="image/*" style="display:none" onchange="previewEditAvatar(this.files[0]);this.value=''">
+    </div>
+    <div class="spot-form-label">昵称</div>
+    <input id="editNameInput" class="spot-form-input" type="text" placeholder="设置你的昵称" maxlength="20">
+    <div class="spot-form-label">性别</div>
+    <div style="display:flex;gap:8px;margin-bottom:20px">
+      <button class="gender-btn" id="eGBtn-male"    onclick="selectEditGender('male')">♂ 男</button>
+      <button class="gender-btn" id="eGBtn-female"  onclick="selectEditGender('female')">♀ 女</button>
+      <button class="gender-btn" id="eGBtn-private" onclick="selectEditGender('private')">∙ 保密</button>
+    </div>
+    <button class="spot-submit-btn" id="profileSaveBtn" onclick="saveProfileEdit()">保存</button>
+    <button onclick="closeProfileEdit()" style="width:100%;padding:12px;margin-top:8px;background:none;border:none;color:var(--muted);font-size:14px;cursor:pointer">取消</button>
+  </div>
+</div>
+
+<!-- ===== 景点提交 MODAL ===== -->
+<div id="spotSubmitModal" class="spot-modal-overlay" onclick="if(event.target===this)closeSpotSubmitModal()">
+  <div class="spot-modal-sheet">
+    <div class="spot-modal-title">推荐一个景点</div>
+    <div class="spot-form-label">景点中文名 *</div>
+    <input id="sfNameZh" class="spot-form-input" type="text" placeholder="如：海神庙">
+    <div class="spot-form-label">印尼语名称 *</div>
+    <input id="sfName" class="spot-form-input" type="text" placeholder="如：Tanah Lot">
+    <div class="spot-form-label">所在大区 *</div>
+    <select id="sfRegion" class="spot-form-input spot-form-select">
+      <option value="">请选择</option>
+      <option>巴厘</option><option>爪哇</option><option>苏门答腊</option><option>苏拉威西</option><option>其他</option>
+    </select>
+    <div class="spot-form-label">类型</div>
+    <select id="sfCategory" class="spot-form-input spot-form-select">
+      <option value="nature">自然风光 🌿</option>
+      <option value="beach">海滩 🏖️</option>
+      <option value="culture">文化历史 🏛️</option>
+      <option value="city">城市 🏙️</option>
+      <option value="food">美食 🍜</option>
+    </select>
+    <div class="spot-form-label">省份（可选）</div>
+    <input id="sfProvince" class="spot-form-input" type="text" placeholder="如：巴厘省">
+    <div class="spot-form-label">简介（可选）</div>
+    <input id="sfDesc" class="spot-form-input" type="text" placeholder="用一两句话介绍这个地方">
+    <div class="spot-form-label">封面图 URL（可选）</div>
+    <input id="sfCover" class="spot-form-input" type="url" placeholder="粘贴图片链接">
+    <div class="spot-form-label">Google Maps 链接（可选）</div>
+    <input id="sfMaps" class="spot-form-input" type="url" placeholder="粘贴 Google Maps 分享链接">
+    <button class="spot-submit-btn" onclick="submitNewSpot()">提交推荐</button>
+    <button onclick="closeSpotSubmitModal()" style="width:100%;padding:12px;margin-top:8px;background:none;border:none;color:var(--muted);font-size:14px;cursor:pointer">取消</button>
+  </div>
 </div>
 
 <!-- ===== 划词翻译 POPUP ===== -->
@@ -1048,10 +1493,13 @@ function initSupabase() {
 // ===== AUTH =====
 function toggleAuthMode() {
   authMode = authMode === 'login' ? 'signup' : 'login'
-  document.getElementById('authSubmit').textContent = authMode === 'login' ? '登录' : '注册'
-  document.getElementById('authSub').textContent = authMode === 'login' ? '登录，开始你的印尼语之旅' : '注册一个新账号'
+  document.getElementById('authSubmit').textContent = authMode === 'login' ? '开始学习' : '立即注册'
+  document.getElementById('authSub').textContent = authMode === 'login' ? '趣味新闻、单词记忆、比拼打榜，边玩边学' : '创建账号，马上开始你的印尼语之旅'
   document.getElementById('authToggleText').textContent = authMode === 'login' ? '还没有账号？' : '已经有账号了？'
-  document.getElementById('authToggleLink').textContent = authMode === 'login' ? '注册一个' : '去登录'
+  document.getElementById('authToggleLink').textContent = authMode === 'login' ? '立即注册' : '去登录'
+  const nameField = document.getElementById('authNameField')
+  if (nameField) nameField.style.display = authMode === 'signup' ? '' : 'none'
+  document.getElementById('authRememberWrap').style.display = authMode === 'login' ? '' : 'none'
   setAuthMsg('')
 }
 function setAuthMsg(text, ok) {
@@ -1064,18 +1512,38 @@ async function doAuth() {
   const email = document.getElementById('authEmail').value.trim()
   const password = document.getElementById('authPass').value
   if (!email || password.length < 6) return setAuthMsg('请输入邮箱和至少 6 位密码')
+  const nameInput = document.getElementById('authName')
+  const displayName = nameInput.value.trim()
+  if (authMode === 'signup' && !displayName) return setAuthMsg('请填写昵称')
   const btn = document.getElementById('authSubmit'); btn.disabled = true
   setAuthMsg(authMode === 'login' ? '登录中…' : '注册中…', true)
   try {
     if (authMode === 'login') {
       const { data, error } = await sb.auth.signInWithPassword({ email, password })
       if (error) throw error
+      if (document.getElementById('authRemember').checked) {
+        localStorage.setItem('saved_email', email)
+      } else {
+        localStorage.removeItem('saved_email')
+      }
       onLoggedIn(data.user)
     } else {
       const { data, error } = await sb.auth.signUp({ email, password })
       if (error) throw error
-      if (data.session) { onLoggedIn(data.user) }
-      else { setAuthMsg('注册成功，请去邮箱确认后再登录（或在 Supabase 后台关闭邮箱确认）', true); authMode = 'login' }
+      if (data.session) {
+        await sb.from('profiles').upsert({ user_id: data.user.id, display_name: displayName }, { onConflict: 'user_id' })
+        onLoggedIn(data.user)
+      } else {
+        setAuthMsg('注册成功，请去邮箱确认后再登录（或在 Supabase 后台关闭邮箱确认）', true)
+        authMode = 'login'
+        document.getElementById('authSubmit').textContent = '开始学习'
+        document.getElementById('authSub').textContent = '趣味新闻、单词记忆、比拼打榜，边玩边学'
+        document.getElementById('authToggleText').textContent = '还没有账号？'
+        document.getElementById('authToggleLink').textContent = '立即注册'
+        const nameField = document.getElementById('authNameField')
+        if (nameField) nameField.style.display = 'none'
+        document.getElementById('authRememberWrap').style.display = ''
+      }
     }
   } catch (e) {
     setAuthMsg(translateAuthErr(e.message || '出错了'))
@@ -1102,7 +1570,18 @@ async function doLogout() {
 }
 function enterAuth() {
   authMode = 'login'
-  document.getElementById('authSubmit').textContent = '登录'
+  document.getElementById('authSubmit').textContent = '开始学习'
+  document.getElementById('authSub').textContent = '趣味新闻、单词记忆、比拼打榜，边玩边学'
+  document.getElementById('authToggleText').textContent = '还没有账号？'
+  document.getElementById('authToggleLink').textContent = '立即注册'
+  const nameField = document.getElementById('authNameField')
+  if (nameField) nameField.style.display = 'none'
+  document.getElementById('authRememberWrap').style.display = ''
+  const saved = localStorage.getItem('saved_email')
+  if (saved) {
+    document.getElementById('authEmail').value = saved
+    document.getElementById('authRemember').checked = true
+  }
   showView('auth')
 }
 async function loadProfileData() {
@@ -1148,6 +1627,8 @@ function showView(name, tabEl) {
   if (name === 'calendar') loadCalendar()
   if (name === 'profile') loadProfile()
   if (name === 'lessons') loadLessons()
+  if (name === 'leaderboard') loadLeaderboard()
+  if (name === 'spots') { buildSpotRegionChips(); loadSpots() }
 }
 
 // ===== DATE HELPERS =====
@@ -1213,6 +1694,7 @@ async function loadHome() {
 
   document.getElementById('newCount').textContent = newRemaining
   document.getElementById('dueCount').textContent = dueCount || 0
+  maybeNotify(dueCount || 0, newRemaining)
   document.getElementById('learnedStat').textContent = learnedWords || 0
   document.getElementById('totalStat').textContent = totalWords || 0
   document.getElementById('learnedStatMini').textContent = learnedWords || 0
@@ -1750,9 +2232,13 @@ function updateArticleBadge() {
   const read = getReadArticles()
   const unread = articleCache.filter(a => !read.has(a.id)).length
   const badge = document.getElementById('artTabBadge')
+  const homeBadge = document.getElementById('homeArticleBadge')
   if (!badge) return
   if (unread > 0) { badge.textContent = '+' + (unread > 99 ? 99 : unread); badge.style.display = '' }
   else badge.style.display = 'none'
+  if (homeBadge) {
+    homeBadge.hidden = unread <= 0
+  }
 }
 // 进 app 时就拉文章 id，让角标提前显示（不渲染列表）
 async function refreshArticleBadge() {
@@ -1844,6 +2330,206 @@ function toggleTrans() {
   const body = document.getElementById('artBody')
   const hidden = body.classList.toggle('trans-hidden')
   document.getElementById('transToggle').textContent = hidden ? '显示中文' : '隐藏中文'
+}
+
+let _artShareBlob = null
+
+async function shareArticle() {
+  if (!artCurrent) return
+  const btn = event && event.target
+  if (btn) { btn.disabled = true; btn.textContent = '生成中…' }
+  try {
+    const blob = await artBuildShareImage(artCurrent)
+    if (!blob) throw new Error('生成失败')
+    _artShareBlob = blob
+    const url = URL.createObjectURL(blob)
+    const img = document.getElementById('artShareImg')
+    img.src = url
+    const modal = document.getElementById('artShareModal')
+    modal.style.display = 'flex'
+    // hide native share button if not supported
+    const nativeBtn = document.getElementById('artShareNativeBtn')
+    const file = new File([blob], 'article.png', { type: 'image/png' })
+    nativeBtn.style.display = (navigator.share && (!navigator.canShare || navigator.canShare({ files: [file] }))) ? '' : 'none'
+  } catch (e) {
+    if (e.name !== 'AbortError') alert(e.message || '分享失败')
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = '分享' }
+  }
+}
+
+function closeArtShareModal() {
+  const modal = document.getElementById('artShareModal')
+  modal.style.display = 'none'
+  const img = document.getElementById('artShareImg')
+  if (img.src.startsWith('blob:')) URL.revokeObjectURL(img.src)
+  img.src = ''
+  _artShareBlob = null
+}
+
+function artShareDownload() {
+  if (!_artShareBlob) return
+  const url = URL.createObjectURL(_artShareBlob)
+  const a = document.createElement('a')
+  a.href = url; a.download = `bahasa-article-${artCurrent ? artCurrent.id : Date.now()}.png`
+  document.body.appendChild(a); a.click(); a.remove()
+  setTimeout(() => URL.revokeObjectURL(url), 4000)
+}
+
+async function artShareNative() {
+  if (!_artShareBlob || !artCurrent) return
+  try {
+    const file = new File([_artShareBlob], 'article.png', { type: 'image/png' })
+    await navigator.share({ title: artCurrent.title_zh, text: `${artCurrent.title_zh}｜BahasaBelajar`, files: [file] })
+  } catch (e) {
+    if (e.name !== 'AbortError') alert(e.message || '分享失败')
+  }
+}
+
+function artWrapText(ctx, text, maxW) {
+  const chars = [...text]
+  const lines = []
+  let line = ''
+  for (const ch of chars) {
+    if (ctx.measureText(line + ch).width > maxW) { lines.push(line); line = ch }
+    else line += ch
+  }
+  if (line) lines.push(line)
+  return lines
+}
+
+async function artBuildShareImage(a) {
+  const DPR = Math.max(window.devicePixelRatio || 1, 2)
+  const W = 1080
+  const PAD = 72
+  const CW = W - PAD * 2
+  const SF = '-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC",sans-serif'
+  const GREEN = '#1a6b4f'
+  const GREEN2 = '#e8f2e8'
+  const INK = '#222'
+  const MUTED = '#6a736c'
+
+  let qr = null, logo = null
+  try { qr = await vtLoadImage('img/share-qrcode.jpg') } catch(e) {}
+  try { logo = await vtLoadImage('img/logo.png') } catch(e) {}
+
+  const measure = document.createElement('canvas').getContext('2d')
+
+  let y = 0
+  const blocks = []
+  const push = (fn, h) => { blocks.push({ fn, y, h }); y += h }
+
+  // header
+  push((ctx, by) => {
+    ctx.fillStyle = GREEN
+    ctx.fillRect(0, by, W, 160)
+    if (logo) { ctx.save(); ctx.beginPath(); ctx.arc(PAD + 28, by + 80, 28, 0, Math.PI*2); ctx.clip(); ctx.drawImage(logo, PAD, by + 52, 56, 56); ctx.restore() }
+    ctx.fillStyle = '#fff'
+    ctx.font = `bold 36px ${SF}`
+    ctx.fillText('BahasaBelajar', PAD + 72, by + 90)
+    ctx.font = `22px ${SF}`
+    ctx.fillText('轻松学印尼语', PAD + 72, by + 120)
+  }, 160)
+
+  // title area
+  const lv = a.level===1?'入门':a.level===2?'初级':'中级'
+  measure.font = `bold 44px ${SF}`
+  const titleLines = artWrapText(measure, a.title_zh, CW)
+  const titleH = 60 + titleLines.length * 56 + 40 + 36 + 40
+  push((ctx, by) => {
+    ctx.fillStyle = INK
+    ctx.font = `bold 44px ${SF}`
+    titleLines.forEach((l, i) => ctx.fillText(l, PAD, by + 60 + i * 56))
+    const tagY = by + 60 + titleLines.length * 56 + 20
+    ctx.fillStyle = MUTED
+    ctx.font = `20px ${SF}`
+    ctx.fillText(`${a.title}  ·  ${a.category}  ·  ${lv}  ·  ${a.sentences.length} 句`, PAD, tagY)
+  }, titleH)
+
+  // divider
+  push((ctx, by) => {
+    ctx.strokeStyle = '#e0e0e0'; ctx.lineWidth = 2
+    ctx.beginPath(); ctx.moveTo(PAD, by + 10); ctx.lineTo(W - PAD, by + 10); ctx.stroke()
+  }, 20)
+
+  // sentences
+  a.sentences.forEach((s, i) => {
+    measure.font = `bold 30px ${SF}`
+    const idLines = artWrapText(measure, `${i+1}. ${s.id}`, CW - 8)
+    measure.font = `26px ${SF}`
+    const zhLines = artWrapText(measure, s.zh, CW - 8)
+    let noteLines = []
+    if (s.note) { measure.font = `24px ${SF}`; noteLines = artWrapText(measure, '💡 ' + s.note, CW - 16) }
+    const sentH = 28 + idLines.length * 40 + 12 + zhLines.length * 36 + (noteLines.length ? 16 + noteLines.length * 32 : 0) + 28
+    push((ctx, by) => {
+      let cy = by + 28
+      ctx.fillStyle = INK
+      ctx.font = `bold 30px ${SF}`
+      idLines.forEach(l => { ctx.fillText(l, PAD + 4, cy); cy += 40 })
+      cy += 4
+      ctx.fillStyle = MUTED
+      ctx.font = `26px ${SF}`
+      zhLines.forEach(l => { ctx.fillText(l, PAD + 4, cy); cy += 36 })
+      if (noteLines.length) {
+        cy += 8
+        ctx.fillStyle = '#8a6d3b'
+        ctx.font = `24px ${SF}`
+        noteLines.forEach(l => { ctx.fillText(l, PAD + 8, cy); cy += 32 })
+      }
+    }, sentH)
+
+    if (i < a.sentences.length - 1) {
+      push((ctx, by) => {
+        ctx.strokeStyle = '#f0f0f0'; ctx.lineWidth = 1
+        ctx.beginPath(); ctx.moveTo(PAD + 4, by + 4); ctx.lineTo(W - PAD - 4, by + 4); ctx.stroke()
+      }, 8)
+    }
+  })
+
+  // footer divider
+  push((ctx, by) => {
+    ctx.strokeStyle = '#e0e0e0'; ctx.lineWidth = 2
+    ctx.beginPath(); ctx.moveTo(PAD, by + 20); ctx.lineTo(W - PAD, by + 20); ctx.stroke()
+  }, 40)
+
+  // footer with QR + URL
+  const footerH = 180
+  push((ctx, by) => {
+    const qrSize = 120
+    if (qr) ctx.drawImage(qr, W - PAD - qrSize, by + 20, qrSize, qrSize)
+    ctx.fillStyle = GREEN
+    ctx.font = `bold 28px ${SF}`
+    ctx.fillText('BahasaBelajar', PAD, by + 50)
+    ctx.fillStyle = MUTED
+    ctx.font = `22px ${SF}`
+    ctx.fillText('免费印尼语学习 · 浏览器打开即用', PAD, by + 84)
+    ctx.fillStyle = INK
+    ctx.font = `20px ${SF}`
+    ctx.fillText('roisantoso-id.github.io/bahasabelajar', PAD, by + 118)
+    ctx.fillStyle = '#bbb'
+    ctx.font = `18px ${SF}`
+    ctx.fillText('扫码或复制链接打开', W - PAD - qrSize, by + 158)
+  }, footerH)
+
+  // now render at DPR resolution for crisp text
+  const H = y + 40
+  const canvas = document.createElement('canvas')
+  canvas.width = W * DPR; canvas.height = H * DPR
+  const ctx = canvas.getContext('2d')
+  ctx.scale(DPR, DPR)
+
+  // background
+  ctx.fillStyle = '#fff'
+  ctx.fillRect(0, 0, W, H)
+  const topBg = ctx.createLinearGradient(0, 0, 0, 300)
+  topBg.addColorStop(0, GREEN2)
+  topBg.addColorStop(1, '#fff')
+  ctx.fillStyle = topBg
+  ctx.fillRect(0, 0, W, 300)
+
+  blocks.forEach(b => b.fn(ctx, b.y))
+
+  return await new Promise(resolve => canvas.toBlob(blob => resolve(blob), 'image/png', 1))
 }
 
 // ===== CULTURE =====
@@ -2128,37 +2814,111 @@ function loadProfile() {
   const name = profile.display_name || (currentUser && currentUser.email ? currentUser.email.split('@')[0] : 'Bahasa Learner')
   document.getElementById('profName').textContent = name
   document.getElementById('profEmail').textContent = currentUser ? currentUser.email : '正在建立印尼语思维'
-  document.getElementById('profAvatar').textContent = (name[0] || 'B').toUpperCase()
   document.getElementById('planNew').textContent = profile.daily_new_words || 10
   document.getElementById('planReview').textContent = profile.daily_review_limit || 100
   document.getElementById('adminGroup').classList.toggle('hidden', !profile.is_admin)
+
+  // Avatar: show image if available, else show initial letter
+  const ava = document.getElementById('profAvatar')
+  if (profile.avatar_url) {
+    ava.style.backgroundImage = `url(${profile.avatar_url})`
+    ava.style.backgroundSize = 'cover'
+    ava.style.backgroundPosition = 'center'
+    ava.textContent = ''
+  } else {
+    ava.style.backgroundImage = ''
+    ava.textContent = (name[0] || 'B').toUpperCase()
+  }
+
   syncTTSToggle()
   syncDarkToggle()
   loadProfileStats()
   renderJournal()
   loadAllNotes()
 }
-// 自定义昵称：点笔→内联输入→回车/失焦保存
-function editName() {
-  const el = document.getElementById('profName')
-  if (el.querySelector('input')) return
-  const cur = profile.display_name || (currentUser && currentUser.email ? currentUser.email.split('@')[0] : '')
-  el.innerHTML = `<input id="nameInput" class="name-input" maxlength="20" value="${esc(cur)}">`
-  const inp = document.getElementById('nameInput')
-  inp.focus(); inp.select()
-  let saved = false
-  const save = async () => {
-    if (saved) return; saved = true
-    const v = (inp.value || '').trim().slice(0, 20)
-    if (v && v !== profile.display_name) {
-      profile.display_name = v
-      try { await sb.from('profiles').update({ display_name: v }).eq('user_id', currentUser.id) } catch (e) {}
-    }
-    loadProfile()
+
+// ===== 编辑个人资料 MODAL =====
+let _editGender = null
+let _editAvatarFile = null
+
+function openProfileEdit() {
+  const name = profile.display_name || (currentUser?.email?.split('@')[0] || '')
+  document.getElementById('editNameInput').value = name
+  _editGender = profile.gender || null
+  _editAvatarFile = null
+  // Sync avatar preview
+  const ava = document.getElementById('editAvatarPreview')
+  if (profile.avatar_url) {
+    ava.style.backgroundImage = `url(${profile.avatar_url})`
+    ava.style.backgroundSize = 'cover'
+    ava.style.backgroundPosition = 'center'
+    ava.textContent = ''
+  } else {
+    ava.style.backgroundImage = ''
+    ava.textContent = (name[0] || 'B').toUpperCase()
   }
-  inp.onkeydown = e => { if (e.key === 'Enter') inp.blur(); if (e.key === 'Escape') { saved = true; loadProfile() } }
-  inp.onblur = save
+  // Sync gender buttons
+  ;['male','female','private'].forEach(g => {
+    document.getElementById('eGBtn-' + g)?.classList.toggle('active', _editGender === g)
+  })
+  document.getElementById('profileEditModal').classList.add('open')
 }
+function closeProfileEdit() {
+  document.getElementById('profileEditModal').classList.remove('open')
+  _editAvatarFile = null
+}
+function previewEditAvatar(file) {
+  if (!file) return
+  _editAvatarFile = file
+  const url = URL.createObjectURL(file)
+  const ava = document.getElementById('editAvatarPreview')
+  ava.style.backgroundImage = `url(${url})`
+  ava.style.backgroundSize = 'cover'
+  ava.style.backgroundPosition = 'center'
+  ava.textContent = ''
+}
+function selectEditGender(g) {
+  _editGender = g
+  ;['male','female','private'].forEach(k =>
+    document.getElementById('eGBtn-' + k)?.classList.toggle('active', k === g)
+  )
+}
+async function saveProfileEdit() {
+  if (!currentUser || !sb) return
+  const btn = document.getElementById('profileSaveBtn')
+  if (btn) btn.disabled = true
+  try {
+    const updates = {}
+    // Upload new avatar if selected
+    if (_editAvatarFile) {
+      const file = _editAvatarFile
+      const ext = file.name.split('.').pop().toLowerCase().replace(/[^a-z]/g,'') || 'jpg'
+      const path = `${currentUser.id}.${ext}`
+      const { error } = await sb.storage.from('avatars').upload(path, file, {
+        upsert: true, contentType: file.type || 'image/jpeg'
+      })
+      if (error) throw error
+      const { data: urlData } = sb.storage.from('avatars').getPublicUrl(path)
+      updates.avatar_url = urlData.publicUrl + '?t=' + Date.now()
+    }
+    // Nickname
+    const name = document.getElementById('editNameInput').value.trim().slice(0, 20)
+    if (name) updates.display_name = name
+    // Gender
+    if (_editGender) updates.gender = _editGender
+    if (Object.keys(updates).length) {
+      await sb.from('profiles').update(updates).eq('user_id', currentUser.id)
+      Object.assign(profile, updates)
+    }
+    closeProfileEdit()
+    loadProfile()
+  } catch(e) {
+    alert('保存失败：' + (e.message || '请重试'))
+  } finally {
+    if (btn) btn.disabled = false
+  }
+}
+function editName() { openProfileEdit() }
 async function loadProfileStats() {
   if (!sb) return
   try {
@@ -2371,233 +3131,992 @@ async function loadAllNotes() {
   } catch(e) { if (el) el.innerHTML = '' }
 }
 
-// ===== 词汇量测算 =====
-let vocabPool = null, vtSample = []
-const VT_LEVELS = [
-  { key:'buta',     max:200,      emoji:'😵', zh:'啥也不认识', id:'Buta Huruf',    quote:'你可能只认识「Halo」！',      color:['#3a3a4a','#1a1a2a'] },
-  { key:'pemula',   max:1000,     emoji:'🐣', zh:'印尼鸡宝',  id:'Pemula',        quote:'点菜还得靠手比脚划，加油！',  color:['#8b4513','#4a2008'] },
-  { key:'menengah', max:3000,     emoji:'🍜', zh:'能混过去',  id:'Lumayan Jago',  quote:'市场砍价勉强够用！',          color:['#1f5d4d','#0d3327'] },
-  { key:'jago',     max:6500,     emoji:'🔥', zh:'Bahasa Jago',id:'Jago Sekali',  quote:'印尼人都以为你是华裔！',      color:['#c25c10','#7a3008'] },
-  { key:'master',   max:Infinity, emoji:'👑', zh:'封神了！',  id:'Bahasa Master', quote:'你应该去教我们老师！',        color:['#5a2090','#28086a'] },
+// ===== BIPA 模拟测评 =====
+let vocabExamBank = null
+let vtExam = null
+let vtAdvanceTimer = null
+
+const VT_STAGE_META = {
+  word: { label: '单词选择', sub: '识别基础词义，判断词汇覆盖。', total: 6 },
+  sentence: { label: '句子理解', sub: '补全句子，判断结构和搭配。', total: 6 },
+  reading: { label: '阅读理解', sub: '短文阅读，判断整体理解能力。', total: 4 },
+}
+
+const VT_STAGE_ORDER = ['word', 'sentence', 'reading']
+
+const VT_BIPA_LEVELS = [
+  { max: 1500, code: 'A1', name: '入门', note: '适合从最常见词汇开始。' },
+  { max: 3000, code: 'A2', name: '基础', note: '能处理常见生活场景。' },
+  { max: 5000, code: 'B1', name: '中级', note: '能应对较多日常与校园场景。' },
+  { max: 7000, code: 'B2', name: '进阶', note: '能阅读较完整的文章。' },
+  { max: Infinity, code: 'C1+', name: '高阶', note: '综合理解和表达已较稳。' },
 ]
-const VT_BANDS = { 1:1000, 2:3000, 3:6000 }
-const VT_PER_LEVEL = { 1:14, 2:14, 3:12 }
+
+const VT_LEVEL_ART = {
+  A1: 'img/vt-lv1.webp',
+  A2: 'img/vt-lv2.webp',
+  B1: 'img/vt-lv3.webp',
+  B2: 'img/vt-lv4.webp',
+  'C1+': 'img/vt-lv5.webp',
+}
+
+const VT_LEVEL_FLAIR = {
+  A1: '刚开机的小可爱',
+  A2: '开始像样了',
+  B1: '已经会点了',
+  B2: '像个本地人',
+  'C1+': '嘴比脑子还快',
+}
+
+const VT_LEVEL_TAG = {
+  A1: '我先试试',
+  A2: '不慌不慌',
+  B1: '状态不错',
+  B2: '有点东西',
+  'C1+': '真有点强',
+}
+
+const VT_LEVEL_COPY = {
+  A1: {
+    headline: '刚开机的小可爱',
+    line1: '你已经不是空白页了，至少能看懂一点点。',
+    line2: '别急着装大神，先把“能认”和“会用”分开。',
+    roast: '现在属于“点菜能说个大概，但别让我考你”。',
+    id_quote: 'Halo, aku masih tahap kenalan.',
+    zh_roast: '我还在打基础，先别让我装老手。',
+    shareQuote: 'Aku masih belajar, tapi aku sudah jalan.',
+    shareTranslation: '我还在学，不过已经开始往前走了。',
+  },
+  A2: {
+    headline: '开始像样了',
+    line1: '你已经有点印尼语味儿了，开始能顺着题目往下走。',
+    line2: '如果继续这个速度，下一次海报会更像“我真的会”。',
+    roast: '不是路人了，但也还没到本地人随便乱认的程度。',
+    id_quote: 'Pelan-pelan, udah mulai nyambung.',
+    zh_roast: '慢慢能接上话了，离“真会”只差一点点。',
+    shareQuote: 'Pelan-pelan, aku makin paham.',
+    shareTranslation: '慢慢来，我已经越来越懂了。',
+  },
+  B1: {
+    headline: '已经会点了',
+    line1: '你现在是”能聊两句，而且不太像外星人”的状态。',
+    line2: '再补一点词汇和结构，海报就能开始吹了。',
+    roast: '已经可以在饭桌上假装自己很懂了。',
+    id_quote: 'Lumayan lah, ngobrol tanpa Google Translate.',
+    zh_roast: '已经能顺着聊几句了，演技很自然。',
+    shareQuote: 'Sekarang aku berani ngobrol.',
+    shareTranslation: '现在我已经敢开口聊天了。',
+  },
+  B2: {
+    headline: '像个本地人',
+    line1: '你这已经不是”知道答案”，而是”差不多真的会用”。',
+    line2: '朋友看到这分数，大概率会先沉默三秒。',
+    roast: '再练一点，就快到”别问，问就是我会”了。',
+    id_quote: 'Orang Indo bisa kira aku lokal.',
+    zh_roast: '别人可能真的会把你当本地人。',
+    shareQuote: 'Orang bisa kira aku orang lokal.',
+    shareTranslation: '别人可能会以为我是本地人。',
+  },
+  'C1+': {
+    headline: '嘴比脑子还快',
+    line1: '你现在属于那种会把印尼语说得很自然的人。',
+    line2: '这个分数已经不是炫耀，是提醒大家别小看你。',
+    roast: '这不是会一点，这是已经能把场子接住了。',
+    id_quote: 'Kamu harusnya ngajar guru bahasa kami.',
+    zh_roast: '建议直接去当印尼语老师，别浪费这份天赋。',
+    shareQuote: 'Kalau serius, gurunya juga ikut waspada.',
+    shareTranslation: '你要是认真起来，老师都得警惕一下。',
+  },
+}
+
+const vtImageCache = new Map()
+
+function vtAsset(path) {
+  return path
+}
+
+function vtLevelImage(code) {
+  return vtAsset(VT_LEVEL_ART[code] || VT_LEVEL_ART['C1+'])
+}
+
+function vtShareName() {
+  const name = (profile && profile.display_name) || (currentUser && currentUser.email ? currentUser.email.split('@')[0] : '')
+  return name || 'Bahasa Jago'
+}
+
+function vtShareText(result) {
+  const name = vtShareName()
+  const copy = VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']
+  return `${name} 现在是 ${copy.headline}。≈ ${result.estimate.toLocaleString()} 词，${result.level.code}（${result.level.name}）。`
+}
+
+function vtShareSlogan(result) {
+  const copy = VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']
+  return copy.roast
+}
+
+function vtRoundRectPath(ctx, x, y, w, h, r) {
+  const rr = Math.min(r, w / 2, h / 2)
+  ctx.beginPath()
+  ctx.moveTo(x + rr, y)
+  ctx.arcTo(x + w, y, x + w, y + h, rr)
+  ctx.arcTo(x + w, y + h, x, y + h, rr)
+  ctx.arcTo(x, y + h, x, y, rr)
+  ctx.arcTo(x, y, x + w, y, rr)
+  ctx.closePath()
+}
+
+function vtWrapText(ctx, text, x, y, maxWidth, lineHeight, maxLines) {
+  const raw = String(text || '').trim()
+  const words = raw.includes(' ') ? raw.split(/\s+/) : Array.from(raw)
+  let line = ''
+  let lines = 0
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i]
+    const test = line ? line + ' ' + word : word
+    if (ctx.measureText(test).width > maxWidth && line) {
+      ctx.fillText(line, x, y)
+      line = word
+      y += lineHeight
+      lines++
+      if (maxLines && lines >= maxLines - 1) {
+        const remaining = [line].concat(words.slice(i + 1)).join(' ')
+        const clipped = remaining.replace(/\s+/g, ' ').trim()
+        ctx.fillText(clipped.length > 0 ? clipped : line, x, y)
+        return y
+      }
+    } else {
+      line = test
+    }
+  }
+  if (line) ctx.fillText(line, x, y)
+  return y
+}
+
+function vtLoadImage(src) {
+  if (vtImageCache.has(src)) return vtImageCache.get(src)
+  const p = new Promise((resolve, reject) => {
+    const img = new Image()
+    img.onload = () => resolve(img)
+    img.onerror = reject
+    img.src = src
+  })
+  vtImageCache.set(src, p)
+  return p
+}
 
 function vtShuffle(arr) {
   const a = arr.slice()
-  for (let i = a.length-1; i > 0; i--) { const j = Math.floor(Math.random()*(i+1)); const t=a[i]; a[i]=a[j]; a[j]=t }
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    const t = a[i]
+    a[i] = a[j]
+    a[j] = t
+  }
   return a
 }
-function wilsonCI(k, n, z=1.96) {
-  if (!n) return [0, 1]
-  const p = k/n, denom = 1 + z*z/n
-  const center = (p + z*z/(2*n)) / denom
-  const margin = z * Math.sqrt(p*(1-p)/n + z*z/(4*n*n)) / denom
-  return [Math.max(0, center-margin), Math.min(1, center+margin)]
+
+function vtRound10(n) {
+  return Math.round(n / 10) * 10
+}
+
+function vtSelectByDifficulty(pool, difficulty, count) {
+  const ranked = pool.filter(q => q.difficulty === difficulty)
+  const fallback = pool.filter(q => q.difficulty !== difficulty)
+  const merged = vtShuffle(ranked).concat(vtShuffle(fallback))
+  return merged.slice(0, count)
+}
+
+function vtPickReadingPassage(bank, difficulty) {
+  const pool = bank.reading.filter(p => p.difficulty === difficulty)
+  const fallback = bank.reading.filter(p => p.difficulty !== difficulty)
+  const source = (pool.length ? pool : fallback)
+  const passage = vtShuffle(source)[0]
+  return passage
+}
+
+function vtDifficultyByRate(rate) {
+  if (rate >= 0.83) return 'hard'
+  if (rate >= 0.55) return 'medium'
+  return 'easy'
+}
+
+function vtNormalizeOptions(value) {
+  if (Array.isArray(value)) return value.map(v => String(v))
+  if (typeof value === 'string' && value) {
+    try {
+      const parsed = JSON.parse(value)
+      if (Array.isArray(parsed)) return parsed.map(v => String(v))
+    } catch (e) {}
+    return [value]
+  }
+  return []
+}
+
+function vtNormalizeExamRows(rows) {
+  const bank = { word: [], sentence: [], reading: [] }
+  const readingMap = new Map()
+
+  for (const row of rows || []) {
+    if (!row || !row.section || !row.difficulty || !row.prompt) continue
+    const item = {
+      id: String(row.id ?? ''),
+      difficulty: String(row.difficulty),
+      prompt: String(row.prompt),
+      options: vtNormalizeOptions(row.options),
+      answer: String(row.answer ?? ''),
+      explain: String(row.explain ?? ''),
+      sortOrder: Number(row.sort_order ?? 0),
+    }
+    if (!item.id || !item.options.length || !item.answer) continue
+
+    if (row.section === 'reading') {
+      const key = `${row.difficulty}::${row.passage_title || ''}::${row.passage_text || ''}`
+      if (!readingMap.has(key)) {
+        readingMap.set(key, {
+          title: row.passage_title || '阅读材料',
+          passage: row.passage_text || '',
+          difficulty: String(row.difficulty),
+          questions: [],
+        })
+      }
+      readingMap.get(key).questions.push(item)
+      continue
+    }
+
+    if (bank[row.section]) bank[row.section].push(item)
+  }
+
+  for (const passage of readingMap.values()) {
+    passage.questions.sort((a, b) => a.sortOrder - b.sortOrder)
+    bank.reading.push(passage)
+  }
+  return bank
+}
+
+async function vtLoadBank() {
+  if (vocabExamBank) return vocabExamBank
+  if (!sb) throw new Error('Supabase 未初始化')
+  const { data, error } = await sb
+    .from('vocab_exam_bank')
+    .select('id,section,difficulty,prompt,options,answer,explain,passage_title,passage_text,sort_order,active')
+    .eq('active', true)
+    .order('section', { ascending: true })
+    .order('difficulty', { ascending: true })
+    .order('sort_order', { ascending: true })
+    .order('id', { ascending: true })
+  if (error) throw new Error(`题库加载失败：${error.message || error.code || 'unknown'}`)
+  if (!data || !data.length) throw new Error('题库为空，请先在 Supabase 导入数据')
+  const bank = vtNormalizeExamRows(data)
+  if (!bank.word.length || !bank.sentence.length || !bank.reading.length) {
+    throw new Error('题库不完整，请检查 Supabase 的题目数据')
+  }
+  vocabExamBank = bank
+  return bank
+}
+
+async function vtLoadLatestVocabExamResult() {
+  if (!sb || !currentUser) return null
+  try {
+    const { data, error } = await sb
+      .from('vocab_exam_results')
+      .select('id,estimate,level_code,level_name,word_correct,word_total,sentence_correct,sentence_total,reading_correct,reading_total,overall_rate,stage_difficulty,created_at')
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .maybeSingle()
+    if (error) throw error
+    return data || null
+  } catch (e) {
+    return null
+  }
+}
+
+function vtFormatResultCompare(prev, current) {
+  if (!prev) {
+    return {
+      title: '首次记录',
+      main: '这是你的第一条测评记录',
+      sub: '下次再测一次，就能直接对比进步幅度了。',
+    }
+  }
+  const prevEstimate = Number(prev.estimate || 0)
+  const currEstimate = Number(current.estimate || 0)
+  const delta = currEstimate - prevEstimate
+  const abs = Math.abs(delta).toLocaleString()
+  const levelText = prev.level_code && prev.level_name
+    ? `上次是 ${prev.level_code} · ${prev.level_name}`
+    : '上次的级别记录已经留好了'
+  let main = '和上次一样稳'
+  if (delta > 0) main = `比上次进步 +${abs} 词`
+  else if (delta < 0) main = `这次少了 ${abs} 词，别慌，下次补回来`
+  return {
+    title: '和上次对比',
+    main,
+    sub: `${levelText} · 这次 ≈ ${currEstimate.toLocaleString()} 词`,
+  }
+}
+
+async function vtPersistVocabExamResult(result) {
+  if (!sb || !currentUser || !result) return null
+  const payload = {
+    mode: 'exam',
+    result: {
+      estimate: result.estimate,
+      level: {
+        code: result.level?.code || result.level_code || 'A1',
+        name: result.level?.name || result.level_name || '入门',
+      },
+      level_code: result.level?.code || result.level_code || 'A1',
+      level_name: result.level?.name || result.level_name || '入门',
+      wordRate: result.wordRate ?? result.word?.rate ?? 0,
+      sentenceRate: result.sentenceRate ?? result.sentence?.rate ?? 0,
+      readingRate: result.readingRate ?? result.reading?.rate ?? 0,
+      word: result.word || { score: 0, total: 0 },
+      sentence: result.sentence || { score: 0, total: 0 },
+      reading: result.reading || { score: 0, total: 0 },
+      overallRate: result.overallRate ?? 0,
+      stageDifficulty: result.stageDifficulty || {},
+    },
+  }
+  const { data: { session } } = await sb.auth.getSession()
+  const token = session && session.access_token
+  if (token) {
+    try {
+      const r = await fetch(SUPABASE_URL + '/functions/v1/vocab-test', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: SUPABASE_KEY,
+          Authorization: 'Bearer ' + token,
+        },
+        body: JSON.stringify(payload),
+      })
+      if (r.ok) return await r.json().catch(() => ({}))
+    } catch (e) {}
+  }
+  try {
+    const { data, error } = await sb.from('vocab_exam_results').insert({
+      estimate: Number(result.estimate || 0),
+      level_code: String(result.level?.code || result.level_code || 'A1'),
+      level_name: String(result.level?.name || result.level_name || '入门'),
+      word_correct: Number(result.word?.score || 0),
+      word_total: Number(result.word?.total || 0),
+      sentence_correct: Number(result.sentence?.score || 0),
+      sentence_total: Number(result.sentence?.total || 0),
+      reading_correct: Number(result.reading?.score || 0),
+      reading_total: Number(result.reading?.total || 0),
+      overall_rate: Number(result.overallRate || 0),
+      stage_difficulty: result.stageDifficulty || {},
+    }).select('id,estimate,level_code,level_name,created_at').single()
+    if (error) throw error
+    return { stored: true, result: data }
+  } catch (e) {
+    return { stored: false, error: e }
+  }
+}
+
+function vtEnsureExam() {
+  if (!vtExam) throw new Error('测评未初始化')
+}
+
+function vtResetUi() {
+  document.getElementById('vtResultArea').style.display = 'none'
+  document.getElementById('vtResultArea').innerHTML = ''
+  document.getElementById('vtTestArea').style.display = ''
+  document.getElementById('vtTestArea').classList.remove('quizzing')
+}
+
+function vtSetStagePills(active) {
+  const ai = VT_STAGE_ORDER.indexOf(active)
+  const ids = { word:'vtStepWord', sentence:'vtStepSentence', reading:'vtStepReading' }
+  for (const key of VT_STAGE_ORDER) {
+    const el = document.getElementById(ids[key])
+    if (!el) continue
+    const ki = VT_STAGE_ORDER.indexOf(key)
+    el.classList.toggle('active', key === active)
+    el.classList.toggle('done', ki < ai)
+  }
+  const l1 = document.getElementById('vtLine1')
+  const l2 = document.getElementById('vtLine2')
+  if (l1) l1.classList.toggle('done', ai > 0)
+  if (l2) l2.classList.toggle('done', ai > 1)
+}
+
+function vtShuffleOptions(q) {
+  return { ...q, options: vtShuffle(q.options) }
+}
+
+function vtBuildWordQuestions(bank) {
+  return [
+    ...vtSelectByDifficulty(bank.word, 'easy', 2),
+    ...vtSelectByDifficulty(bank.word, 'medium', 2),
+    ...vtSelectByDifficulty(bank.word, 'hard', 2),
+  ].map((q, idx) => vtShuffleOptions({ ...q, idx }))
+}
+
+function vtBuildSentenceQuestions(bank, difficulty) {
+  return vtSelectByDifficulty(bank.sentence, difficulty, VT_STAGE_META.sentence.total).map((q, idx) => vtShuffleOptions({ ...q, idx }))
+}
+
+function vtBuildReadingQuestions(bank, difficulty) {
+  const passage = vtPickReadingPassage(bank, difficulty)
+  return (passage.questions || []).slice(0, VT_STAGE_META.reading.total).map((q, idx) => vtShuffleOptions({
+    ...q,
+    idx,
+    passageTitle: passage.title,
+    passageText: passage.passage,
+    passageDifficulty: passage.difficulty,
+  }))
+}
+
+function vtStartStage(stage, questions, difficulty) {
+  vtExam.stage = stage
+  vtExam.questions = questions
+  vtExam.index = 0
+  vtExam.selected = null
+  vtExam.locked = false
+  vtExam.screen = 'question'
+  vtExam.stageDifficulty[stage] = difficulty
+  vtSetStagePills(stage)
+  document.getElementById('vtTestArea').classList.add('quizzing')
+  document.getElementById('vtHeadTag').textContent = VT_STAGE_META[stage].label
+  vtRender()
+}
+
+function vtBuildExamSummary() {
+  const w = vtExam.sectionScores.word
+  const s = vtExam.sectionScores.sentence
+  const r = vtExam.sectionScores.reading
+  const wordRate = w.total ? w.correct / w.total : 0
+  const sentenceRate = s.total ? s.correct / s.total : 0
+  const readingRate = r.total ? r.correct / r.total : 0
+  const overallRate = (w.correct + s.correct + r.correct) / (w.total + s.total + r.total)
+  const rawEstimate = 700 + wordRate * 2600 + sentenceRate * 2500 + readingRate * 2200
+    + (vtExam.stageDifficulty.sentence === 'medium' ? 250 : vtExam.stageDifficulty.sentence === 'hard' ? 650 : 0)
+    + (vtExam.stageDifficulty.reading === 'medium' ? 220 : vtExam.stageDifficulty.reading === 'hard' ? 650 : 0)
+  const estimate = vtRound10(rawEstimate)
+  const level = VT_BIPA_LEVELS.find(l => estimate < l.max) || VT_BIPA_LEVELS[VT_BIPA_LEVELS.length - 1]
+  const diffLabel = d => d === 'hard' ? '困难' : d === 'medium' ? '中等' : '基础'
+  return {
+    estimate, level, overallRate,
+    stageDifficulty: { ...vtExam.stageDifficulty },
+    word: { score: w.correct, total: w.total, rate: wordRate, difficultyLabel: diffLabel(vtExam.stageDifficulty.word || 'mixed') },
+    sentence: { score: s.correct, total: s.total, rate: sentenceRate, difficultyLabel: diffLabel(vtExam.stageDifficulty.sentence) },
+    reading: { score: r.correct, total: r.total, rate: readingRate, difficultyLabel: diffLabel(vtExam.stageDifficulty.reading) },
+  }
+}
+
+function vtRender() {
+  vtEnsureExam()
+  const quizArea = document.getElementById('vtQuizArea')
+  const nextBtn = document.getElementById('vtNextBtn')
+  const stateEl = document.getElementById('vtState')
+
+  if (vtExam.screen === 'question') {
+    const q = vtExam.questions[vtExam.index]
+    const pct = Math.round((vtExam.index / vtExam.questions.length) * 100)
+    const passageHtml = q.passageText ? `<div class="vt-passage"><b>${esc(q.passageTitle || '短文')}</b><br>${esc(q.passageText)}</div>` : ''
+    const locked = vtExam.locked
+    const correctIdx = locked ? q.options.indexOf(q.answer) : -1
+    quizArea.innerHTML = `
+      <div class="vt-progress"><div class="vt-progress-fill" style="width:${pct}%"></div></div>
+      ${passageHtml}
+      <div class="vt-prompt">${esc(q.prompt)}</div>
+      <div class="vt-options">
+        ${q.options.map((opt, idx) => {
+          let cls = 'vt-option'
+          if (locked) {
+            if (idx === vtExam.selected && idx === correctIdx) cls += ' correct'
+            else if (idx === vtExam.selected) cls += ' wrong'
+            else if (idx === correctIdx) cls += ' correct'
+            else cls += ' locked'
+          } else if (vtExam.selected === idx) {
+            cls += ' selected'
+          }
+          return `<button type="button" class="${cls}" onclick="vtPickAnswer(${idx})">${esc(opt)}</button>`
+        }).join('')}
+      </div>
+    `
+    return
+  }
+
+  if (vtExam.screen === 'result') {
+    const result = vtExam.result
+    const levelImg = vtLevelImage(result.level.code)
+    const levelCopy = VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']
+    const compare = vtFormatResultCompare(vtExam.previousResult, result)
+    quizArea.innerHTML = ''
+    document.getElementById('vtResultArea').style.display = ''
+    document.getElementById('vtHeadTag').textContent = '结果'
+    document.getElementById('vtResultArea').innerHTML = `
+      <div class="vt-result">
+        <div class="vt-result-eyebrow">BIPA 模拟测评结果</div>
+        <div class="vt-result-card">
+          <div class="vt-result-main">
+            <div class="vt-num"><span>≈</span>${result.estimate.toLocaleString()}</div>
+            <div class="vt-ci">词汇覆盖估算 · ${result.level.code} · ${result.level.name}</div>
+            <div class="vt-level-badge">
+              <div class="vt-level-code">${result.level.code}</div>
+              <div class="vt-level-name">${result.level.name}</div>
+              <div class="vt-level-id">BIPA 参考级别</div>
+              <div class="vt-level-note">${esc(result.level.note)}</div>
+            </div>
+            <div class="vt-funny-quote">单词、句子、阅读一路闯下来，最后才知道你有多稳。</div>
+            <div class="vt-bars">
+              <div class="vt-bar-row">
+                <div class="vt-bar-top"><span>单词选择</span><span>${result.word.score}/${result.word.total}</span></div>
+                <div class="vt-bar-track"><div class="vt-bar-fill" style="width:${Math.round(result.word.rate * 100)}%"></div></div>
+                <div class="vt-bar-meta">${result.word.difficultyLabel}</div>
+              </div>
+              <div class="vt-bar-row">
+                <div class="vt-bar-top"><span>句子理解</span><span>${result.sentence.score}/${result.sentence.total}</span></div>
+                <div class="vt-bar-track"><div class="vt-bar-fill" style="width:${Math.round(result.sentence.rate * 100)}%"></div></div>
+                <div class="vt-bar-meta">${result.sentence.difficultyLabel}</div>
+              </div>
+              <div class="vt-bar-row">
+                <div class="vt-bar-top"><span>阅读理解</span><span>${result.reading.score}/${result.reading.total}</span></div>
+                <div class="vt-bar-track"><div class="vt-bar-fill" style="width:${Math.round(result.reading.rate * 100)}%"></div></div>
+                <div class="vt-bar-meta">${result.reading.difficultyLabel}</div>
+              </div>
+            </div>
+          </div>
+          <div class="vt-result-side">
+            <div class="vt-side-tag">${VT_LEVEL_TAG[result.level.code] || '太强了'}</div>
+            <div class="vt-side-title">${esc(levelCopy.headline)}</div>
+            <div class="vt-side-sub">${esc(vtShareName())}</div>
+            <img class="vt-side-art" src="${esc(levelImg)}" alt="level art">
+            <div class="vt-side-copy">${esc(levelCopy.line1)}</div>
+          </div>
+        </div>
+        <div class="vt-compare">
+          <div class="vt-compare-title">${esc(compare.title)}</div>
+          <div class="vt-compare-main">${esc(compare.main)}</div>
+          <div class="vt-compare-sub">${esc(compare.sub)}</div>
+        </div>
+        <div class="vt-actions">
+          <button class="vt-share" onclick="shareVocabExam()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
+            生成分享图
+          </button>
+          <button class="vt-retry" onclick="startVocabTest()">重新测评</button>
+        </div>
+        <div class="vt-note">这是 BIPA 风格的模拟测评，不是官方认证考试。题库可继续扩充。</div>
+      </div>
+    `
+    nextBtn.disabled = false
+    nextBtn.textContent = '重新测评'
+    stateEl.textContent = '测评完成'
+  }
+}
+
+function vtPickAnswer(idx) {
+  vtEnsureExam()
+  if (vtExam.screen !== 'question' || vtExam.locked) return
+  vtExam.selected = idx
+  vtExam.locked = true
+
+  const q = vtExam.questions[vtExam.index]
+  const chosen = q.options[idx]
+  const isCorrect = chosen === q.answer
+  const stageKey = vtExam.stage
+  vtExam.sectionScores[stageKey].total++
+  if (isCorrect) vtExam.sectionScores[stageKey].correct++
+  vtExam.answers.push({
+    stage: stageKey, id: q.id, prompt: q.prompt,
+    chosen, answer: q.answer, correct: isCorrect,
+  })
+
+  vtRender()
+
+  setTimeout(() => {
+    vtExam.locked = false
+    vtExam.selected = null
+    vtExam.index++
+    if (vtExam.index < vtExam.questions.length) {
+      vtRender()
+    } else {
+      vtFinishStage()
+    }
+  }, isCorrect ? 600 : 1200)
+}
+
+function vtNext() {
+  vtEnsureExam()
+  if (vtExam.screen === 'result') {
+    startVocabTest()
+  }
+}
+
+function vtFinishStage() {
+  const stage = vtExam.stage
+  const score = vtExam.sectionScores[stage].correct
+  const total = vtExam.sectionScores[stage].total
+  const rate = total ? score / total : 0
+  if (stage === 'word') {
+    const next = vtDifficultyByRate(rate)
+    vtExam.stageDifficulty.sentence = next
+    vtAutoAdvance('sentence', next)
+  } else if (stage === 'sentence') {
+    const combined = (vtExam.sectionScores.word.correct + vtExam.sectionScores.sentence.correct) /
+      (vtExam.sectionScores.word.total + vtExam.sectionScores.sentence.total)
+    const next = vtDifficultyByRate(combined)
+    vtExam.stageDifficulty.reading = next
+    vtAutoAdvance('reading', next)
+  } else {
+    vtShowResult()
+  }
+}
+
+function vtShowResult() {
+  clearTimeout(vtAdvanceTimer)
+  vtExam.screen = 'result'
+  vtExam.result = vtBuildExamSummary()
+  localStorage.setItem('bb_vocab_last', String(vtExam.result.estimate))
+  vtSetStagePills('reading')
+  document.getElementById('vtHeadTag').textContent = '结果'
+  vtRender()
+  refreshVocabBadge()
+  if (!vtExam.resultSaving && !vtExam.resultSaved) {
+    vtExam.resultSaving = true
+    void vtPersistVocabExamResult(vtExam.result).then(payload => {
+      vtExam.resultSaving = false
+      vtExam.resultSaved = !!(payload && payload.stored !== false)
+      if (payload && payload.previous) vtExam.previousResult = payload.previous
+      if (payload && payload.result && payload.result.created_at) vtExam.lastSavedResult = payload.result
+    })
+  }
+}
+
+function vtAutoAdvance(nextStage, difficulty, delay = 350) {
+  clearTimeout(vtAdvanceTimer)
+  vtAdvanceTimer = setTimeout(() => {
+    if (!vtExam || !vocabExamBank) return
+    const q = nextStage === 'sentence'
+      ? vtBuildSentenceQuestions(vocabExamBank, difficulty)
+      : vtBuildReadingQuestions(vocabExamBank, difficulty)
+    vtStartStage(nextStage, q, difficulty)
+  }, delay)
+}
+
+function vtDrawCoverImage(ctx, img, x, y, w, h) {
+  if (!img || !img.width || !img.height) return
+  const scale = Math.max(w / img.width, h / img.height)
+  const sw = w / scale
+  const sh = h / scale
+  const sx = Math.max(0, (img.width - sw) / 2)
+  const sy = Math.max(0, (img.height - sh) / 2)
+  ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h)
+}
+
+async function vtBuildSharePoster(result) {
+  const RW = 1080, RH = 1440
+  const canvas = document.createElement('canvas')
+  canvas.width = RW; canvas.height = RH
+  const ctx = canvas.getContext('2d')
+  const SF = '"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif'
+  const name = vtShareName()
+  const copy = VT_LEVEL_COPY[result.level.code] || VT_LEVEL_COPY['C1+']
+  const art = await vtLoadImage(vtLevelImage(result.level.code))
+  const logo = await vtLoadImage('img/logo.png')
+  let qr = null
+  try { qr = await vtLoadImage('img/share-qrcode.jpg') } catch (e) {}
+  const pal = {
+    bgTop: '#f4ecff',
+    bgBottom: '#ffffff',
+    accent: '#6b33cc',
+    accent2: '#a87cf0',
+    dark: '#37205f',
+    light: '#fbf8ff',
+  }
+
+  // background
+  const bg = ctx.createLinearGradient(0, 0, 0, RH)
+  bg.addColorStop(0, pal.bgTop)
+  bg.addColorStop(0.62, '#f9f4ff')
+  bg.addColorStop(1, pal.bgBottom)
+  ctx.fillStyle = bg
+  ctx.fillRect(0, 0, RW, RH)
+
+  ctx.save()
+  ctx.globalAlpha = 0.16
+  ctx.strokeStyle = pal.accent2
+  ctx.lineWidth = 10
+  ctx.beginPath(); ctx.arc(88, 104, 92, Math.PI * 0.1, Math.PI * 1.7); ctx.stroke()
+  ctx.beginPath(); ctx.arc(968, 170, 126, Math.PI * 1.1, Math.PI * 2.5); ctx.stroke()
+  ctx.globalAlpha = 0.12
+  ctx.fillStyle = '#ffffff'
+  ctx.beginPath(); ctx.arc(968, 132, 132, 0, Math.PI * 2); ctx.fill()
+  ctx.beginPath(); ctx.arc(110, 118, 102, 0, Math.PI * 2); ctx.fill()
+  ctx.restore()
+
+  // outer card
+  ctx.save()
+  vtRoundRectPath(ctx, 34, 34, RW - 68, RH - 68, 56)
+  ctx.fillStyle = 'rgba(255,255,255,.78)'
+  ctx.fill()
+  ctx.strokeStyle = 'rgba(255,255,255,.9)'
+  ctx.lineWidth = 2
+  ctx.stroke()
+  ctx.restore()
+
+  // header
+  if (logo && logo.width) {
+    ctx.save()
+    vtRoundRectPath(ctx, 88, 86, 108, 108, 24)
+    ctx.fillStyle = '#fff'
+    ctx.fill()
+    ctx.clip()
+    ctx.drawImage(logo, 88, 86, 108, 108)
+    ctx.restore()
+  }
+  ctx.fillStyle = pal.dark
+  ctx.textAlign = 'left'
+  ctx.textBaseline = 'middle'
+  ctx.font = `1000 47px ${SF}`
+  ctx.fillText('BahasaBelajar', 216, 126)
+  ctx.fillStyle = '#7b54da'
+  ctx.font = `800 30px ${SF}`
+  ctx.fillText('BIPA 模拟测评', 218, 170)
+
+  // hero art
+  const artX = 84, artY = 214, artW = 912, artH = 420
+  ctx.save()
+  vtRoundRectPath(ctx, artX, artY, artW, artH, 38)
+  ctx.fillStyle = '#f7f2ff'
+  ctx.fill()
+  ctx.clip()
+  if (art && art.width) vtDrawCoverImage(ctx, art, artX, artY, artW, artH)
+  ctx.restore()
+  ctx.save()
+  ctx.strokeStyle = 'rgba(255,255,255,.95)'
+  ctx.lineWidth = 10
+  vtRoundRectPath(ctx, artX, artY, artW, artH, 38)
+  ctx.stroke()
+  ctx.restore()
+
+  // level badge
+  const badgeX = 116, badgeY = 468, badgeW = 168, badgeH = 160
+  ctx.save()
+  vtRoundRectPath(ctx, badgeX, badgeY, badgeW, badgeH, 34)
+  const badgeGrad = ctx.createLinearGradient(badgeX, badgeY, badgeX + badgeW, badgeY + badgeH)
+  badgeGrad.addColorStop(0, '#7f46e2')
+  badgeGrad.addColorStop(1, '#4b1d9d')
+  ctx.fillStyle = badgeGrad
+  ctx.fill()
+  ctx.strokeStyle = 'rgba(255,228,165,.8)'
+  ctx.lineWidth = 4
+  vtRoundRectPath(ctx, badgeX, badgeY, badgeW, badgeH, 34)
+  ctx.stroke()
+  ctx.restore()
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'middle'
+  ctx.fillStyle = '#fff'
+  ctx.font = `1000 42px Georgia,${SF}`
+  ctx.fillText(result.level.code, badgeX + badgeW / 2, badgeY + 60)
+  ctx.font = `900 20px ${SF}`
+  ctx.fillText(result.level.name, badgeX + badgeW / 2, badgeY + 103)
+  ctx.font = `700 14px ${SF}`
+  ctx.fillStyle = 'rgba(255,255,255,.84)'
+  ctx.fillText('参考级别', badgeX + badgeW / 2, badgeY + 132)
+
+  // score card
+  const scoreY = 612
+  ctx.save()
+  vtRoundRectPath(ctx, 76, scoreY, RW - 152, 222, 34)
+  const scoreGrad = ctx.createLinearGradient(76, scoreY, 76, scoreY + 222)
+  scoreGrad.addColorStop(0, '#ffffff')
+  scoreGrad.addColorStop(1, '#f9f2ff')
+  ctx.fillStyle = scoreGrad
+  ctx.fill()
+  ctx.strokeStyle = 'rgba(142,104,215,.18)'
+  ctx.lineWidth = 4
+  vtRoundRectPath(ctx, 76, scoreY, RW - 152, 222, 34)
+  ctx.stroke()
+  ctx.restore()
+
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'alphabetic'
+  ctx.fillStyle = pal.dark
+  ctx.font = `1000 104px Georgia,${SF}`
+  ctx.fillText(`≈ ${result.estimate.toLocaleString()}`, RW / 2, scoreY + 108)
+  ctx.fillStyle = '#7b6e88'
+  ctx.font = `800 24px ${SF}`
+  ctx.fillText('词汇覆盖量', RW / 2, scoreY + 148)
+  ctx.fillStyle = '#6f42d9'
+  ctx.font = `900 30px ${SF}`
+  ctx.fillText(`${name} 的印尼语水平：`, RW / 2, scoreY + 198)
+
+  // headline
+  ctx.fillStyle = pal.dark
+  ctx.font = `1000 50px ${SF}`
+  ctx.fillText(`「${copy.headline}」`, RW / 2, 886)
+  ctx.fillStyle = '#a48ccc'
+  ctx.font = `700 18px ${SF}`
+  ctx.fillText('小结不严肃，成绩很认真', RW / 2, 918)
+
+  // quote card
+  const boxY = 950, boxH = 210
+  ctx.save()
+  vtRoundRectPath(ctx, 76, boxY, RW - 152, boxH, 34)
+  const boxGrad = ctx.createLinearGradient(76, boxY, RW - 76, boxY + boxH)
+  boxGrad.addColorStop(0, '#31104f')
+  boxGrad.addColorStop(1, '#7b30bd')
+  ctx.fillStyle = boxGrad
+  ctx.fill()
+  ctx.restore()
+  ctx.fillStyle = 'rgba(255,255,255,.52)'
+  ctx.font = `700 18px ${SF}`
+  ctx.textAlign = 'left'
+  ctx.fillText('🇮🇩 Bahasa', 120, boxY + 40)
+  ctx.fillStyle = 'rgba(255,255,255,.95)'
+  ctx.font = `italic 700 24px Georgia,${SF}`
+  vtWrapText(ctx, copy.shareQuote || copy.id_quote || copy.roast, 120, boxY + 78, 790, 32, 2)
+  ctx.fillStyle = 'rgba(255,255,255,.52)'
+  ctx.font = `700 18px ${SF}`
+  ctx.fillText('🇨🇳 翻译', 120, boxY + 138)
+  ctx.fillStyle = '#ffd66c'
+  ctx.font = `900 24px ${SF}`
+  vtWrapText(ctx, copy.shareTranslation || copy.zh_roast || copy.roast, 120, boxY + 172, 820, 30, 2)
+
+  // score chips
+  const chipY = 1188
+  const chipDefs = [
+    ['单词 Word', `${Math.round(result.word.rate * 100)}%`, '#ff8c47'],
+    ['句子 Kalimat', `${Math.round(result.sentence.rate * 100)}%`, '#f0b93a'],
+    ['阅读 Bacaan', `${Math.round(result.reading.rate * 100)}%`, '#41c3b1'],
+  ]
+  let chipX = 76
+  const chipW = (RW - 152 - 30) / 3
+  for (const [label, value, color] of chipDefs) {
+    ctx.save()
+    vtRoundRectPath(ctx, chipX, chipY, chipW, 86, 22)
+    ctx.fillStyle = '#fff'
+    ctx.fill()
+    ctx.strokeStyle = color
+    ctx.lineWidth = 3
+    vtRoundRectPath(ctx, chipX, chipY, chipW, 86, 22)
+    ctx.stroke()
+    ctx.restore()
+    ctx.fillStyle = color
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+    ctx.font = `800 18px ${SF}`
+    ctx.fillText(label, chipX + chipW / 2, chipY + 24)
+    ctx.font = `1000 30px ${SF}`
+    ctx.fillText(value, chipX + chipW / 2, chipY + 58)
+    chipX += chipW + 15
+  }
+
+  // footer CTA + QR
+  ctx.save()
+  vtRoundRectPath(ctx, 76, 1290, 928, 86, 26)
+  ctx.fillStyle = '#f8f4ff'
+  ctx.fill()
+  ctx.restore()
+  ctx.fillStyle = pal.accent
+  ctx.textAlign = 'left'
+  ctx.textBaseline = 'middle'
+  ctx.font = `900 26px ${SF}`
+  ctx.fillText('你也来试试，看你有多 Jago？👇', 120, 1332)
+  ctx.fillStyle = '#8b78a8'
+  ctx.font = `700 18px ${SF}`
+  ctx.fillText('roisantoso-id.github.io/bahasabelajar', 120, 1360)
+  if (qr && qr.width) {
+    ctx.save()
+    vtRoundRectPath(ctx, 860, 1302, 120, 120, 22)
+    ctx.fillStyle = '#fff'
+    ctx.fill()
+    ctx.clip()
+    ctx.drawImage(qr, 860, 1302, 120, 120)
+    ctx.restore()
+    ctx.strokeStyle = 'rgba(107,51,204,.14)'
+    ctx.lineWidth = 3
+    vtRoundRectPath(ctx, 860, 1302, 120, 120, 22)
+    ctx.stroke()
+  }
+
+  return await new Promise(resolve => {
+    canvas.toBlob(blob => resolve(blob), 'image/png', 1)
+  })
 }
 
 async function startVocabTest() {
   if (!sb) return alert('请先登录')
-  if (!vocabPool) {
-    try { const { data } = await sb.from('words').select('word,pos,meaning,level,examples').range(0, 1999); vocabPool = data || [] }
-    catch (e) { vocabPool = [] }
-  }
-  if (!vocabPool.length) return alert('词库加载失败，稍后再试')
-  vtSample = []
-  for (const lv of [1,2,3]) {
-    vtSample = vtSample.concat(vtShuffle(vocabPool.filter(w => w.level === lv)).slice(0, VT_PER_LEVEL[lv]))
-  }
-  vtSample = vtShuffle(vtSample)
-  document.getElementById('vtGrid').innerHTML = vtSample.map((w, i) => {
-    const ex = Array.isArray(w.examples) && w.examples[0] ? w.examples[0] : null
-    return `<button class="vt-word" data-i="${i}" onclick="toggleVtWord(this)">
-      <div class="vt-word-top"><span class="vt-w">${esc(w.word)}</span><span class="vt-pos">${esc(w.pos||'')}</span></div>
-      <div class="vt-zh">${esc(w.meaning||'')}</div>
-      ${ex ? `<div class="vt-ex">${esc(ex.id||'')}<span class="vt-ex-zh">${esc(ex.zh||'')}</span></div>` : ''}
-      <div class="vt-check">✓</div>
-    </button>`
-  }).join('')
-  document.getElementById('vtSelCount').textContent = '0'
-  document.getElementById('vtTestArea').style.display = ''
-  const ra = document.getElementById('vtResultArea'); ra.style.display = 'none'; ra.innerHTML = ''
-  document.getElementById('vtHeadTag').textContent = '选词'
-  showView('vocabtest')
-  window.scrollTo(0, 0)
-}
-
-function toggleVtWord(el) {
-  el.classList.toggle('known')
-  document.getElementById('vtSelCount').textContent = document.querySelectorAll('#vtGrid .vt-word.known').length
-}
-
-async function finishVocabTest() {
-  const byLevel = { 1:{s:0,k:0}, 2:{s:0,k:0}, 3:{s:0,k:0} }
-  document.querySelectorAll('#vtGrid .vt-word').forEach(el => {
-    const w = vtSample[+el.dataset.i]; if (!w || !byLevel[w.level]) return
-    byLevel[w.level].s++; if (el.classList.contains('known')) byLevel[w.level].k++
-  })
-  const samples = [1,2,3].map(lv => ({ level:lv, sampled:byLevel[lv].s, known:byLevel[lv].k }))
-  const LV_NAMES = ['入门高频词','初级词','中级词']
-
-  let estimate, ciLow, ciHigh, rows
+  clearTimeout(vtAdvanceTimer)
   try {
-    const { data: { session } } = await sb.auth.getSession()
-    const token = session && session.access_token
-    const r = await fetch(`${SUPABASE_URL}/functions/v1/vocab-test`, {
-      method:'POST',
-      headers:{ 'Content-Type':'application/json', apikey:SUPABASE_KEY, ...(token?{Authorization:'Bearer '+token}:{}) },
-      body: JSON.stringify({ samples })
-    })
-    if (!r.ok) throw new Error(r.status)
-    const d = await r.json()
-    estimate=d.estimate; ciLow=d.ciLow; ciHigh=d.ciHigh
-    rows = d.rows.map((r,i)=>({ name:LV_NAMES[i]||LV_NAMES[r.level-1], rate:r.sampled?r.known/r.sampled:0, est:r.est }))
-  } catch(e) {
-    estimate=0; ciLow=0; ciHigh=0; rows=[]
-    for (let i=0; i<3; i++) {
-      const lv=i+1, b=byLevel[lv]
-      const [pL,pH] = wilsonCI(b.k, b.s)
-      const rate=b.s?b.k/b.s:0, band=VT_BANDS[lv], est=Math.round(rate*band)
-      ciLow+=Math.round(pL*band); ciHigh+=Math.round(pH*band); estimate+=est
-      rows.push({ name:LV_NAMES[i], rate, est })
+    const bank = await vtLoadBank()
+    const previousResult = await vtLoadLatestVocabExamResult()
+    vocabExamBank = bank
+    vtExam = {
+      stage: 'word',
+      screen: 'question',
+      questions: [],
+      index: 0,
+      selected: null,
+      answers: [],
+      sectionScores: {
+        word: { correct: 0, total: 0 },
+        sentence: { correct: 0, total: 0 },
+        reading: { correct: 0, total: 0 },
+      },
+      stageDifficulty: { word: 'mixed', sentence: 'medium', reading: 'medium' },
+      result: null,
+      previousResult,
+      lastSavedResult: null,
+      resultSaved: false,
+      resultSaving: false,
     }
-    estimate=Math.round(estimate/10)*10
-    ciLow=Math.round(ciLow/10)*10; ciHigh=Math.round(ciHigh/10)*10
+    showView('vocabtest')
+    vtResetUi()
+    document.getElementById('vtHeadTag').textContent = VT_STAGE_META.word.label
+    vtSetStagePills('word')
+    const questions = vtBuildWordQuestions(bank)
+    vtExam.questions = questions
+    document.getElementById('vtState').textContent = '先完成单词选择，系统会据此决定后两部分的难度。'
+    vtRender()
+  } catch (e) {
+    alert(e.message || '题库加载失败')
   }
-
-  const lvInfo = VT_LEVELS.find(l => estimate < l.max) || VT_LEVELS[VT_LEVELS.length-1]
-  const lvIdx = VT_LEVELS.indexOf(lvInfo)
-  localStorage.setItem('bb_vocab_last', String(estimate))
-
-  const barsHtml = rows.map(r=>`
-    <div class="vt-bar-row">
-      <div class="vt-bar-top"><span>${esc(r.name)}</span><span>${r.est.toLocaleString()} 词</span></div>
-      <div class="vt-bar-track"><div class="vt-bar-fill" style="width:${Math.min(100,Math.round(r.rate*100))}%"></div></div>
-    </div>`).join('')
-
-  document.getElementById('vtTestArea').style.display = 'none'
-  const ra = document.getElementById('vtResultArea')
-  ra.innerHTML = `
-    <div class="vt-result">
-      <div class="vt-result-eyebrow">PERKIRAAN KOSAKATA · 估算词汇量</div>
-      <div class="vt-num"><span>≈</span>${estimate.toLocaleString()}</div>
-      <div class="vt-ci">${ciLow.toLocaleString()} – ${ciHigh.toLocaleString()} 词（95% 置信区间）</div>
-      <div class="vt-level-badge">
-        <div class="vt-level-emoji">${lvInfo.emoji}</div>
-        <div class="vt-level-name">${esc(lvInfo.zh)}</div>
-        <div class="vt-level-id">${esc(lvInfo.id)}</div>
-      </div>
-      <div class="vt-funny-quote">「${esc(lvInfo.quote)}」</div>
-      <div class="vt-bars">${barsHtml}</div>
-      <div class="vt-actions">
-        <button class="vt-share" onclick="shareVocab(${estimate},${ciLow},${ciHigh},${lvIdx})">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
-          生成分享图
-        </button>
-        <button class="vt-retry" onclick="startVocabTest()">重新测</button>
-      </div>
-      <div class="vt-note">词频分层抽样 · Wilson 置信区间 · 仅供娱乐参考</div>
-    </div>`
-  ra.style.display = ''
-  document.getElementById('vtHeadTag').textContent = '结果'
-  window.scrollTo(0, 0)
-  refreshVocabBadge()
 }
 
-function vtRRectPath(ctx, x, y, w, h, r) {
-  ctx.beginPath()
-  ctx.moveTo(x+r, y); ctx.lineTo(x+w-r, y)
-  ctx.arcTo(x+w,y,x+w,y+r,r); ctx.lineTo(x+w,y+h-r)
-  ctx.arcTo(x+w,y+h,x+w-r,y+h,r); ctx.lineTo(x+r,y+h)
-  ctx.arcTo(x,y+h,x,y+h-r,r); ctx.lineTo(x,y+r)
-  ctx.arcTo(x,y,x+r,y,r); ctx.closePath()
-}
-function vtWrapText(ctx, text, x, y, maxW, lh) {
-  const chars=[...text]; let line=''; const lines=[]
-  for (const c of chars) {
-    if (ctx.measureText(line+c).width>maxW && line) { lines.push(line); line=c } else line+=c
-  }
-  if (line) lines.push(line)
-  lines.forEach((l,i)=>ctx.fillText(l, x, y+i*lh))
-  return lines.length
-}
-
-function drawShareCard(estimate, ciLow, ciHigh, lvIdx) {
-  const lv = VT_LEVELS[lvIdx] || VT_LEVELS[2]
-  const W=540, H=530, DPR=2
-  const canvas = document.createElement('canvas')
-  canvas.width=W*DPR; canvas.height=H*DPR
-  const ctx = canvas.getContext('2d')
-  ctx.scale(DPR, DPR)
-
-  const g = ctx.createLinearGradient(0,0,W,H)
-  g.addColorStop(0, lv.color[0]); g.addColorStop(1, lv.color[1])
-  ctx.fillStyle=g; ctx.fillRect(0,0,W,H)
-
-  ctx.fillStyle='rgba(255,255,255,.04)'
-  for (let i=0;i<5;i++){ctx.beginPath();ctx.arc(W*.84,H*.14,50+i*36,0,Math.PI*2);ctx.fill()}
-
-  ctx.textAlign='center'; ctx.textBaseline='middle'
-  ctx.fillStyle='rgba(255,255,255,.55)'
-  ctx.font='700 14px -apple-system,Helvetica,sans-serif'
-  ctx.fillText('BahasaBelajar · 印尼语学习', W/2, 40)
-  ctx.fillStyle='rgba(255,255,255,.38)'
-  ctx.font='600 11px -apple-system,Helvetica,sans-serif'
-  ctx.fillText('PERKIRAAN KOSAKATA', W/2, 60)
-
-  ctx.fillStyle='#fff'
-  ctx.font='900 76px Georgia,serif'
-  ctx.fillText('≈ '+estimate.toLocaleString()+' 词', W/2, 148)
-
-  ctx.fillStyle='rgba(255,255,255,.62)'
-  ctx.font='600 14px -apple-system,Helvetica,sans-serif'
-  ctx.fillText(ciLow.toLocaleString()+' – '+ciHigh.toLocaleString()+' 词（95% 置信区间）', W/2, 208)
-
-  ctx.font='62px sans-serif'
-  ctx.fillText(lv.emoji, W/2, 275)
-
-  const bW=320,bH=84,bX=(W-bW)/2,bY=308
-  ctx.fillStyle='rgba(255,255,255,.13)'
-  vtRRectPath(ctx,bX,bY,bW,bH,18); ctx.fill()
-  ctx.fillStyle='#fff'
-  ctx.font='900 20px -apple-system,Helvetica,sans-serif'
-  ctx.fillText(lv.zh+'  ·  '+lv.id, W/2, bY+27)
-  ctx.fillStyle='rgba(255,255,255,.75)'
-  ctx.font='italic 600 15px -apple-system,Helvetica,sans-serif'
-  vtWrapText(ctx,'「'+lv.quote+'」',W/2,bY+57,bW-24,22)
-
-  ctx.strokeStyle='rgba(255,255,255,.2)'; ctx.lineWidth=1
-  ctx.beginPath(); ctx.moveTo(56,420); ctx.lineTo(W-56,420); ctx.stroke()
-
-  ctx.fillStyle='#fff'
-  ctx.font='900 17px -apple-system,Helvetica,sans-serif'
-  ctx.fillText('来测测你的印尼语词汇量！', W/2, 452)
-  ctx.fillStyle='rgba(255,255,255,.48)'
-  ctx.font='600 12px -apple-system,Helvetica,sans-serif'
-  ctx.fillText('roisantoso-id.github.io/bahasabelajar', W/2, 472)
-
-  return canvas
-}
-
-async function shareVocab(estimate, ciLow, ciHigh, lvIdx) {
-  const lv = VT_LEVELS[lvIdx] || VT_LEVELS[2]
-  const canvas = drawShareCard(estimate, ciLow, ciHigh, lvIdx)
-  canvas.toBlob(async blob => {
-    const file = new File([blob], 'bahasa-vocab.png', { type:'image/png' })
-    if (navigator.share && navigator.canShare && navigator.canShare({ files:[file] })) {
-      try { await navigator.share({ files:[file], title:'我的印尼语词汇量', text:`≈ ${estimate.toLocaleString()} 词  ${lv.emoji} ${lv.zh}` }); return } catch(e) {}
+async function shareVocabExam() {
+  vtEnsureExam()
+  const result = vtExam.result || vtBuildExamSummary()
+  try {
+    const blob = await vtBuildSharePoster(result)
+    if (!blob) throw new Error('海报生成失败')
+    const text = vtShareText(result)
+    const file = new File([blob], `bahasa-jago-${result.level.code}.png`, { type: 'image/png' })
+    if (navigator.share && (!navigator.canShare || navigator.canShare({ files: [file] }))) {
+      await navigator.share({ title: 'BahasaBelajar 测评海报', text, files: [file] })
+      return
     }
-    const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='bahasa-vocab.png'; a.click()
-    const text = `我的印尼语词汇量约 ${estimate.toLocaleString()} 词（${lv.zh}）！${lv.quote} 来 BahasaBelajar 测测你的👇\nhttps://roisantoso-id.github.io/bahasabelajar/`
-    try { await navigator.clipboard.writeText(text); setTimeout(()=>alert('图片已保存，文案已复制！去粘贴分享吧 🎉'),300) } catch(e) {}
-  }, 'image/png')
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `bahasa-jago-${result.level.code}.png`
+    document.body.appendChild(a)
+    a.click()
+    a.remove()
+    setTimeout(() => URL.revokeObjectURL(url), 4000)
+    alert('分享图已生成，已尝试下载到本地。')
+  } catch (e) {
+    const text = vtShareText(result)
+    navigator.clipboard.writeText(text).then(() => alert('图片生成失败，已复制分享文案')).catch(() => alert(text))
+  }
 }
 
 function refreshVocabBadge() {
-  const el = document.getElementById('vocabBadge'); if (!el) return
+  const el = document.getElementById('vocabBadge')
+  if (!el) return
   const last = localStorage.getItem('bb_vocab_last')
-  if (last) { el.textContent = '≈' + Number(last).toLocaleString(); el.classList.add('score') }
-  else { el.textContent = 'NEW'; el.classList.remove('score') }
+  if (last) {
+    el.textContent = '≈' + Number(last).toLocaleString()
+    el.classList.add('score')
+  } else {
+    el.textContent = 'NEW'
+    el.classList.remove('score')
+  }
 }
 
 // ===== 暗黑模式 =====
@@ -2645,6 +4164,102 @@ async function loadWeekChart() {
   } catch (e) {}
 }
 
+// ===== LEADERBOARD =====
+let lbData = null
+let lbTab = 'exam'
+
+async function loadLeaderboard() {
+  if (!sb) return
+  const el = document.getElementById('lbContent')
+  el.innerHTML = '<div class="lb-empty">加载中...</div>'
+  try {
+    const { data, error } = await sb.rpc('get_leaderboard')
+    if (error) throw error
+    lbData = data
+    renderLbTab()
+  } catch (e) {
+    el.innerHTML = '<div class="lb-empty">排行榜加载失败<br><span style="font-size:12px;color:#bbb">需要先在 Supabase 执行 leaderboard.sql</span></div>'
+  }
+}
+
+function switchLbTab(tab, btn) {
+  lbTab = tab
+  document.querySelectorAll('.lb-tab').forEach(t => t.classList.remove('active'))
+  btn.classList.add('active')
+  renderLbTab()
+}
+
+function renderLbTab() {
+  const el = document.getElementById('lbContent')
+  if (!lbData) { el.innerHTML = '<div class="lb-empty">暂无数据</div>'; return }
+  const list = lbData[lbTab] || []
+  if (!list.length) {
+    const labels = { exam: '还没人参加测评', streak: '还没人打卡', words: '还没人开始学习' }
+    el.innerHTML = `<div class="lb-empty">${labels[lbTab] || '暂无数据'}</div>`
+    return
+  }
+
+  const uid = currentUser?.id
+  const medals = ['🥇', '🥈', '🥉']
+  let myIdx = -1
+  let anonCount = 0
+
+  let html = '<div class="lb-list">'
+  list.forEach((item, i) => {
+    const rank = i + 1
+    const isMe = item.user_id === uid
+    if (isMe) myIdx = i
+    const medal = medals[i] || rank
+    const rankClass = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : ''
+    const hasName = item.name && item.name !== '同学'
+    const displayName = hasName ? item.name : '同学' + (++anonCount)
+    const initial = displayName[0].toUpperCase()
+    const name = isMe ? (hasName ? item.name : '我') + ' (我)' : displayName
+    let val = '', unit = '', sub = ''
+    if (lbTab === 'exam') {
+      val = (item.estimate || 0).toLocaleString()
+      unit = '词'
+      sub = item.level_name || ''
+    } else if (lbTab === 'streak') {
+      val = item.streak || 0
+      unit = '天'
+    } else {
+      val = (item.words || 0).toLocaleString()
+      unit = '词'
+    }
+    if (rank > 10 && !isMe) return
+    html += `<div class="lb-row${isMe ? ' me' : ''}">
+      <div class="lb-rank ${rankClass}">${typeof medal === 'string' && medal.length > 1 ? medal : rank}</div>
+      <div class="lb-avatar">${initial}</div>
+      <div class="lb-info"><div class="lb-name">${name}</div>${sub ? `<div class="lb-sub">${sub}</div>` : ''}</div>
+      <div class="lb-val">${val}<span class="lb-unit">${unit}</span></div>
+    </div>`
+  })
+  html += '</div>'
+
+  if (myIdx > 9) {
+    const item = list[myIdx]
+    const initial = (item.name || '?')[0].toUpperCase()
+    let val = '', unit = ''
+    if (lbTab === 'exam') { val = (item.estimate||0).toLocaleString(); unit = '词' }
+    else if (lbTab === 'streak') { val = item.streak||0; unit = '天' }
+    else { val = (item.words||0).toLocaleString(); unit = '词' }
+    html += `<div class="lb-me-section">
+      <div class="lb-me-title">我的排名</div>
+      <div class="lb-row me">
+        <div class="lb-rank">${myIdx + 1}</div>
+        <div class="lb-avatar">${initial}</div>
+        <div class="lb-info"><div class="lb-name">${item.name || '我'} (我)</div></div>
+        <div class="lb-val">${val}<span class="lb-unit">${unit}</span></div>
+      </div>
+    </div>`
+  } else if (myIdx === -1 && uid) {
+    html += `<div class="lb-me-section"><div class="lb-me-title">你还没有上榜，快去${lbTab === 'exam' ? '测评' : lbTab === 'streak' ? '打卡' : '学习'}吧！</div></div>`
+  }
+
+  el.innerHTML = html
+}
+
 // ===== INIT =====
 window.addEventListener('DOMContentLoaded', async () => {
   if (!initSupabase()) { enterAuth(); return }
@@ -2663,6 +4278,301 @@ window.addEventListener('DOMContentLoaded', async () => {
     if (event === 'SIGNED_OUT') enterAuth()
   })
 })
+
+// ===== 通知 / SERVICE WORKER =====
+let _swReg = null
+
+async function initSW() {
+  if (!('serviceWorker' in navigator)) return
+  try {
+    _swReg = await navigator.serviceWorker.register('sw.js', { scope: './' })
+    await navigator.serviceWorker.ready
+  } catch (e) {}
+  updateNotifUI()
+}
+
+function updateNotifUI() {
+  const btn = document.getElementById('notifToggle')
+  const desc = document.getElementById('notifDesc')
+  if (!btn || !desc) return
+  if (!('Notification' in window)) {
+    desc.textContent = '此浏览器不支持'; btn.disabled = true; btn.textContent = '不支持'; return
+  }
+  const p = Notification.permission
+  if (p === 'granted') {
+    desc.textContent = '已开启，有待复习时提醒'; btn.textContent = '已开启'; btn.style.background = 'var(--green)'; btn.style.color = '#fff'
+  } else if (p === 'denied') {
+    desc.textContent = '已被浏览器屏蔽，请在系统设置里允许'; btn.textContent = '已屏蔽'; btn.disabled = true
+  } else {
+    desc.textContent = '未开启'; btn.textContent = '开启'
+  }
+}
+
+async function requestNotifyPermission() {
+  if (!('Notification' in window)) return
+  if (Notification.permission === 'denied') { alert('通知已被屏蔽，请到系统设置 → Safari/浏览器 → 通知 里手动开启'); return }
+  const result = await Notification.requestPermission()
+  updateNotifUI()
+  if (result === 'granted') {
+    sendNotif('🎉 提醒已开启！', '有词语待复习时，我会来提醒你。')
+  }
+}
+
+function sendNotif(title, body) {
+  if (Notification.permission !== 'granted') return
+  if (_swReg && _swReg.active) {
+    _swReg.active.postMessage({ type: 'SHOW_NOTIFICATION', title, body })
+  } else {
+    new Notification(title, { body, icon: 'img/logo.png', tag: 'bahasa-review' })
+  }
+}
+
+// Called from loadHome() after counts are known
+function maybeNotify(dueCount, newCount) {
+  if (Notification.permission !== 'granted') return
+  const key = 'bb_notif_last'
+  const last = parseInt(localStorage.getItem(key) || '0')
+  const now = Date.now()
+  if (now - last < 4 * 60 * 60 * 1000) return  // 每4小时最多一次
+  if (dueCount > 0) {
+    localStorage.setItem(key, now)
+    sendNotif('📚 BahasaBelajar', `你有 ${dueCount} 个词语待复习，别让它们跑掉！`)
+  } else if (newCount > 0) {
+    localStorage.setItem(key, now)
+    sendNotif('📖 BahasaBelajar', `今天还有 ${newCount} 个新词等你来学`)
+  }
+}
+
+// ===== 种草 SPOTS =====
+const SPOT_CAT = {
+  nature:  { gradient:'linear-gradient(135deg,#e8f4e8,#a8d8a8)', emoji:'🌿', label:'自然风光' },
+  beach:   { gradient:'linear-gradient(135deg,#ddeeff,#88bbee)', emoji:'🏖️', label:'海滩' },
+  culture: { gradient:'linear-gradient(135deg,#fff0e0,#f0c080)', emoji:'🏛️', label:'文化历史' },
+  city:    { gradient:'linear-gradient(135deg,#f0e8ff,#c0a0e0)', emoji:'🏙️', label:'城市' },
+  food:    { gradient:'linear-gradient(135deg,#fff8e0,#f0d080)', emoji:'🍜', label:'美食' },
+}
+const SPOT_REGIONS = ['全部','巴厘','爪哇','苏门答腊','苏拉威西','其他']
+let spotRegion = '全部'
+let currentSpotId = null
+let replyToId = null
+
+function buildSpotRegionChips() {
+  const el = document.getElementById('spotsFilter')
+  if (!el) return
+  el.innerHTML = SPOT_REGIONS.map(r =>
+    `<div class="spot-chip${r===spotRegion?' active':''}" onclick="filterSpots('${r}')">${r}</div>`
+  ).join('')
+}
+function filterSpots(r) { spotRegion = r; buildSpotRegionChips(); loadSpots() }
+
+async function loadSpots() {
+  const el = document.getElementById('spotsList')
+  if (!el || !sb) return
+  el.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--muted)">加载中…</div>'
+  try {
+    let q = sb.from('spots').select('id,name,name_zh,province,region,category,cover_url,view_count')
+      .order('is_preset', { ascending: false }).order('view_count', { ascending: false }).limit(60)
+    if (spotRegion !== '全部') q = q.eq('region', spotRegion)
+    const { data, error } = await q
+    if (error) throw error
+    if (!data || !data.length) {
+      el.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:32px;color:var(--muted)">暂无景点，快来推荐第一个！</div>'
+      return
+    }
+    el.innerHTML = data.map(s => {
+      const cat = SPOT_CAT[s.category] || SPOT_CAT.nature
+      const coverImg = s.cover_url ? `<img src="${s.cover_url}" loading="lazy" onerror="this.style.display='none'">` : ''
+      return `<div class="spot-card" onclick="openSpot(${s.id})">
+        <div class="spot-card-cover" style="background:${cat.gradient}">${coverImg}<span class="spot-card-emoji">${cat.emoji}</span></div>
+        <div class="spot-card-info">
+          <div class="spot-card-name">${s.name_zh}</div>
+          <div class="spot-card-region">${s.province || s.region}</div>
+          <div class="spot-card-stats"><span>👀 ${s.view_count || 0}</span></div>
+        </div>
+      </div>`
+    }).join('')
+  } catch(e) {
+    el.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--muted)">加载失败，请重试</div>'
+  }
+}
+
+async function openSpot(id) {
+  currentSpotId = id
+  replyToId = null
+  showView('spot')
+  // Reset UI
+  const coverEl = document.getElementById('spotDetailCover')
+  // Remove any previously injected cover image
+  coverEl.querySelectorAll('img').forEach(i => i.remove())
+  document.getElementById('spotDetailEmoji').textContent = '🌿'
+  coverEl.style.background = SPOT_CAT.nature.gradient
+  document.getElementById('spotDetailNameZh').textContent = '加载中…'
+  document.getElementById('spotDetailNameId').textContent = ''
+  document.getElementById('spotDetailTags').innerHTML = ''
+  document.getElementById('spotDetailDesc').textContent = ''
+  document.getElementById('spotDetailMaps').style.display = 'none'
+  document.getElementById('spotVisitedBadge').style.display = 'none'
+  document.getElementById('spotCommentsList').innerHTML = ''
+  document.getElementById('spotCommentInput').value = ''
+  document.getElementById('spotCommentInput').placeholder = '分享你的感受…'
+
+  try {
+    const { data: s, error } = await sb.from('spots').select('*').eq('id', id).single()
+    if (error || !s) return
+    const cat = SPOT_CAT[s.category] || SPOT_CAT.nature
+    document.getElementById('spotDetailEmoji').textContent = cat.emoji
+    coverEl.style.background = cat.gradient
+    if (s.cover_url) {
+      const img = document.createElement('img')
+      img.src = s.cover_url
+      img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover'
+      img.onerror = () => img.remove()
+      coverEl.insertBefore(img, coverEl.firstChild)
+    }
+    document.getElementById('spotDetailNameZh').textContent = s.name_zh
+    document.getElementById('spotDetailNameId').textContent = s.name
+    document.getElementById('spotDetailTags').innerHTML =
+      `<span class="spot-tag spot-tag-region">${s.province || s.region}</span>` +
+      `<span class="spot-tag spot-tag-cat">${cat.label}</span>`
+    document.getElementById('spotDetailDesc').textContent = s.description_zh || s.description || ''
+    if (s.maps_url) {
+      const a = document.getElementById('spotDetailMaps')
+      a.href = s.maps_url
+      a.style.display = 'inline-flex'
+    }
+    // Track view + show visited badge
+    if (currentUser) {
+      try {
+        await sb.rpc('track_spot_view', { p_spot_id: id })
+        document.getElementById('spotVisitedBadge').style.display = ''
+      } catch(e) {}
+    }
+    loadSpotComments(id)
+  } catch(e) {}
+}
+
+async function loadSpotComments(spotId) {
+  const el = document.getElementById('spotCommentsList')
+  if (!el || !sb) return
+  try {
+    const { data } = await sb.from('spot_comments').select('*').eq('spot_id', spotId).order('created_at', { ascending: true })
+    if (!data || !data.length) {
+      el.innerHTML = '<div style="text-align:center;padding:20px;color:var(--muted);font-size:13px">还没有评论，来说第一句！</div>'
+      return
+    }
+    const tops = data.filter(c => !c.parent_id)
+    const replies = data.filter(c => c.parent_id)
+    el.innerHTML = tops.map(c => {
+      const ava = (c.display_name || '?')[0].toUpperCase()
+      const mine = currentUser && c.user_id === currentUser.id
+      const time = new Date(c.created_at).toLocaleDateString('zh-CN', { month:'numeric', day:'numeric' })
+      const reps = replies.filter(r => r.parent_id === c.id)
+      const repHtml = reps.map(r => {
+        const rAva = (r.display_name || '?')[0].toUpperCase()
+        const rMine = currentUser && r.user_id === currentUser.id
+        const rTime = new Date(r.created_at).toLocaleDateString('zh-CN', { month:'numeric', day:'numeric' })
+        return `<div class="reply-row">
+          <div class="comment-main">
+            <div class="comment-avatar" style="width:24px;height:24px;font-size:9px">${rAva}</div>
+            <div class="comment-bubble">
+              <div class="comment-name">${r.display_name || '游客'}</div>
+              <div class="comment-text">${r.content}</div>
+              <div class="comment-meta">${rTime}${rMine ? `<button class="comment-del-btn" onclick="deleteSpotComment(${r.id})">删除</button>` : ''}</div>
+            </div>
+          </div>
+        </div>`
+      }).join('')
+      return `<div class="comment-item">
+        <div class="comment-main">
+          <div class="comment-avatar">${ava}</div>
+          <div class="comment-bubble">
+            <div class="comment-name">${c.display_name || '游客'}</div>
+            <div class="comment-text">${c.content}</div>
+            <div class="comment-meta">${time}
+              <button class="comment-reply-btn" onclick="startReply(${c.id},${JSON.stringify(c.display_name||'游客')})">回复</button>
+              ${mine ? `<button class="comment-del-btn" onclick="deleteSpotComment(${c.id})">删除</button>` : ''}
+            </div>
+          </div>
+        </div>
+        ${reps.length ? `<div class="comment-replies">${repHtml}</div>` : ''}
+      </div>`
+    }).join('')
+  } catch(e) {
+    el.innerHTML = '<div style="text-align:center;padding:16px;color:var(--muted)">评论加载失败</div>'
+  }
+}
+
+function startReply(commentId, name) {
+  replyToId = commentId
+  const input = document.getElementById('spotCommentInput')
+  input.placeholder = `回复 ${name}…`
+  input.focus()
+}
+
+async function submitSpotComment() {
+  const input = document.getElementById('spotCommentInput')
+  const content = input.value.trim()
+  if (!content || !currentUser || !currentSpotId) return
+  const displayName = profile?.display_name || currentUser.email?.split('@')[0] || '游客'
+  try {
+    const { error } = await sb.from('spot_comments').insert({
+      spot_id: currentSpotId, user_id: currentUser.id,
+      display_name: displayName, content,
+      parent_id: replyToId || null,
+    })
+    if (error) throw error
+    input.value = ''
+    input.placeholder = '分享你的感受…'
+    replyToId = null
+    loadSpotComments(currentSpotId)
+  } catch(e) { alert('发送失败，请重试') }
+}
+
+async function deleteSpotComment(id) {
+  if (!confirm('确定删除这条评论？')) return
+  try {
+    await sb.from('spot_comments').delete().eq('id', id)
+    loadSpotComments(currentSpotId)
+  } catch(e) {}
+}
+
+function showSpotSubmitModal() {
+  if (!currentUser) { alert('请先登录'); return }
+  document.getElementById('spotSubmitModal').classList.add('open')
+}
+function closeSpotSubmitModal() {
+  document.getElementById('spotSubmitModal').classList.remove('open')
+}
+async function submitNewSpot() {
+  const nameZh = document.getElementById('sfNameZh').value.trim()
+  const name   = document.getElementById('sfName').value.trim()
+  const region = document.getElementById('sfRegion').value
+  if (!nameZh || !name || !region) { alert('请填写景点名称和所在大区'); return }
+  const category = document.getElementById('sfCategory').value || 'nature'
+  const province = document.getElementById('sfProvince').value.trim() || null
+  const desc     = document.getElementById('sfDesc').value.trim() || null
+  const cover    = document.getElementById('sfCover').value.trim() || null
+  const maps     = document.getElementById('sfMaps').value.trim() || null
+  try {
+    const { error } = await sb.from('spots').insert({
+      name, name_zh: nameZh, region, category, province,
+      description_zh: desc, cover_url: cover, maps_url: maps,
+      submitted_by: currentUser.id,
+      submitted_name: profile?.display_name || null,
+      is_preset: false,
+    })
+    if (error) throw error
+    closeSpotSubmitModal()
+    ;['sfNameZh','sfName','sfProvince','sfDesc','sfCover','sfMaps'].forEach(id => { document.getElementById(id).value = '' })
+    document.getElementById('sfRegion').value = ''
+    document.getElementById('sfCategory').value = 'nature'
+    spotRegion = '全部'
+    showView('spots')
+    alert('感谢推荐！景点已添加 🎉')
+  } catch(e) { alert('提交失败：' + (e.message || '请重试')) }
+}
+
+initSW()
 </script>
 </body>
 </html>

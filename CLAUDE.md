@@ -15,7 +15,7 @@
 
 ### Supabase 信息
 - Project URL：`https://bzdelpmcewjdvmgyafux.supabase.co`
-- 表：`words`、`grammar`、`learning`、`checkins`、`settings`、`articles`、`culture`、`profiles`、`article_notes`、`translations`、`qwen_usage`、`lessons`
+- 表：`words`、`grammar`、`learning`、`checkins`、`settings`、`articles`、`culture`、`profiles`、`article_notes`、`translations`、`qwen_usage`、`lessons`、`vocab_exam_bank`
 
 ### 内容架构（课程主线 · `supabase/lessons-schema.sql`）
 - `lessons` 表 = 课本课程（第1课、2课…）。
@@ -97,6 +97,8 @@ anon key **不能建表**。流程：
 3. 在 `h5/index.html` 加视图 + tab + 加载函数。
 4. 写内容 JSON + 上传脚本，跑上传。
 
+> 新的 `BIPA 模拟测评` 题库也按这个流程走，但它是单独的 `vocab_exam_bank` 表，见 `supabase/vocab-exam-schema.sql` 和 `supabase/vocab-exam-seed.sql`。
+
 ---
 
 ## 每日内容 Routine（自动）
@@ -117,12 +119,16 @@ anon key **不能建表**。流程：
 
 前端就是 `h5/index.html` 一个文件。改完后推到部署仓库即可，GitHub Pages 自动重建（约 1–2 分钟）。
 
+更短的部署/更新速查见 [UPDATE_GUIDE.md](/Users/mac/Desktop/roi/Bantu/BahasaBelajar/UPDATE_GUIDE.md)。
+
 部署仓库（独立于本项目，只含 `index.html`）：仓库 `roisantoso-id/bahasabelajar`，分支 `master`，Pages 从根目录服务。
 
 ```bash
 # 1. 本项目 h5/index.html 改好后，复制到部署仓库的克隆目录
 cp h5/index.html <部署仓库克隆路径>/index.html
-# 2. 提交推送
+# 2. 如果 h5/img/ 有改动，也一起复制
+cp -r h5/img <部署仓库克隆路径>/img
+# 3. 提交推送
 cd <部署仓库克隆路径>
 git add -A && git commit -m "更新说明" && git push
 ```

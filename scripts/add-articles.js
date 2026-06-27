@@ -40,11 +40,19 @@ async function getJSON(url, headers) {
   console.log(`收到 ${incoming.length} 篇，新文章 ${fresh.length}，跳过 ${incoming.length - fresh.length}（同名已存在）`)
   if (!fresh.length) return console.log('无新文章可上传。')
 
-  const res = await fetch(`${URL}/rest/v1/articles`, {
+  // articles 表 RLS 允许 anon 写入；service_role 可能缺 sequence grant，优先 KEY，403 时降级 ANON
+  let res = await fetch(`${URL}/rest/v1/articles`, {
     method: 'POST',
     headers: { apikey: KEY, Authorization: `Bearer ${KEY}`, 'Content-Type': 'application/json', Prefer: 'return=representation' },
     body: JSON.stringify(fresh)
   })
+  if (res.status === 403) {
+    res = await fetch(`${URL}/rest/v1/articles`, {
+      method: 'POST',
+      headers: { apikey: ANON, Authorization: `Bearer ${ANON}`, 'Content-Type': 'application/json', Prefer: 'return=representation' },
+      body: JSON.stringify(fresh)
+    })
+  }
   if (!res.ok) throw new Error(`上传失败 ${res.status}: ${await res.text()}`)
   console.log(`✓ 上传 ${JSON.parse(await res.text()).length} 篇新文章`)
 

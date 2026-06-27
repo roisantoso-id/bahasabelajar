@@ -1,0 +1,406 @@
+{
+  "version": "bipa-exam-v1",
+  "title": "BIPA 模拟测评题库",
+  "word": [
+    {
+      "id": "w-e1",
+      "difficulty": "easy",
+      "prompt": "Kata \"rumah\" berarti ...",
+      "options": ["房子", "道路", "市场", "朋友"],
+      "answer": "房子",
+      "explain": "rumah = 房子"
+    },
+    {
+      "id": "w-e2",
+      "difficulty": "easy",
+      "prompt": "Kata \"makan\" berarti ...",
+      "options": ["吃", "喝", "买", "睡觉"],
+      "answer": "吃",
+      "explain": "makan = 吃"
+    },
+    {
+      "id": "w-e3",
+      "difficulty": "easy",
+      "prompt": "Kata \"pergi\" berarti ...",
+      "options": ["去", "来", "坐", "看"],
+      "answer": "去",
+      "explain": "pergi = 去"
+    },
+    {
+      "id": "w-e4",
+      "difficulty": "easy",
+      "prompt": "Kata \"sekolah\" berarti ...",
+      "options": ["学校", "医院", "办公室", "公园"],
+      "answer": "学校",
+      "explain": "sekolah = 学校"
+    },
+    {
+      "id": "w-e5",
+      "difficulty": "easy",
+      "prompt": "Kata \"teman\" berarti ...",
+      "options": ["朋友", "老师", "司机", "客人"],
+      "answer": "朋友",
+      "explain": "teman = 朋友"
+    },
+    {
+      "id": "w-e6",
+      "difficulty": "easy",
+      "prompt": "Kata \"air\" berarti ...",
+      "options": ["水", "米饭", "衣服", "天气"],
+      "answer": "水",
+      "explain": "air = 水"
+    },
+    {
+      "id": "w-m1",
+      "difficulty": "medium",
+      "prompt": "Kata \"harga\" berarti ...",
+      "options": ["价格", "时间", "方向", "温度"],
+      "answer": "价格",
+      "explain": "harga = 价格"
+    },
+    {
+      "id": "w-m2",
+      "difficulty": "medium",
+      "prompt": "Kata \"cepat\" berarti ...",
+      "options": ["快", "慢", "远", "高"],
+      "answer": "快",
+      "explain": "cepat = 快"
+    },
+    {
+      "id": "w-m3",
+      "difficulty": "medium",
+      "prompt": "Kata \"cuaca\" berarti ...",
+      "options": ["天气", "日子", "季节", "地点"],
+      "answer": "天气",
+      "explain": "cuaca = 天气"
+    },
+    {
+      "id": "w-m4",
+      "difficulty": "medium",
+      "prompt": "Kata \"perjalanan\" berarti ...",
+      "options": ["旅行", "学习", "工作", "购物"],
+      "answer": "旅行",
+      "explain": "perjalanan = 旅行 / 行程"
+    },
+    {
+      "id": "w-m5",
+      "difficulty": "medium",
+      "prompt": "Kata \"kesehatan\" berarti ...",
+      "options": ["健康", "文化", "教育", "交通"],
+      "answer": "健康",
+      "explain": "kesehatan = 健康"
+    },
+    {
+      "id": "w-m6",
+      "difficulty": "medium",
+      "prompt": "Kata \"pekerjaan\" berarti ...",
+      "options": ["工作", "房间", "礼物", "道路"],
+      "answer": "工作",
+      "explain": "pekerjaan = 工作"
+    },
+    {
+      "id": "w-h1",
+      "difficulty": "hard",
+      "prompt": "Kata \"suasana\" berarti ...",
+      "options": ["氛围", "速度", "地图", "成绩"],
+      "answer": "氛围",
+      "explain": "suasana = 氛围 / 环境气氛"
+    },
+    {
+      "id": "w-h2",
+      "difficulty": "hard",
+      "prompt": "Kata \"kebijakan\" berarti ...",
+      "options": ["政策", "词典", "方法", "理由"],
+      "answer": "政策",
+      "explain": "kebijakan = 政策"
+    },
+    {
+      "id": "w-h3",
+      "difficulty": "hard",
+      "prompt": "Kata \"pertumbuhan\" berarti ...",
+      "options": ["增长", "阻碍", "改正", "结论"],
+      "answer": "增长",
+      "explain": "pertumbuhan = 增长"
+    },
+    {
+      "id": "w-h4",
+      "difficulty": "hard",
+      "prompt": "Kata \"mengelola\" berarti ...",
+      "options": ["管理", "翻译", "记录", "等待"],
+      "answer": "管理",
+      "explain": "mengelola = 管理 / 经营"
+    },
+    {
+      "id": "w-h5",
+      "difficulty": "hard",
+      "prompt": "Kata \"kebutuhan\" berarti ...",
+      "options": ["需要", "希望", "习惯", "兴趣"],
+      "answer": "需要",
+      "explain": "kebutuhan = 需要"
+    },
+    {
+      "id": "w-h6",
+      "difficulty": "hard",
+      "prompt": "Kata \"keberhasilan\" berarti ...",
+      "options": ["成功", "失败", "机会", "合作"],
+      "answer": "成功",
+      "explain": "keberhasilan = 成功"
+    }
+  ],
+  "sentence": [
+    {
+      "id": "s-e1",
+      "difficulty": "easy",
+      "prompt": "Saya ___ nasi goreng setiap pagi.",
+      "options": ["makan", "minum", "membeli", "berjalan"],
+      "answer": "makan",
+      "explain": "makan nasi goreng = 吃炒饭"
+    },
+    {
+      "id": "s-e2",
+      "difficulty": "easy",
+      "prompt": "Kami ___ ke pasar pada hari Minggu.",
+      "options": ["pergi", "datang", "tinggal", "duduk"],
+      "answer": "pergi",
+      "explain": "pergi ke pasar = 去市场"
+    },
+    {
+      "id": "s-e3",
+      "difficulty": "easy",
+      "prompt": "Ibu sedang ___ kopi di dapur.",
+      "options": ["membuat", "membaca", "membuka", "menutup"],
+      "answer": "membuat",
+      "explain": "membuat kopi = 做咖啡"
+    },
+    {
+      "id": "s-e4",
+      "difficulty": "easy",
+      "prompt": "Adik suka ___ buku cerita.",
+      "options": ["membaca", "berlari", "menari", "menyanyi"],
+      "answer": "membaca",
+      "explain": "membaca buku cerita = 读故事书"
+    },
+    {
+      "id": "s-e5",
+      "difficulty": "easy",
+      "prompt": "Mereka tinggal di rumah ___ besar.",
+      "options": ["yang", "dan", "atau", "karena"],
+      "answer": "yang",
+      "explain": "yang 用来连接名词和形容词"
+    },
+    {
+      "id": "s-e6",
+      "difficulty": "easy",
+      "prompt": "Budi ___ air putih sebelum tidur.",
+      "options": ["minum", "mendengar", "mencari", "memasak"],
+      "answer": "minum",
+      "explain": "minum air putih = 喝白水"
+    },
+    {
+      "id": "s-m1",
+      "difficulty": "medium",
+      "prompt": "Setelah hujan reda, jalan menjadi ___.",
+      "options": ["licin", "panas", "tinggi", "sempit"],
+      "answer": "licin",
+      "explain": "hujan后路面会变滑"
+    },
+    {
+      "id": "s-m2",
+      "difficulty": "medium",
+      "prompt": "Saya belajar Bahasa Indonesia ___ bisa berbicara dengan teman.",
+      "options": ["agar", "tetapi", "walaupun", "sebelum"],
+      "answer": "agar",
+      "explain": "agar = 为了 / 以便"
+    },
+    {
+      "id": "s-m3",
+      "difficulty": "medium",
+      "prompt": "Harga buku ini ___ mahal, jadi saya tidak membelinya.",
+      "options": ["cukup", "sangat", "sekali", "juga"],
+      "answer": "cukup",
+      "explain": "cukup mahal = 还算贵"
+    },
+    {
+      "id": "s-m4",
+      "difficulty": "medium",
+      "prompt": "Dia datang lebih ___ daripada saya.",
+      "options": ["cepat", "lambat", "dekat", "jauh"],
+      "answer": "cepat",
+      "explain": "lebih cepat = 更快"
+    },
+    {
+      "id": "s-m5",
+      "difficulty": "medium",
+      "prompt": "Mereka membeli tiket karena ingin ___ konser itu.",
+      "options": ["menonton", "menulis", "mengukur", "menyiram"],
+      "answer": "menonton",
+      "explain": "menonton konser = 看演出"
+    },
+    {
+      "id": "s-m6",
+      "difficulty": "medium",
+      "prompt": "Saya pergi ke kantor ___ bus, bukan naik motor.",
+      "options": ["naik", "dari", "untuk", "tentang"],
+      "answer": "naik",
+      "explain": "naik bus = 乘坐公交"
+    },
+    {
+      "id": "s-h1",
+      "difficulty": "hard",
+      "prompt": "Meski jadwalnya padat, dia tetap ___ tugas dengan teliti.",
+      "options": ["menyelesaikan", "menyimpan", "menjelaskan", "menghilangkan"],
+      "answer": "menyelesaikan",
+      "explain": "menyelesaikan tugas = 完成任务"
+    },
+    {
+      "id": "s-h2",
+      "difficulty": "hard",
+      "prompt": "Pemerintah menyiapkan kebijakan untuk ___ harga pangan.",
+      "options": ["menstabilkan", "menghapus", "mengubah", "mempercepat"],
+      "answer": "menstabilkan",
+      "explain": "menstabilkan harga = 稳定价格"
+    },
+    {
+      "id": "s-h3",
+      "difficulty": "hard",
+      "prompt": "Program itu berjalan ___ karena dukungan masyarakat.",
+      "options": ["lancar", "bising", "kering", "dingin"],
+      "answer": "lancar",
+      "explain": "berjalan lancar = 顺利进行"
+    },
+    {
+      "id": "s-h4",
+      "difficulty": "hard",
+      "prompt": "Banyak siswa memilih kos ini karena ___ dengan kampus.",
+      "options": ["dekat", "ramai", "mahal", "besar"],
+      "answer": "dekat",
+      "explain": "dekat dengan kampus = 离校园近"
+    },
+    {
+      "id": "s-h5",
+      "difficulty": "hard",
+      "prompt": "Riset itu dilakukan untuk mengetahui ___ penggunaan transportasi umum.",
+      "options": ["pola", "warna", "ukuran", "bunyi"],
+      "answer": "pola",
+      "explain": "pola penggunaan = 使用模式"
+    },
+    {
+      "id": "s-h6",
+      "difficulty": "hard",
+      "prompt": "Ketika festival selesai, para peserta ___ ke hotel masing-masing.",
+      "options": ["kembali", "berkembang", "bersembunyi", "berhenti"],
+      "answer": "kembali",
+      "explain": "kembali ke hotel = 回酒店"
+    }
+  ],
+  "reading": [
+    {
+      "id": "r-e1",
+      "difficulty": "easy",
+      "title": "Rina di Kampus",
+      "passage": "Rina belajar BIPA di Jakarta. Setiap pagi ia naik bus ke kampus. Di kelas, guru menjelaskan kosakata, kalimat, dan budaya Indonesia. Setelah kelas, Rina sering makan siang bersama teman dari Jepang, Korea, dan Thailand.",
+      "questions": [
+        {
+          "id": "r-e1-q1",
+          "prompt": "Rina belajar BIPA di ...",
+          "options": ["Jakarta", "Bandung", "Surabaya", "Bali"],
+          "answer": "Jakarta",
+          "explain": "文中第一句直接写明 Jakarta"
+        },
+        {
+          "id": "r-e1-q2",
+          "prompt": "Rina pergi ke kampus dengan ...",
+          "options": ["bus", "sepeda", "mobil", "kereta"],
+          "answer": "bus",
+          "explain": "文中写的是 naik bus"
+        },
+        {
+          "id": "r-e1-q3",
+          "prompt": "Di kelas, guru menjelaskan ...",
+          "options": ["kosakata, kalimat, dan budaya Indonesia", "hanya matematika", "hanya olahraga", "hanya musik"],
+          "answer": "kosakata, kalimat, dan budaya Indonesia",
+          "explain": "这句直接对应原文"
+        },
+        {
+          "id": "r-e1-q4",
+          "prompt": "Setelah kelas, Rina sering ...",
+          "options": ["makan siang bersama teman", "langsung tidur", "membeli sepatu", "berlari ke taman"],
+          "answer": "makan siang bersama teman",
+          "explain": "文中写的是 makan siang bersama teman"
+        }
+      ]
+    },
+    {
+      "id": "r-m1",
+      "difficulty": "medium",
+      "title": "Pasar di Hari Minggu",
+      "passage": "Budi tinggal di Surabaya. Pada hari Minggu, ia pergi ke pasar bersama ibunya. Mereka membeli sayur, buah, dan ikan. Di rumah, Budi membantu memasak lalu membersihkan meja.",
+      "questions": [
+        {
+          "id": "r-m1-q1",
+          "prompt": "Budi tinggal di ...",
+          "options": ["Surabaya", "Medan", "Malang", "Yogyakarta"],
+          "answer": "Surabaya",
+          "explain": "第一句直接给出地点"
+        },
+        {
+          "id": "r-m1-q2",
+          "prompt": "Ke pasar Budi pergi bersama ...",
+          "options": ["ibunya", "temannya", "gurunya", "tetangganya"],
+          "answer": "ibunya",
+          "explain": "文中写的是 bersama ibunya"
+        },
+        {
+          "id": "r-m1-q3",
+          "prompt": "Mereka membeli ...",
+          "options": ["sayur, buah, dan ikan", "roti, susu, dan daging", "nasi, mie, dan kopi", "baju, tas, dan sepatu"],
+          "answer": "sayur, buah, dan ikan",
+          "explain": "文中明确列出这三样"
+        },
+        {
+          "id": "r-m1-q4",
+          "prompt": "Di rumah, Budi ...",
+          "options": ["membantu memasak lalu membersihkan meja", "langsung pergi ke kantor", "menonton film seharian", "tidur sampai sore"],
+          "answer": "membantu memasak lalu membersihkan meja",
+          "explain": "文末写了这两个动作"
+        }
+      ]
+    },
+    {
+      "id": "r-h1",
+      "difficulty": "hard",
+      "title": "Festival Budaya Kota",
+      "passage": "Pemerintah kota mengadakan festival budaya untuk memperkenalkan tradisi daerah kepada warga dan wisatawan. Di acara itu ada pertunjukan musik, pameran makanan, dan diskusi singkat tentang sejarah kota. Banyak pengunjung datang karena ingin melihat bagaimana budaya lokal tetap hidup di tengah perubahan zaman.",
+      "questions": [
+        {
+          "id": "r-h1-q1",
+          "prompt": "Tujuan festival budaya adalah ...",
+          "options": ["memperkenalkan tradisi daerah", "menjual kendaraan", "menguji cuaca", "membuat jalan baru"],
+          "answer": "memperkenalkan tradisi daerah",
+          "explain": "原文第一句给出目的"
+        },
+        {
+          "id": "r-h1-q2",
+          "prompt": "Di acara itu ada ...",
+          "options": ["pertunjukan musik, pameran makanan, dan diskusi singkat", "lomba renang dan lari", "uji bahasa dan matematika", "perjalanan laut"],
+          "answer": "pertunjukan musik, pameran makanan, dan diskusi singkat",
+          "explain": "原文第二句直接列出"
+        },
+        {
+          "id": "r-h1-q3",
+          "prompt": "Banyak pengunjung datang karena ...",
+          "options": ["ingin melihat budaya lokal tetap hidup", "ingin membeli tiket pesawat", "ingin belajar memasak", "ingin melihat hujan"],
+          "answer": "ingin melihat budaya lokal tetap hidup",
+          "explain": "文末说明原因"
+        },
+        {
+          "id": "r-h1-q4",
+          "prompt": "Kata yang paling dekat maknanya dengan \"perubahan zaman\" adalah ...",
+          "options": ["时代变化", "地名", "食谱", "门票"],
+          "answer": "时代变化",
+          "explain": "perubahan zaman = 时代变化"
+        }
+      ]
+    }
+  ]
+}

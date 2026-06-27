@@ -19,6 +19,7 @@
 2. 据此写 2 篇文章，每篇 14-16 句。**事实要准**，数字按报道写，不编造具体引语。
    - 格式：`{title(印尼语), title_zh, level:3, category:"时政"/"经济"/"科技"/"猎奇", image_url, summary, sentences:[{id:印尼语句, zh:中文, note:词缀/语法注释}]}`
    - **`image_url`（封面图）**：用 WebFetch 取原文页面的 `og:image` meta 标签 content URL 填进去（前端列表/详情会显示）。取不到就省略该字段，别编造。
+     - 常见坑：WebFetch 把页面转 markdown 时常把 `<head>` 吞掉，导致取不到 og:image。这时改让它「列出文章正文的 lead 图 URL」，认 CDN 域名（cdn.antaranews.com / akcdn.detik.net.id / cdn1.katadata.co.id 等），挑发布日期当天那张。务必 https 且能热链。
    - **猎奇批次选题方向**：印尼奇闻趣事（鳄鱼/火山/神话）、病毒社媒事件、奇特饮食/风俗、野生动物入侵、名人搞笑糗事、印尼版「世界之最」等，要真实有趣、语言地道。
    - 注释专挑词缀（拆词根），把阅读和语法模块挂钩。
 3. 写到 `seed/_tmp-articles.json`，上传：`node scripts/add-articles.js seed/_tmp-articles.json`（按标题去重）。
@@ -31,10 +32,65 @@
    - 每词至少 1 个自然例句 + 翻译。
 3. 写到 `seed/_tmp-words.json`，上传：`node scripts/add-words.js seed/_tmp-words.json`（按 word 去重，已存在的自动跳过）。
 
-### 3. 收尾
+### 3. 测评题目（从当批内容自动生成）
+从刚写的文章和新词里自动生成一批 BIPA 测评题，上传到 `vocab_exam_bank`。
+
+**生成规则：**
+
+1. **单词题（word）**：从本批新词里挑 6-10 个，生成 `Kata "X" berarti ...` 格式。
+   - 4 个选项（1 个正确中文释义 + 3 个干扰项，干扰项从同批其他词的释义里选或自编近义词）
+   - difficulty 跟词的 level 对应：level 1→easy, 2→medium, 3→hard
+   - explain 写中文解释
+
+2. **句子题（sentence）**：从本批文章里挑 4-6 个好句，挖空关键词做填空题。
+   - 格式：`原句把关键词替换为 ___`，4 个选项
+   - 被挖掉的词就是答案，干扰项选语法/语义近似但不对的词
+   - difficulty 跟文章 level 对应
+
+3. **阅读题（reading）**：从本批 2 篇文章里各取 3-4 句做一个阅读小段，出 2-3 道理解题。
+   - passage_title = 文章标题（印尼语），passage_text = 截取的 3-4 句原文拼接
+   - 每题有 passage_title 和 passage_text（同一篇共享），sort_order 从 1 开始
+   - difficulty 跟文章 level 对应
+
+**JSON 格式**（写到 `seed/_tmp-exam.json`）：
+```json
+[
+  {
+    "section": "word",
+    "difficulty": "medium",
+    "prompt": "Kata \"inflasi\" berarti ...",
+    "options": ["通货膨胀", "利率", "汇率", "预算"],
+    "answer": "通货膨胀",
+    "explain": "inflasi = 通货膨胀"
+  },
+  {
+    "section": "sentence",
+    "difficulty": "hard",
+    "prompt": "Pemerintah ___ kebijakan baru untuk menstabilkan harga.",
+    "options": ["mengeluarkan", "menghapus", "menyimpan", "menutup"],
+    "answer": "mengeluarkan",
+    "explain": "mengeluarkan kebijakan = 出台政策"
+  },
+  {
+    "section": "reading",
+    "difficulty": "medium",
+    "prompt": "Di mana festival itu diadakan?",
+    "options": ["Jakarta", "Bandung", "Yogyakarta", "Bali"],
+    "answer": "Jakarta",
+    "explain": "文中第一句提到 di Jakarta",
+    "passage_title": "Festival Budaya",
+    "passage_text": "Pemerintah kota mengadakan festival budaya di Jakarta. ...",
+    "sort_order": 1
+  }
+]
+```
+
+上传：`node scripts/add-exam-questions.js seed/_tmp-exam.json`（按 prompt 去重，已存在的跳过）。
+
+### 4. 收尾
 - 删除 `seed/_tmp-*.json` 临时文件。
 - 内容存在 Supabase，线上 H5 实时拉取，**无需重新部署**。
-- 简短报告：本批上传了 X 词、Y 篇文章（及跳过数）。
+- 简短报告：本批上传了 X 词、Y 篇文章、Z 道测评题（及各自跳过数）。
 
 ## 注意
 - JSON 字符串里别用中文弯引号 `""`，用直角括号 `「」`。
