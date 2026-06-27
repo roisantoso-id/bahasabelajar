@@ -1564,7 +1564,7 @@ const QWEN_FN = SUPABASE_URL + '/functions/v1/qwen'
 // 发音：固定 女声 + 慢速。所有音频用 scripts/gen-tts.js 预生成存进 Storage，
 // 前端直读 public URL（不依赖登录/实时 Azure，永不失败）；未命中才降级系统语音。
 const TTS_VOICE_NAME = 'id-ID-GadisNeural'   // Azure 印尼语女声
-const TTS_RATE = 0.75                          // 慢速
+const TTS_RATE = 0.6                           // 慢速（学习用，更慢更清晰）
 const STORAGE_TTS_BASE = SUPABASE_URL + '/storage/v1/object/public/tts-cache/'
 let qwenTransOK = true   // 翻译代理是否可用（失败则回退 MyMemory）
 
