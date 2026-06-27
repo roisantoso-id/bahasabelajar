@@ -390,6 +390,11 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .stepper button{width:32px;height:100%;display:flex;align-items:center;justify-content:center;color:#2d6253;background:#f0f3ed;font-size:17px}
 .stepper span{min-width:34px;text-align:center;font-size:13px;font-weight:800}
 .tts-toggle{flex:none;min-width:58px;height:34px;padding:0 14px;border-radius:12px;background:linear-gradient(180deg,#1f5d4d,#174d40);color:#fff;font-size:13px;font-weight:900;box-shadow:0 10px 18px rgba(23,45,39,.12)}
+.tts-seg{display:flex;gap:3px;background:rgba(0,0,0,.07);border-radius:10px;padding:3px;flex-shrink:0}
+.tts-seg button{padding:5px 11px;border-radius:8px;border:none;background:none;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;transition:all .15s}
+.tts-seg button.active{background:#fff;color:var(--green);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+[data-theme="dark"] .tts-seg{background:rgba(255,255,255,.08)}
+[data-theme="dark"] .tts-seg button.active{background:#263330;color:#5cc99a;box-shadow:none}
 .logout-btn{width:100%;height:52px;margin-top:26px;border-radius:16px;border:1.5px solid #e6b0a4;color:#c0392b;background:rgba(255,253,248,.92);font-size:15px;font-weight:900;box-shadow:0 10px 20px rgba(23,45,39,.06)}
 .app-version{margin-top:18px;text-align:center;color:#adb1ad;font-size:11px}
 /* ===== 文章笔记 / 划线 ===== */
@@ -1309,6 +1314,24 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
       <div class="setting-copy"><div>TTS 引擎</div><span id="ttsDesc">Azure 神经语音（在线·印尼语优化）</span></div>
       <button class="tts-toggle" id="ttsToggle" onclick="toggleTTS()">Azure</button>
     </div>
+    <div class="setting-row" style="border-top:1px solid rgba(0,0,0,.06)">
+      <div class="setting-icon" style="background:#f3eeff;color:#7c4dff">🎙</div>
+      <div class="setting-copy"><div>音色</div></div>
+      <div class="tts-seg" id="voiceSeg">
+        <button onclick="setTTSVoice('male')">♂ 男</button>
+        <button onclick="setTTSVoice('female')">♀ 女</button>
+      </div>
+    </div>
+    <div class="setting-row" style="border-top:1px solid rgba(0,0,0,.06)">
+      <div class="setting-icon" style="background:#fff3e0;color:#f57c00">⚡</div>
+      <div class="setting-copy"><div>语速</div></div>
+      <div class="tts-seg" id="rateSeg">
+        <button onclick="setTTSRate(0.75)">慢</button>
+        <button onclick="setTTSRate(1.0)">正常</button>
+        <button onclick="setTTSRate(1.25)">快</button>
+        <button onclick="setTTSRate(1.5)">极快</button>
+      </div>
+    </div>
   </div>
 
   <div class="group-title">外观</div>
@@ -1561,6 +1584,8 @@ const SPEAK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" st
 // ===== Qwen 代理（Supabase Edge Function）=====
 const QWEN_FN = SUPABASE_URL + '/functions/v1/qwen'
 let ttsEngine = localStorage.getItem('tts_engine') || 'azure'  // 'azure' | 'web'
+let ttsVoice  = localStorage.getItem('tts_voice')  || 'male'   // 'male' | 'female'
+let ttsRate   = parseFloat(localStorage.getItem('tts_rate') || '1.0')
 let qwenTransOK = true   // 翻译代理是否可用（失败则回退 MyMemory）
 
 async function qwenCall(action, text) {
@@ -2879,8 +2904,12 @@ async function playBuf(buf) {
 }
 
 // —— L2: Edge Function（返回 Storage URL）——
+// cache key 含 voice+rate，不同设置的音频分开缓存
+function _ttsCacheKey(text) { return `${ttsVoice}|${ttsRate}|${text}` }
+
 async function _remoteURL(text) {
-  let url = _ttsUrlMap.get(text)
+  const ck = _ttsCacheKey(text)
+  let url = _ttsUrlMap.get(ck)
   if (url) return url
   const { data: { session } } = await sb.auth.getSession()
   const token = session?.access_token
@@ -2888,12 +2917,12 @@ async function _remoteURL(text) {
   const r = await fetch(QWEN_FN, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-    body: JSON.stringify({ action: 'azure_tts', text }),
+    body: JSON.stringify({ action: 'azure_tts', text, voice: ttsVoice, rate: ttsRate }),
   })
   if (!r.ok) throw new Error('fn ' + r.status)
   const { url: u } = await r.json()
   if (!u) throw new Error('no url')
-  _ttsUrlMap.set(text, u)
+  _ttsUrlMap.set(ck, u)
   return u
 }
 
@@ -2902,15 +2931,16 @@ async function azureSpeak(text) {
   if (!text) return
   try {
     if (!sb) return webSpeak(text)
+    const ck = _ttsCacheKey(text)
     // L1 命中 → 直接播，0 网络
-    const local = await idbGet(text)
+    const local = await idbGet(ck)
     if (local) { await playBuf(local); return }
     // L2 命中或 Azure 生成 → 拿 URL → 下载字节 → 存 L1 → 播
     const url = await _remoteURL(text)
     const resp = await fetch(url)
     if (!resp.ok) throw new Error('fetch url')
     const buf = await resp.arrayBuffer()
-    idbPut(text, buf)        // 异步写 L1，不阻塞播放
+    idbPut(ck, buf)
     await playBuf(buf)
   } catch { webSpeak(text) }
 }
@@ -2923,15 +2953,34 @@ async function prefetchTTS(texts) {
     if (!session?.access_token) return
     for (const t of texts) {
       if (!t) continue
-      const hit = await idbGet(t)
+      const ck = _ttsCacheKey(t)
+      const hit = await idbGet(ck)
       if (hit) continue
       try {
         const url = await _remoteURL(t)
         const resp = await fetch(url)
-        if (resp.ok) idbPut(t, await resp.arrayBuffer())
+        if (resp.ok) idbPut(ck, await resp.arrayBuffer())
       } catch {}
     }
   } catch {}
+}
+
+function setTTSVoice(v) {
+  ttsVoice = v
+  localStorage.setItem('tts_voice', v)
+  syncTTSSeg()
+}
+function setTTSRate(r) {
+  ttsRate = r
+  localStorage.setItem('tts_rate', String(r))
+  syncTTSSeg()
+}
+function syncTTSSeg() {
+  document.querySelectorAll('#voiceSeg button').forEach(b => b.classList.toggle('active', b.textContent.includes(ttsVoice === 'male' ? '男' : '女')))
+  document.querySelectorAll('#rateSeg button').forEach(b => {
+    const map = {'慢':0.75,'正常':1.0,'快':1.25,'极快':1.5}
+    b.classList.toggle('active', map[b.textContent] === ttsRate)
+  })
 }
 
 function webSpeak(text, rate) {
@@ -2968,6 +3017,7 @@ function syncTTSToggle() {
     btn.textContent = '系统'
     desc.textContent = '系统印尼语语音（免费·离线）'
   }
+  syncTTSSeg()
 }
 if ('speechSynthesis' in window) {
   loadVoices()
