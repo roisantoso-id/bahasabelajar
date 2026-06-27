@@ -27,6 +27,9 @@
 })();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@4/lib/index.css"/>
+<script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vant@4/lib/vant.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800;900&display=swap');
 :root{--ink:#16352e;--muted:#7c857f;--green:#174d40;--green2:#2d745f;--mint:#dcebdc;--cream:#f4f1e9;--paper:#fffdf8;--coral:#f17455;--purple:#6b4c9a;--purplebg:#ebe0f5;--yellow:#f4c95d;--radius:18px;--ease:cubic-bezier(.22,.61,.36,1)}
@@ -872,6 +875,24 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 .spot-form-label{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:5px}
 .spot-form-input{width:100%;padding:10px 14px;border-radius:12px;border:1.5px solid rgba(20,41,37,.12);background:rgba(255,253,248,.9);font-size:14px;color:var(--ink);outline:none;box-sizing:border-box;margin-bottom:12px}
 .spot-form-input:focus{border-color:var(--green)}
+.spot-picker-row{display:flex;align-items:center;justify-content:space-between;width:100%;padding:10px 14px;border-radius:12px;border:1.5px solid rgba(20,41,37,.12);background:rgba(255,253,248,.9);font-size:14px;color:var(--ink);margin-bottom:12px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.spot-picker-row:active{background:rgba(23,77,64,.04)}
+.spot-picker-row .pick-arrow{flex:none;width:16px;height:16px;stroke:var(--muted);stroke-width:2;fill:none}
+[data-theme="dark"] .spot-picker-row{background:rgba(26,32,29,.9);border-color:rgba(200,220,210,.15)}
+.van-picker__confirm{color:var(--green) !important}
+#customActionSheet{display:none;position:fixed;inset:0;z-index:9995;flex-direction:column;justify-content:flex-end;align-items:center}
+.cas-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.5)}
+.cas-panel{position:relative;width:100%;max-width:520px;background:var(--bg,#fffdf8);border-radius:20px 20px 0 0;padding-bottom:calc(8px + env(safe-area-inset-bottom));z-index:1;animation:casUp .22s cubic-bezier(.22,.61,.36,1)}
+@keyframes casUp{from{transform:translateY(100%)}to{transform:none}}
+.cas-title{font-size:13px;font-weight:700;color:var(--muted);text-align:center;padding:14px 16px 10px;border-bottom:1px solid rgba(0,0,0,.06)}
+.cas-option{display:flex;align-items:center;justify-content:center;flex-direction:column;width:100%;padding:15px 16px;font-size:16px;font-weight:600;color:var(--ink);text-align:center;background:none;border:none;border-bottom:1px solid rgba(0,0,0,.04);cursor:pointer;gap:2px}
+.cas-option:active{background:rgba(0,0,0,.04)}
+.cas-sub{font-size:12px;font-weight:500;color:var(--muted)}
+.cas-cancel{display:block;width:100%;padding:15px 16px;font-size:16px;font-weight:600;color:var(--muted);text-align:center;background:none;border:none;border-top:6px solid rgba(0,0,0,.06);cursor:pointer;margin-top:2px}
+.cas-cancel:active{background:rgba(0,0,0,.04)}
+[data-theme="dark"] .cas-panel{background:#1a201d}
+[data-theme="dark"] .cas-option{border-color:rgba(255,255,255,.06)}
+[data-theme="dark"] .cas-cancel{border-color:rgba(255,255,255,.08)}
 .spot-form-select{-webkit-appearance:none;appearance:none}
 [data-theme="dark"] .spot-form-input{background:rgba(26,32,29,.9);border-color:rgba(200,220,210,.15);color:var(--ink)}
 .spot-submit-btn{width:100%;padding:14px;background:var(--green);color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:800;cursor:pointer;margin-top:6px}
@@ -1365,10 +1386,9 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
     <div class="spot-form-label">昵称</div>
     <input id="editNameInput" class="spot-form-input" type="text" placeholder="设置你的昵称" maxlength="20">
     <div class="spot-form-label">性别</div>
-    <div style="display:flex;gap:8px;margin-bottom:20px">
-      <button class="gender-btn" id="eGBtn-male"    onclick="selectEditGender('male')">♂ 男</button>
-      <button class="gender-btn" id="eGBtn-female"  onclick="selectEditGender('female')">♀ 女</button>
-      <button class="gender-btn" id="eGBtn-private" onclick="selectEditGender('private')">∙ 保密</button>
+    <div class="spot-picker-row" onclick="openGenderPicker()">
+      <span id="genderPickerVal" style="color:var(--muted)">请选择</span>
+      <svg class="pick-arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
     </div>
     <button class="spot-submit-btn" id="profileSaveBtn" onclick="saveProfileEdit()">保存</button>
     <button onclick="closeProfileEdit()" style="width:100%;padding:12px;margin-top:8px;background:none;border:none;color:var(--muted);font-size:14px;cursor:pointer">取消</button>
@@ -1384,18 +1404,15 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
     <div class="spot-form-label">印尼语名称 *</div>
     <input id="sfName" class="spot-form-input" type="text" placeholder="如：Tanah Lot">
     <div class="spot-form-label">所在大区 *</div>
-    <select id="sfRegion" class="spot-form-input spot-form-select">
-      <option value="">请选择</option>
-      <option>巴厘</option><option>爪哇</option><option>苏门答腊</option><option>苏拉威西</option><option>其他</option>
-    </select>
+    <div class="spot-picker-row" onclick="pickSpotRegion()">
+      <span id="sfRegionDisplay" style="color:var(--muted)">请选择大区</span>
+      <svg class="pick-arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </div>
     <div class="spot-form-label">类型</div>
-    <select id="sfCategory" class="spot-form-input spot-form-select">
-      <option value="nature">自然风光 🌿</option>
-      <option value="beach">海滩 🏖️</option>
-      <option value="culture">文化历史 🏛️</option>
-      <option value="city">城市 🏙️</option>
-      <option value="food">美食 🍜</option>
-    </select>
+    <div class="spot-picker-row" onclick="pickSpotCategory()">
+      <span id="sfCategoryDisplay">自然风光 🌿</span>
+      <svg class="pick-arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </div>
     <div class="spot-form-label">省份（可选）</div>
     <input id="sfProvince" class="spot-form-input" type="text" placeholder="如：巴厘省">
     <div class="spot-form-label">简介（可选）</div>
@@ -1450,6 +1467,82 @@ let profile = { daily_new_words: 10, daily_review_limit: 100, display_name: null
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]))
 }
+// Vant UI helpers — toast / confirm dialog
+function toast(msg, type = 'text') {
+  vant.showToast({ message: msg, type, duration: type === 'success' ? 1500 : 2500, wordBreak: 'break-word' })
+}
+async function confirmDialog(message, title = '确认') {
+  return vant.showConfirmDialog({ title, message, confirmButtonColor: 'var(--green)' })
+}
+
+// ===== 自制 ActionSheet（Vant 风格，vanilla JS，无 Vue 组件依赖） =====
+let _casResolve = null, _casReject = null
+function showActionSheet(title, actions) {
+  const sheet = document.getElementById('customActionSheet')
+  document.getElementById('casTitle').textContent = title
+  document.getElementById('casOptions').innerHTML = actions.map((a, i) =>
+    `<button class="cas-option" onclick="selectCAS(${i})">${a.name}${a.subname ? '<span class=\"cas-sub\">' + a.subname + '</span>' : ''}</button>`
+  ).join('')
+  sheet.style.display = 'flex'
+  return new Promise((res, rej) => { _casResolve = res; _casReject = rej })
+}
+function selectCAS(i) {
+  document.getElementById('customActionSheet').style.display = 'none'
+  const res = _casResolve
+  _casResolve = null; _casReject = null
+  res?.(i)
+}
+function closeCAS() {
+  document.getElementById('customActionSheet').style.display = 'none'
+  const rej = _casReject
+  _casResolve = null; _casReject = null
+  rej?.()
+}
+
+// Picker helpers
+let _sfRegion = '', _sfCategory = 'nature'
+const SF_CATS = [
+  { label: '自然风光 🌿', value: 'nature' },
+  { label: '海滩 🏖️',    value: 'beach'  },
+  { label: '文化历史 🏛️', value: 'culture'},
+  { label: '城市 🏙️',    value: 'city'   },
+  { label: '美食 🍜',    value: 'food'   },
+]
+const GENDER_ACTIONS = [
+  { name: '♂ 男', value: 'male' },
+  { name: '♀ 女', value: 'female' },
+  { name: '∙ 保密', value: 'private' },
+]
+
+const REGIONS = ['巴厘', '爪哇', '苏门答腊', '苏拉威西', '其他']
+
+async function pickSpotRegion() {
+  try {
+    const i = await showActionSheet('选择大区', REGIONS.map(r => ({ name: r })))
+    _sfRegion = REGIONS[i]
+    const el = document.getElementById('sfRegionDisplay')
+    el.textContent = _sfRegion; el.style.color = 'var(--ink)'
+  } catch {}
+}
+
+async function pickSpotCategory() {
+  try {
+    const i = await showActionSheet('景点类型', SF_CATS.map(c => ({ name: c.label })))
+    _sfCategory = SF_CATS[i].value
+    document.getElementById('sfCategoryDisplay').textContent = SF_CATS[i].label
+  } catch {}
+}
+
+async function openGenderPicker() {
+  try {
+    const i = await showActionSheet('性别', GENDER_ACTIONS)
+    const opt = GENDER_ACTIONS[i]
+    _editGender = opt.value
+    const el = document.getElementById('genderPickerVal')
+    el.textContent = opt.name; el.style.color = 'var(--ink)'
+  } catch {}
+}
+
 // 统一的发音 SVG 图标（替代 🔊 emoji）
 const SPEAK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>'
 
@@ -1740,13 +1833,13 @@ async function learnedIdList() {
 }
 // 主线：课本词（按课、词频）优先，不够再用基础词库（按词频）补；routine 拓展词不进主线
 async function startLearn() {
-  if (!sb) return alert('请先在设置中配置 Supabase')
+  if (!sb) return toast('请先在设置中配置 Supabase', 'fail')
   studyMode = 'learn'
   const t = todayStr()
   const {data: ci} = await sb.from('checkins').select('*').eq('date',t).maybeSingle()
   const done = ci ? ci.new_learned : 0
   const limit = Math.max(0, (profile.daily_new_words || 10) - done)
-  if (!limit) return alert('今日新词已学完！')
+  if (!limit) return toast('今日新词已学完！')
   const learnedIds = await learnedIdList()
   const excl = learnedIds.length ? `(${learnedIds.join(',')})` : null
   // 1) 课本词优先
@@ -1759,7 +1852,7 @@ async function startLearn() {
     if (excl) qc = qc.not('id','in',excl)
     pool = pool.concat((await qc).data || [])
   }
-  if (!pool.length) return alert('课本+基础词库已全部学完！去「拓展词」继续吧')
+  if (!pool.length) return toast('课本+基础词库已全部学完！去「拓展词」继续吧')
   studyQueue = pool.map(w => ({...w, wrongTimes:0}))
   studyIdx = 0; studyCompleted = 0
   showView('study')
@@ -1774,7 +1867,7 @@ async function startLessonWords(lessonNo) {
   let q = sb.from('words').select('*').eq('lesson', lessonNo).order('freq').limit(50)
   if (excl) q = q.not('id','in',excl)
   const pool = (await q).data || []
-  if (!pool.length) return alert('这一课的词都学过啦，去「巩固复习」吧')
+  if (!pool.length) return toast('这一课的词都学过啦，去「巩固复习」吧')
   studyQueue = pool.map(w => ({...w, wrongTimes:0}))
   studyIdx = 0; studyCompleted = 0
   showView('study')
@@ -1782,14 +1875,14 @@ async function startLessonWords(lessonNo) {
 }
 // 拓展词（routine 生成的高阶词）
 async function startExtra() {
-  if (!sb) return alert('请先登录')
+  if (!sb) return toast('请先登录', 'fail')
   studyMode = 'learn'
   const learnedIds = await learnedIdList()
   const excl = learnedIds.length ? `(${learnedIds.join(',')})` : null
   let q = sb.from('words').select('*').in('source',['routine','user']).order('freq').limit(profile.daily_new_words || 10)
   if (excl) q = q.not('id','in',excl)
   const pool = (await q).data || []
-  if (!pool.length) return alert('拓展词暂时学完了')
+  if (!pool.length) return toast('拓展词暂时学完了')
   studyQueue = pool.map(w => ({...w, wrongTimes:0}))
   studyIdx = 0; studyCompleted = 0
   showView('study')
@@ -1797,11 +1890,11 @@ async function startExtra() {
 }
 
 async function startReview() {
-  if (!sb) return alert('请先在设置中配置 Supabase')
+  if (!sb) return toast('请先在设置中配置 Supabase', 'fail')
   studyMode = 'review'
   const t = todayStr()
   const {data} = await sb.from('learning').select('word_id, stage, words(*)').eq('status','reviewing').lte('next_review_at',t).order('next_review_at').limit(profile.daily_review_limit || 100)
-  if (!data || !data.length) return alert('暂无待复习单词！')
+  if (!data || !data.length) return toast('暂无待复习单词！')
   studyQueue = data.map(r => ({...r.words, stage: r.stage, wrongTimes:0}))
   studyIdx = 0; studyCompleted = 0
   showView('study')
@@ -2040,9 +2133,9 @@ let grammarExpanded = -1
 
 async function startGrammar(lesson) {
   lesson = lesson || 2
-  if (!sb) return alert('请先在设置中配置 Supabase')
+  if (!sb) return toast('请先在设置中配置 Supabase', 'fail')
   const {data} = await sb.from('grammar').select('*').eq('lesson',lesson).order('id')
-  if (!data || !data.length) return alert('这一课暂无语法内容')
+  if (!data || !data.length) return toast('这一课暂无语法内容')
   document.getElementById('grammarTag').textContent = '第' + lesson + '课'
   showView('grammar')
   const html = data.map((r, i) => {
@@ -2352,7 +2445,7 @@ async function shareArticle() {
     const file = new File([blob], 'article.png', { type: 'image/png' })
     nativeBtn.style.display = (navigator.share && (!navigator.canShare || navigator.canShare({ files: [file] }))) ? '' : 'none'
   } catch (e) {
-    if (e.name !== 'AbortError') alert(e.message || '分享失败')
+    if (e.name !== 'AbortError') toast(e.message || '分享失败', 'fail')
   } finally {
     if (btn) { btn.disabled = false; btn.textContent = '分享' }
   }
@@ -2382,7 +2475,7 @@ async function artShareNative() {
     const file = new File([_artShareBlob], 'article.png', { type: 'image/png' })
     await navigator.share({ title: artCurrent.title_zh, text: `${artCurrent.title_zh}｜BahasaBelajar`, files: [file] })
   } catch (e) {
-    if (e.name !== 'AbortError') alert(e.message || '分享失败')
+    if (e.name !== 'AbortError') toast(e.message || '分享失败', 'fail')
   }
 }
 
@@ -2857,10 +2950,10 @@ function openProfileEdit() {
     ava.style.backgroundImage = ''
     ava.textContent = (name[0] || 'B').toUpperCase()
   }
-  // Sync gender buttons
-  ;['male','female','private'].forEach(g => {
-    document.getElementById('eGBtn-' + g)?.classList.toggle('active', _editGender === g)
-  })
+  // Sync gender display
+  const gMap = { male: '♂ 男', female: '♀ 女', private: '∙ 保密' }
+  const gEl = document.getElementById('genderPickerVal')
+  if (gEl) { gEl.textContent = (_editGender && gMap[_editGender]) || '请选择'; gEl.style.color = _editGender ? 'var(--ink)' : 'var(--muted)' }
   document.getElementById('profileEditModal').classList.add('open')
 }
 function closeProfileEdit() {
@@ -2887,6 +2980,7 @@ async function saveProfileEdit() {
   if (!currentUser || !sb) return
   const btn = document.getElementById('profileSaveBtn')
   if (btn) btn.disabled = true
+  vant.showLoadingToast({ message: '保存中…', forbidClick: true })
   try {
     const updates = {}
     // Upload new avatar if selected
@@ -2910,10 +3004,12 @@ async function saveProfileEdit() {
       await sb.from('profiles').update(updates).eq('user_id', currentUser.id)
       Object.assign(profile, updates)
     }
+    vant.closeToast()
     closeProfileEdit()
     loadProfile()
   } catch(e) {
-    alert('保存失败：' + (e.message || '请重试'))
+    vant.closeToast()
+    toast('保存失败：' + (e.message || '请重试'), 'fail')
   } finally {
     if (btn) btn.disabled = false
   }
@@ -2989,14 +3085,14 @@ function renderUsers() {
 async function toggleBan(userId, ban) {
   const u = adminUsers.find(x => x.user_id === userId)
   const who = u ? (u.email || u.display_name || userId.slice(0, 8)) : userId.slice(0, 8)
-  if (!confirm(ban ? `停用「${who}」？\n停用后对方下次打开/登录将被强制登出。` : `恢复「${who}」的登录权限？`)) return
+  try { await confirmDialog(ban ? '停用后对方下次打开/登录将被强制登出。' : `恢复「${who}」的登录权限？`, ban ? `停用「${who}」？` : '恢复权限') } catch { return }
   try {
     const { error } = await sb.from('profiles').update({ banned: ban }).eq('user_id', userId)
     if (error) throw error
     if (u) u.banned = ban
     renderUsers()
   } catch (e) {
-    alert('操作失败：' + (e.message || '权限不足或表未迁移'))
+    toast('操作失败：' + (e.message || '权限不足或表未迁移'), 'fail')
   }
 }
 
@@ -3050,7 +3146,7 @@ async function saveNote() {
     const { error } = await sb.from('article_notes').insert({ ...pendingNote, note })
     if (error) throw error
   } catch (e) {
-    alert('保存失败：可能还没在 Supabase 建好 article_notes 表（睡醒跑 SQL 后即可）')
+    toast('保存失败：article_notes 表未迁移', 'fail')
     return closeNoteEditor()
   }
   closeNoteEditor()
@@ -4041,7 +4137,7 @@ async function vtBuildSharePoster(result) {
 }
 
 async function startVocabTest() {
-  if (!sb) return alert('请先登录')
+  if (!sb) return toast('请先登录', 'fail')
   clearTimeout(vtAdvanceTimer)
   try {
     const bank = await vtLoadBank()
@@ -4075,7 +4171,7 @@ async function startVocabTest() {
     document.getElementById('vtState').textContent = '先完成单词选择，系统会据此决定后两部分的难度。'
     vtRender()
   } catch (e) {
-    alert(e.message || '题库加载失败')
+    toast(e.message || '题库加载失败', 'fail')
   }
 }
 
@@ -4099,10 +4195,10 @@ async function shareVocabExam() {
     a.click()
     a.remove()
     setTimeout(() => URL.revokeObjectURL(url), 4000)
-    alert('分享图已生成，已尝试下载到本地。')
+    toast('分享图已生成，已尝试下载到本地。', 'success')
   } catch (e) {
     const text = vtShareText(result)
-    navigator.clipboard.writeText(text).then(() => alert('图片生成失败，已复制分享文案')).catch(() => alert(text))
+    navigator.clipboard.writeText(text).then(() => toast('图片生成失败，已复制分享文案')).catch(() => toast(text, 'fail'))
   }
 }
 
@@ -4310,7 +4406,7 @@ function updateNotifUI() {
 
 async function requestNotifyPermission() {
   if (!('Notification' in window)) return
-  if (Notification.permission === 'denied') { alert('通知已被屏蔽，请到系统设置 → Safari/浏览器 → 通知 里手动开启'); return }
+  if (Notification.permission === 'denied') { toast('通知已被屏蔽，请到系统设置开启', 'fail'); return }
   const result = await Notification.requestPermission()
   updateNotifUI()
   if (result === 'granted') {
@@ -4425,8 +4521,9 @@ async function openSpot(id) {
     if (s.cover_url) {
       const img = document.createElement('img')
       img.src = s.cover_url
-      img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover'
+      img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;cursor:zoom-in'
       img.onerror = () => img.remove()
+      img.onclick = () => vant.showImagePreview({ images: [s.cover_url] })
       coverEl.insertBefore(img, coverEl.firstChild)
     }
     document.getElementById('spotDetailNameZh').textContent = s.name_zh
@@ -4525,11 +4622,11 @@ async function submitSpotComment() {
     input.placeholder = '分享你的感受…'
     replyToId = null
     loadSpotComments(currentSpotId)
-  } catch(e) { alert('发送失败，请重试') }
+  } catch(e) { toast('发送失败，请重试', 'fail') }
 }
 
 async function deleteSpotComment(id) {
-  if (!confirm('确定删除这条评论？')) return
+  try { await confirmDialog('确定删除这条评论？') } catch { return }
   try {
     await sb.from('spot_comments').delete().eq('id', id)
     loadSpotComments(currentSpotId)
@@ -4537,7 +4634,7 @@ async function deleteSpotComment(id) {
 }
 
 function showSpotSubmitModal() {
-  if (!currentUser) { alert('请先登录'); return }
+  if (!currentUser) { toast('请先登录', 'fail'); return }
   document.getElementById('spotSubmitModal').classList.add('open')
 }
 function closeSpotSubmitModal() {
@@ -4546,13 +4643,14 @@ function closeSpotSubmitModal() {
 async function submitNewSpot() {
   const nameZh = document.getElementById('sfNameZh').value.trim()
   const name   = document.getElementById('sfName').value.trim()
-  const region = document.getElementById('sfRegion').value
-  if (!nameZh || !name || !region) { alert('请填写景点名称和所在大区'); return }
-  const category = document.getElementById('sfCategory').value || 'nature'
+  const region = _sfRegion
+  if (!nameZh || !name || !region) { toast('请填写景点名称和所在大区', 'fail'); return }
+  const category = _sfCategory || 'nature'
   const province = document.getElementById('sfProvince').value.trim() || null
   const desc     = document.getElementById('sfDesc').value.trim() || null
   const cover    = document.getElementById('sfCover').value.trim() || null
   const maps     = document.getElementById('sfMaps').value.trim() || null
+  vant.showLoadingToast({ message: '提交中…', forbidClick: true })
   try {
     const { error } = await sb.from('spots').insert({
       name, name_zh: nameZh, region, category, province,
@@ -4562,17 +4660,26 @@ async function submitNewSpot() {
       is_preset: false,
     })
     if (error) throw error
+    vant.closeToast()
     closeSpotSubmitModal()
     ;['sfNameZh','sfName','sfProvince','sfDesc','sfCover','sfMaps'].forEach(id => { document.getElementById(id).value = '' })
-    document.getElementById('sfRegion').value = ''
-    document.getElementById('sfCategory').value = 'nature'
+    _sfRegion = ''; document.getElementById('sfRegionDisplay').textContent = '请选择大区'; document.getElementById('sfRegionDisplay').style.color = 'var(--muted)'
+    _sfCategory = 'nature'; document.getElementById('sfCategoryDisplay').textContent = '自然风光 🌿'
     spotRegion = '全部'
     showView('spots')
-    alert('感谢推荐！景点已添加 🎉')
-  } catch(e) { alert('提交失败：' + (e.message || '请重试')) }
+    toast('感谢推荐！景点已添加', 'success')
+  } catch(e) { vant.closeToast(); toast('提交失败：' + (e.message || '请重试'), 'fail') }
 }
 
 initSW()
 </script>
+<div id="customActionSheet">
+  <div class="cas-backdrop" onclick="closeCAS()"></div>
+  <div class="cas-panel">
+    <div class="cas-title" id="casTitle"></div>
+    <div id="casOptions"></div>
+    <button class="cas-cancel" onclick="closeCAS()">取消</button>
+  </div>
+</div>
 </body>
 </html>
