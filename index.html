@@ -781,7 +781,10 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 .lb-row.me{background:rgba(46,204,113,.1);border:1.5px solid rgba(46,204,113,.25)}
 .lb-rank{width:28px;text-align:center;font-weight:800;font-size:15px;color:var(--ink);flex-shrink:0}
 .lb-rank.gold{color:#e6a817;font-size:20px}.lb-rank.silver{color:#8a929a;font-size:20px}.lb-rank.bronze{color:#b5651d;font-size:20px}
-.lb-avatar{width:38px;height:38px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0}
+.lb-avatar{position:relative;width:38px;height:38px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0}
+.lb-avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%}
+.lb-gender-badge{position:absolute;bottom:-1px;right:-3px;font-size:10px;font-weight:800;line-height:15px;padding:0 2px;background:var(--bg,#fffdf8);border-radius:8px;border:1px solid rgba(0,0,0,.1);z-index:2;overflow:visible}
+[data-theme="dark"] .lb-gender-badge{background:#1a201d;border-color:rgba(255,255,255,.1)}
 .lb-info{flex:1;min-width:0}
 .lb-name{font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lb-sub{font-size:12px;color:var(--muted);margin-top:2px}
@@ -4285,6 +4288,16 @@ function switchLbTab(tab, btn) {
   renderLbTab()
 }
 
+function lbAvatarHTML(item, initial) {
+  const gIcon = item.gender === 'male' ? '♂' : item.gender === 'female' ? '♀' : ''
+  const gColor = item.gender === 'male' ? '#4a9eed' : '#e85d8a'
+  const badge = gIcon ? `<span class="lb-gender-badge" style="color:${gColor}">${gIcon}</span>` : ''
+  if (item.avatar_url) {
+    return `<div class="lb-avatar"><img src="${esc(item.avatar_url)}" onerror="this.remove()" alt="">${initial}${badge}</div>`
+  }
+  return `<div class="lb-avatar">${initial}${badge}</div>`
+}
+
 function renderLbTab() {
   const el = document.getElementById('lbContent')
   if (!lbData) { el.innerHTML = '<div class="lb-empty">暂无数据</div>'; return }
@@ -4326,7 +4339,7 @@ function renderLbTab() {
     if (rank > 10 && !isMe) return
     html += `<div class="lb-row${isMe ? ' me' : ''}">
       <div class="lb-rank ${rankClass}">${typeof medal === 'string' && medal.length > 1 ? medal : rank}</div>
-      <div class="lb-avatar">${initial}</div>
+      ${lbAvatarHTML(item, initial)}
       <div class="lb-info"><div class="lb-name">${name}</div>${sub ? `<div class="lb-sub">${sub}</div>` : ''}</div>
       <div class="lb-val">${val}<span class="lb-unit">${unit}</span></div>
     </div>`
@@ -4344,7 +4357,7 @@ function renderLbTab() {
       <div class="lb-me-title">我的排名</div>
       <div class="lb-row me">
         <div class="lb-rank">${myIdx + 1}</div>
-        <div class="lb-avatar">${initial}</div>
+        ${lbAvatarHTML(item, initial)}
         <div class="lb-info"><div class="lb-name">${item.name || '我'} (我)</div></div>
         <div class="lb-val">${val}<span class="lb-unit">${unit}</span></div>
       </div>
