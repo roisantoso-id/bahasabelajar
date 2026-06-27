@@ -87,6 +87,18 @@
 
 上传：`node scripts/add-exam-questions.js seed/_tmp-exam.json`（按 prompt 去重，已存在的跳过）。
 
+### 3.6 生成发音（新词/新句的 TTS）
+上传完新词和文章后，给本批新内容预生成发音并存入 Supabase Storage：
+
+```
+node scripts/gen-tts.js
+```
+
+- 女声（id-ID-GadisNeural）+ 0.8 慢速，存进 `tts-cache` bucket，按 `words/` 与 `sentences/` 分类。
+- 脚本自动从 `.env` 读 Azure / service_role key（不进 git），拉全库做去重，**只生成 Storage 里还没有的**（旧内容秒跳过），所以每批只新增本批音频，约几十条、1-2 分钟。
+- 前端用**算法寻址**（前端按 `SHA-256(voice|rate|text)` 现算 Storage 路径），所以**无需把音频地址写进 words/articles 表** —— 只要音频按约定 key 存在 Storage，前端必能找到。
+- 失败不阻断本批其它产出；下次 routine 会自动补齐漏掉的。
+
 ### 4. 收尾
 - 删除 `seed/_tmp-*.json` 临时文件。
 - 内容存在 Supabase，线上 H5 实时拉取，**无需重新部署**。

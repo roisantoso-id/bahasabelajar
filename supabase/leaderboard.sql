@@ -15,6 +15,7 @@ begin
       from (
         select r.user_id,
                coalesce(p.display_name, '同学') as name,
+               p.avatar_url, p.gender,
                r.estimate, r.level_code, r.level_name
         from (
           select distinct on (user_id)
@@ -51,6 +52,7 @@ begin
         )
         select b.user_id,
                coalesce(p.display_name, '同学') as name,
+               p.avatar_url, p.gender,
                b.streak
         from best b
         left join profiles p on p.user_id = b.user_id
@@ -63,10 +65,11 @@ begin
       from (
         select l.user_id,
                coalesce(p.display_name, '同学') as name,
+               p.avatar_url, p.gender,
                count(*) as words
         from learning l
         left join profiles p on p.user_id = l.user_id
-        group by l.user_id, p.display_name
+        group by l.user_id, p.display_name, p.avatar_url, p.gender
         order by count(*) desc
         limit 50
       ) t

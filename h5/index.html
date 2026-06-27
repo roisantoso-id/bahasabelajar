@@ -27,6 +27,9 @@
 })();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@4/lib/index.css"/>
+<script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vant@4/lib/vant.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800;900&display=swap');
 :root{--ink:#16352e;--muted:#7c857f;--green:#174d40;--green2:#2d745f;--mint:#dcebdc;--cream:#f4f1e9;--paper:#fffdf8;--coral:#f17455;--purple:#6b4c9a;--purplebg:#ebe0f5;--yellow:#f4c95d;--radius:18px;--ease:cubic-bezier(.22,.61,.36,1)}
@@ -247,6 +250,8 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .art-read-bar{height:3px;background:rgba(23,77,64,.1);border-radius:99px;margin:-4px 0 10px;overflow:hidden}
 .art-read-fill{height:100%;border-radius:inherit;background:linear-gradient(90deg,#1d5a4b,#2b7b62);transition:width .3s;width:0%}
 .sent{padding:10px 12px;margin-bottom:8px;border-radius:14px;background:rgba(255,253,248,.7);border:1px solid rgba(20,41,37,.04);box-shadow:0 4px 12px rgba(23,45,39,.04);cursor:pointer;transition:background .2s}
+.sent.reading-active{background:rgba(76,175,80,.08)!important;border-color:rgba(76,175,80,.25)!important}
+.sent.reading-active .sent-id-text{color:var(--green);font-weight:800}
 .sent:active{background:rgba(240,245,238,.9)}
 .sent-id{font-size:14px;font-weight:700;line-height:1.6;color:var(--ink);display:flex;align-items:flex-start;gap:6px}
 .sent-id-text{flex:1}
@@ -275,6 +280,8 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .speak-btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:50%;background:linear-gradient(180deg,#e8f1e8,#d7e7d7);color:var(--green);cursor:pointer;flex:none;box-shadow:0 10px 18px rgba(23,45,39,.06)}
 .speak-btn:active{transform:scale(.9)}
 .speak-btn svg{width:54%;height:54%;display:block}
+.speak-btn.tts-loading{animation:tts-spin .7s linear infinite;pointer-events:none;opacity:.6}
+@keyframes tts-spin{to{transform:rotate(360deg)}}
 .word-speak{width:44px;height:44px;margin:14px auto 0;display:flex}
 .sent-speak{width:24px;height:24px;margin-right:7px;vertical-align:middle}
 .wl-speak{width:32px;height:32px;margin-left:8px}
@@ -387,6 +394,11 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .stepper button{width:32px;height:100%;display:flex;align-items:center;justify-content:center;color:#2d6253;background:#f0f3ed;font-size:17px}
 .stepper span{min-width:34px;text-align:center;font-size:13px;font-weight:800}
 .tts-toggle{flex:none;min-width:58px;height:34px;padding:0 14px;border-radius:12px;background:linear-gradient(180deg,#1f5d4d,#174d40);color:#fff;font-size:13px;font-weight:900;box-shadow:0 10px 18px rgba(23,45,39,.12)}
+.tts-seg{display:flex;gap:3px;background:rgba(0,0,0,.07);border-radius:10px;padding:3px;flex-shrink:0}
+.tts-seg button{padding:5px 11px;border-radius:8px;border:none;background:none;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;transition:all .15s}
+.tts-seg button.active{background:#fff;color:var(--green);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+[data-theme="dark"] .tts-seg{background:rgba(255,255,255,.08)}
+[data-theme="dark"] .tts-seg button.active{background:#263330;color:#5cc99a;box-shadow:none}
 .logout-btn{width:100%;height:52px;margin-top:26px;border-radius:16px;border:1.5px solid #e6b0a4;color:#c0392b;background:rgba(255,253,248,.92);font-size:15px;font-weight:900;box-shadow:0 10px 20px rgba(23,45,39,.06)}
 .app-version{margin-top:18px;text-align:center;color:#adb1ad;font-size:11px}
 /* ===== 文章笔记 / 划线 ===== */
@@ -778,7 +790,10 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 .lb-row.me{background:rgba(46,204,113,.1);border:1.5px solid rgba(46,204,113,.25)}
 .lb-rank{width:28px;text-align:center;font-weight:800;font-size:15px;color:var(--ink);flex-shrink:0}
 .lb-rank.gold{color:#e6a817;font-size:20px}.lb-rank.silver{color:#8a929a;font-size:20px}.lb-rank.bronze{color:#b5651d;font-size:20px}
-.lb-avatar{width:38px;height:38px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0}
+.lb-avatar{position:relative;width:38px;height:38px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0}
+.lb-avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%}
+.lb-gender-badge{position:absolute;bottom:-1px;right:-3px;font-size:10px;font-weight:800;line-height:15px;padding:0 2px;background:var(--bg,#fffdf8);border-radius:8px;border:1px solid rgba(0,0,0,.1);z-index:2;overflow:visible}
+[data-theme="dark"] .lb-gender-badge{background:#1a201d;border-color:rgba(255,255,255,.1)}
 .lb-info{flex:1;min-width:0}
 .lb-name{font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lb-sub{font-size:12px;color:var(--muted);margin-top:2px}
@@ -872,6 +887,24 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 .spot-form-label{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:5px}
 .spot-form-input{width:100%;padding:10px 14px;border-radius:12px;border:1.5px solid rgba(20,41,37,.12);background:rgba(255,253,248,.9);font-size:14px;color:var(--ink);outline:none;box-sizing:border-box;margin-bottom:12px}
 .spot-form-input:focus{border-color:var(--green)}
+.spot-picker-row{display:flex;align-items:center;justify-content:space-between;width:100%;padding:10px 14px;border-radius:12px;border:1.5px solid rgba(20,41,37,.12);background:rgba(255,253,248,.9);font-size:14px;color:var(--ink);margin-bottom:12px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.spot-picker-row:active{background:rgba(23,77,64,.04)}
+.spot-picker-row .pick-arrow{flex:none;width:16px;height:16px;stroke:var(--muted);stroke-width:2;fill:none}
+[data-theme="dark"] .spot-picker-row{background:rgba(26,32,29,.9);border-color:rgba(200,220,210,.15)}
+.van-picker__confirm{color:var(--green) !important}
+#customActionSheet{display:none;position:fixed;inset:0;z-index:9995;flex-direction:column;justify-content:flex-end;align-items:center}
+.cas-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.5)}
+.cas-panel{position:relative;width:100%;max-width:520px;background:var(--bg,#fffdf8);border-radius:20px 20px 0 0;padding-bottom:calc(8px + env(safe-area-inset-bottom));z-index:1;animation:casUp .22s cubic-bezier(.22,.61,.36,1)}
+@keyframes casUp{from{transform:translateY(100%)}to{transform:none}}
+.cas-title{font-size:13px;font-weight:700;color:var(--muted);text-align:center;padding:14px 16px 10px;border-bottom:1px solid rgba(0,0,0,.06)}
+.cas-option{display:flex;align-items:center;justify-content:center;flex-direction:column;width:100%;padding:15px 16px;font-size:16px;font-weight:600;color:var(--ink);text-align:center;background:none;border:none;border-bottom:1px solid rgba(0,0,0,.04);cursor:pointer;gap:2px}
+.cas-option:active{background:rgba(0,0,0,.04)}
+.cas-sub{font-size:12px;font-weight:500;color:var(--muted)}
+.cas-cancel{display:block;width:100%;padding:15px 16px;font-size:16px;font-weight:600;color:var(--muted);text-align:center;background:none;border:none;border-top:6px solid rgba(0,0,0,.06);cursor:pointer;margin-top:2px}
+.cas-cancel:active{background:rgba(0,0,0,.04)}
+[data-theme="dark"] .cas-panel{background:#1a201d}
+[data-theme="dark"] .cas-option{border-color:rgba(255,255,255,.06)}
+[data-theme="dark"] .cas-cancel{border-color:rgba(255,255,255,.08)}
 .spot-form-select{-webkit-appearance:none;appearance:none}
 [data-theme="dark"] .spot-form-input{background:rgba(26,32,29,.9);border-color:rgba(200,220,210,.15);color:var(--ink)}
 .spot-submit-btn{width:100%;padding:14px;background:var(--green);color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:800;cursor:pointer;margin-top:6px}
@@ -1156,10 +1189,11 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 <!-- ===== ARTICLE DETAIL ===== -->
 <div id="v-article" class="view">
   <div class="grammar-head">
-    <button class="back" onclick="showView('articles', document.querySelectorAll('.tab')[3])">‹</button>
+    <button class="back" onclick="stopArticleRead();showView('articles', document.querySelectorAll('.tab')[3])">‹</button>
     <h1 id="artTitle" style="font-size:16px"></h1>
     <button id="transToggle" class="grammar-lesson-tag" onclick="toggleTrans()">隐藏中文</button>
-    <button class="grammar-lesson-tag" onclick="shareArticle()" style="margin-left:6px;background:var(--green);color:#fff">分享</button>
+    <button id="readAllBtn" class="grammar-lesson-tag" onclick="toggleArticleRead()" style="margin-left:4px">▶ 听读</button>
+    <button class="grammar-lesson-tag" onclick="shareArticle()" style="margin-left:4px;background:var(--green);color:#fff">分享</button>
   </div>
   <div class="art-read-bar"><div class="art-read-fill" id="artReadBar"></div></div>
   <div id="artMeta" class="grammar-subtitle" style="font-size:11px"></div>
@@ -1365,10 +1399,9 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
     <div class="spot-form-label">昵称</div>
     <input id="editNameInput" class="spot-form-input" type="text" placeholder="设置你的昵称" maxlength="20">
     <div class="spot-form-label">性别</div>
-    <div style="display:flex;gap:8px;margin-bottom:20px">
-      <button class="gender-btn" id="eGBtn-male"    onclick="selectEditGender('male')">♂ 男</button>
-      <button class="gender-btn" id="eGBtn-female"  onclick="selectEditGender('female')">♀ 女</button>
-      <button class="gender-btn" id="eGBtn-private" onclick="selectEditGender('private')">∙ 保密</button>
+    <div class="spot-picker-row" onclick="openGenderPicker()">
+      <span id="genderPickerVal" style="color:var(--muted)">请选择</span>
+      <svg class="pick-arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
     </div>
     <button class="spot-submit-btn" id="profileSaveBtn" onclick="saveProfileEdit()">保存</button>
     <button onclick="closeProfileEdit()" style="width:100%;padding:12px;margin-top:8px;background:none;border:none;color:var(--muted);font-size:14px;cursor:pointer">取消</button>
@@ -1384,18 +1417,15 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
     <div class="spot-form-label">印尼语名称 *</div>
     <input id="sfName" class="spot-form-input" type="text" placeholder="如：Tanah Lot">
     <div class="spot-form-label">所在大区 *</div>
-    <select id="sfRegion" class="spot-form-input spot-form-select">
-      <option value="">请选择</option>
-      <option>巴厘</option><option>爪哇</option><option>苏门答腊</option><option>苏拉威西</option><option>其他</option>
-    </select>
+    <div class="spot-picker-row" onclick="pickSpotRegion()">
+      <span id="sfRegionDisplay" style="color:var(--muted)">请选择大区</span>
+      <svg class="pick-arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </div>
     <div class="spot-form-label">类型</div>
-    <select id="sfCategory" class="spot-form-input spot-form-select">
-      <option value="nature">自然风光 🌿</option>
-      <option value="beach">海滩 🏖️</option>
-      <option value="culture">文化历史 🏛️</option>
-      <option value="city">城市 🏙️</option>
-      <option value="food">美食 🍜</option>
-    </select>
+    <div class="spot-picker-row" onclick="pickSpotCategory()">
+      <span id="sfCategoryDisplay">自然风光 🌿</span>
+      <svg class="pick-arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </div>
     <div class="spot-form-label">省份（可选）</div>
     <input id="sfProvince" class="spot-form-input" type="text" placeholder="如：巴厘省">
     <div class="spot-form-label">简介（可选）</div>
@@ -1450,12 +1480,92 @@ let profile = { daily_new_words: 10, daily_review_limit: 100, display_name: null
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]))
 }
+// Vant UI helpers — toast / confirm dialog
+function toast(msg, type = 'text') {
+  vant.showToast({ message: msg, type, duration: type === 'success' ? 1500 : 2500, wordBreak: 'break-word' })
+}
+async function confirmDialog(message, title = '确认') {
+  return vant.showConfirmDialog({ title, message, confirmButtonColor: 'var(--green)' })
+}
+
+// ===== 自制 ActionSheet（Vant 风格，vanilla JS，无 Vue 组件依赖） =====
+let _casResolve = null, _casReject = null
+function showActionSheet(title, actions) {
+  const sheet = document.getElementById('customActionSheet')
+  document.getElementById('casTitle').textContent = title
+  document.getElementById('casOptions').innerHTML = actions.map((a, i) =>
+    `<button class="cas-option" onclick="selectCAS(${i})">${a.name}${a.subname ? '<span class=\"cas-sub\">' + a.subname + '</span>' : ''}</button>`
+  ).join('')
+  sheet.style.display = 'flex'
+  return new Promise((res, rej) => { _casResolve = res; _casReject = rej })
+}
+function selectCAS(i) {
+  document.getElementById('customActionSheet').style.display = 'none'
+  const res = _casResolve
+  _casResolve = null; _casReject = null
+  res?.(i)
+}
+function closeCAS() {
+  document.getElementById('customActionSheet').style.display = 'none'
+  const rej = _casReject
+  _casResolve = null; _casReject = null
+  rej?.()
+}
+
+// Picker helpers
+let _sfRegion = '', _sfCategory = 'nature'
+const SF_CATS = [
+  { label: '自然风光 🌿', value: 'nature' },
+  { label: '海滩 🏖️',    value: 'beach'  },
+  { label: '文化历史 🏛️', value: 'culture'},
+  { label: '城市 🏙️',    value: 'city'   },
+  { label: '美食 🍜',    value: 'food'   },
+]
+const GENDER_ACTIONS = [
+  { name: '♂ 男', value: 'male' },
+  { name: '♀ 女', value: 'female' },
+  { name: '∙ 保密', value: 'private' },
+]
+
+const REGIONS = ['巴厘', '爪哇', '苏门答腊', '苏拉威西', '其他']
+
+async function pickSpotRegion() {
+  try {
+    const i = await showActionSheet('选择大区', REGIONS.map(r => ({ name: r })))
+    _sfRegion = REGIONS[i]
+    const el = document.getElementById('sfRegionDisplay')
+    el.textContent = _sfRegion; el.style.color = 'var(--ink)'
+  } catch {}
+}
+
+async function pickSpotCategory() {
+  try {
+    const i = await showActionSheet('景点类型', SF_CATS.map(c => ({ name: c.label })))
+    _sfCategory = SF_CATS[i].value
+    document.getElementById('sfCategoryDisplay').textContent = SF_CATS[i].label
+  } catch {}
+}
+
+async function openGenderPicker() {
+  try {
+    const i = await showActionSheet('性别', GENDER_ACTIONS)
+    const opt = GENDER_ACTIONS[i]
+    _editGender = opt.value
+    const el = document.getElementById('genderPickerVal')
+    el.textContent = opt.name; el.style.color = 'var(--ink)'
+  } catch {}
+}
+
 // 统一的发音 SVG 图标（替代 🔊 emoji）
 const SPEAK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>'
 
 // ===== Qwen 代理（Supabase Edge Function）=====
 const QWEN_FN = SUPABASE_URL + '/functions/v1/qwen'
-let ttsEngine = localStorage.getItem('tts_engine') || 'qwen'   // 'qwen' | 'web'
+// 发音：固定 女声 + 慢速。所有音频用 scripts/gen-tts.js 预生成存进 Storage，
+// 前端直读 public URL（不依赖登录/实时 Azure，永不失败）；未命中才降级系统语音。
+const TTS_VOICE_NAME = 'id-ID-GadisNeural'   // Azure 印尼语女声
+const TTS_RATE = 0.8                           // 慢速（数字倍率 0.8x，学习用更清晰）
+const STORAGE_TTS_BASE = SUPABASE_URL + '/storage/v1/object/public/tts-cache/'
 let qwenTransOK = true   // 翻译代理是否可用（失败则回退 MyMemory）
 
 async function qwenCall(action, text) {
@@ -1740,13 +1850,13 @@ async function learnedIdList() {
 }
 // 主线：课本词（按课、词频）优先，不够再用基础词库（按词频）补；routine 拓展词不进主线
 async function startLearn() {
-  if (!sb) return alert('请先在设置中配置 Supabase')
+  if (!sb) return toast('请先在设置中配置 Supabase', 'fail')
   studyMode = 'learn'
   const t = todayStr()
   const {data: ci} = await sb.from('checkins').select('*').eq('date',t).maybeSingle()
   const done = ci ? ci.new_learned : 0
   const limit = Math.max(0, (profile.daily_new_words || 10) - done)
-  if (!limit) return alert('今日新词已学完！')
+  if (!limit) return toast('今日新词已学完！')
   const learnedIds = await learnedIdList()
   const excl = learnedIds.length ? `(${learnedIds.join(',')})` : null
   // 1) 课本词优先
@@ -1759,11 +1869,12 @@ async function startLearn() {
     if (excl) qc = qc.not('id','in',excl)
     pool = pool.concat((await qc).data || [])
   }
-  if (!pool.length) return alert('课本+基础词库已全部学完！去「拓展词」继续吧')
+  if (!pool.length) return toast('课本+基础词库已全部学完！去「拓展词」继续吧')
   studyQueue = pool.map(w => ({...w, wrongTimes:0}))
   studyIdx = 0; studyCompleted = 0
   showView('study')
   renderStudy()
+  setTimeout(() => prefetchTTS(studyQueue.slice(0, 8).map(w => w.word), 'words'), 600)
 }
 // 学某一课的词（从「课程」页进入）
 async function startLessonWords(lessonNo) {
@@ -1774,7 +1885,7 @@ async function startLessonWords(lessonNo) {
   let q = sb.from('words').select('*').eq('lesson', lessonNo).order('freq').limit(50)
   if (excl) q = q.not('id','in',excl)
   const pool = (await q).data || []
-  if (!pool.length) return alert('这一课的词都学过啦，去「巩固复习」吧')
+  if (!pool.length) return toast('这一课的词都学过啦，去「巩固复习」吧')
   studyQueue = pool.map(w => ({...w, wrongTimes:0}))
   studyIdx = 0; studyCompleted = 0
   showView('study')
@@ -1782,14 +1893,14 @@ async function startLessonWords(lessonNo) {
 }
 // 拓展词（routine 生成的高阶词）
 async function startExtra() {
-  if (!sb) return alert('请先登录')
+  if (!sb) return toast('请先登录', 'fail')
   studyMode = 'learn'
   const learnedIds = await learnedIdList()
   const excl = learnedIds.length ? `(${learnedIds.join(',')})` : null
   let q = sb.from('words').select('*').in('source',['routine','user']).order('freq').limit(profile.daily_new_words || 10)
   if (excl) q = q.not('id','in',excl)
   const pool = (await q).data || []
-  if (!pool.length) return alert('拓展词暂时学完了')
+  if (!pool.length) return toast('拓展词暂时学完了')
   studyQueue = pool.map(w => ({...w, wrongTimes:0}))
   studyIdx = 0; studyCompleted = 0
   showView('study')
@@ -1797,11 +1908,11 @@ async function startExtra() {
 }
 
 async function startReview() {
-  if (!sb) return alert('请先在设置中配置 Supabase')
+  if (!sb) return toast('请先在设置中配置 Supabase', 'fail')
   studyMode = 'review'
   const t = todayStr()
   const {data} = await sb.from('learning').select('word_id, stage, words(*)').eq('status','reviewing').lte('next_review_at',t).order('next_review_at').limit(profile.daily_review_limit || 100)
-  if (!data || !data.length) return alert('暂无待复习单词！')
+  if (!data || !data.length) return toast('暂无待复习单词！')
   studyQueue = data.map(r => ({...r.words, stage: r.stage, wrongTimes:0}))
   studyIdx = 0; studyCompleted = 0
   showView('study')
@@ -1826,7 +1937,7 @@ function renderStudy() {
               <div class="swi-word">${esc(w.word)}</div>
               <div class="swi-meaning">${esc(w.meaning)}</div>
             </div>
-            <button class="speak-btn" onclick="speak('${esc(w.word).replace(/'/g,'&#39;')}')" style="flex-shrink:0">${SPEAK_SVG}</button>
+            <button class="speak-btn" onclick="speak('${esc(w.word).replace(/'/g,'&#39;')}',null,this)" style="flex-shrink:0">${SPEAK_SVG}</button>
           </div>`).join('')}
       </div>` : ''
     document.getElementById('studyCard').innerHTML = `
@@ -1848,7 +1959,7 @@ function renderStudy() {
   document.getElementById('studyCard').innerHTML = `
     <span class="word-level">${levelName}${w.topic ? ` · ${esc(w.topic)}` : ''}</span>
     <div class="word-main">${esc(w.word)}</div>
-    <button class="speak-btn word-speak" onclick="speakStudyWord()">${SPEAK_SVG}</button>
+    <button class="speak-btn word-speak" onclick="speakStudyWord(this)">${SPEAK_SVG}</button>
     <div class="word-pos">${esc(w.pos)}</div>
     <div id="answerArea"><div class="think-hint">先在脑海里回想它的意思</div></div>`
   document.getElementById('studyActions').innerHTML = `
@@ -1901,7 +2012,7 @@ function produceReveal() {
 function renderListen(w, levelName) {
   document.getElementById('studyCard').innerHTML = `
     <span class="word-level">${levelName}</span>
-    <button class="listen-play" onclick="speakStudyWord()">${SPEAK_SVG}</button>
+    <button class="listen-play" onclick="speakStudyWord(this)">${SPEAK_SVG}</button>
     <div class="listen-hint">点喇叭再听一次 · 回想它的意思和拼写</div>
     <div id="answerArea"></div>`
   document.getElementById('studyActions').innerHTML = `
@@ -2040,9 +2151,9 @@ let grammarExpanded = -1
 
 async function startGrammar(lesson) {
   lesson = lesson || 2
-  if (!sb) return alert('请先在设置中配置 Supabase')
+  if (!sb) return toast('请先在设置中配置 Supabase', 'fail')
   const {data} = await sb.from('grammar').select('*').eq('lesson',lesson).order('id')
-  if (!data || !data.length) return alert('这一课暂无语法内容')
+  if (!data || !data.length) return toast('这一课暂无语法内容')
   document.getElementById('grammarTag').textContent = '第' + lesson + '课'
   showView('grammar')
   const html = data.map((r, i) => {
@@ -2173,7 +2284,7 @@ function renderWords() {
           <div class="wl-meaning">${esc(w.meaning)}</div>
         </div>
         <span class="wl-status ${stCls}">${statusLabel}</span>
-        <button class="speak-btn wl-speak" onclick="event.stopPropagation(); speakListWord(${i})">${SPEAK_SVG}</button>
+        <button class="speak-btn wl-speak" onclick="event.stopPropagation();speakListWord(${i},this)">${SPEAK_SVG}</button>
         <button class="wl-star${isStarred?' starred':''}" onclick="event.stopPropagation();toggleStar(${w.id},this)" title="${isStarred?'取消收藏':'收藏'}">★</button>
         ${chevron}
       </div>
@@ -2298,7 +2409,7 @@ function openArticle(id) {
   document.getElementById('artReadBar').style.width = '0%'
   document.getElementById('artBody').innerHTML = a.sentences.map((s, i) => `
     <div class="sent${s.note?' has-note':''}" data-si="${i}" onclick="toggleSentNote(this)">
-      <div class="sent-id"><button class="speak-btn sent-speak" onclick="event.stopPropagation();speakArticleSentence(${i})"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg></button><span class="sent-num">${i+1}</span><span class="sent-id-text">${esc(s.id)}</span>${s.note?'<span class="sent-note-hint">💡</span>':''}</div>
+      <div class="sent-id"><button class="speak-btn sent-speak" onclick="event.stopPropagation();speakArticleSentence(${i},this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg></button><span class="sent-num">${i+1}</span><span class="sent-id-text">${esc(s.id)}</span>${s.note?'<span class="sent-note-hint">💡</span>':''}</div>
       <div class="sent-zh">${esc(s.zh)}</div>
       ${s.note ? `<div class="sent-note">${esc(s.note)}</div>` : ''}
     </div>`).join('')
@@ -2309,6 +2420,8 @@ function openArticle(id) {
   window.scrollTo(0, 0)
   loadArticleNotes(a.id)
   initArticleScroll(a.sentences.length)
+  // 后台预缓存全部句子音频
+  setTimeout(() => prefetchTTS(a.sentences.map(s => s.id), 'sentences'), 800)
 }
 function toggleSentNote(el) { el.classList.toggle('note-open') }
 function initArticleScroll(total) {
@@ -2352,7 +2465,7 @@ async function shareArticle() {
     const file = new File([blob], 'article.png', { type: 'image/png' })
     nativeBtn.style.display = (navigator.share && (!navigator.canShare || navigator.canShare({ files: [file] }))) ? '' : 'none'
   } catch (e) {
-    if (e.name !== 'AbortError') alert(e.message || '分享失败')
+    if (e.name !== 'AbortError') toast(e.message || '分享失败', 'fail')
   } finally {
     if (btn) { btn.disabled = false; btn.textContent = '分享' }
   }
@@ -2382,7 +2495,7 @@ async function artShareNative() {
     const file = new File([_artShareBlob], 'article.png', { type: 'image/png' })
     await navigator.share({ title: artCurrent.title_zh, text: `${artCurrent.title_zh}｜BahasaBelajar`, files: [file] })
   } catch (e) {
-    if (e.name !== 'AbortError') alert(e.message || '分享失败')
+    if (e.name !== 'AbortError') toast(e.message || '分享失败', 'fail')
   }
 }
 
@@ -2645,7 +2758,7 @@ async function lookupWord(clean, rect) {
     transCurrent.hit = hit
     const ex = (hit.examples || [])[0]
     renderTransBody(`
-      <div class="tp-word">${esc(hit.word)}<button class="speak-btn tp-speak" onclick="speakSel()">${SPEAK_SVG}</button><span class="tp-pos">${esc(hit.pos)}</span><span class="tp-src">词库</span></div>
+      <div class="tp-word">${esc(hit.word)}<button class="speak-btn tp-speak" onclick="speakSel(this)">${SPEAK_SVG}</button><span class="tp-pos">${esc(hit.pos)}</span><span class="tp-src">词库</span></div>
       <div class="tp-mean">${esc(hit.meaning)}</div>
       ${ex ? `<div class="tp-ex">${esc(ex.id)}<br>${esc(ex.zh)}</div>` : ''}
       <button class="tp-btn" id="tpAction" onclick="addSelToLearning()">＋ 加入背诵</button>${noteBtn}`, rect)
@@ -2677,7 +2790,7 @@ async function lookupWord(clean, rect) {
     if (transCurrent?.text !== clean) return
     transCurrent.mt = mt
     renderTransBody(`
-      <div class="tp-word">${esc(clean)}<button class="speak-btn tp-speak" onclick="speakSel()">${SPEAK_SVG}</button><span class="tp-src">${srcLabel}</span></div>
+      <div class="tp-word">${esc(clean)}<button class="speak-btn tp-speak" onclick="speakSel(this)">${SPEAK_SVG}</button><span class="tp-src">${srcLabel}</span></div>
       <div class="tp-mean">${esc(mt)}</div>
       <button class="tp-btn" id="tpAction" onclick="collectSelWord()">＋ 收藏到词库</button>${noteBtn}`, rect)
   }
@@ -2716,43 +2829,191 @@ document.addEventListener('touchend', () => setTimeout(onTextSelect, 10))
 document.addEventListener('mousedown', (e) => { if (!e.target.closest('#transPop')) hideTransPop() })
 document.addEventListener('scroll', hideTransPop, true)
 
-// ===== 发音（Web Speech API，印尼语 id-ID）=====
+// ===== 发音 · 双缓存（本地 IndexedDB + 远程 Supabase Storage）=====
+// ttsEngine: 'azure'（默认）| 'web'（系统 id-ID 离线备用）
+// L1 本地 IndexedDB bb_tts_cache：ArrayBuffer，0 网络直接播
+// L2 远程 Storage tts-cache：Edge Function 管理，跨设备共享
+// session Map _ttsUrlMap 避免同次会话重复请求 Edge Function
 let idVoice = null
+const _ttsUrlMap = new Map()
+let _ttsDb = null
+let _ttsDebug = localStorage.getItem('tts_debug') === '1'  // 诊断：localStorage.tts_debug='1' 开启失败 toast
+
 function loadVoices() {
   try {
     const vs = window.speechSynthesis.getVoices()
     idVoice = vs.find(v => v.lang === 'id-ID') || vs.find(v => (v.lang || '').toLowerCase().startsWith('id')) || null
   } catch (e) {}
 }
-function webSpeak(text, rate) {
-  if (!text || !('speechSynthesis' in window)) return
+
+// —— L1: IndexedDB ——
+function _openTTSDb() {
+  if (_ttsDb) return Promise.resolve(_ttsDb)
+  return new Promise((res, rej) => {
+    const r = indexedDB.open('bb_tts', 1)
+    r.onupgradeneeded = e => e.target.result.createObjectStore('a')
+    r.onsuccess = e => { _ttsDb = e.target.result; res(_ttsDb) }
+    r.onerror = () => rej(r.error)
+  })
+}
+async function idbGet(text) {
   try {
-    speechSynthesis.cancel()
-    const u = new SpeechSynthesisUtterance(text)
-    u.lang = 'id-ID'
-    if (idVoice) u.voice = idVoice
-    u.rate = rate || 0.95
-    speechSynthesis.speak(u)
-  } catch (e) {}
+    const db = await _openTTSDb()
+    return new Promise(res => {
+      const req = db.transaction('a','readonly').objectStore('a').get(text)
+      req.onsuccess = () => res(req.result || null)
+      req.onerror = () => res(null)
+    })
+  } catch { return null }
 }
-// 发音用系统自带的真印尼语语音（id-ID）。Qwen TTS 不支持印尼语，已停用。
-function speak(text, rate) {
-  webSpeak(text, rate)
+async function idbPut(text, buf) {
+  try {
+    const db = await _openTTSDb()
+    return new Promise(res => {
+      const tx = db.transaction('a','readwrite')
+      tx.objectStore('a').put(buf, text)
+      tx.oncomplete = res; tx.onerror = res
+    })
+  } catch {}
 }
-function speakStudyWord() { const w = studyQueue[studyIdx]; if (w) speak(w.word) }
-function speakArticleSentence(i) { if (artCurrent && artCurrent.sentences[i]) speak(artCurrent.sentences[i].id) }
-function speakListWord(i) { const w = wordItems[i]; if (w) speak(w.word) }
-function speakSel() { speak((transCurrent && (transCurrent.hit ? transCurrent.hit.word : transCurrent.text)) || '') }
-function toggleTTS() {
-  ttsEngine = ttsEngine === 'qwen' ? 'web' : 'qwen'
-  localStorage.setItem('tts_engine', ttsEngine)
-  syncTTSToggle()
+// —— 音频停止 / AudioContext（共享，iOS 需在用户手势内 unlock）——
+let _audioCtx = null, _audioSrc = null, _curAudio = null
+function _getAudioCtx() {
+  if (!_audioCtx) _audioCtx = new (window.AudioContext || window.webkitAudioContext)()
+  if (_audioCtx.state === 'suspended') _audioCtx.resume().catch(() => {})
+  return _audioCtx
 }
-function syncTTSToggle() {
-  const btn = document.getElementById('ttsToggle'), desc = document.getElementById('ttsDesc')
-  if (!btn) return
-  btn.textContent = ttsEngine === 'qwen' ? 'Qwen' : '系统'
-  desc.textContent = ttsEngine === 'qwen' ? 'Qwen 语音（在线，需边缘函数）' : '系统印尼语语音（免费·离线）'
+function _stopCurrentAudio() {
+  if (_audioSrc) { try { _audioSrc.stop() } catch {}; _audioSrc = null }
+  if (_curAudio)  { try { _curAudio.pause(); _curAudio.src = '' } catch {}; _curAudio = null }
+}
+
+// IndexedDB 缓存命中 → AudioContext 播放（iOS await 后仍可播）
+// 失败时抛错，让上层降级到系统语音（不可静默吞，否则无声又无降级）
+function playBuf(buf) {
+  _stopCurrentAudio()
+  return new Promise(async (res, rej) => {
+    try {
+      const ctx = _getAudioCtx()
+      const decoded = await ctx.decodeAudioData(buf.slice(0))
+      const src = ctx.createBufferSource()
+      _audioSrc = src
+      src.buffer = decoded
+      src.connect(ctx.destination)
+      src.onended = () => { if (_audioSrc === src) _audioSrc = null; res() }
+      src.start(0)
+    } catch (e) { rej(e) }
+  })
+}
+
+// —— Storage 直读：路径 = `<cat>/<SHA-256(`voice|rate|text`)>.mp3`（cat: words|sentences）——
+// 分文件夹便于管理；hash 与 gen-tts.js 一致。
+async function _ttsStorageURL(text, cat = 'words') {
+  const mk = cat + '|' + text
+  let key = _ttsUrlMap.get(mk)
+  if (!key) {
+    const input = `${TTS_VOICE_NAME}|${TTS_RATE}|${text}`
+    const hashBuf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(input))
+    key = cat + '/' + [...new Uint8Array(hashBuf)].map(b => b.toString(16).padStart(2, '0')).join('') + '.mp3'
+    _ttsUrlMap.set(mk, key)
+  }
+  return STORAGE_TTS_BASE + key
+}
+
+// —— 按钮 loading 状态（每个按钮独立，不互相干扰）——
+function _ttsLoadEl(el, on) { if (el) el.classList.toggle('tts-loading', on) }
+
+// IndexedDB 缓存 key 带版本+类别：bump 'v3' 即可作废旧本地缓存（改了语速/音色/结构）
+function _idbKey(text, cat = 'words') { return 'v3|' + cat + '|' + text }
+
+// —— 发音主入口（返回 Promise，供「听读全文」await）——
+// L1 IndexedDB → L2 Storage public（预生成）→ 兜底系统语音
+async function azureSpeak(text, el, cat = 'words') {
+  if (!text) return
+  _stopCurrentAudio()
+  _ttsLoadEl(el, true)
+  try {
+    // L1：本地 IndexedDB 命中 → 0 网络
+    const local = await idbGet(_idbKey(text, cat))
+    if (local) { _ttsLoadEl(el, false); await playBuf(local); return }
+    // L2：直读 Supabase Storage 预生成的 mp3（public，不需登录）
+    const url = await _ttsStorageURL(text, cat)
+    const resp = await fetch(url)
+    _ttsLoadEl(el, false)
+    if (!resp.ok) throw new Error('storage ' + resp.status)
+    const buf = await resp.arrayBuffer()
+    idbPut(_idbKey(text, cat), buf.slice(0))   // 存 L1，下次本地命中
+    await playBuf(buf)
+  } catch (e) {
+    _ttsLoadEl(el, false)
+    if (_ttsDebug) { try { toast('TTS: ' + (e?.message || e), 'fail') } catch {} }
+    webSpeak(text)   // 未预生成的词 → 系统语音兜底
+  }
+}
+
+// —— 后台预缓存（进文章/学习时预热 IndexedDB，静默失败）——
+async function prefetchTTS(texts, cat = 'words') {
+  try {
+    for (const t of texts) {
+      if (!t) continue
+      if (await idbGet(_idbKey(t, cat))) continue
+      try {
+        const resp = await fetch(await _ttsStorageURL(t, cat))
+        if (resp.ok) idbPut(_idbKey(t, cat), await resp.arrayBuffer())
+      } catch {}
+    }
+  } catch {}
+}
+
+function webSpeak(text, rate) {
+  return new Promise(res => {
+    if (!text || !('speechSynthesis' in window)) { res(); return }
+    try {
+      speechSynthesis.cancel()
+      const u = new SpeechSynthesisUtterance(text)
+      u.lang = 'id-ID'
+      if (idVoice) u.voice = idVoice
+      u.rate = rate || TTS_RATE
+      u.onend = res; u.onerror = res
+      speechSynthesis.speak(u)
+    } catch { res() }
+  })
+}
+function speak(text, rate, el, cat = 'words') {
+  try { _getAudioCtx() } catch {}  // iOS: 在用户手势内同步 unlock AudioContext
+  return azureSpeak(text, el, cat) || Promise.resolve()
+}
+function speakStudyWord(el) { const w = studyQueue[studyIdx]; if (w) speak(w.word, null, el, 'words') }
+function speakArticleSentence(i, el) { if (artCurrent && artCurrent.sentences[i]) speak(artCurrent.sentences[i].id, null, el, 'sentences') }
+function speakListWord(i, el) { const w = wordItems[i]; if (w) speak(w.word, null, el, 'words') }
+function speakSel(el) { speak((transCurrent && (transCurrent.hit ? transCurrent.hit.word : transCurrent.text)) || '', null, el, 'words') }
+
+// ===== 听读全文 =====
+let _artReadActive = false
+async function toggleArticleRead() {
+  if (_artReadActive) { stopArticleRead(); return }
+  if (!artCurrent?.sentences?.length) return
+  _artReadActive = true
+  const btn = document.getElementById('readAllBtn')
+  if (btn) { btn.textContent = '⏹ 停止'; btn.style.cssText += ';background:var(--green);color:#fff' }
+  const sents = document.querySelectorAll('#artBody .sent')
+  for (let i = 0; i < artCurrent.sentences.length; i++) {
+    if (!_artReadActive) break
+    const s = artCurrent.sentences[i]
+    if (!s?.id) continue
+    sents[i]?.classList.add('reading-active')
+    sents[i]?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    try { await speak(s.id, null, null, 'sentences') } catch {}
+    sents[i]?.classList.remove('reading-active')
+  }
+  stopArticleRead()
+}
+function stopArticleRead() {
+  _artReadActive = false
+  _stopCurrentAudio()
+  document.querySelectorAll('#artBody .sent').forEach(el => el.classList.remove('reading-active'))
+  const btn = document.getElementById('readAllBtn')
+  if (btn) { btn.textContent = '▶ 听读'; btn.style.background = ''; btn.style.color = '' }
 }
 if ('speechSynthesis' in window) {
   loadVoices()
@@ -2830,7 +3091,6 @@ function loadProfile() {
     ava.textContent = (name[0] || 'B').toUpperCase()
   }
 
-  syncTTSToggle()
   syncDarkToggle()
   loadProfileStats()
   renderJournal()
@@ -2857,10 +3117,10 @@ function openProfileEdit() {
     ava.style.backgroundImage = ''
     ava.textContent = (name[0] || 'B').toUpperCase()
   }
-  // Sync gender buttons
-  ;['male','female','private'].forEach(g => {
-    document.getElementById('eGBtn-' + g)?.classList.toggle('active', _editGender === g)
-  })
+  // Sync gender display
+  const gMap = { male: '♂ 男', female: '♀ 女', private: '∙ 保密' }
+  const gEl = document.getElementById('genderPickerVal')
+  if (gEl) { gEl.textContent = (_editGender && gMap[_editGender]) || '请选择'; gEl.style.color = _editGender ? 'var(--ink)' : 'var(--muted)' }
   document.getElementById('profileEditModal').classList.add('open')
 }
 function closeProfileEdit() {
@@ -2887,6 +3147,7 @@ async function saveProfileEdit() {
   if (!currentUser || !sb) return
   const btn = document.getElementById('profileSaveBtn')
   if (btn) btn.disabled = true
+  vant.showLoadingToast({ message: '保存中…', forbidClick: true })
   try {
     const updates = {}
     // Upload new avatar if selected
@@ -2910,10 +3171,12 @@ async function saveProfileEdit() {
       await sb.from('profiles').update(updates).eq('user_id', currentUser.id)
       Object.assign(profile, updates)
     }
+    vant.closeToast()
     closeProfileEdit()
     loadProfile()
   } catch(e) {
-    alert('保存失败：' + (e.message || '请重试'))
+    vant.closeToast()
+    toast('保存失败：' + (e.message || '请重试'), 'fail')
   } finally {
     if (btn) btn.disabled = false
   }
@@ -2989,14 +3252,14 @@ function renderUsers() {
 async function toggleBan(userId, ban) {
   const u = adminUsers.find(x => x.user_id === userId)
   const who = u ? (u.email || u.display_name || userId.slice(0, 8)) : userId.slice(0, 8)
-  if (!confirm(ban ? `停用「${who}」？\n停用后对方下次打开/登录将被强制登出。` : `恢复「${who}」的登录权限？`)) return
+  try { await confirmDialog(ban ? '停用后对方下次打开/登录将被强制登出。' : `恢复「${who}」的登录权限？`, ban ? `停用「${who}」？` : '恢复权限') } catch { return }
   try {
     const { error } = await sb.from('profiles').update({ banned: ban }).eq('user_id', userId)
     if (error) throw error
     if (u) u.banned = ban
     renderUsers()
   } catch (e) {
-    alert('操作失败：' + (e.message || '权限不足或表未迁移'))
+    toast('操作失败：' + (e.message || '权限不足或表未迁移'), 'fail')
   }
 }
 
@@ -3050,7 +3313,7 @@ async function saveNote() {
     const { error } = await sb.from('article_notes').insert({ ...pendingNote, note })
     if (error) throw error
   } catch (e) {
-    alert('保存失败：可能还没在 Supabase 建好 article_notes 表（睡醒跑 SQL 后即可）')
+    toast('保存失败：article_notes 表未迁移', 'fail')
     return closeNoteEditor()
   }
   closeNoteEditor()
@@ -4041,7 +4304,7 @@ async function vtBuildSharePoster(result) {
 }
 
 async function startVocabTest() {
-  if (!sb) return alert('请先登录')
+  if (!sb) return toast('请先登录', 'fail')
   clearTimeout(vtAdvanceTimer)
   try {
     const bank = await vtLoadBank()
@@ -4075,7 +4338,7 @@ async function startVocabTest() {
     document.getElementById('vtState').textContent = '先完成单词选择，系统会据此决定后两部分的难度。'
     vtRender()
   } catch (e) {
-    alert(e.message || '题库加载失败')
+    toast(e.message || '题库加载失败', 'fail')
   }
 }
 
@@ -4099,10 +4362,10 @@ async function shareVocabExam() {
     a.click()
     a.remove()
     setTimeout(() => URL.revokeObjectURL(url), 4000)
-    alert('分享图已生成，已尝试下载到本地。')
+    toast('分享图已生成，已尝试下载到本地。', 'success')
   } catch (e) {
     const text = vtShareText(result)
-    navigator.clipboard.writeText(text).then(() => alert('图片生成失败，已复制分享文案')).catch(() => alert(text))
+    navigator.clipboard.writeText(text).then(() => toast('图片生成失败，已复制分享文案')).catch(() => toast(text, 'fail'))
   }
 }
 
@@ -4189,6 +4452,16 @@ function switchLbTab(tab, btn) {
   renderLbTab()
 }
 
+function lbAvatarHTML(item, initial) {
+  const gIcon = item.gender === 'male' ? '♂' : item.gender === 'female' ? '♀' : ''
+  const gColor = item.gender === 'male' ? '#4a9eed' : '#e85d8a'
+  const badge = gIcon ? `<span class="lb-gender-badge" style="color:${gColor}">${gIcon}</span>` : ''
+  if (item.avatar_url) {
+    return `<div class="lb-avatar"><img src="${esc(item.avatar_url)}" onerror="this.remove()" alt="">${initial}${badge}</div>`
+  }
+  return `<div class="lb-avatar">${initial}${badge}</div>`
+}
+
 function renderLbTab() {
   const el = document.getElementById('lbContent')
   if (!lbData) { el.innerHTML = '<div class="lb-empty">暂无数据</div>'; return }
@@ -4230,7 +4503,7 @@ function renderLbTab() {
     if (rank > 10 && !isMe) return
     html += `<div class="lb-row${isMe ? ' me' : ''}">
       <div class="lb-rank ${rankClass}">${typeof medal === 'string' && medal.length > 1 ? medal : rank}</div>
-      <div class="lb-avatar">${initial}</div>
+      ${lbAvatarHTML(item, initial)}
       <div class="lb-info"><div class="lb-name">${name}</div>${sub ? `<div class="lb-sub">${sub}</div>` : ''}</div>
       <div class="lb-val">${val}<span class="lb-unit">${unit}</span></div>
     </div>`
@@ -4248,7 +4521,7 @@ function renderLbTab() {
       <div class="lb-me-title">我的排名</div>
       <div class="lb-row me">
         <div class="lb-rank">${myIdx + 1}</div>
-        <div class="lb-avatar">${initial}</div>
+        ${lbAvatarHTML(item, initial)}
         <div class="lb-info"><div class="lb-name">${item.name || '我'} (我)</div></div>
         <div class="lb-val">${val}<span class="lb-unit">${unit}</span></div>
       </div>
@@ -4310,7 +4583,7 @@ function updateNotifUI() {
 
 async function requestNotifyPermission() {
   if (!('Notification' in window)) return
-  if (Notification.permission === 'denied') { alert('通知已被屏蔽，请到系统设置 → Safari/浏览器 → 通知 里手动开启'); return }
+  if (Notification.permission === 'denied') { toast('通知已被屏蔽，请到系统设置开启', 'fail'); return }
   const result = await Notification.requestPermission()
   updateNotifUI()
   if (result === 'granted') {
@@ -4425,8 +4698,9 @@ async function openSpot(id) {
     if (s.cover_url) {
       const img = document.createElement('img')
       img.src = s.cover_url
-      img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover'
+      img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;cursor:zoom-in'
       img.onerror = () => img.remove()
+      img.onclick = () => vant.showImagePreview({ images: [s.cover_url] })
       coverEl.insertBefore(img, coverEl.firstChild)
     }
     document.getElementById('spotDetailNameZh').textContent = s.name_zh
@@ -4525,11 +4799,11 @@ async function submitSpotComment() {
     input.placeholder = '分享你的感受…'
     replyToId = null
     loadSpotComments(currentSpotId)
-  } catch(e) { alert('发送失败，请重试') }
+  } catch(e) { toast('发送失败，请重试', 'fail') }
 }
 
 async function deleteSpotComment(id) {
-  if (!confirm('确定删除这条评论？')) return
+  try { await confirmDialog('确定删除这条评论？') } catch { return }
   try {
     await sb.from('spot_comments').delete().eq('id', id)
     loadSpotComments(currentSpotId)
@@ -4537,7 +4811,7 @@ async function deleteSpotComment(id) {
 }
 
 function showSpotSubmitModal() {
-  if (!currentUser) { alert('请先登录'); return }
+  if (!currentUser) { toast('请先登录', 'fail'); return }
   document.getElementById('spotSubmitModal').classList.add('open')
 }
 function closeSpotSubmitModal() {
@@ -4546,13 +4820,14 @@ function closeSpotSubmitModal() {
 async function submitNewSpot() {
   const nameZh = document.getElementById('sfNameZh').value.trim()
   const name   = document.getElementById('sfName').value.trim()
-  const region = document.getElementById('sfRegion').value
-  if (!nameZh || !name || !region) { alert('请填写景点名称和所在大区'); return }
-  const category = document.getElementById('sfCategory').value || 'nature'
+  const region = _sfRegion
+  if (!nameZh || !name || !region) { toast('请填写景点名称和所在大区', 'fail'); return }
+  const category = _sfCategory || 'nature'
   const province = document.getElementById('sfProvince').value.trim() || null
   const desc     = document.getElementById('sfDesc').value.trim() || null
   const cover    = document.getElementById('sfCover').value.trim() || null
   const maps     = document.getElementById('sfMaps').value.trim() || null
+  vant.showLoadingToast({ message: '提交中…', forbidClick: true })
   try {
     const { error } = await sb.from('spots').insert({
       name, name_zh: nameZh, region, category, province,
@@ -4562,17 +4837,26 @@ async function submitNewSpot() {
       is_preset: false,
     })
     if (error) throw error
+    vant.closeToast()
     closeSpotSubmitModal()
     ;['sfNameZh','sfName','sfProvince','sfDesc','sfCover','sfMaps'].forEach(id => { document.getElementById(id).value = '' })
-    document.getElementById('sfRegion').value = ''
-    document.getElementById('sfCategory').value = 'nature'
+    _sfRegion = ''; document.getElementById('sfRegionDisplay').textContent = '请选择大区'; document.getElementById('sfRegionDisplay').style.color = 'var(--muted)'
+    _sfCategory = 'nature'; document.getElementById('sfCategoryDisplay').textContent = '自然风光 🌿'
     spotRegion = '全部'
     showView('spots')
-    alert('感谢推荐！景点已添加 🎉')
-  } catch(e) { alert('提交失败：' + (e.message || '请重试')) }
+    toast('感谢推荐！景点已添加', 'success')
+  } catch(e) { vant.closeToast(); toast('提交失败：' + (e.message || '请重试'), 'fail') }
 }
 
 initSW()
 </script>
+<div id="customActionSheet">
+  <div class="cas-backdrop" onclick="closeCAS()"></div>
+  <div class="cas-panel">
+    <div class="cas-title" id="casTitle"></div>
+    <div id="casOptions"></div>
+    <button class="cas-cancel" onclick="closeCAS()">取消</button>
+  </div>
+</div>
 </body>
 </html>
