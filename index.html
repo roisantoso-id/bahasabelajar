@@ -737,50 +737,6 @@
 </div>
 
 <!-- ===== DIALOGUE 对话学习 ===== -->
-<div id="v-dialogue" class="view" style="display:none">
-  <div class="dl-header">
-    <button class="dl-back-btn" onclick="closeDialogue()">‹</button>
-    <div class="dl-hdr-center">
-      <div id="dlHdrTitle" class="dl-hdr-title"></div>
-      <div id="dlHdrSub" class="dl-hdr-sub"></div>
-    </div>
-  </div>
-
-  <!-- 听读 phase -->
-  <div id="dlListenWrap" class="dl-phase-wrap">
-    <div class="dl-phase-badge">🎧 听读对话</div>
-    <div id="dlLinesList" class="dl-lines-list"></div>
-    <div class="dl-bottom-bar">
-      <button id="dlPlayAllBtn" class="dl-btn-sec" onclick="dlPlayAll()">▶ 全部播放</button>
-      <button class="dl-btn-pri" onclick="dlStartRoleplay()">开口练习 →</button>
-    </div>
-  </div>
-
-  <!-- 角色扮演 phase -->
-  <div id="dlRoleplayWrap" class="dl-phase-wrap" style="display:none">
-    <div class="dl-phase-badge">🎭 角色扮演</div>
-    <div class="dl-role-bar">
-      <span class="dl-role-lbl">我扮演：</span>
-      <div id="dlRoleBtns" class="dl-role-btns"></div>
-    </div>
-    <div id="dlRoleLines" class="dl-lines-list"></div>
-    <div class="dl-bottom-bar">
-      <button class="dl-btn-sec" onclick="dlStartRoleplay()">换角色</button>
-      <button class="dl-btn-pri" onclick="dlDone()">✓ 完成对话</button>
-    </div>
-  </div>
-
-  <!-- 完成 phase -->
-  <div id="dlDoneWrap" class="dl-phase-wrap dl-done-wrap" style="display:none">
-    <div class="dl-done-emoji">🎉</div>
-    <div id="dlDoneTitle" class="dl-done-title"></div>
-    <p class="dl-done-sub">继续下一段对话，或再练一次！</p>
-    <div class="dl-done-btns">
-      <button class="dl-btn-sec" onclick="dlReplay()">再练一次</button>
-      <button class="dl-btn-pri" onclick="closeDialogue()">返回课程</button>
-    </div>
-  </div>
-</div>
 
 <!-- ===== TABS ===== -->
 <div class="tabs" id="tabBar">
