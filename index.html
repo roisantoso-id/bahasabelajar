@@ -1874,7 +1874,7 @@ async function startLearn() {
   studyIdx = 0; studyCompleted = 0
   showView('study')
   renderStudy()
-  setTimeout(() => prefetchTTS(studyQueue.slice(0, 8).map(w => w.word)), 600)
+  setTimeout(() => prefetchTTS(studyQueue.slice(0, 8).map(w => w.word), 'words'), 600)
 }
 // 学某一课的词（从「课程」页进入）
 async function startLessonWords(lessonNo) {
@@ -2421,7 +2421,7 @@ function openArticle(id) {
   loadArticleNotes(a.id)
   initArticleScroll(a.sentences.length)
   // 后台预缓存全部句子音频
-  setTimeout(() => prefetchTTS(a.sentences.map(s => s.id)), 800)
+  setTimeout(() => prefetchTTS(a.sentences.map(s => s.id), 'sentences'), 800)
 }
 function toggleSentNote(el) { el.classList.toggle('note-open') }
 function initArticleScroll(total) {
@@ -2906,14 +2906,16 @@ function playBuf(buf) {
   })
 }
 
-// —— Storage 直读：key = SHA-256(`voice|rate|text`).mp3，与 gen-tts.js / edge function 一致 ——
-async function _ttsStorageURL(text) {
-  let key = _ttsUrlMap.get(text)
+// —— Storage 直读：路径 = `<cat>/<SHA-256(`voice|rate|text`)>.mp3`（cat: words|sentences）——
+// 分文件夹便于管理；hash 与 gen-tts.js 一致。
+async function _ttsStorageURL(text, cat = 'words') {
+  const mk = cat + '|' + text
+  let key = _ttsUrlMap.get(mk)
   if (!key) {
     const input = `${TTS_VOICE_NAME}|${TTS_RATE}|${text}`
     const hashBuf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(input))
-    key = [...new Uint8Array(hashBuf)].map(b => b.toString(16).padStart(2, '0')).join('') + '.mp3'
-    _ttsUrlMap.set(text, key)
+    key = cat + '/' + [...new Uint8Array(hashBuf)].map(b => b.toString(16).padStart(2, '0')).join('') + '.mp3'
+    _ttsUrlMap.set(mk, key)
   }
   return STORAGE_TTS_BASE + key
 }
@@ -2921,26 +2923,26 @@ async function _ttsStorageURL(text) {
 // —— 按钮 loading 状态（每个按钮独立，不互相干扰）——
 function _ttsLoadEl(el, on) { if (el) el.classList.toggle('tts-loading', on) }
 
-// IndexedDB 缓存 key 带版本：bump 'v2' 即可作废旧的本地缓存（如改了语速/音色）
-function _idbKey(text) { return 'v2|' + text }
+// IndexedDB 缓存 key 带版本+类别：bump 'v3' 即可作废旧本地缓存（改了语速/音色/结构）
+function _idbKey(text, cat = 'words') { return 'v3|' + cat + '|' + text }
 
 // —— 发音主入口（返回 Promise，供「听读全文」await）——
 // L1 IndexedDB → L2 Storage public（预生成）→ 兜底系统语音
-async function azureSpeak(text, el) {
+async function azureSpeak(text, el, cat = 'words') {
   if (!text) return
   _stopCurrentAudio()
   _ttsLoadEl(el, true)
   try {
     // L1：本地 IndexedDB 命中 → 0 网络
-    const local = await idbGet(_idbKey(text))
+    const local = await idbGet(_idbKey(text, cat))
     if (local) { _ttsLoadEl(el, false); await playBuf(local); return }
     // L2：直读 Supabase Storage 预生成的 mp3（public，不需登录）
-    const url = await _ttsStorageURL(text)
+    const url = await _ttsStorageURL(text, cat)
     const resp = await fetch(url)
     _ttsLoadEl(el, false)
     if (!resp.ok) throw new Error('storage ' + resp.status)
     const buf = await resp.arrayBuffer()
-    idbPut(_idbKey(text), buf.slice(0))   // 存 L1，下次本地命中
+    idbPut(_idbKey(text, cat), buf.slice(0))   // 存 L1，下次本地命中
     await playBuf(buf)
   } catch (e) {
     _ttsLoadEl(el, false)
@@ -2950,14 +2952,14 @@ async function azureSpeak(text, el) {
 }
 
 // —— 后台预缓存（进文章/学习时预热 IndexedDB，静默失败）——
-async function prefetchTTS(texts) {
+async function prefetchTTS(texts, cat = 'words') {
   try {
     for (const t of texts) {
       if (!t) continue
-      if (await idbGet(_idbKey(t))) continue
+      if (await idbGet(_idbKey(t, cat))) continue
       try {
-        const resp = await fetch(await _ttsStorageURL(t))
-        if (resp.ok) idbPut(_idbKey(t), await resp.arrayBuffer())
+        const resp = await fetch(await _ttsStorageURL(t, cat))
+        if (resp.ok) idbPut(_idbKey(t, cat), await resp.arrayBuffer())
       } catch {}
     }
   } catch {}
@@ -2977,14 +2979,14 @@ function webSpeak(text, rate) {
     } catch { res() }
   })
 }
-function speak(text, rate, el) {
+function speak(text, rate, el, cat = 'words') {
   try { _getAudioCtx() } catch {}  // iOS: 在用户手势内同步 unlock AudioContext
-  return azureSpeak(text, el) || Promise.resolve()
+  return azureSpeak(text, el, cat) || Promise.resolve()
 }
-function speakStudyWord(el) { const w = studyQueue[studyIdx]; if (w) speak(w.word, null, el) }
-function speakArticleSentence(i, el) { if (artCurrent && artCurrent.sentences[i]) speak(artCurrent.sentences[i].id, null, el) }
-function speakListWord(i, el) { const w = wordItems[i]; if (w) speak(w.word, null, el) }
-function speakSel(el) { speak((transCurrent && (transCurrent.hit ? transCurrent.hit.word : transCurrent.text)) || '', null, el) }
+function speakStudyWord(el) { const w = studyQueue[studyIdx]; if (w) speak(w.word, null, el, 'words') }
+function speakArticleSentence(i, el) { if (artCurrent && artCurrent.sentences[i]) speak(artCurrent.sentences[i].id, null, el, 'sentences') }
+function speakListWord(i, el) { const w = wordItems[i]; if (w) speak(w.word, null, el, 'words') }
+function speakSel(el) { speak((transCurrent && (transCurrent.hit ? transCurrent.hit.word : transCurrent.text)) || '', null, el, 'words') }
 
 // ===== 听读全文 =====
 let _artReadActive = false
@@ -3001,7 +3003,7 @@ async function toggleArticleRead() {
     if (!s?.id) continue
     sents[i]?.classList.add('reading-active')
     sents[i]?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-    try { await speak(s.id) } catch {}
+    try { await speak(s.id, null, null, 'sentences') } catch {}
     sents[i]?.classList.remove('reading-active')
   }
   stopArticleRead()
