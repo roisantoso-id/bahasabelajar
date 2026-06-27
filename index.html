@@ -2921,6 +2921,9 @@ async function _ttsStorageURL(text) {
 // —— 按钮 loading 状态（每个按钮独立，不互相干扰）——
 function _ttsLoadEl(el, on) { if (el) el.classList.toggle('tts-loading', on) }
 
+// IndexedDB 缓存 key 带版本：bump 'v2' 即可作废旧的本地缓存（如改了语速/音色）
+function _idbKey(text) { return 'v2|' + text }
+
 // —— 发音主入口（返回 Promise，供「听读全文」await）——
 // L1 IndexedDB → L2 Storage public（预生成）→ 兜底系统语音
 async function azureSpeak(text, el) {
@@ -2929,7 +2932,7 @@ async function azureSpeak(text, el) {
   _ttsLoadEl(el, true)
   try {
     // L1：本地 IndexedDB 命中 → 0 网络
-    const local = await idbGet(text)
+    const local = await idbGet(_idbKey(text))
     if (local) { _ttsLoadEl(el, false); await playBuf(local); return }
     // L2：直读 Supabase Storage 预生成的 mp3（public，不需登录）
     const url = await _ttsStorageURL(text)
@@ -2937,7 +2940,7 @@ async function azureSpeak(text, el) {
     _ttsLoadEl(el, false)
     if (!resp.ok) throw new Error('storage ' + resp.status)
     const buf = await resp.arrayBuffer()
-    idbPut(text, buf.slice(0))   // 存 L1，下次本地命中
+    idbPut(_idbKey(text), buf.slice(0))   // 存 L1，下次本地命中
     await playBuf(buf)
   } catch (e) {
     _ttsLoadEl(el, false)
@@ -2951,10 +2954,10 @@ async function prefetchTTS(texts) {
   try {
     for (const t of texts) {
       if (!t) continue
-      if (await idbGet(t)) continue
+      if (await idbGet(_idbKey(t))) continue
       try {
         const resp = await fetch(await _ttsStorageURL(t))
-        if (resp.ok) idbPut(t, await resp.arrayBuffer())
+        if (resp.ok) idbPut(_idbKey(t), await resp.arrayBuffer())
       } catch {}
     }
   } catch {}
