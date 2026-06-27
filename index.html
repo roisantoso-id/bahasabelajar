@@ -1302,6 +1302,15 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
     </div>
   </div>
 
+  <div class="group-title">发音引擎</div>
+  <div class="setting-card">
+    <div class="setting-row">
+      <div class="setting-icon" style="background:#e8f4ff;color:#1a7fd4">🔊</div>
+      <div class="setting-copy"><div>TTS 引擎</div><span id="ttsDesc">Azure 神经语音（在线·印尼语优化）</span></div>
+      <button class="tts-toggle" id="ttsToggle" onclick="toggleTTS()">Azure</button>
+    </div>
+  </div>
+
   <div class="group-title">外观</div>
   <div class="setting-card">
     <div class="setting-row">
@@ -1551,7 +1560,7 @@ const SPEAK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" st
 
 // ===== Qwen 代理（Supabase Edge Function）=====
 const QWEN_FN = SUPABASE_URL + '/functions/v1/qwen'
-let ttsEngine = localStorage.getItem('tts_engine') || 'qwen'   // 'qwen' | 'web'
+let ttsEngine = localStorage.getItem('tts_engine') || 'azure'  // 'azure' | 'web'
 let qwenTransOK = true   // 翻译代理是否可用（失败则回退 MyMemory）
 
 async function qwenCall(action, text) {
@@ -2812,7 +2821,8 @@ document.addEventListener('touchend', () => setTimeout(onTextSelect, 10))
 document.addEventListener('mousedown', (e) => { if (!e.target.closest('#transPop')) hideTransPop() })
 document.addEventListener('scroll', hideTransPop, true)
 
-// ===== 发音（Web Speech API，印尼语 id-ID）=====
+// ===== 发音 =====
+// ttsEngine: 'azure'（默认）| 'web'（系统 id-ID 离线备用）
 let idVoice = null
 function loadVoices() {
   try {
@@ -2831,24 +2841,52 @@ function webSpeak(text, rate) {
     speechSynthesis.speak(u)
   } catch (e) {}
 }
-// 发音用系统自带的真印尼语语音（id-ID）。Qwen TTS 不支持印尼语，已停用。
+async function azureSpeak(text) {
+  if (!text || !sb) return webSpeak(text)
+  try {
+    const { data: { session } } = await sb.auth.getSession()
+    const token = session?.access_token
+    if (!token) return webSpeak(text)
+    const r = await fetch(QWEN_FN, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+      body: JSON.stringify({ action: 'azure_tts', text }),
+    })
+    if (!r.ok) throw new Error('azure ' + r.status)
+    const buf = await r.arrayBuffer()
+    const ctx = new (window.AudioContext || window.webkitAudioContext)()
+    const decoded = await ctx.decodeAudioData(buf)
+    const src = ctx.createBufferSource()
+    src.buffer = decoded
+    src.connect(ctx.destination)
+    src.start(0)
+  } catch (e) {
+    webSpeak(text)   // fallback
+  }
+}
 function speak(text, rate) {
-  webSpeak(text, rate)
+  if (ttsEngine === 'azure') azureSpeak(text)
+  else webSpeak(text, rate)
 }
 function speakStudyWord() { const w = studyQueue[studyIdx]; if (w) speak(w.word) }
 function speakArticleSentence(i) { if (artCurrent && artCurrent.sentences[i]) speak(artCurrent.sentences[i].id) }
 function speakListWord(i) { const w = wordItems[i]; if (w) speak(w.word) }
 function speakSel() { speak((transCurrent && (transCurrent.hit ? transCurrent.hit.word : transCurrent.text)) || '') }
 function toggleTTS() {
-  ttsEngine = ttsEngine === 'qwen' ? 'web' : 'qwen'
+  ttsEngine = ttsEngine === 'azure' ? 'web' : 'azure'
   localStorage.setItem('tts_engine', ttsEngine)
   syncTTSToggle()
 }
 function syncTTSToggle() {
   const btn = document.getElementById('ttsToggle'), desc = document.getElementById('ttsDesc')
   if (!btn) return
-  btn.textContent = ttsEngine === 'qwen' ? 'Qwen' : '系统'
-  desc.textContent = ttsEngine === 'qwen' ? 'Qwen 语音（在线，需边缘函数）' : '系统印尼语语音（免费·离线）'
+  if (ttsEngine === 'azure') {
+    btn.textContent = 'Azure'
+    desc.textContent = 'Azure 神经语音（在线·印尼语优化）'
+  } else {
+    btn.textContent = '系统'
+    desc.textContent = '系统印尼语语音（免费·离线）'
+  }
 }
 if ('speechSynthesis' in window) {
   loadVoices()
