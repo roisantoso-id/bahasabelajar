@@ -1756,19 +1756,8 @@ function addDays(dateStr, n) {
 const INTERVALS = {1:1, 2:2, 3:4, 4:7, 5:15, 6:30, 7:60}
 
 // ===== HOME =====
-async function renderHeroCal() {
-  if (!sb) return
-  const now = new Date()
-  const y = now.getFullYear(), m = now.getMonth() + 1
-  const mm = String(m).padStart(2, '0')
-  const lastDay = new Date(y, m, 0).getDate()
+function _renderHeroCalFromData(rows, y, m, lastDay, todayDate) {
   const firstDow = new Date(y, m - 1, 1).getDay()
-  const todayDate = now.getDate()
-  let rows = []
-  try {
-    const { data } = await sb.from('checkins').select('date,completed,new_learned,reviewed').gte('date', `${y}-${mm}-01`).lte('date', `${y}-${mm}-${String(lastDay).padStart(2,'0')}`)
-    rows = data || []
-  } catch (e) {}
   const map = {}
   rows.forEach(r => { map[Number(r.date.slice(-2))] = r })
   let days = ''
@@ -1783,24 +1772,58 @@ async function renderHeroCal() {
   document.getElementById('heroCalWrap').innerHTML =
     `<div class="hero-cal" onclick="showView('calendar')"><div class="hero-cal-head">${y}年${m}月</div><div class="hero-cal-week"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div><div class="hero-cal-grid">${days}</div></div>`
 }
+async function renderHeroCal() {
+  if (!sb) return
+  const now = new Date()
+  const y = now.getFullYear(), m = now.getMonth() + 1
+  const mm = String(m).padStart(2, '0')
+  const lastDay = new Date(y, m, 0).getDate()
+  try {
+    const { data } = await sb.from('checkins').select('date,completed,new_learned,reviewed').gte('date', `${y}-${mm}-01`).lte('date', `${y}-${mm}-${String(lastDay).padStart(2,'0')}`)
+    _renderHeroCalFromData(data || [], y, m, lastDay, now.getDate())
+  } catch (e) {}
+}
 async function loadHome() {
   if (!sb) return
   const t = todayStr()
   const h = new Date().getHours()
+  const now = new Date()
   document.getElementById('greeting').textContent = h < 12 ? 'Selamat pagi' : h < 18 ? 'Selamat siang' : 'Selamat malam'
-  document.getElementById('dateLabel').textContent = `${new Date().getMonth()+1}月${new Date().getDate()}日 · 今日计划`
+  document.getElementById('dateLabel').textContent = `${now.getMonth()+1}月${now.getDate()}日 · 今日计划`
   refreshVocabBadge()
 
-  const [{count: totalWords}, {count: learnedWords}] = await Promise.all([
+  const y = now.getFullYear(), m = now.getMonth() + 1
+  const mm = String(m).padStart(2, '0')
+  const lastDay = new Date(y, m, 0).getDate()
+
+  // 所有首页数据一次并发拉取，消除串行等待
+  const [
+    {count: totalWords},
+    {count: learnedWords},
+    {count: dueCount},
+    {data: ci},
+    {data: streakRows},
+    {data: weekRows},
+    {data: calRows}
+  ] = await Promise.all([
     sb.from('words').select('*', {count:'exact', head:true}),
-    sb.from('learning').select('*', {count:'exact', head:true})
+    sb.from('learning').select('*', {count:'exact', head:true}),
+    sb.from('learning').select('*',{count:'exact',head:true}).eq('status','reviewing').lte('next_review_at', t),
+    sb.from('checkins').select('*').eq('date', t).maybeSingle(),
+    sb.from('checkins').select('date').eq('completed',1).order('date',{ascending:false}).limit(60),
+    sb.from('checkins').select('date,new_learned,reviewed').gte('date', addDays(t,-6)).lte('date', t),
+    sb.from('checkins').select('date,completed,new_learned,reviewed').gte('date', `${y}-${mm}-01`).lte('date', `${y}-${mm}-${String(lastDay).padStart(2,'0')}`)
   ])
-  const {count: dueCount} = await sb.from('learning').select('*',{count:'exact',head:true}).eq('status','reviewing').lte('next_review_at', t)
-  const {data: ci} = await sb.from('checkins').select('*').eq('date', t).maybeSingle()
+
   const checkin = ci || {new_learned:0, reviewed:0, completed:0}
   const goal = profile.daily_new_words || 10
   const newRemaining = Math.max(0, goal - checkin.new_learned)
-  const streak = await getStreak(t)
+
+  // streak 从预取数据直接算，无需额外请求
+  const streakSet = new Set((streakRows || []).map(r => r.date))
+  let sd = streakSet.has(t) ? t : addDays(t, -1)
+  let streak = 0
+  while (streakSet.has(sd)) { streak++; sd = addDays(sd, -1) }
 
   document.getElementById('newCount').textContent = newRemaining
   document.getElementById('dueCount').textContent = dueCount || 0
@@ -1817,8 +1840,8 @@ async function loadHome() {
   const total = goal + (dueCount||0) + checkin.reviewed
   const pct = checkin.completed ? 100 : Math.min(100, Math.round(done / Math.max(1,total)*100))
   document.getElementById('homeProgress').style.width = pct + '%'
-  loadWeekChart()
-  renderHeroCal()
+  _renderWeekChartFromData(weekRows || [], t)
+  _renderHeroCalFromData(calRows || [], y, m, lastDay, now.getDate())
 }
 
 async function getStreak(t) {
@@ -4403,27 +4426,30 @@ function syncDarkToggle() {
 matchMedia('(prefers-color-scheme:dark)').addEventListener('change', () => { if (darkPref === 'auto') applyDarkMode() })
 
 // ===== 本周趋势 =====
+function _renderWeekChartFromData(data, t) {
+  const dates = []
+  for (let i = 6; i >= 0; i--) dates.push(addDays(t, -i))
+  const map = {}
+  ;(data || []).forEach(r => { map[r.date] = (r.new_learned || 0) + (r.reviewed || 0) })
+  const max = Math.max(1, ...dates.map(d => map[d] || 0))
+  const dayNames = ['日', '一', '二', '三', '四', '五', '六']
+  const bars = dates.map(d => {
+    const v = map[d] || 0
+    const pct = v ? Math.max(8, Math.round(v / max * 100)) : 5
+    return `<div class="wc-bar${v ? ' has' : ''}" style="height:${pct}%">${v ? `<div class="wc-val">${v}</div>` : ''}</div>`
+  }).join('')
+  const days = dates.map(d => {
+    const isToday = d === t
+    return `<div class="wc-day${isToday ? ' today' : ''}">${dayNames[new Date(d + 'T00:00').getDay()]}</div>`
+  }).join('')
+  document.getElementById('weekChart').innerHTML = `<div class="wc-bars">${bars}</div><div class="wc-days">${days}</div>`
+}
 async function loadWeekChart() {
   if (!sb) return
   const t = todayStr()
-  const dates = []
-  for (let i = 6; i >= 0; i--) dates.push(addDays(t, -i))
   try {
-    const { data } = await sb.from('checkins').select('date,new_learned,reviewed').gte('date', dates[0]).lte('date', dates[6])
-    const map = {}
-    ;(data || []).forEach(r => { map[r.date] = (r.new_learned || 0) + (r.reviewed || 0) })
-    const max = Math.max(1, ...dates.map(d => map[d] || 0))
-    const dayNames = ['日', '一', '二', '三', '四', '五', '六']
-    const bars = dates.map(d => {
-      const v = map[d] || 0
-      const pct = v ? Math.max(8, Math.round(v / max * 100)) : 5
-      return `<div class="wc-bar${v ? ' has' : ''}" style="height:${pct}%">${v ? `<div class="wc-val">${v}</div>` : ''}</div>`
-    }).join('')
-    const days = dates.map(d => {
-      const isToday = d === t
-      return `<div class="wc-day${isToday ? ' today' : ''}">${dayNames[new Date(d + 'T00:00').getDay()]}</div>`
-    }).join('')
-    document.getElementById('weekChart').innerHTML = `<div class="wc-bars">${bars}</div><div class="wc-days">${days}</div>`
+    const { data } = await sb.from('checkins').select('date,new_learned,reviewed').gte('date', addDays(t,-6)).lte('date', t)
+    _renderWeekChartFromData(data || [], t)
   } catch (e) {}
 }
 
