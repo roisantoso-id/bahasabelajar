@@ -250,6 +250,8 @@ button{border:0;background:none;font:inherit;cursor:pointer;color:inherit}
 .art-read-bar{height:3px;background:rgba(23,77,64,.1);border-radius:99px;margin:-4px 0 10px;overflow:hidden}
 .art-read-fill{height:100%;border-radius:inherit;background:linear-gradient(90deg,#1d5a4b,#2b7b62);transition:width .3s;width:0%}
 .sent{padding:10px 12px;margin-bottom:8px;border-radius:14px;background:rgba(255,253,248,.7);border:1px solid rgba(20,41,37,.04);box-shadow:0 4px 12px rgba(23,45,39,.04);cursor:pointer;transition:background .2s}
+.sent.reading-active{background:rgba(76,175,80,.08)!important;border-color:rgba(76,175,80,.25)!important}
+.sent.reading-active .sent-id-text{color:var(--green);font-weight:800}
 .sent:active{background:rgba(240,245,238,.9)}
 .sent-id{font-size:14px;font-weight:700;line-height:1.6;color:var(--ink);display:flex;align-items:flex-start;gap:6px}
 .sent-id-text{flex:1}
@@ -1187,10 +1189,11 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 <!-- ===== ARTICLE DETAIL ===== -->
 <div id="v-article" class="view">
   <div class="grammar-head">
-    <button class="back" onclick="showView('articles', document.querySelectorAll('.tab')[3])">‹</button>
+    <button class="back" onclick="stopArticleRead();showView('articles', document.querySelectorAll('.tab')[3])">‹</button>
     <h1 id="artTitle" style="font-size:16px"></h1>
     <button id="transToggle" class="grammar-lesson-tag" onclick="toggleTrans()">隐藏中文</button>
-    <button class="grammar-lesson-tag" onclick="shareArticle()" style="margin-left:6px;background:var(--green);color:#fff">分享</button>
+    <button id="readAllBtn" class="grammar-lesson-tag" onclick="toggleArticleRead()" style="margin-left:4px">▶ 听读</button>
+    <button class="grammar-lesson-tag" onclick="shareArticle()" style="margin-left:4px;background:var(--green);color:#fff">分享</button>
   </div>
   <div class="art-read-bar"><div class="art-read-fill" id="artReadBar"></div></div>
   <div id="artMeta" class="grammar-subtitle" style="font-size:11px"></div>
@@ -2897,12 +2900,24 @@ async function idbPut(text, buf) {
     })
   } catch {}
 }
+// 当前播放的 Audio 实例，用于在新请求时打断旧的
+let _curAudio = null
+function _stopCurrentAudio() {
+  if (_curAudio) { try { _curAudio.pause(); _curAudio.src = '' } catch {} ; _curAudio = null }
+}
+
 async function playBuf(buf) {
-  const ctx = new (window.AudioContext || window.webkitAudioContext)()
-  const src = ctx.createBufferSource()
-  src.buffer = await ctx.decodeAudioData(buf.slice(0))
-  src.connect(ctx.destination)
-  src.start(0)
+  _stopCurrentAudio()
+  const blob = new Blob([buf], { type: 'audio/mpeg' })
+  const burl = URL.createObjectURL(blob)
+  return new Promise((res, rej) => {
+    const a = new Audio(burl)
+    _curAudio = a
+    const done = (ok) => { if (_curAudio === a) _curAudio = null; URL.revokeObjectURL(burl); ok ? res() : rej(new Error('playBuf')) }
+    a.onended = () => done(true)
+    a.onerror = () => done(false)
+    a.play().catch(() => done(false))
+  })
 }
 
 // —— L2: Edge Function（返回 Storage URL）——
@@ -2928,39 +2943,39 @@ async function _remoteURL(text) {
   return u
 }
 
-// —— 按钮 loading 状态 ——
-let _ttsLoadingEl = null
-function _ttsLoadEl(el, on) {
-  if (_ttsLoadingEl) { _ttsLoadingEl.classList.remove('tts-loading'); _ttsLoadingEl = null }
-  if (on && el) { el.classList.add('tts-loading'); _ttsLoadingEl = el }
-}
+// —— 按钮 loading 状态（每个按钮独立，不互相干扰）——
+function _ttsLoadEl(el, on) { if (el) el.classList.toggle('tts-loading', on) }
 
 // 流式播放远端 URL（拿到 URL 即开始播，不等完整下载）
 function playUrl(url) {
+  _stopCurrentAudio()
   return new Promise((res, rej) => {
     const a = new Audio(url)
-    a.onended = res
-    a.onerror = () => rej(new Error('audio error'))
-    a.play().catch(rej)
+    _curAudio = a
+    const done = (ok) => { if (_curAudio === a) _curAudio = null; ok ? res() : rej(new Error('playUrl')) }
+    a.onended = () => done(true)
+    a.onerror = () => done(false)
+    a.play().catch(() => done(false))
   })
 }
 
-// —— 双缓存发音主入口 ——
+// —— 双缓存发音主入口（返回 Promise，供「听读全文」await）——
 async function azureSpeak(text, el) {
   if (!text) return
+  _stopCurrentAudio()
   _ttsLoadEl(el, true)
   try {
     if (!sb) { _ttsLoadEl(el, false); return webSpeak(text) }
     const ck = _ttsCacheKey(text)
     // L1 命中 → 直接播，0 网络
     const local = await idbGet(ck)
-    if (local) { _ttsLoadEl(el, false); await playBuf(local); return }
+    if (local) { _ttsLoadEl(el, false); return playBuf(local) }
     // L2/L3 → 拿 URL（Storage 命中仅需 HEAD，否则 Azure 生成）
     const url = await _remoteURL(text)
     _ttsLoadEl(el, false)   // URL 到手即移除 loading，流式播放立即开始
-    await playUrl(url)
     // 后台异步缓存到 IndexedDB，下次本地命中
     fetch(url).then(r => r.ok ? r.arrayBuffer() : null).then(buf => { if (buf) idbPut(ck, buf) }).catch(() => {})
+    return playUrl(url)
   } catch { _ttsLoadEl(el, false); webSpeak(text) }
 }
 
@@ -3003,24 +3018,55 @@ function syncTTSSeg() {
 }
 
 function webSpeak(text, rate) {
-  if (!text || !('speechSynthesis' in window)) return
-  try {
-    speechSynthesis.cancel()
-    const u = new SpeechSynthesisUtterance(text)
-    u.lang = 'id-ID'
-    if (idVoice) u.voice = idVoice
-    u.rate = rate || 0.95
-    speechSynthesis.speak(u)
-  } catch (e) {}
+  return new Promise(res => {
+    if (!text || !('speechSynthesis' in window)) { res(); return }
+    try {
+      speechSynthesis.cancel()
+      const u = new SpeechSynthesisUtterance(text)
+      u.lang = 'id-ID'
+      if (idVoice) u.voice = idVoice
+      u.rate = rate || 0.95
+      u.onend = res; u.onerror = res
+      speechSynthesis.speak(u)
+    } catch { res() }
+  })
 }
 function speak(text, rate, el) {
-  if (ttsEngine === 'azure') azureSpeak(text, el)
-  else webSpeak(text, rate)
+  if (ttsEngine === 'azure') return azureSpeak(text, el) || Promise.resolve()
+  return webSpeak(text, rate)
 }
 function speakStudyWord(el) { const w = studyQueue[studyIdx]; if (w) speak(w.word, null, el) }
 function speakArticleSentence(i, el) { if (artCurrent && artCurrent.sentences[i]) speak(artCurrent.sentences[i].id, null, el) }
 function speakListWord(i, el) { const w = wordItems[i]; if (w) speak(w.word, null, el) }
 function speakSel(el) { speak((transCurrent && (transCurrent.hit ? transCurrent.hit.word : transCurrent.text)) || '', null, el) }
+
+// ===== 听读全文 =====
+let _artReadActive = false
+async function toggleArticleRead() {
+  if (_artReadActive) { stopArticleRead(); return }
+  if (!artCurrent?.sentences?.length) return
+  _artReadActive = true
+  const btn = document.getElementById('readAllBtn')
+  if (btn) { btn.textContent = '⏹ 停止'; btn.style.cssText += ';background:var(--green);color:#fff' }
+  const sents = document.querySelectorAll('#artBody .sent')
+  for (let i = 0; i < artCurrent.sentences.length; i++) {
+    if (!_artReadActive) break
+    const s = artCurrent.sentences[i]
+    if (!s?.id) continue
+    sents[i]?.classList.add('reading-active')
+    sents[i]?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    try { await speak(s.id) } catch {}
+    sents[i]?.classList.remove('reading-active')
+  }
+  stopArticleRead()
+}
+function stopArticleRead() {
+  _artReadActive = false
+  _stopCurrentAudio()
+  document.querySelectorAll('#artBody .sent').forEach(el => el.classList.remove('reading-active'))
+  const btn = document.getElementById('readAllBtn')
+  if (btn) { btn.textContent = '▶ 听读'; btn.style.background = ''; btn.style.color = '' }
+}
 function toggleTTS() {
   ttsEngine = ttsEngine === 'azure' ? 'web' : 'azure'
   localStorage.setItem('tts_engine', ttsEngine)
