@@ -666,7 +666,7 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
 .vocab-banner:active{transform:scale(.98)}
 .vocab-banner::after{content:'';position:absolute;right:-30px;top:-30px;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,rgba(244,201,93,.30),transparent 70%);pointer-events:none}
 .vocab-banner-icon{flex:none;width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.16);color:#fff}
-.vocab-banner-icon img,.vocab-banner-icon svg{width:20px;height:20px;display:block}
+.vocab-banner-icon img,.vocab-banner-icon svg{width:100%;height:100%;display:block;object-fit:cover;border-radius:11px}
 .vocab-banner-text{flex:1;min-width:0;position:relative;z-index:1}
 .vocab-banner-title{font-size:14px;font-weight:900;color:#fff;letter-spacing:-.2px}
 .vocab-banner-sub{font-size:10px;color:rgba(255,255,255,.78);margin-top:2px}
@@ -1006,7 +1006,7 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
   <div class="task-grid">
     <div class="task" onclick="startLearn()">
       <div class="task-top">
-        <div class="task-icon learn"><img src="img/home-learn.svg" alt=""></div>
+        <div class="task-icon learn"><img src="img/home-learn.webp" alt=""></div>
         <span class="task-count" id="newCount">0</span>
       </div>
       <div class="task-body">
@@ -1016,7 +1016,7 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
     </div>
     <div class="task" onclick="startReview()">
       <div class="task-top">
-        <div class="task-icon review"><img src="img/home-review.svg" alt=""></div>
+        <div class="task-icon review"><img src="img/home-review.webp" alt=""></div>
         <span class="task-count" id="dueCount">0</span>
       </div>
       <div class="task-body">
@@ -1027,26 +1027,26 @@ button{transition:transform .1s var(--ease),filter .18s ease,opacity .18s ease}
   </div>
   <div class="quick-grid">
     <div class="quick-item" onclick="startGrammar()">
-      <div class="task-icon grammar"><img src="img/home-grammar.svg" alt=""></div>
+      <div class="task-icon grammar"><img src="img/home-grammar.webp" alt=""></div>
       <div class="task-name">语法笔记</div>
     </div>
     <div class="quick-item" onclick="startExtra()">
-      <div class="task-icon extra"><img src="img/home-extra.svg" alt=""></div>
+      <div class="task-icon extra"><img src="img/home-extra.webp" alt=""></div>
       <div class="task-name">拓展词</div>
     </div>
     <div class="quick-item" onclick="showView('articles', document.querySelectorAll('.tab')[3])">
       <span class="task-dot" id="homeArticleBadge" hidden></span>
-      <div class="task-icon article"><img src="img/home-article.svg" alt=""></div>
+      <div class="task-icon article"><img src="img/home-article.webp" alt=""></div>
       <div class="task-name">印尼文章</div>
     </div>
     <div class="quick-item" onclick="showView('culture')">
-      <div class="task-icon culture"><img src="img/home-culture.svg" alt=""></div>
+      <div class="task-icon culture"><img src="img/home-culture.webp" alt=""></div>
       <div class="task-name">印尼文化</div>
     </div>
   </div>
   <div class="vocab-banner" onclick="startVocabTest()">
     <span class="vocab-badge" id="vocabBadge">NEW</span>
-    <div class="vocab-banner-icon"><img src="img/home-bipa.svg" alt=""></div>
+    <div class="vocab-banner-icon"><img src="img/home-bipa.webp" alt=""></div>
     <div class="vocab-banner-text">
       <div class="vocab-banner-title">BIPA 模拟测评</div>
       <div class="vocab-banner-sub">单词、句子、阅读连着做，按答题表现自动切下一关</div>
@@ -1616,6 +1616,18 @@ function setAuthMsg(text, ok) {
   const el = document.getElementById('authMsg')
   el.textContent = text
   el.className = 'auth-msg ' + (ok ? 'ok' : 'err')
+}
+async function forgotPassword() {
+  if (!sb) return setAuthMsg('Supabase 未初始化')
+  const email = document.getElementById('authEmail').value.trim()
+  if (!email) return setAuthMsg('先填写邮箱，再点忘记密码')
+  try {
+    const { error } = await sb.auth.resetPasswordForEmail(email)
+    if (error) throw error
+    setAuthMsg('已发送重置邮件，请检查邮箱', true)
+  } catch (e) {
+    setAuthMsg(translateAuthErr(e.message || '发送失败'))
+  }
 }
 async function doAuth() {
   if (!sb) return setAuthMsg('Supabase 未初始化')
