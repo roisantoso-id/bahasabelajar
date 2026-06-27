@@ -2824,10 +2824,12 @@ document.addEventListener('touchend', () => setTimeout(onTextSelect, 10))
 document.addEventListener('mousedown', (e) => { if (!e.target.closest('#transPop')) hideTransPop() })
 document.addEventListener('scroll', hideTransPop, true)
 
-// ===== 发音 + IndexedDB 音频缓存 =====
+// ===== 发音 + Supabase Storage 音频缓存 =====
 // ttsEngine: 'azure'（默认）| 'web'（系统 id-ID 离线备用）
-// 缓存策略：Azure 音频 ArrayBuffer 存 IndexedDB，key = 文本，永久有效
-let idVoice = null, _ttsDb = null
+// 缓存策略：Edge Function 将 mp3 存入 tts-cache bucket，前端 session Map 避免重复请求
+let idVoice = null
+const _ttsUrlMap = new Map()   // text → Storage 公开 URL（本 session 内存缓存）
+
 function loadVoices() {
   try {
     const vs = window.speechSynthesis.getVoices()
@@ -2835,48 +2837,7 @@ function loadVoices() {
   } catch (e) {}
 }
 
-// —— IndexedDB helpers ——
-function openTTSDB() {
-  if (_ttsDb) return Promise.resolve(_ttsDb)
-  return new Promise((res, rej) => {
-    const r = indexedDB.open('bb_tts_cache', 1)
-    r.onupgradeneeded = e => e.target.result.createObjectStore('audio')
-    r.onsuccess = e => { _ttsDb = e.target.result; res(_ttsDb) }
-    r.onerror = () => rej(r.error)
-  })
-}
-async function ttsGet(key) {
-  try {
-    const db = await openTTSDB()
-    return new Promise(res => {
-      const tx = db.transaction('audio', 'readonly')
-      const req = tx.objectStore('audio').get(key)
-      req.onsuccess = () => res(req.result || null)
-      req.onerror = () => res(null)
-    })
-  } catch { return null }
-}
-async function ttsPut(key, buf) {
-  try {
-    const db = await openTTSDB()
-    return new Promise(res => {
-      const tx = db.transaction('audio', 'readwrite')
-      tx.objectStore('audio').put(buf, key)
-      tx.oncomplete = res; tx.onerror = res
-    })
-  } catch {}
-}
-async function playBuf(buf) {
-  const ctx = new (window.AudioContext || window.webkitAudioContext)()
-  const decoded = await ctx.decodeAudioData(buf.slice(0))
-  const src = ctx.createBufferSource()
-  src.buffer = decoded
-  src.connect(ctx.destination)
-  src.start(0)
-}
-
-// —— Azure TTS（缓存优先）——
-async function fetchAzureAudio(text) {
+async function _callAzureTTS(text) {
   const { data: { session } } = await sb.auth.getSession()
   const token = session?.access_token
   if (!token) throw new Error('not logged in')
@@ -2886,34 +2847,38 @@ async function fetchAzureAudio(text) {
     body: JSON.stringify({ action: 'azure_tts', text }),
   })
   if (!r.ok) throw new Error('azure ' + r.status)
-  return r.arrayBuffer()
+  const { url } = await r.json()
+  if (!url) throw new Error('no url')
+  return url
 }
 
 async function azureSpeak(text) {
   if (!text) return
   try {
-    let buf = await ttsGet(text)
-    if (!buf) {
-      if (!sb) return webSpeak(text)
-      buf = await fetchAzureAudio(text)
-      ttsPut(text, buf)   // 异步存缓存，不阻塞播放
+    if (!sb) return webSpeak(text)
+    let url = _ttsUrlMap.get(text)
+    if (!url) {
+      url = await _callAzureTTS(text)
+      _ttsUrlMap.set(text, url)
     }
-    await playBuf(buf)
+    new Audio(url).play()
   } catch { webSpeak(text) }
 }
 
-// 后台预缓存（不阻塞 UI，静默失败）
+// 后台预缓存（触发 Edge Function 把音频存进 Storage，静默失败）
 async function prefetchTTS(texts) {
   if (!sb || ttsEngine !== 'azure') return
-  for (const t of texts) {
-    if (!t) continue
-    const hit = await ttsGet(t)
-    if (hit) continue
-    try {
-      const buf = await fetchAzureAudio(t)
-      await ttsPut(t, buf)
-    } catch {}
-  }
+  try {
+    const { data: { session } } = await sb.auth.getSession()
+    if (!session?.access_token) return
+    for (const t of texts) {
+      if (!t || _ttsUrlMap.has(t)) continue
+      try {
+        const url = await _callAzureTTS(t)
+        _ttsUrlMap.set(t, url)
+      } catch {}
+    }
+  } catch {}
 }
 
 function webSpeak(text, rate) {
