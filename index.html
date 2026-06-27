@@ -1869,6 +1869,7 @@ async function startLearn() {
   studyIdx = 0; studyCompleted = 0
   showView('study')
   renderStudy()
+  setTimeout(() => prefetchTTS(studyQueue.slice(0, 8).map(w => w.word)), 600)
 }
 // 学某一课的词（从「课程」页进入）
 async function startLessonWords(lessonNo) {
@@ -2414,6 +2415,8 @@ function openArticle(id) {
   window.scrollTo(0, 0)
   loadArticleNotes(a.id)
   initArticleScroll(a.sentences.length)
+  // 后台预缓存全部句子音频
+  setTimeout(() => prefetchTTS(a.sentences.map(s => s.id)), 800)
 }
 function toggleSentNote(el) { el.classList.toggle('note-open') }
 function initArticleScroll(total) {
@@ -2821,15 +2824,98 @@ document.addEventListener('touchend', () => setTimeout(onTextSelect, 10))
 document.addEventListener('mousedown', (e) => { if (!e.target.closest('#transPop')) hideTransPop() })
 document.addEventListener('scroll', hideTransPop, true)
 
-// ===== 发音 =====
+// ===== 发音 + IndexedDB 音频缓存 =====
 // ttsEngine: 'azure'（默认）| 'web'（系统 id-ID 离线备用）
-let idVoice = null
+// 缓存策略：Azure 音频 ArrayBuffer 存 IndexedDB，key = 文本，永久有效
+let idVoice = null, _ttsDb = null
 function loadVoices() {
   try {
     const vs = window.speechSynthesis.getVoices()
     idVoice = vs.find(v => v.lang === 'id-ID') || vs.find(v => (v.lang || '').toLowerCase().startsWith('id')) || null
   } catch (e) {}
 }
+
+// —— IndexedDB helpers ——
+function openTTSDB() {
+  if (_ttsDb) return Promise.resolve(_ttsDb)
+  return new Promise((res, rej) => {
+    const r = indexedDB.open('bb_tts_cache', 1)
+    r.onupgradeneeded = e => e.target.result.createObjectStore('audio')
+    r.onsuccess = e => { _ttsDb = e.target.result; res(_ttsDb) }
+    r.onerror = () => rej(r.error)
+  })
+}
+async function ttsGet(key) {
+  try {
+    const db = await openTTSDB()
+    return new Promise(res => {
+      const tx = db.transaction('audio', 'readonly')
+      const req = tx.objectStore('audio').get(key)
+      req.onsuccess = () => res(req.result || null)
+      req.onerror = () => res(null)
+    })
+  } catch { return null }
+}
+async function ttsPut(key, buf) {
+  try {
+    const db = await openTTSDB()
+    return new Promise(res => {
+      const tx = db.transaction('audio', 'readwrite')
+      tx.objectStore('audio').put(buf, key)
+      tx.oncomplete = res; tx.onerror = res
+    })
+  } catch {}
+}
+async function playBuf(buf) {
+  const ctx = new (window.AudioContext || window.webkitAudioContext)()
+  const decoded = await ctx.decodeAudioData(buf.slice(0))
+  const src = ctx.createBufferSource()
+  src.buffer = decoded
+  src.connect(ctx.destination)
+  src.start(0)
+}
+
+// —— Azure TTS（缓存优先）——
+async function fetchAzureAudio(text) {
+  const { data: { session } } = await sb.auth.getSession()
+  const token = session?.access_token
+  if (!token) throw new Error('not logged in')
+  const r = await fetch(QWEN_FN, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+    body: JSON.stringify({ action: 'azure_tts', text }),
+  })
+  if (!r.ok) throw new Error('azure ' + r.status)
+  return r.arrayBuffer()
+}
+
+async function azureSpeak(text) {
+  if (!text) return
+  try {
+    let buf = await ttsGet(text)
+    if (!buf) {
+      if (!sb) return webSpeak(text)
+      buf = await fetchAzureAudio(text)
+      ttsPut(text, buf)   // 异步存缓存，不阻塞播放
+    }
+    await playBuf(buf)
+  } catch { webSpeak(text) }
+}
+
+// 后台预缓存（不阻塞 UI，静默失败）
+async function prefetchTTS(texts) {
+  if (!sb || ttsEngine !== 'azure') return
+  for (const t of texts) {
+    if (!t) continue
+    const hit = await ttsGet(t)
+    if (hit) continue
+    try {
+      const buf = await fetchAzureAudio(t)
+      await ttsPut(t, buf)
+    } catch {}
+  }
+}
+
 function webSpeak(text, rate) {
   if (!text || !('speechSynthesis' in window)) return
   try {
@@ -2840,29 +2926,6 @@ function webSpeak(text, rate) {
     u.rate = rate || 0.95
     speechSynthesis.speak(u)
   } catch (e) {}
-}
-async function azureSpeak(text) {
-  if (!text || !sb) return webSpeak(text)
-  try {
-    const { data: { session } } = await sb.auth.getSession()
-    const token = session?.access_token
-    if (!token) return webSpeak(text)
-    const r = await fetch(QWEN_FN, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-      body: JSON.stringify({ action: 'azure_tts', text }),
-    })
-    if (!r.ok) throw new Error('azure ' + r.status)
-    const buf = await r.arrayBuffer()
-    const ctx = new (window.AudioContext || window.webkitAudioContext)()
-    const decoded = await ctx.decodeAudioData(buf)
-    const src = ctx.createBufferSource()
-    src.buffer = decoded
-    src.connect(ctx.destination)
-    src.start(0)
-  } catch (e) {
-    webSpeak(text)   // fallback
-  }
 }
 function speak(text, rate) {
   if (ttsEngine === 'azure') azureSpeak(text)
