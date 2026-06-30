@@ -110,7 +110,7 @@
               <span class="kbbi-word">${w(l.word)}</span>
               <span class="kbbi-badge">KBBI</span>
             </div>
-            ${l.arti_zh?`<div class="kbbi-meaning">${w(l.arti_zh)}</div>`:`<div class="kbbi-arti">${w(l.arti.slice(0,120))}${l.arti.length>120?"…":""}</div>`}
+            ${l.arti_zh?`<div class="kbbi-meaning">${w(l.arti_zh)}</div>`:`<div class="kbbi-arti">${l.arti}</div>`}
             <div class="kbbi-actions">
               <button class="kbbi-btn" onclick="kbbiCollect(this)">＋ 收藏到词库</button>
               ${l.arti_zh?"":'<button class="kbbi-btn kbbi-btn-trans" onclick="kbbiTranslate(this)">翻译释义</button>'}
